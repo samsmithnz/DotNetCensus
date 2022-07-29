@@ -40,6 +40,7 @@ namespace DotNetCensus
             Project project = new()
             {
                 Path = filePath,
+                FileName = new FileInfo(filePath).Name,
                 Language = language
             };
 
@@ -72,6 +73,7 @@ namespace DotNetCensus
                             Project additionalProject = new()
                             {
                                 Path = filePath,
+                                FileName = new FileInfo(filePath).Name,
                                 Language = language,
                                 Framework = frameworkList[i]
                             };
@@ -80,59 +82,27 @@ namespace DotNetCensus
                     }
                     break;
                 }
-                else if (line.IndexOf("<ProductVersion>") > 0)
+                else if (line.IndexOf("<ProductVersion>") > 0 ||
+                         line.IndexOf("ProductVersion = ") > 0)
                 {
                     //Since product version could appear first in the list, and we could still find a target version, don't break out of the loop
                     project.Framework = GetHistoricalFrameworkVersion(line);
                 }
-                else if (line.IndexOf("ProductVersion = ") > 0)
+                else if (line.Contains("m_EditorVersion:"))
                 {
-                    //Since product version could appear first in the list, and we could still find a target version, don't break out of the loop
-                    project.Framework = GetHistoricalFrameworkVersion(line);
+                    //Unity project file
+                    project.Framework = GetUnityFrameworkVersion(line);
                 }
-
-                //if (line.Contains("<TargetFrameworkVersion>"))
-                //{
-                //    //A single target framework version (older way it appears)
-                //    framework = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
-                //    framework = GetFrameworkFamily(framework);
-                //    break;
-                //}
-                //else if (line.Contains("<TargetFramework>"))
-                //{
-                //    //A single target framework version (newer way it appears)
-                //    framework = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
-                //    framework = GetFrameworkFamily(framework);
-                //    break;
-                //}
-                //else if (line.Contains("<TargetFrameworks>"))
-                //{
-                //    //Multiple versions exist, split them out.
-                //    string frameworks = line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim();
-                //    string[] frameworkList = frameworks.Split(';');
-                //    for (int i = 0; i < frameworkList.Length - 1; i++)
-                //    {
-                //        if (i > 0)
-                //        {
-                //            framework += ",";
-                //        }
-                //        framework += GetFrameworkFamily(frameworkList[i]);
-                //    }
-                //    break;
-                //}
-                //else if (line.Contains("<ProductVersion>") || line.Contains("ProductVersion = "))
-                //{
-                //    //Since product version could appear first in the list, and we could still find a target version, don't break out of the loop
-                //    framework = GetFrameworkFamily(GetHistoricalFrameworkVersion(line));
-                //}
-                //else if (line.Contains("m_EditorVersion:"))
-                //{
-                //    //Unity project file
-                //    framework = GetUnityFrameworkVersion(line);
-                //}
             }
 
             projects.Add(project);
+
+            //Add colors
+            foreach (Project item in projects)
+            {
+                item.Color = GetColor(item.Framework);
+            }
+
             return projects;
         }
 
