@@ -1,19 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCensus.Tests", "DotnetCensus.Tests\DotnetCensus.Tests.csproj", "{5FCE8F48-9845-4B36-B59D-74C1D544B593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCensus.Tests", "DotnetCensus.Tests\DotNetCensus.Tests.csproj", "{5FCE8F48-9845-4B36-B59D-74C1D544B593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCensus", "DotnetCensus\DotnetCensus.csproj", "{FA149391-83BD-4D96-9CE9-7FC405371ACF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCensus", "DotnetCensus\DotNetCensus.csproj", "{FA149391-83BD-4D96-9CE9-7FC405371ACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5FCE8F48-9845-4B36-B59D-74C1D544B593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +21,11 @@ Global
 		{FA149391-83BD-4D96-9CE9-7FC405371ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA149391-83BD-4D96-9CE9-7FC405371ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA149391-83BD-4D96-9CE9-7FC405371ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C79BFD1A-41E6-4BC6-BB34-464332F3871B}
 	EndGlobalSection
 EndGlobal
