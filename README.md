@@ -1,7 +1,7 @@
 # DotnetCensus
 [![CI/CD](https://github.com/samsmithnz/DotnetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotnetCensus/actions/workflows/workflow.yml)
 
-A tool to conduct a census, on a folder and/or repo, to detect and count different .NET versions. Currently includes
+**A tool to conduct a census, to count different .NET versions, on a folder and/or repo.** Currently supports:
 - .NET Framework
 - .NET Standard
 - .NET Core
