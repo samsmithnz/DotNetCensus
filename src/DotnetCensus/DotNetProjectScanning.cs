@@ -2,7 +2,7 @@
 
 namespace DotNetCensus
 {
-    public static class DotnetProjectScanning
+    public static class DotNetProjectScanning
     {
 
         //Search folder for project files

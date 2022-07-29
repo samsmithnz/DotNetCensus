@@ -1,27 +1,23 @@
+using DotNetCensus.Core.Models;
+
 namespace DotNetCensus.Tests;
 
 [TestClass]
 public class DotNetProjectScanningTests
 {
     [TestMethod]
-    public void TestMethod1()
+    public void CountSampleFrameworksTest()
     {
         //Arrange
-        DirectoryInfo currentDir = new(Directory.GetCurrentDirectory());
-        string samplesPath =  Path.Combine(currentDir.Parent.Parent.Parent.Parent.Parent.FullName, "samples"); ;
+        DirectoryInfo? currentWorkingPath = new(Directory.GetCurrentDirectory());
+        string samplesPath = Path.Combine(currentWorkingPath.Parent.Parent.Parent.Parent.Parent.FullName, "samples"); ;
 
-        ////Act
-        //List<FrameworkSummary> results = repoScanner.AggregateFrameworks(projects, includeTotal);
+        //Act
+        List<Project> results = DotNetProjectScanning.SearchFolder(samplesPath);
 
-        ////Asset
-        Assert.AreEqual(@"C:\Users\samsm\source\repos\DotnetCensus\samples", samplesPath);
-        //Assert.AreEqual(10, results.Count);
-        //Assert.AreEqual(2, results.Find(i => i.Framework == "netstandard2.0").Count);
-        //Assert.AreEqual(2, results.Find(i => i.FrameworkFamily == ".NET Standard").Count);
-        //Assert.AreEqual(1, results.Find(i => i.Framework == "netcoreapp3.1").Count);
-        //Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Core").Count);
-        //Assert.AreEqual(1, results.Find(i => i.Framework == "net45").Count);
-        //Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Framework").Count);
-        //Assert.AreEqual(10, results[^1].Count);
+        //Asset
+        Assert.IsNotNull(results);
+        Assert.AreEqual(9, results.Count);
+
     }
 }
