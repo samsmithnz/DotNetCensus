@@ -23,8 +23,8 @@ public class DotNetProjectScanningTests : BaseTests
         Assert.IsNotNull(project1);
         Assert.AreEqual(project1.Framework, "netcoreapp3.1");
         Assert.AreEqual(project1.Language, "csharp");
-        Assert.IsTrue(project1.Path.Length > 0);
-        Assert.IsTrue(project1.FileName.Length > 0);
+        Assert.IsTrue(project1.Path?.Length > 0);
+        Assert.IsTrue(project1.FileName?.Length > 0);
         Assert.IsTrue(project1.Color?.Length > 0);
     }
 }
