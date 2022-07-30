@@ -43,7 +43,7 @@ public class DotNetProjectScanningTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(14, results.Count);
+        Assert.AreEqual(13, results.Count);
         //Project project1 = results.FirstOrDefault(d => d.Framework == "netcoreapp3.1");
         //Assert.IsNotNull(project1);
         //Assert.AreEqual(project1.Framework, "netcoreapp3.1");
@@ -68,7 +68,7 @@ public class DotNetProjectScanningTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(14, results.Count);
+        Assert.AreEqual(4, results.Count);
         //Project project1 = results.FirstOrDefault(d => d.Framework == "netcoreapp3.1");
         //Assert.IsNotNull(project1);
         //Assert.AreEqual(project1.Framework, "netcoreapp3.1");
