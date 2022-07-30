@@ -1,5 +1,5 @@
-﻿global using Microsoft.VisualStudio.TestTools.UnitTesting;
-global using DotNetCensus.Core.Models;
+﻿global using DotNetCensus.Core.Models;
+global using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetCensus.Tests
 {
