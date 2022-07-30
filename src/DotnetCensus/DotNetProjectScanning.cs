@@ -48,16 +48,19 @@ namespace DotNetCensus
             //scan the project file to identify the framework
             foreach (string line in lines)
             {
+                //.NET Framework version element
                 if (line.IndexOf("<TargetFrameworkVersion>") > 0)
                 {
                     project.Framework = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
                     break;
                 }
+                //.NET Core version element
                 else if (line.IndexOf("<TargetFramework>") > 0)
                 {
                     project.Framework = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
                     break;
                 }
+                //Multiple .NET flavors element
                 else if (line.IndexOf("<TargetFrameworks>") > 0)
                 {
                     string frameworks = line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim();
@@ -82,16 +85,18 @@ namespace DotNetCensus
                     }
                     break;
                 }
+                //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
                 else if (line.IndexOf("<ProductVersion>") > 0 ||
                          line.IndexOf("ProductVersion = ") > 0)
                 {
-                    //Since product version could appear first in the list, and we could still find a target version, don't break out of the loop
                     project.Framework = GetHistoricalFrameworkVersion(line);
+                    //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
                 }
+                //Unity 3d project files
                 else if (line.Contains("m_EditorVersion:"))
                 {
-                    //Unity project file
                     project.Framework = GetUnityFrameworkVersion(line);
+                    break;
                 }
             }
 
@@ -191,7 +196,7 @@ namespace DotNetCensus
             return unityVersion;
         }
 
-        // get a color to represent the framework support. Kinda rough today, but highlights really old versions.
+        // get a color to represent the support. Kinda rough for now, but highlights really old versions.
         private static string? GetColor(string? framework)
         {
             if (framework == null)
@@ -221,6 +226,7 @@ namespace DotNetCensus
                 return "orange";
             }
             else if (framework.Contains("net6.0") ||
+                framework.Contains("net7.0") ||
                 framework.Contains("netstandard") ||
                 framework.Contains("Unity3d v2020") ||
                 framework.Contains(".NET Framework v4.6.2") ||
