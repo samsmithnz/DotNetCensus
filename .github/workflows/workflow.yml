@@ -41,3 +41,27 @@ jobs:
       with:
         name: drop
         path: src/DotnetCensus/bin/Release
+
+  release: 
+    name: Release job
+    runs-on: windows-latest
+    needs: 
+    - build
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: drop
+        path: drop
+    - name: Display GitVersion outputs
+      run: |
+        echo "Version: ${{ needs.build.outputs.Version }}" 
+        echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}" 
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
+      with:
+        tag: ${{ needs.build.outputs.Version }}
+        name: Release ${{ needs.build.outputs.Version }}
+        token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
