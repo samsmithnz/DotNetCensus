@@ -1,19 +1,19 @@
-using DotNetCensus.Core.Models;
-
 namespace DotNetCensus.Tests;
 
 [TestClass]
-public class DotNetProjectScanningTests
+public class DotNetProjectScanningTests : BaseTests
 {
     [TestMethod]
     public void CountSampleFrameworksTest()
     {
         //Arrange
-        DirectoryInfo? currentWorkingPath = new(Directory.GetCurrentDirectory());
-        string samplesPath = Path.Combine(currentWorkingPath.Parent.Parent.Parent.Parent.Parent.FullName, "samples"); ;
+        List<Project>? results = null;
 
         //Act
-        List<Project> results = DotNetProjectScanning.SearchFolder(samplesPath);
+        if (SamplesPath != null)
+        {
+            results = DotNetProjectScanning.SearchDirectory(SamplesPath);
+        }
 
         //Asset
         Assert.IsNotNull(results);
@@ -24,6 +24,6 @@ public class DotNetProjectScanningTests
         Assert.AreEqual(project1.Language, "csharp");
         Assert.IsTrue(project1.Path.Length > 0);
         Assert.IsTrue(project1.FileName.Length > 0);
-        Assert.IsTrue(project1.Color.Length > 0);
+        Assert.IsTrue(project1.Color?.Length > 0);
     }
 }

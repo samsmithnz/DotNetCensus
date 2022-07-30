@@ -5,11 +5,11 @@ namespace DotNetCensus
     public static class DotNetProjectScanning
     {
 
-        //Search folder for project files
-        public static List<Project> SearchFolder(string folder)
+        //Search directory for project files
+        public static List<Project> SearchDirectory(string dir)
         {
             List<Project> projects = new();
-            foreach (FileInfo fileInfo in new DirectoryInfo(folder).GetFiles("*.*", SearchOption.AllDirectories))
+            foreach (FileInfo fileInfo in new DirectoryInfo(dir).GetFiles("*.*", SearchOption.AllDirectories))
             {
                 //if .NET project files are found, process them
                 switch (fileInfo.Extension.ToLower())
