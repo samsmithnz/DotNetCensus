@@ -47,7 +47,7 @@ jobs:
     runs-on: windows-latest
     needs: 
     - build
-    if: github.ref == 'refs/heads/main'
+    ##if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
