@@ -11,3 +11,4 @@ Currently supports:
 - Unity3d projects
 - VB6 (!!!)
 
+- Currently only works on folders. In the future will support GitHub repo scanning too.
