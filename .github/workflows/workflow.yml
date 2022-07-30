@@ -35,7 +35,7 @@ jobs:
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Release
     - name: .NET publish
-      run: dotnet publish src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+      run: dotnet publish src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
