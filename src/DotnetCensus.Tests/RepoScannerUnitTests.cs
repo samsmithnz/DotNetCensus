@@ -45,7 +45,7 @@
 //            //Asset
 //            Assert.AreEqual(6, results.Count);
 //            Assert.AreEqual(6, results.Find(i => i.Language == "csharp").Count);
-//            Assert.AreEqual(1, results.Find(i => i.Language == "vbdotnet").Count);
+//            Assert.AreEqual(1, results.Find(i => i.Language == "vbDotNet").Count);
 //            Assert.AreEqual(10, results[^1].Count);
 //        }
 
@@ -80,7 +80,7 @@
 //                new Project
 //                {
 //                    Framework = "net45",
-//                    Language = "vbdotnet",
+//                    Language = "vbDotNet",
 //                    Path = @"c:\Project45"
 //                },
 //                new Project
