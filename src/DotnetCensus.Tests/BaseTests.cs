@@ -3,6 +3,7 @@ global using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetCensus.Tests
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class BaseTests
     {
         public string? SamplesPath { get; set; }
