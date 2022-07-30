@@ -1,4 +1,5 @@
 ﻿global using DotNetCensus.Core.Models;
+global using DotNetCensus.Core;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetCensus.Tests

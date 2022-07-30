@@ -1,6 +1,6 @@
 ﻿using DotNetCensus.Core.Models;
 
-namespace DotNetCensus
+namespace DotNetCensus.Core
 {
     public static class DotNetProjectScanning
     {

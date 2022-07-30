@@ -1,3 +1,4 @@
+
 namespace DotNetCensus.Tests;
 
 [TestClass]
