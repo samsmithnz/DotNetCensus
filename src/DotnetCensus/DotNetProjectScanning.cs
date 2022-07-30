@@ -23,6 +23,13 @@ namespace DotNetCensus
                     case ".vbp":
                         projects.Add(new Project { Path = fileInfo.FullName, Framework = "vb6", Language = "vb6" });
                         break;
+                    default:
+                        //Is it a Unity3d project?
+                        if (fileInfo.Name == "ProjectVersion.txt")
+                        {
+                            projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+                        }
+                        break;
                 }
             }
 
