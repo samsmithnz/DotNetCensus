@@ -19,8 +19,20 @@ public class ConsoleAppTests : BaseTests
 
             Console.SetOut(sw);
 
-            Program.Main(new string[] { SamplesPath });
-            expected = "Hello World!" + Environment.NewLine;
+            Program.Main(new string[] { "-d", SamplesPath });
+            expected = @"(Unknown framework): 1
+net462: 1
+net5.0: 1
+netcoreapp3.1: 3
+netstandard2.0: 1
+Unity3d v2020.3: 1
+v1.0: 1
+v1.1: 1
+v2.0: 1
+v4.7.1: 1
+v4.7.2: 2
+vb6: 1
+";
 
             //Program.Main(new string[] { SamplesPath });
             //List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);

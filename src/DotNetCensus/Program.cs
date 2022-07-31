@@ -1,15 +1,49 @@
-﻿namespace DotNetCensus
+﻿using CommandLine;
+using DotNetCensus.Core;
+using DotNetCensus.Core.Models;
+
+namespace DotNetCensus
 {
     public class Program
     {
+        private static string? _directory;
+        private static bool _includeTotals;
+        //private static string _outputFile;
+
         public static void Main(string[] args)
         {
             //process arguments
-            //var result = CommandLine.Parser.Default.ParseArguments<Options>(args)
-            //       .WithParsed(RunOptions)
-            //       .WithNotParsed(HandleParseError);
+            ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
+                   .WithParsed(RunOptions)
+                   .WithNotParsed(HandleParseError);
 
-            Console.WriteLine("Hello World!");
+
+            //If there is a folder to scan, run the process against it
+            if (string.IsNullOrEmpty(_directory) == false)
+            {
+                List<Project> projects = DotNetProjectScanning.SearchDirectory(_directory);
+                List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
+
+                foreach (FrameworkSummary item in results)
+                {
+                    Console.WriteLine(item.Framework + ": " + item.Count);
+                }
+            }
+
+            //Console.WriteLine("Hello World!");
+        }
+
+        static void RunOptions(Options opts)
+        {
+            //handle options
+            _directory = opts.Directory;
+            _includeTotals = opts.IncludeTotals;
+            //_outputFile = opts.OutputFile;
+        }
+
+        static void HandleParseError(IEnumerable<Error> errs)
+        {
+            //handle errors
         }
     }
 }
