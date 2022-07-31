@@ -38,7 +38,7 @@ public class DotNetProjectScanningTests : BaseTests
         if (SamplesPath != null)
         {
             List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
-            results = Aggregations.AggregateFrameworks(projects, true);
+            results = Census.AggregateFrameworks(projects, true);
         }
 
         //Asset
@@ -63,7 +63,7 @@ public class DotNetProjectScanningTests : BaseTests
         if (SamplesPath != null)
         {
             List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
-            results = Aggregations.AggregateLanguages(projects, true);
+            results = Census.AggregateLanguages(projects, true);
         }
 
         //Asset
