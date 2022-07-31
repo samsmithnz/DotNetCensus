@@ -15,13 +15,11 @@ namespace DotNetCensus.Core
                 switch (fileInfo.Extension.ToLower())
                 {
                     case ".csproj":
+                    case ".sqlproj":
                         projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
                         break;
                     case ".vbproj":
                         projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "vb.net"));
-                        break;
-                    case ".sqlproj":
-                        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
                         break;
                     case ".vbp":
                         projects.Add(new Project { Path = fileInfo.FullName, Framework = "vb6", Language = "vb6" });
