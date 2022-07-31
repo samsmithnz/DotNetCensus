@@ -18,7 +18,7 @@ public class DotNetProjectScanningTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(15, results.Count);
+        Assert.AreEqual(17, results.Count);
         Project? project1 = results.FirstOrDefault(d => d.Framework == "netcoreapp3.1");
         Assert.IsNotNull(project1);
         Assert.AreEqual(project1.Framework, "netcoreapp3.1");
