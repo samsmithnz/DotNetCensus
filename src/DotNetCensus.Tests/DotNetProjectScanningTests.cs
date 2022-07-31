@@ -18,7 +18,7 @@ public class DotNetProjectScanningTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(14, results.Count);
+        Assert.AreEqual(15, results.Count);
         Project? project1 = results.FirstOrDefault(d => d.Framework == "netcoreapp3.1");
         Assert.IsNotNull(project1);
         Assert.AreEqual(project1.Framework, "netcoreapp3.1");
@@ -49,7 +49,7 @@ public class DotNetProjectScanningTests : BaseTests
         Assert.AreEqual("(Unknown framework)", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("vb6", results[^2].Framework);
-        Assert.AreEqual(14, results[^1].Count);
+        Assert.AreEqual(15, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -93,13 +93,13 @@ public class DotNetProjectScanningTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(8, results[0].Count);
+        Assert.AreEqual(9, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
         Assert.AreEqual(1, results[2].Count);
         Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(14, results[3].Count);
+        Assert.AreEqual(15, results[3].Count);
         Assert.AreEqual("total languages", results[3].Language);
     }
 
@@ -120,7 +120,7 @@ public class DotNetProjectScanningTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(8, results[0].Count);
+        Assert.AreEqual(9, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
