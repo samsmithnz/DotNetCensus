@@ -10,7 +10,7 @@ namespace DotNetCensus.Core
             List<FrameworkSummary> frameworkSummary = new();
             foreach (Project project in projects)
             {
-                project.Family = DotNetProjectScanning.GetFrameworkFamily(project.FrameworkCode);
+                project.Family = ProjectScanning.GetFrameworkFamily(project.FrameworkCode);
                 if (string.IsNullOrEmpty(project.FrameworkCode) == true)
                 {
                     project.FrameworkCode = "(Unknown framework)";

@@ -13,7 +13,7 @@ public class DotNetProjectScanningTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            results = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            results = ProjectScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset
@@ -37,7 +37,7 @@ public class DotNetProjectScanningTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            results = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            results = ProjectScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset

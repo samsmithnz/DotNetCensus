@@ -10,21 +10,21 @@ public class ConsoleAppTests : BaseTests
         //Arrange
         StringWriter sw = new();
         string expected = @"
-Framework            FrameworkFamily  Count
--------------------------------------------
-(Unknown framework)                       1
-net462               .NET Framework       1
-net5.0               .NET                 1
-net6.0               .NET                 1
-net7.0               .NET                 1
-netcoreapp3.1        .NET Core            3
-netstandard2.0       .NET Standard        1
-v1.0                 .NET Framework       1
-v1.1                 .NET Framework       1
-v2.0                 .NET Framework       1
-v4.7.1               .NET Framework       1
-v4.7.2               .NET Framework       2
-vb6                  Visual Basic 6       1
+Framework             FrameworkFamily  Count
+--------------------------------------------
+.NET 5.0              .NET                 1
+.NET 6.0              .NET                 1
+.NET 7.0              .NET                 1
+.NET Core 3.1         .NET Core            3
+.NET Framework 1.0    .NET Framework       1
+.NET Framework 1.1    .NET Framework       1
+.NET Framework 2.0    .NET Framework       1
+.NET Framework 4.6.2  .NET Framework       1
+.NET Framework 4.7.1  .NET Framework       1
+.NET Framework 4.7.2  .NET Framework       2
+.NET Standard         .NET Standard        1
+(Unknown)             (Unknown)            1
+Visual Basic 6        Visual Basic 6       1
 
 ";
 
@@ -47,22 +47,22 @@ vb6                  Visual Basic 6       1
         bool includeTotal = true;
         StringWriter sw = new();
         string expected = @"
-Framework            FrameworkFamily  Count
--------------------------------------------
-(Unknown framework)                       1
-net462               .NET Framework       1
-net5.0               .NET                 1
-net6.0               .NET                 1
-net7.0               .NET                 1
-netcoreapp3.1        .NET Core            3
-netstandard2.0       .NET Standard        1
-v1.0                 .NET Framework       1
-v1.1                 .NET Framework       1
-v2.0                 .NET Framework       1
-v4.7.1               .NET Framework       1
-v4.7.2               .NET Framework       2
-vb6                  Visual Basic 6       1
-total frameworks                         16
+Framework             FrameworkFamily  Count
+--------------------------------------------
+.NET 5.0              .NET                 1
+.NET 6.0              .NET                 1
+.NET 7.0              .NET                 1
+.NET Core 3.1         .NET Core            3
+.NET Framework 1.0    .NET Framework       1
+.NET Framework 1.1    .NET Framework       1
+.NET Framework 2.0    .NET Framework       1
+.NET Framework 4.6.2  .NET Framework       1
+.NET Framework 4.7.1  .NET Framework       1
+.NET Framework 4.7.2  .NET Framework       2
+.NET Standard         .NET Standard        1
+(Unknown)             (Unknown)            1
+Visual Basic 6        Visual Basic 6       1
+total frameworks                          16
 
 ";
         //        string expected = @"

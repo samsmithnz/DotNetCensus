@@ -2,7 +2,7 @@
 
 namespace DotNetCensus.Core
 {
-    public static class DotNetProjectScanning
+    public static class ProjectScanning
     {
 
         //Search directory for project files
@@ -16,21 +16,21 @@ namespace DotNetCensus.Core
                 {
                     case ".csproj":
                     case ".sqlproj":
-                        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp"));
                         break;
                     case ".vbproj":
-                        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "vb.net"));
+                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
                         break;
                     case ".vbp":
-                        projects.Add(new Project { Path = fileInfo.FullName, FrameworkCode = "vb6", Language = "vb6" });
+                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
                         break;
-                    //default:
-                    //    //Is it a Unity3d project?
-                    //    if (fileInfo.Name == "ProjectVersion.txt")
-                    //    {
-                    //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
-                    //    }
-                    //    break;
+                        //default:
+                        //    //Is it a Unity3d project?
+                        //    if (fileInfo.Name == "ProjectVersion.txt")
+                        //    {
+                        //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+                        //    }
+                        //    break;
                 }
             }
 
@@ -38,7 +38,7 @@ namespace DotNetCensus.Core
         }
 
         //Process individual project files
-        private static List<Project> ProcessDotNetProjectFile(string filePath, string language)
+        private static List<Project> ProcessProjectFile(string filePath, string language)
         {
             string[] lines = File.ReadAllLines(filePath);
 
@@ -52,60 +52,66 @@ namespace DotNetCensus.Core
                 Language = language
             };
 
-
-            //scan the project file to identify the framework
-            foreach (string line in lines)
+            if (language == "vb6")
             {
-                //.NET Framework version element
-                if (line.IndexOf("<TargetFrameworkVersion>") > 0)
+                project.FrameworkCode = "vb6";
+            }
+            else
+            {
+                //scan the project file to identify the framework
+                foreach (string line in lines)
                 {
-                    project.FrameworkCode = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
-                    break;
-                }
-                //.NET Core version element
-                else if (line.IndexOf("<TargetFramework>") > 0)
-                {
-                    project.FrameworkCode = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
-                    break;
-                }
-                //Multiple .NET flavors element
-                else if (line.IndexOf("<TargetFrameworks>") > 0)
-                {
-                    string frameworks = line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim();
-                    string[] frameworkList = frameworks.Split(';');
-                    for (int i = 0; i < frameworkList.Length - 1; i++)
+                    //.NET Framework version element
+                    if (line.IndexOf("<TargetFrameworkVersion>") > 0)
                     {
-                        if (i == 0)
-                        {
-                            project.FrameworkCode = frameworkList[i];
-                        }
-                        else
-                        {
-                            Project additionalProject = new()
-                            {
-                                FileName = new FileInfo(filePath).Name,
-                                Path = filePath,
-                                Language = language,
-                                FrameworkCode = frameworkList[i]
-                            };
-                            projects.Add(additionalProject);
-                        }
+                        project.FrameworkCode = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
+                        break;
                     }
-                    break;
+                    //.NET Core version element
+                    else if (line.IndexOf("<TargetFramework>") > 0)
+                    {
+                        project.FrameworkCode = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
+                        break;
+                    }
+                    //Multiple .NET flavors element
+                    else if (line.IndexOf("<TargetFrameworks>") > 0)
+                    {
+                        string frameworks = line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim();
+                        string[] frameworkList = frameworks.Split(';');
+                        for (int i = 0; i < frameworkList.Length - 1; i++)
+                        {
+                            if (i == 0)
+                            {
+                                project.FrameworkCode = frameworkList[i];
+                            }
+                            else
+                            {
+                                Project additionalProject = new()
+                                {
+                                    FileName = new FileInfo(filePath).Name,
+                                    Path = filePath,
+                                    Language = language,
+                                    FrameworkCode = frameworkList[i]
+                                };
+                                projects.Add(additionalProject);
+                            }
+                        }
+                        break;
+                    }
+                    //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
+                    else if (line.IndexOf("<ProductVersion>") > 0 ||
+                             line.IndexOf("ProductVersion = ") > 0)
+                    {
+                        project.FrameworkCode = GetHistoricalFrameworkVersion(line);
+                        //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
+                    }
+                    ////Unity 3d project files
+                    //else if (line.Contains("m_EditorVersion:"))
+                    //{
+                    //    project.Framework = GetUnityFrameworkVersion(line);
+                    //    break;
+                    //}
                 }
-                //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
-                else if (line.IndexOf("<ProductVersion>") > 0 ||
-                         line.IndexOf("ProductVersion = ") > 0)
-                {
-                    project.FrameworkCode = GetHistoricalFrameworkVersion(line);
-                    //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
-                }
-                ////Unity 3d project files
-                //else if (line.Contains("m_EditorVersion:"))
-                //{
-                //    project.Framework = GetUnityFrameworkVersion(line);
-                //    break;
-                //}
             }
 
             projects.Add(project);
@@ -121,34 +127,34 @@ namespace DotNetCensus.Core
             return projects;
         }
 
-        public static string GetFrameworkFamily(string framework)
+        public static string GetFrameworkFamily(string frameworkCode)
         {
-            if (string.IsNullOrEmpty(framework) == true)
+            if (string.IsNullOrEmpty(frameworkCode) == true)
             {
-                return "";
+                return "(Unknown)";
             }
-            else if (framework.StartsWith("netstandard"))
+            else if (frameworkCode.StartsWith("netstandard"))
             {
                 return ".NET Standard";
             }
-            else if (framework.StartsWith("v1.") ||
-                     framework.StartsWith("v2.") ||
-                     framework.StartsWith("v3.") ||
-                     framework.StartsWith("v4.") ||
-                     framework.StartsWith("net4") ||
-                     framework.StartsWith("Unity"))
+            else if (frameworkCode.StartsWith("v1.") ||
+                     frameworkCode.StartsWith("v2.") ||
+                     frameworkCode.StartsWith("v3.") ||
+                     frameworkCode.StartsWith("v4.") ||
+                     frameworkCode.StartsWith("net4") ||
+                     frameworkCode.StartsWith("Unity"))
             {
                 return ".NET Framework";
             }
-            else if (framework.StartsWith("netcoreapp"))
+            else if (frameworkCode.StartsWith("netcoreapp"))
             {
                 return ".NET Core";
             }
-            else if (framework.StartsWith("net")) //net5.0, net6.0, etc)
+            else if (frameworkCode.StartsWith("net")) //net5.0, net6.0, etc)
             {
                 return ".NET";
             }
-            else if (framework.StartsWith("vb6"))
+            else if (frameworkCode.StartsWith("vb6"))
             {
                 return "Visual Basic 6";
             }
@@ -158,48 +164,48 @@ namespace DotNetCensus.Core
             }
         }
 
-        public static string GetFriendlyName(string framework, string family)
+        public static string GetFriendlyName(string frameworkCode, string family)
         {
 
-            if (string.IsNullOrEmpty(framework) == true)
+            if (string.IsNullOrEmpty(frameworkCode) == true)
             {
-                return "";
+                return "(Unknown)";
             }
-            else if (framework.StartsWith("netstandard"))
+            else if (frameworkCode.StartsWith("netstandard"))
             {
                 return ".NET Standard";
             }
-            else if (framework.StartsWith("v1.") ||
-                     framework.StartsWith("v2.") ||
-                     framework.StartsWith("v3.") ||
-                     framework.StartsWith("v4."))
+            else if (frameworkCode.StartsWith("v1.") ||
+                     frameworkCode.StartsWith("v2.") ||
+                     frameworkCode.StartsWith("v3.") ||
+                     frameworkCode.StartsWith("v4."))
             {
-                return family + " " + framework.Replace("v", "");
+                return family + " " + frameworkCode.Replace("v", "");
             }
-            else if (framework.StartsWith("net4"))
+            else if (frameworkCode.StartsWith("net4"))
             {
-                string number = framework.Replace("net", "");
+                string number = frameworkCode.Replace("net", "");
                 string formattedNumber = "";
                 //Add .'s between each number. Gross.
                 for (int i = 0; i < number.Length; i++)
                 {
                     formattedNumber += number[i];
-                    if (i < number.Length-1)
+                    if (i < number.Length - 1)
                     {
                         formattedNumber += ".";
                     }
                 }
                 return family + " " + formattedNumber;
             }
-            else if (framework.StartsWith("netcoreapp"))
+            else if (frameworkCode.StartsWith("netcoreapp"))
             {
-                return family + " " + framework.Replace("netcoreapp", "");
+                return family + " " + frameworkCode.Replace("netcoreapp", "");
             }
-            else if (framework.StartsWith("net")) //net5.0, net6.0, etc)
+            else if (frameworkCode.StartsWith("net")) //net5.0, net6.0, etc)
             {
-                return family + " " + framework.Replace("net", "");
+                return family + " " + frameworkCode.Replace("net", "");
             }
-            else if (framework.StartsWith("vb6"))
+            else if (frameworkCode.StartsWith("vb6"))
             {
                 return "Visual Basic 6";
             }

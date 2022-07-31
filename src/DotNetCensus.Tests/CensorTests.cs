@@ -53,7 +53,7 @@ public class CensorTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateFrameworks(projects, includeTotal);
         }
 
@@ -78,7 +78,7 @@ public class CensorTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateFrameworks(projects, includeTotal);
         }
 
@@ -101,7 +101,7 @@ public class CensorTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateLanguages(projects, includeTotal);
         }
 
@@ -128,7 +128,7 @@ public class CensorTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = DotNetProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateLanguages(projects, includeTotal);
         }
 
@@ -150,80 +150,80 @@ public class CensorTests : BaseTests
                 new Project
                 {
                     FrameworkCode = "netstandard2.0",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("netstandard2.0"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("netstandard2.0", DotNetProjectScanning.GetFrameworkFamily("netstandard2.0")),
+                    Family = ProjectScanning.GetFrameworkFamily("netstandard2.0"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("netstandard2.0", ProjectScanning.GetFrameworkFamily("netstandard2.0")),
                     Language = "csharp",
                     Path = @"c:\Project1"
                 },
                 new Project
                 {
                     FrameworkCode = "netstandard2.0",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("netstandard2.0"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("netstandard2.0", DotNetProjectScanning.GetFrameworkFamily("netstandard2.0")),
+                    Family = ProjectScanning.GetFrameworkFamily("netstandard2.0"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("netstandard2.0", ProjectScanning.GetFrameworkFamily("netstandard2.0")),
                     Language = "csharp",
                     Path = @"c:\Project2"
                 },
                 new Project
                 {
                     FrameworkCode = "netcoreapp3.1",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("netcoreapp3.1"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("netcoreapp3.1", DotNetProjectScanning.GetFrameworkFamily("netcoreapp3.1")),
+                    Family = ProjectScanning.GetFrameworkFamily("netcoreapp3.1"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("netcoreapp3.1", ProjectScanning.GetFrameworkFamily("netcoreapp3.1")),
                     Language = "csharp",
                     Path = @"c:\Project3"
                 },
                 new Project
                 {
                     FrameworkCode = "net6.0",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("net6.0"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("net6.0", DotNetProjectScanning.GetFrameworkFamily("net6.0")),
+                    Family = ProjectScanning.GetFrameworkFamily("net6.0"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("net6.0", ProjectScanning.GetFrameworkFamily("net6.0")),
                     Language = "csharp",
                     Path = @"c:\Project3"
                 },
                 new Project
                 {
                     FrameworkCode = "net45",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("net45"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("net45", DotNetProjectScanning.GetFrameworkFamily("net45")),
+                    Family = ProjectScanning.GetFrameworkFamily("net45"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("net45", ProjectScanning.GetFrameworkFamily("net45")),
                     Language = "vbDotNet",
                     Path = @"c:\Project45"
                 },
                 new Project
                 {
                     FrameworkCode = "vb6",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("vb6"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("vb6", DotNetProjectScanning.GetFrameworkFamily("vb6")),
+                    Family = ProjectScanning.GetFrameworkFamily("vb6"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("vb6", ProjectScanning.GetFrameworkFamily("vb6")),
                     Language = "vb6",
                     Path = @"c:\Projectvb6"
                 },
                 new Project
                 {
                     FrameworkCode = "v2.2",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("v2.2"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("v2.2", DotNetProjectScanning.GetFrameworkFamily("v2.2")),
+                    Family = ProjectScanning.GetFrameworkFamily("v2.2"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("v2.2", ProjectScanning.GetFrameworkFamily("v2.2")),
                     Language = "csharp",
                     Path = @"c:\Projectv2"
                 },
                 new Project
                 {
                     FrameworkCode = "v3.5",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("v3.5"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("v3.5", DotNetProjectScanning.GetFrameworkFamily("v3.5")),
+                    Family = ProjectScanning.GetFrameworkFamily("v3.5"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("v3.5", ProjectScanning.GetFrameworkFamily("v3.5")),
                     Language = "csharp",
                     Path = @"c:\Projectv35"
                 },
                 new Project
                 {
                     FrameworkCode = "",
-                    Family = DotNetProjectScanning.GetFrameworkFamily(""),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("", DotNetProjectScanning.GetFrameworkFamily("")),
+                    Family = ProjectScanning.GetFrameworkFamily(""),
+                    FrameworkName = ProjectScanning.GetFriendlyName("", ProjectScanning.GetFrameworkFamily("")),
                     Language = "",
                     Path = @"c:\ProjectNull"
                 },
                 new Project
                 {
                     FrameworkCode = "unknown framework",
-                    Family = DotNetProjectScanning.GetFrameworkFamily("unknown framework"),
-                    FrameworkName = DotNetProjectScanning.GetFriendlyName("unknown framework", DotNetProjectScanning.GetFrameworkFamily("unknown framework")),
+                    Family = ProjectScanning.GetFrameworkFamily("unknown framework"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("unknown framework", ProjectScanning.GetFrameworkFamily("unknown framework")),
                     Language = "unknown language",
                     Path = @"c:\ProjectUnknown"
                 }

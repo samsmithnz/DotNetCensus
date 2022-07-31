@@ -22,7 +22,7 @@ namespace DotNetCensus
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
-                List<Project> projects = DotNetProjectScanning.SearchDirectory(_directory);
+                List<Project> projects = ProjectScanning.SearchDirectory(_directory);
                 List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
 
                 //foreach (FrameworkSummary item in results)
