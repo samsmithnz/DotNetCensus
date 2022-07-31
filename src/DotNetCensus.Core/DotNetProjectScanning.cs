@@ -203,7 +203,7 @@ namespace DotNetCensus.Core
             {
                 unityVersion = "Unity3d v" + splitVersion[0] + "." + splitVersion[1];
             }
-            
+
             return unityVersion;
         }
 

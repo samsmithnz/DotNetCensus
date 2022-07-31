@@ -15,7 +15,7 @@
         public string? Language { get; set; }
         public string? Family { get; set; }
         public string? Color { get; set; }
-        
+
         //public string? Content { get; set; }
 
     }
