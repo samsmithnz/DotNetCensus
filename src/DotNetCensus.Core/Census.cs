@@ -85,7 +85,7 @@ namespace DotNetCensus.Core
             //Add a total line if we need one
             if (includeTotal == true)
             {
-                sortedLanguages.Add(new LanguageSummary { Language = "total languages:", Count = total });
+                sortedLanguages.Add(new LanguageSummary { Language = "total languages", Count = total });
             }
             return sortedLanguages;
         }
