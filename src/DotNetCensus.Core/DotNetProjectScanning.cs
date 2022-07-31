@@ -110,10 +110,12 @@ namespace DotNetCensus.Core
 
             projects.Add(project);
 
-            //Add colors
+            //Add colors and families
             foreach (Project item in projects)
             {
                 item.Color = GetColor(item.Framework);
+                item.Family = GetFrameworkFamily(item.Framework);
+                item.FriendlyName = GetFriendlyName(item.Framework, item.Family);
             }
 
             return projects;
@@ -124,10 +126,6 @@ namespace DotNetCensus.Core
             if (string.IsNullOrEmpty(framework) == true)
             {
                 return "";
-            }
-            else if (framework.StartsWith("netcoreapp"))
-            {
-                return ".NET Core";
             }
             else if (framework.StartsWith("netstandard"))
             {
@@ -142,7 +140,11 @@ namespace DotNetCensus.Core
             {
                 return ".NET Framework";
             }
-            else if (framework.StartsWith("net")) //net5.0, net6.0, etc
+            else if (framework.StartsWith("netcoreapp"))
+            {
+                return ".NET Core";
+            }
+            else if (framework.StartsWith("net")) //net5.0, net6.0, etc)
             {
                 return ".NET";
             }
@@ -154,6 +156,11 @@ namespace DotNetCensus.Core
             {
                 return "";
             }
+        }
+
+        private static string GetFriendlyName(string framework, string family)
+        {
+            return family + " " + framework.Replace("netcoreapp", "");
         }
 
         private static string GetHistoricalFrameworkVersion(string line)
