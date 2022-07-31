@@ -5,7 +5,7 @@
 //using System.Threading.Tasks;
 //using TechDebtID.Core;
 
-//namespace TechDebtID.Tests
+//namespace DotNetCensus.Tests;
 //{
 //    [TestClass]
 //    public class RepoSyncWithStorageIntegrationTests
