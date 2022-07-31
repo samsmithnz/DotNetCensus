@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using ConsoleTables;
 using DotNetCensus.Core;
 using DotNetCensus.Core.Models;
 
@@ -24,10 +25,15 @@ namespace DotNetCensus
                 List<Project> projects = DotNetProjectScanning.SearchDirectory(_directory);
                 List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
 
-                foreach (FrameworkSummary item in results)
-                {
-                    Console.WriteLine(item.Framework + ": " + item.Count);
-                }
+                //foreach (FrameworkSummary item in results)
+                //{
+                //    Console.WriteLine(item.Framework + ": " + item.Count);
+                //}
+
+                ConsoleTable
+                    .From<FrameworkSummary>(results)
+                    .Configure(o => o.NumberAlignment = Alignment.Right)
+                    .Write(Format.Minimal);
             }
         }
 

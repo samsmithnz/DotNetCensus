@@ -9,18 +9,22 @@ public class ConsoleAppTests : BaseTests
     {
         //Arrange
         StringWriter sw = new();
-        string expected = @"(Unknown framework): 1
-net462: 1
-net5.0: 1
-netcoreapp3.1: 3
-netstandard2.0: 1
-Unity3d v2020.3: 1
-v1.0: 1
-v1.1: 1
-v2.0: 1
-v4.7.1: 1
-v4.7.2: 2
-vb6: 1
+        string expected = @"
+Framework            FrameworkFamily  Count
+-------------------------------------------
+(Unknown framework)                       1
+net462               .NET Framework       1
+net5.0               .NET                 1
+netcoreapp3.1        .NET Core            3
+netstandard2.0       .NET Standard        1
+Unity3d v2020.3                           1
+v1.0                 .NET Framework       1
+v1.1                 .NET Framework       1
+v2.0                 .NET Framework       1
+v4.7.1               .NET Framework       1
+v4.7.2               .NET Framework       2
+vb6                  Visual Basic 6       1
+
 ";
 
         //Act
@@ -32,7 +36,7 @@ vb6: 1
 
         //Asset
         Assert.IsNotNull(expected);
-        Assert.AreEqual(expected, sw.ToString());
+        Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
     }
 
     [TestMethod]
@@ -41,21 +45,31 @@ vb6: 1
         //Arrange
         bool includeTotal = true;
         StringWriter sw = new();
-        string expected = @"(Unknown framework): 1
-net462: 1
-net5.0: 1
-netcoreapp3.1: 3
-netstandard2.0: 1
-Unity3d v2020.3: 1
-v1.0: 1
-v1.1: 1
-v2.0: 1
-v4.7.1: 1
-v4.7.2: 2
-vb6: 1
-total frameworks: 15
-";
+        string expected = @"
+Framework            FrameworkFamily  Count
+-------------------------------------------
+(Unknown framework)                       1
+net462               .NET Framework       1
+net5.0               .NET                 1
+netcoreapp3.1        .NET Core            3
+netstandard2.0       .NET Standard        1
+Unity3d v2020.3                           1
+v1.0                 .NET Framework       1
+v1.1                 .NET Framework       1
+v2.0                 .NET Framework       1
+v4.7.1               .NET Framework       1
+v4.7.2               .NET Framework       2
+vb6                  Visual Basic 6       1
+total frameworks                         15
 
+";
+        //        string expected = @"
+        //Framework         FrameworkFamily  Count
+        //----------------------------------------
+        //net6.0            .NET                 1
+        //total frameworks                       1
+
+        //";
         //Act
         if (SamplesPath != null)
         {
@@ -65,7 +79,7 @@ total frameworks: 15
 
         //Asset
         Assert.IsNotNull(expected);
-        Assert.AreEqual(expected, sw.ToString());
+        Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
     }
 
 }
