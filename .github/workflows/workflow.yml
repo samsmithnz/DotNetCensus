@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: drop
-        path: src/DotNetCensus/bin/Release
+        path: src/DotNetCensus.Core/bin/Release
 
   release: 
     name: Release job
