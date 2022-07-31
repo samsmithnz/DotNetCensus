@@ -10,21 +10,21 @@ namespace DotNetCensus.Core
             List<FrameworkSummary> frameworkSummary = new();
             foreach (Project project in projects)
             {
-                project.Family = DotNetProjectScanning.GetFrameworkFamily(project.Framework);
-                if (string.IsNullOrEmpty(project.Framework) == true)
+                project.Family = DotNetProjectScanning.GetFrameworkFamily(project.FrameworkCode);
+                if (string.IsNullOrEmpty(project.FrameworkCode) == true)
                 {
-                    project.Framework = "(Unknown framework)";
+                    project.FrameworkCode = "(Unknown framework)";
                 }
 
                 //Process each indvidual framework
-                FrameworkSummary? framework = frameworkSummary.Find(i => i.Framework == project.Framework);
+                FrameworkSummary? framework = frameworkSummary.Find(i => i.Framework == project.FrameworkName);
 
                 //If this framework isn't in the current list, create a new one
                 if (framework == null)
                 {
                     frameworkSummary.Add(new FrameworkSummary
                     {
-                        Framework = project.Framework,
+                        Framework = project.FrameworkName,
                         FrameworkFamily = project.Family,
                         Count = 1 //it's the first time, start with a count of 1
                     });

@@ -22,7 +22,7 @@ namespace DotNetCensus.Core
                         projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "vb.net"));
                         break;
                     case ".vbp":
-                        projects.Add(new Project { Path = fileInfo.FullName, Framework = "vb6", Language = "vb6" });
+                        projects.Add(new Project { Path = fileInfo.FullName, FrameworkCode = "vb6", Language = "vb6" });
                         break;
                     //default:
                     //    //Is it a Unity3d project?
@@ -59,13 +59,13 @@ namespace DotNetCensus.Core
                 //.NET Framework version element
                 if (line.IndexOf("<TargetFrameworkVersion>") > 0)
                 {
-                    project.Framework = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
+                    project.FrameworkCode = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
                     break;
                 }
                 //.NET Core version element
                 else if (line.IndexOf("<TargetFramework>") > 0)
                 {
-                    project.Framework = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
+                    project.FrameworkCode = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
                     break;
                 }
                 //Multiple .NET flavors element
@@ -77,7 +77,7 @@ namespace DotNetCensus.Core
                     {
                         if (i == 0)
                         {
-                            project.Framework = frameworkList[i];
+                            project.FrameworkCode = frameworkList[i];
                         }
                         else
                         {
@@ -86,7 +86,7 @@ namespace DotNetCensus.Core
                                 FileName = new FileInfo(filePath).Name,
                                 Path = filePath,
                                 Language = language,
-                                Framework = frameworkList[i]
+                                FrameworkCode = frameworkList[i]
                             };
                             projects.Add(additionalProject);
                         }
@@ -97,7 +97,7 @@ namespace DotNetCensus.Core
                 else if (line.IndexOf("<ProductVersion>") > 0 ||
                          line.IndexOf("ProductVersion = ") > 0)
                 {
-                    project.Framework = GetHistoricalFrameworkVersion(line);
+                    project.FrameworkCode = GetHistoricalFrameworkVersion(line);
                     //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
                 }
                 ////Unity 3d project files
@@ -113,9 +113,9 @@ namespace DotNetCensus.Core
             //Add colors and families
             foreach (Project item in projects)
             {
-                item.Color = GetColor(item.Framework);
-                item.Family = GetFrameworkFamily(item.Framework);
-                item.FriendlyName = GetFriendlyName(item.Framework, item.Family);
+                item.Color = GetColor(item.FrameworkCode);
+                item.Family = GetFrameworkFamily(item.FrameworkCode);
+                item.FrameworkName = GetFriendlyName(item.FrameworkCode, item.Family);
             }
 
             return projects;
@@ -154,11 +154,11 @@ namespace DotNetCensus.Core
             }
             else
             {
-                return "";
+                return "(Unknown)";
             }
         }
 
-        private static string GetFriendlyName(string framework, string family)
+        public static string GetFriendlyName(string framework, string family)
         {
 
             if (string.IsNullOrEmpty(framework) == true)
@@ -205,7 +205,7 @@ namespace DotNetCensus.Core
             }
             else
             {
-                return "";
+                return "(Unknown)";
             }
         }
 
