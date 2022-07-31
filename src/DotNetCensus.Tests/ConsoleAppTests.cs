@@ -15,6 +15,8 @@ Framework            FrameworkFamily  Count
 (Unknown framework)                       1
 net462               .NET Framework       1
 net5.0               .NET                 1
+net6.0               .NET                 1
+net7.0               .NET                 1
 netcoreapp3.1        .NET Core            3
 netstandard2.0       .NET Standard        1
 Unity3d v2020.3      .NET Framework       1
@@ -51,6 +53,8 @@ Framework            FrameworkFamily  Count
 (Unknown framework)                       1
 net462               .NET Framework       1
 net5.0               .NET                 1
+net6.0               .NET                 1
+net7.0               .NET                 1
 netcoreapp3.1        .NET Core            3
 netstandard2.0       .NET Standard        1
 Unity3d v2020.3      .NET Framework       1
@@ -60,7 +64,7 @@ v2.0                 .NET Framework       1
 v4.7.1               .NET Framework       1
 v4.7.2               .NET Framework       2
 vb6                  Visual Basic 6       1
-total frameworks                         15
+total frameworks                         17
 
 ";
         //        string expected = @"
