@@ -173,7 +173,7 @@ namespace DotNetCensus.Core
             }
             else if (frameworkCode.StartsWith("netstandard"))
             {
-                return ".NET Standard";
+                return family + " " + frameworkCode.Replace("netstandard", "");
             }
             else if (frameworkCode.StartsWith("v1.") ||
                      frameworkCode.StartsWith("v2.") ||

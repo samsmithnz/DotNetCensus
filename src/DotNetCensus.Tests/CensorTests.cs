@@ -15,13 +15,13 @@ public class CensorTests : BaseTests
         List<FrameworkSummary> results = Census.AggregateFrameworks(projects, includeTotal);
 
         //Asset
-        //Assert.AreEqual(10, results.Count);
-        Assert.AreEqual("", results.Find(i => i.Framework == "netstandard2.0"));
-        Assert.AreEqual(2, results.Find(i => i.Framework == "netstandard2.0")?.Count);
+        Assert.AreEqual(9, results.Count);
+        //Assert.AreEqual("", results.Find(i => i.Framework == "netstandard2.0"));
+        Assert.AreEqual(2, results.Find(i => i.Framework == ".NET Standard 2.0")?.Count);
         Assert.AreEqual(2, results.Find(i => i.FrameworkFamily == ".NET Standard")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Framework == "netcoreapp3.1")?.Count);
+        Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Core 3.1")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Core")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Framework == "net45")?.Count);
+        Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Framework 4.5")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Framework")?.Count);
         Assert.AreEqual(10, results[^1].Count);
     }
@@ -61,9 +61,9 @@ public class CensorTests : BaseTests
         Assert.IsNotNull(results);
         Assert.AreEqual(14, results.Count);
         Assert.AreEqual(1, results[0].Count);
-        Assert.AreEqual("(Unknown framework)", results[0].Framework);
+        Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
-        Assert.AreEqual("vb6", results[^2].Framework);
+        Assert.AreEqual("Visual Basic 6", results[^2].Framework);
         Assert.AreEqual(16, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
@@ -86,9 +86,9 @@ public class CensorTests : BaseTests
         Assert.IsNotNull(results);
         Assert.AreEqual(13, results.Count);
         Assert.AreEqual(1, results[0].Count);
-        Assert.AreEqual("(Unknown framework)", results[0].Framework);
+        Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
-        Assert.AreEqual("vb6", results[^1].Framework);
+        Assert.AreEqual("Visual Basic 6", results[^1].Framework);
     }
 
     [TestMethod]

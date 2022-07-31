@@ -22,7 +22,7 @@ Framework             FrameworkFamily  Count
 .NET Framework 4.6.2  .NET Framework       1
 .NET Framework 4.7.1  .NET Framework       1
 .NET Framework 4.7.2  .NET Framework       2
-.NET Standard         .NET Standard        1
+.NET Standard 2.0     .NET Standard        1
 (Unknown)             (Unknown)            1
 Visual Basic 6        Visual Basic 6       1
 
@@ -59,7 +59,7 @@ Framework             FrameworkFamily  Count
 .NET Framework 4.6.2  .NET Framework       1
 .NET Framework 4.7.1  .NET Framework       1
 .NET Framework 4.7.2  .NET Framework       2
-.NET Standard         .NET Standard        1
+.NET Standard 2.0     .NET Standard        1
 (Unknown)             (Unknown)            1
 Visual Basic 6        Visual Basic 6       1
 total frameworks                          16
