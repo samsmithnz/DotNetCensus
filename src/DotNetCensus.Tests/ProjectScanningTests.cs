@@ -2,7 +2,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class DotNetProjectScanningTests : BaseTests
+public class ProjectScanningTests : BaseTests
 {
     [TestMethod]
     public void CountSampleFrameworksTest()

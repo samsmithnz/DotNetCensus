@@ -1,5 +1,6 @@
 namespace DotNetCensus.Tests;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
 public class ConsoleAppTests : BaseTests
 {
