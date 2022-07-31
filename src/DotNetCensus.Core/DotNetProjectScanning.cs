@@ -46,8 +46,8 @@ namespace DotNetCensus.Core
             //Setup the project object
             Project project = new()
             {
-                Path = filePath,
                 FileName = new FileInfo(filePath).Name,
+                Path = filePath,
                 Language = language
             };
 
@@ -82,8 +82,8 @@ namespace DotNetCensus.Core
                         {
                             Project additionalProject = new()
                             {
-                                Path = filePath,
                                 FileName = new FileInfo(filePath).Name,
+                                Path = filePath,
                                 Language = language,
                                 Framework = frameworkList[i]
                             };
@@ -118,11 +118,11 @@ namespace DotNetCensus.Core
             return projects;
         }
 
-        public static string? GetFrameworkFamily(string framework)
+        public static string GetFrameworkFamily(string framework)
         {
-            if (framework == null)
+            if (string.IsNullOrEmpty(framework) == true)
             {
-                return null;
+                return "";
             }
             else if (framework.StartsWith("netcoreapp"))
             {
@@ -150,11 +150,11 @@ namespace DotNetCensus.Core
             }
             else
             {
-                return null;
+                return "";
             }
         }
 
-        private static string? GetHistoricalFrameworkVersion(string line)
+        private static string GetHistoricalFrameworkVersion(string line)
         {
             string productVersion = line.Replace("<ProductVersion>", "").Replace("</ProductVersion>", "").Replace("ProductVersion = ", "").Replace("\"", "").Trim();
             //https://en.wikipedia.org/wiki/Microsoft_Visual_Studio#History
@@ -187,19 +187,23 @@ namespace DotNetCensus.Core
             }
             else
             {
-                return null;
+                return "";
             }
         }
 
-        private static string? GetUnityFrameworkVersion(string line)
+        private static string GetUnityFrameworkVersion(string line)
         {
             //An example of what to expect:
             //m_EditorVersion: 2020.3.12f1
             //m_EditorVersionWithRevision: 2020.3.12f1(b3b2c6512326)
             string fullVersion = line.Replace("m_EditorVersion:", "").Trim();
             string[] splitVersion = fullVersion.Split('.');
-            string unityVersion = "Unity3d v" + splitVersion[0] + "." + splitVersion[1];
-
+            string unityVersion = "";
+            if (splitVersion.Length >= 2)
+            {
+                unityVersion = "Unity3d v" + splitVersion[0] + "." + splitVersion[1];
+            }
+            
             return unityVersion;
         }
 

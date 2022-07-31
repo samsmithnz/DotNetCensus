@@ -7,7 +7,7 @@ namespace DotNetCensus.Core
         public static List<FrameworkSummary> AggregateFrameworks(List<Project> projects, bool includeTotal)
         {
             int total = 0;
-            List<FrameworkSummary> frameworkSummary = new List<FrameworkSummary>();
+            List<FrameworkSummary> frameworkSummary = new();
             foreach (Project project in projects)
             {
                 project.Family = DotNetProjectScanning.GetFrameworkFamily(project.Framework);
@@ -17,7 +17,7 @@ namespace DotNetCensus.Core
                 }
 
                 //Process each indvidual framework
-                FrameworkSummary framework = frameworkSummary.Find(i => i.Framework == project.Framework);
+                FrameworkSummary? framework = frameworkSummary.Find(i => i.Framework == project.Framework);
 
                 //If this framework isn't in the current list, create a new one
                 if (framework == null)
@@ -47,7 +47,7 @@ namespace DotNetCensus.Core
         public static List<LanguageSummary> AggregateLanguages(List<Project> projects, bool includeTotal)
         {
             int total = 0;
-            List<LanguageSummary> languageSummary = new List<LanguageSummary>();
+            List<LanguageSummary> languageSummary = new();
             foreach (Project project in projects)
             {
                 if (project.Language == null)
@@ -56,7 +56,7 @@ namespace DotNetCensus.Core
                 }
 
                 //Process each indvidual language
-                LanguageSummary language = languageSummary.Find(i => i.Language == project.Language);
+                LanguageSummary? language = languageSummary.Find(i => i.Language == project.Language);
 
                 //If this language isn't in the current list, create a new one
                 if (language == null)
