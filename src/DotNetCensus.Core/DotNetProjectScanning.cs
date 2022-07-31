@@ -137,7 +137,8 @@ namespace DotNetCensus.Core
                      framework.StartsWith("v2.") ||
                      framework.StartsWith("v3.") ||
                      framework.StartsWith("v4.") ||
-                     framework.StartsWith("net4"))
+                     framework.StartsWith("net4") ||
+                     framework.StartsWith("Unity"))
             {
                 return ".NET Framework";
             }
