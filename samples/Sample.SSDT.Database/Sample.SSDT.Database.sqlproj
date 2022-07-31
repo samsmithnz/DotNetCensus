@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>SamSmithNZ2017.DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{9d1104aa-cf15-457b-bf19-41ce5445f3be}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SamSmithNZ.Database</RootNamespace>
+    <AssemblyName>SamSmithNZ.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
+    <SqlCodeAnalysisRules>-Microsoft.Rules.Data.SR0007</SqlCodeAnalysisRules>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\Old" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\webpages_UsersInRoles.sql" />
+    <Build Include="dbo\Tables\webpages_Roles.sql" />
+    <Build Include="dbo\Tables\webpages_OAuthMembership.sql" />
+    <Build Include="dbo\Tables\webpages_Membership.sql" />
+    <Build Include="dbo\Tables\wc_tournament_team_final_placing.sql" />
+    <Build Include="dbo\Tables\wc_tournament_team_entry.sql" />
+    <Build Include="dbo\Tables\wc_tournament_format_round.sql" />
+    <Build Include="dbo\Tables\wc_tournament_format.sql" />
+    <Build Include="dbo\Tables\wc_tournament.sql" />
+    <Build Include="dbo\Tables\wc_team.sql" />
+    <Build Include="dbo\Tables\wc_round.sql" />
+    <Build Include="dbo\Tables\wc_related_team.sql" />
+    <Build Include="dbo\Tables\wc_region.sql" />
+    <Build Include="dbo\Tables\wc_ranking.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Tables\wc_playoff_stage.sql" />
+    <Build Include="dbo\Tables\wc_playoff_setup.sql" />
+    <Build Include="dbo\Tables\wc_player_game.sql" />
+    <Build Include="dbo\Tables\wc_player.sql" />
+    <Build Include="dbo\Tables\wc_penalty_shootout.sql" />
+    <Build Include="dbo\Tables\wc_odds.sql" />
+    <Build Include="dbo\Tables\wc_group_stage.sql" />
+    <Build Include="dbo\Tables\wc_goal.sql" />
+    <Build Include="dbo\Tables\wc_game.sql" />
+    <Build Include="dbo\Tables\wc_competition.sql" />
+    <Build Include="dbo\Tables\wc_card.sql" />
+    <Build Include="dbo\Tables\UserProfile.sql" />
+    <Build Include="dbo\Tables\TabTrack_old.sql" />
+    <Build Include="dbo\Tables\TabStats_old.sql" />
+    <Build Include="dbo\Tables\TabAlbum_old.sql" />
+    <Build Include="dbo\Tables\tab_tuning.sql" />
+    <Build Include="dbo\Tables\tab_track.sql" />
+    <Build Include="dbo\Tables\tab_search_parameters.sql" />
+    <Build Include="dbo\Tables\tab_album.sql" />
+    <Build Include="dbo\Tables\steamAPI_stat.sql" />
+    <Build Include="dbo\Tables\problem_search_parameters.sql" />
+    <Build Include="dbo\Tables\problem.sql" />
+    <Build Include="dbo\Tables\itTrack.sql" />
+    <Build Include="dbo\Tables\itPLTrack.sql" />
+    <Build Include="dbo\Tables\itPLPlaylistTrack.sql" />
+    <Build Include="dbo\Tables\itPLPlaylist.sql" />
+    <Build Include="dbo\Tables\itPlaylist.sql" />
+    <Build Include="dbo\Tables\ffl_unknown_song.sql" />
+    <Build Include="dbo\Tables\ffl_tracking.sql" />
+    <Build Include="dbo\Tables\ffl_show_song.sql" />
+    <Build Include="dbo\Tables\ffl_show_recording.sql" />
+    <Build Include="dbo\Tables\ffl_show.sql" />
+    <Build Include="dbo\Tables\ff_song.sql" />
+    <Build Include="dbo\Tables\ff_show_song.sql" />
+    <Build Include="dbo\Tables\ff_show.sql" />
+    <Build Include="dbo\Tables\ff_album.sql" />
+    <Build Include="dbo\Tables\ErrorLog.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="dbo\Views\vwWC_FinalPlacing.sql" />
+    <Build Include="dbo\Views\vWC_TournamentPenaltyShootoutGoals.sql" />
+    <Build Include="dbo\Views\vWC_TournamentGoals.sql" />
+    <Build Include="dbo\Views\vWC_TournamentFormats.sql" />
+    <Build Include="dbo\Views\vWC_TournamentCompletionStatistics.sql" />
+    <Build Include="dbo\Views\vWC_QualifiedTeamCount.sql" />
+    <Build Include="dbo\Views\vWC_PlayerPenaltyShootoutCount.sql" />
+    <Build Include="dbo\Views\vWC_PlayerGoalCount.sql" />
+    <Build Include="dbo\Views\vWC_PlayerCount.sql" />
+    <Build Include="dbo\Views\vWC_PlayerCardCount.sql" />
+    <Build Include="dbo\Views\vWC_GameScoreSummary.sql" />
+    <Build Include="dbo\Views\vWC_GameCount.sql" />
+    <Build Include="dbo\Views\vFF_Show.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamWins.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamLosses.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamGoalsFor.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamGoalsAgainst.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamGamesPlayed.sql" />
+    <Build Include="dbo\Functions\fnWC_GetTeamDraws.sql" />
+    <Build Include="dbo\Functions\fnWC_GetPointsForAWin.sql" />
+    <Build Include="dbo\Functions\fnWC_CalculateRanking_OppositionStrength.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\fnWC_CalculateRanking_MatchResult.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\fnWC_CalculateRanking_GameAge.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Tab_SaveTrack.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_SaveSearchParameters.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_SaveAlbum.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetTunings.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetTracks.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetSearchResults.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetRatings.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetArtists.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetAlbums.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_DeleteTrack.sql" />
+    <Build Include="Security\samdbuser.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_GetAlbums.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_GetShows.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_GetSongs.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_GetYearList.sql" />
+    <Build Include="dbo\Stored Procedures\Tab_GetTrackOrders.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_ImportSetTrackRanks.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_ImportValidateTracksForDuplicates.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_ImportInsertTrack.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_ImportDeletePlaylistTracks.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_ImportCreateNewPlayList.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_GetMovement.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_GetPlaylists.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_GetStats.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_GetTopArtists.sql" />
+    <Build Include="dbo\Stored Procedures\ITunes_GetTracks.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_SaveShow.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_SaveShowSong.sql" />
+    <Build Include="dbo\Stored Procedures\FFL_GetAverageSetlist.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTournaments.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTournamentTeams.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTournamentTeamsPlacing.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGames.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTeams.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGroups.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGroupCodes.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetPlayers.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGameGoalAssignments.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetPenaltyShootoutGoals.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveGoal.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SavePenaltyShootoutGoal.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGoals.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveGroupDetails.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SavePlayoffDetails.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveGame.sql" />
+    <Build Include="dbo\Tables\wc_tournament_team_elo_rating.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveTournamentTeamELORating.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTournamentTopGoalScorers.sql" />
+    <Build Include="dbo\Tables\wc_tournament_team_chance_to_win.sql" />
+    <Build Include="dbo\Stored Procedures\FB_DeleteGoal.sql" />
+    <Build Include="dbo\Stored Procedures\FB_DeletePenaltyShootoutGoal.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveTournamentTeam.sql" />
+    <Build Include="dbo\Stored Procedures\FB_DeleteTournamentTeam.sql" />
+    <Build Include="dbo\Tables\LegoColors.sql" />
+    <Build Include="dbo\Tables\LegoInventories.sql" />
+    <Build Include="dbo\Tables\LegoSets.sql" />
+    <Build Include="dbo\Tables\LegoThemes.sql" />
+    <Build Include="dbo\Tables\LegoParts.sql" />
+    <Build Include="dbo\Tables\LegoPartRelationships.sql" />
+    <Build Include="dbo\Tables\LegoPartCategories.sql" />
+    <Build Include="dbo\Tables\LegoInventorySets.sql" />
+    <Build Include="dbo\Tables\LegoInventoryParts.sql" />
+    <Build Include="dbo\Tables\LegoMySets.sql" />
+    <Build Include="dbo\Tables\LegoOwner.sql" />
+    <Build Include="dbo\Stored Procedures\LegoGetOwnedSets.sql" />
+    <Build Include="dbo\Stored Procedures\LegoGetParts.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetGoalInsights.sql" />
+    <Build Include="dbo\Tables\wc_group_stage_third_placed_teams.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_AddMissingTeamOdds.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_AddOddsForOldTournament.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_AddTeamOdds.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_CalculateAllRankings.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_CalculateRanking.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGameGoalList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGameList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGameListForGoalAssigning.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGameShootoutGoalList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGroupDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGroupGameList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetGroupList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetOddsMinMax.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetOddsSummary.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetPlayerDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetPlayerGames.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetPlayerListForGame.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetPlayerName.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetPlayoffGameList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetQualifiedTeamsForTournament.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetStats_TotalGoalsByTournament.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetStats_TournamentStatistics.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTeamDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTeamGameList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTeamList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTeamName.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTournamentDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTournamentList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTournamentName.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_GetTournamentTeamPlayerList.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_NormalizeOdds.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_ProcessGroupDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_ProcessPlayoffDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_SaveGoal.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_SaveShootoutGoal.sql" />
+    <Build Include="dbo\Stored Procedures\Old\spWC_SetFinalTournamentPlacing.sql" />
+    <Build Include="dbo\Tables\wc_tournament_format_playoff.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetMigratePlayoffsGames.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveMigratePlayoffs.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetMigratePlayoffs.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveGroupDetailsTeam.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SavePlayer.sql" />
+    <Build Include="dbo\Stored Procedures\FB_SaveMigrateGame.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetPlayersByTournament.sql" />
+    <Build Include="dbo\Stored Procedures\FB_ResetTournament.sql" />
+    <Build Include="dbo\Stored Procedures\FB_GetTournamentsImportStatus.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StaticCodeAnalysis.SuppressMessages.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SamSmithNZ.Database.refactorlog" />
+  </ItemGroup>
+</Project>
