@@ -19,7 +19,6 @@ net6.0               .NET                 1
 net7.0               .NET                 1
 netcoreapp3.1        .NET Core            3
 netstandard2.0       .NET Standard        1
-Unity3d v2020.3      .NET Framework       1
 v1.0                 .NET Framework       1
 v1.1                 .NET Framework       1
 v2.0                 .NET Framework       1
@@ -57,14 +56,13 @@ net6.0               .NET                 1
 net7.0               .NET                 1
 netcoreapp3.1        .NET Core            3
 netstandard2.0       .NET Standard        1
-Unity3d v2020.3      .NET Framework       1
 v1.0                 .NET Framework       1
 v1.1                 .NET Framework       1
 v2.0                 .NET Framework       1
 v4.7.1               .NET Framework       1
 v4.7.2               .NET Framework       2
 vb6                  Visual Basic 6       1
-total frameworks                         17
+total frameworks                         16
 
 ";
         //        string expected = @"

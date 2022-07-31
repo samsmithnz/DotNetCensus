@@ -58,12 +58,12 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(15, results.Count);
+        Assert.AreEqual(14, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual("(Unknown framework)", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("vb6", results[^2].Framework);
-        Assert.AreEqual(17, results[^1].Count);
+        Assert.AreEqual(16, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -83,7 +83,7 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(14, results.Count);
+        Assert.AreEqual(13, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual("(Unknown framework)", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
@@ -107,13 +107,13 @@ public class CensorTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(11, results[0].Count);
+        Assert.AreEqual(10, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
         Assert.AreEqual(1, results[2].Count);
         Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(17, results[3].Count);
+        Assert.AreEqual(16, results[3].Count);
         Assert.AreEqual("total languages", results[3].Language);
     }
 
@@ -134,7 +134,7 @@ public class CensorTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(11, results[0].Count);
+        Assert.AreEqual(10, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
