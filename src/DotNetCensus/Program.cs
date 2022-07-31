@@ -29,8 +29,6 @@ namespace DotNetCensus
                     Console.WriteLine(item.Framework + ": " + item.Count);
                 }
             }
-
-            //Console.WriteLine("Hello World!");
         }
 
         static void RunOptions(Options opts)
@@ -44,6 +42,10 @@ namespace DotNetCensus
         static void HandleParseError(IEnumerable<Error> errs)
         {
             //handle errors
+            foreach (Error err in errs)
+            {
+                Console.WriteLine(err.ToString());
+            }
         }
     }
 }
