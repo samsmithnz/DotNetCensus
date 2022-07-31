@@ -24,13 +24,13 @@ namespace DotNetCensus.Core
                     case ".vbp":
                         projects.Add(new Project { Path = fileInfo.FullName, Framework = "vb6", Language = "vb6" });
                         break;
-                    default:
-                        //Is it a Unity3d project?
-                        if (fileInfo.Name == "ProjectVersion.txt")
-                        {
-                            projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
-                        }
-                        break;
+                    //default:
+                    //    //Is it a Unity3d project?
+                    //    if (fileInfo.Name == "ProjectVersion.txt")
+                    //    {
+                    //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+                    //    }
+                    //    break;
                 }
             }
 
@@ -100,12 +100,12 @@ namespace DotNetCensus.Core
                     project.Framework = GetHistoricalFrameworkVersion(line);
                     //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
                 }
-                //Unity 3d project files
-                else if (line.Contains("m_EditorVersion:"))
-                {
-                    project.Framework = GetUnityFrameworkVersion(line);
-                    break;
-                }
+                ////Unity 3d project files
+                //else if (line.Contains("m_EditorVersion:"))
+                //{
+                //    project.Framework = GetUnityFrameworkVersion(line);
+                //    break;
+                //}
             }
 
             projects.Add(project);
@@ -160,7 +160,53 @@ namespace DotNetCensus.Core
 
         private static string GetFriendlyName(string framework, string family)
         {
-            return family + " " + framework.Replace("netcoreapp", "");
+
+            if (string.IsNullOrEmpty(framework) == true)
+            {
+                return "";
+            }
+            else if (framework.StartsWith("netstandard"))
+            {
+                return ".NET Standard";
+            }
+            else if (framework.StartsWith("v1.") ||
+                     framework.StartsWith("v2.") ||
+                     framework.StartsWith("v3.") ||
+                     framework.StartsWith("v4."))
+            {
+                return family + " " + framework.Replace("v", "");
+            }
+            else if (framework.StartsWith("net4"))
+            {
+                string number = framework.Replace("net", "");
+                string formattedNumber = "";
+                //Add .'s between each number. Gross.
+                for (int i = 0; i < number.Length; i++)
+                {
+                    formattedNumber += number[i];
+                    if (i < number.Length-1)
+                    {
+                        formattedNumber += ".";
+                    }
+                }
+                return family + " " + formattedNumber;
+            }
+            else if (framework.StartsWith("netcoreapp"))
+            {
+                return family + " " + framework.Replace("netcoreapp", "");
+            }
+            else if (framework.StartsWith("net")) //net5.0, net6.0, etc)
+            {
+                return family + " " + framework.Replace("net", "");
+            }
+            else if (framework.StartsWith("vb6"))
+            {
+                return "Visual Basic 6";
+            }
+            else
+            {
+                return "";
+            }
         }
 
         private static string GetHistoricalFrameworkVersion(string line)
@@ -200,21 +246,21 @@ namespace DotNetCensus.Core
             }
         }
 
-        private static string GetUnityFrameworkVersion(string line)
-        {
-            //An example of what to expect:
-            //m_EditorVersion: 2020.3.12f1
-            //m_EditorVersionWithRevision: 2020.3.12f1(b3b2c6512326)
-            string fullVersion = line.Replace("m_EditorVersion:", "").Trim();
-            string[] splitVersion = fullVersion.Split('.');
-            string unityVersion = "";
-            if (splitVersion.Length >= 2)
-            {
-                unityVersion = "Unity3d v" + splitVersion[0] + "." + splitVersion[1];
-            }
+        //private static string GetUnityFrameworkVersion(string line)
+        //{
+        //    //An example of what to expect:
+        //    //m_EditorVersion: 2020.3.12f1
+        //    //m_EditorVersionWithRevision: 2020.3.12f1(b3b2c6512326)
+        //    string fullVersion = line.Replace("m_EditorVersion:", "").Trim();
+        //    string[] splitVersion = fullVersion.Split('.');
+        //    string unityVersion = "";
+        //    if (splitVersion.Length >= 2)
+        //    {
+        //        unityVersion = "Unity3d v" + splitVersion[0] + "." + splitVersion[1];
+        //    }
 
-            return unityVersion;
-        }
+        //    return unityVersion;
+        //}
 
         // get a color to represent the support. Kinda rough for now, but highlights really old versions.
         private static string? GetColor(string? framework)
