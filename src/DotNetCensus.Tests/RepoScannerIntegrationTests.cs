@@ -6,7 +6,7 @@
 //using TechDebtID.Core;
 //using TechDebtID.Core.Models;
 
-//namespace TechDebtID.Tests
+//namespace DotNetCensus.Tests;
 //{
 //    [TestClass]
 //    public class RepoScannerIntegrationTests

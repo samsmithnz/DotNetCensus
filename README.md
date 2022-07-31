@@ -1,5 +1,5 @@
-# DotnetCensus
-[![CI/CD](https://github.com/samsmithnz/DotnetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotnetCensus/actions/workflows/workflow.yml)
+# DotNetCensus
+[![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
 
 **A tool to conduct a census, to count different .NET versions, on a folder and/or repo.** 
 
@@ -11,3 +11,4 @@ Currently supports:
 - Unity3d projects
 - VB6 (!!!)
 
+- Currently only works on folders. In the future will support GitHub repo scanning too.
