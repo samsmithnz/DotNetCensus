@@ -8,9 +8,8 @@ public class ConsoleAppTests : BaseTests
     public void RunSamplesTest()
     {
         //Arrange
-        string? expected = null;
-        StringWriter sw = new(); 
-        expected = @"(Unknown framework): 1
+        StringWriter sw = new();
+        string expected = @"(Unknown framework): 1
 net462: 1
 net5.0: 1
 netcoreapp3.1: 3
@@ -35,15 +34,14 @@ vb6: 1
         Assert.IsNotNull(expected);
         Assert.AreEqual(expected, sw.ToString());
     }
-    
+
     [TestMethod]
     public void RunSamplesWithTotalsTest()
     {
         //Arrange
         bool includeTotal = true;
-        string? expected = null;
-        StringWriter sw = new(); 
-        expected = @"(Unknown framework): 1
+        StringWriter sw = new();
+        string expected = @"(Unknown framework): 1
 net462: 1
 net5.0: 1
 netcoreapp3.1: 3
