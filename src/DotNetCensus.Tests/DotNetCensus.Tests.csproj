@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotNetCensus.Core\DotNetCensus.Core.csproj" />
+    <ProjectReference Include="..\DotNetCensus\DotNetCensus.csproj" />
   </ItemGroup>
 
 </Project>
