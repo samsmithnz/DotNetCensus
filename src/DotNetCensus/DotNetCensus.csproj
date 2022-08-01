@@ -8,6 +8,11 @@
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>botsay</ToolCommandName>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/samsmithnz/DotNetCensus</PackageProjectUrl>
+		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
+		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
