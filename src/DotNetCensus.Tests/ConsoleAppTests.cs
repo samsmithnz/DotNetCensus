@@ -37,21 +37,24 @@ Framework  FrameworkFamily  Count  Status
             string[] parameters = new string[] { "-d", SamplesPath };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count  Status
-----------------------------------------------------
-.NET 5.0              .NET                 1  red   
-.NET 6.0              .NET                 1  blue  
-.NET 7.0              .NET                 1  blue  
-.NET Core 3.1         .NET Core            3  orange
-.NET Framework 1.0    .NET Framework       1  gray  
-.NET Framework 1.1    .NET Framework       1  gray  
-.NET Framework 2.0    .NET Framework       1  gray  
-.NET Framework 4.6.2  .NET Framework       1  gray  
-.NET Framework 4.7.1  .NET Framework       1  gray  
-.NET Framework 4.7.2  .NET Framework       2  gray  
-.NET Standard 2.0     .NET Standard        1  blue  
-(Unknown)             (Unknown)            1  gray  
-Visual Basic 6        Visual Basic 6       1  gray  
+Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 5.0              .NET                 1  deprecated      
+.NET 6.0              .NET                 1  supported       
+.NET 7.0              .NET                 1  supported       
+.NET Core 2.0         .NET Core            1  deprecated      
+.NET Core 2.1         .NET Core            1  deprecated      
+.NET Core 3.0         .NET Core            1  deprecated      
+.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework       1  unknown         
+.NET Framework 1.1    .NET Framework       1  unknown         
+.NET Framework 2.0    .NET Framework       1  unknown         
+.NET Framework 4.6.2  .NET Framework       1  unknown         
+.NET Framework 4.7.1  .NET Framework       1  unknown         
+.NET Framework 4.7.2  .NET Framework       2  unknown         
+.NET Standard 2.0     .NET Standard        1  supported       
+(Unknown)             (Unknown)            1  unknown         
+Visual Basic 6        Visual Basic 6       1  unknown         
 
 ";
 
@@ -74,22 +77,25 @@ Visual Basic 6        Visual Basic 6       1  gray
             string[] parameters = new string[] { "-d", SamplesPath, "-t" };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count  Status
-----------------------------------------------------
-.NET 5.0              .NET                 1  red   
-.NET 6.0              .NET                 1  blue  
-.NET 7.0              .NET                 1  blue  
-.NET Core 3.1         .NET Core            3  orange
-.NET Framework 1.0    .NET Framework       1  gray  
-.NET Framework 1.1    .NET Framework       1  gray  
-.NET Framework 2.0    .NET Framework       1  gray  
-.NET Framework 4.6.2  .NET Framework       1  gray  
-.NET Framework 4.7.1  .NET Framework       1  gray  
-.NET Framework 4.7.2  .NET Framework       2  gray  
-.NET Standard 2.0     .NET Standard        1  blue  
-(Unknown)             (Unknown)            1  gray  
-Visual Basic 6        Visual Basic 6       1  gray  
-total frameworks                          16        
+Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 5.0              .NET                 1  deprecated      
+.NET 6.0              .NET                 1  supported       
+.NET 7.0              .NET                 1  supported       
+.NET Core 2.0         .NET Core            1  deprecated      
+.NET Core 2.1         .NET Core            1  deprecated      
+.NET Core 3.0         .NET Core            1  deprecated      
+.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework       1  unknown         
+.NET Framework 1.1    .NET Framework       1  unknown         
+.NET Framework 2.0    .NET Framework       1  unknown         
+.NET Framework 4.6.2  .NET Framework       1  unknown         
+.NET Framework 4.7.1  .NET Framework       1  unknown         
+.NET Framework 4.7.2  .NET Framework       2  unknown         
+.NET Standard 2.0     .NET Standard        1  supported       
+(Unknown)             (Unknown)            1  unknown         
+Visual Basic 6        Visual Basic 6       1  unknown         
+total frameworks                          19                  
 
 ";
 

@@ -274,7 +274,7 @@ namespace DotNetCensus.Core
             if (framework == null)
             {
                 //Unknown/gray
-                return "gray";
+                return "unknown";
             }
             else if (framework.Contains(".NET Framework v1") ||
                 framework.Contains(".NET Framework v2") ||
@@ -287,16 +287,17 @@ namespace DotNetCensus.Core
                 framework.Contains(".NET Framework v4.5") ||
                 framework.Contains(".NET Framework v4.6.0") ||
                 framework.Contains(".NET Framework v4.6.1") ||
+                framework.Contains("netcoreapp2") ||
+                framework.Contains("netcoreapp3.0") ||
                 framework.Contains("net5.0"))
             {
                 //Unsupported/End of life/red
-                return "red";
+                return "deprecated";
             }
-            else if (framework.Contains(".NET Framework") ||
-                framework.Contains("netcoreapp"))
+            else if (framework == "netcoreapp3.1")
             {
                 //Supported, but old/orange
-                return "orange";
+                return "EOL: 13-Dec-2022";
             }
             else if (framework.Contains("net6.0") ||
                 framework.Contains("net7.0") ||
@@ -308,12 +309,12 @@ namespace DotNetCensus.Core
                 framework.Contains(".NET Framework v4.8"))
             {
                 //Supported/Ok/blue
-                return "blue";
+                return "supported";
             }
             else
             {
                 //Unknown/gray
-                return "gray";
+                return "unknown";
             }
         }
     }
