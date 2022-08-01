@@ -34,12 +34,12 @@ jobs:
         dotnet-version: 6.0.x
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Release
-    - name: .NET publish
+    - name: .NET pack NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
-        name: drop
+        name: nugetPackage
         path: src/DotNetCensus/bin/Release
 
   release: 
@@ -52,8 +52,8 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: drop
-        path: drop
+        name: nugetPackage
+        path: nugetPackage
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ needs.build.outputs.Version }}" 
