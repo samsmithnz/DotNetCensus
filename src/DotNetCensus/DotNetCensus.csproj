@@ -13,6 +13,7 @@
 		<PackageProjectUrl>https://github.com/samsmithnz/DotNetCensus</PackageProjectUrl>
 		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
 		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
+		<AssemblyName>dotnet-census</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
