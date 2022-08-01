@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackAsTool>true</PackAsTool>
-		<ToolCommandName>botsay</ToolCommandName>
+		<ToolCommandName>census</ToolCommandName>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
