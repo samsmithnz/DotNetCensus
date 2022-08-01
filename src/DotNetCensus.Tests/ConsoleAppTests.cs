@@ -4,9 +4,32 @@ namespace DotNetCensus.Tests;
 [TestClass]
 public class ConsoleAppTests : BaseTests
 {
+    [TestMethod]
+    public void RunSamplesWithNoParametersTest()
+    {
+        //Arrange
+        if (SamplesPath != null)
+        {
+            string[] parameters = new string[] { };
+            StringWriter sw = new();
+            string expected = @"
+Framework  FrameworkFamily  Count
+---------------------------------
+
+";
+
+            //Act
+            Console.SetOut(sw);
+            Program.Main(parameters);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+        }
+    }
 
     [TestMethod]
-    public void RunSamplesTest()
+    public void RunSamplesWithPathTest()
     {
         //Arrange
         if (SamplesPath != null)
@@ -35,7 +58,6 @@ Visual Basic 6        Visual Basic 6       1
             //Act
             Console.SetOut(sw);
             Program.Main(parameters);
-
 
             //Asset
             Assert.IsNotNull(expected);
@@ -102,9 +124,6 @@ total frameworks                          16
                 Assert.IsNotNull(ex);
                 Assert.AreEqual("One or more errors occurred. (CommandLine.UnknownOptionError)", ex.Message);
             }
-            //Asset
-            //Assert.IsNotNull(expected);
-            //Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
         }
     }
 }

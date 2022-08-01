@@ -36,7 +36,14 @@ namespace DotNetCensus
         static void RunOptions(Options opts)
         {
             //handle options
-            _directory = opts.Directory;
+            if (string.IsNullOrEmpty(opts.Directory) == true)
+            {
+                _directory = Directory.GetCurrentDirectory();
+            }
+            else
+            {
+                _directory = opts.Directory;
+            }
             _includeTotals = opts.IncludeTotals;
             //_outputFile = opts.OutputFile;
         }

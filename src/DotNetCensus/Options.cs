@@ -4,7 +4,7 @@ namespace DotNetCensus
 {
     public class Options
     {
-        [Option('d', "directory", Required = true, HelpText = "Root directory to search for projects")]
+        [Option('d', "directory", Required = false, HelpText = "Root directory to search for projects")]
         public string? Directory { get; set; }
         
         [Option('t', "Total", Required = false, Default = false, HelpText = "Include totals in results")]
