@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
     - build
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
@@ -65,3 +65,7 @@ jobs:
         tag: ${{ needs.build.outputs.Version }}
         name: Release ${{ needs.build.outputs.Version }}
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    - name: Publish nuget package to nuget.org
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
+      run: dotnet nuget push nugetPackage\*.nupkg --api-key "${{ secrets.NUGETTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      shell: pwsh    
