@@ -46,15 +46,15 @@ Framework             FrameworkFamily  Count  Status
 .NET Core 2.1         .NET Core            1  deprecated      
 .NET Core 3.0         .NET Core            1  deprecated      
 .NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework       1  unknown         
-.NET Framework 1.1    .NET Framework       1  unknown         
-.NET Framework 2.0    .NET Framework       1  unknown         
-.NET Framework 4.6.2  .NET Framework       1  unknown         
-.NET Framework 4.7.1  .NET Framework       1  unknown         
-.NET Framework 4.7.2  .NET Framework       2  unknown         
+.NET Framework 1.0    .NET Framework       1  deprecated      
+.NET Framework 1.1    .NET Framework       1  deprecated      
+.NET Framework 2.0    .NET Framework       1  deprecated      
+.NET Framework 4.6.2  .NET Framework       1  supported       
+.NET Framework 4.7.1  .NET Framework       1  supported       
+.NET Framework 4.7.2  .NET Framework       2  supported       
 .NET Standard 2.0     .NET Standard        1  supported       
 (Unknown)             (Unknown)            1  unknown         
-Visual Basic 6        Visual Basic 6       1  unknown         
+Visual Basic 6        Visual Basic 6       1  deprecated      
 
 ";
 
@@ -86,15 +86,15 @@ Framework             FrameworkFamily  Count  Status
 .NET Core 2.1         .NET Core            1  deprecated      
 .NET Core 3.0         .NET Core            1  deprecated      
 .NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework       1  unknown         
-.NET Framework 1.1    .NET Framework       1  unknown         
-.NET Framework 2.0    .NET Framework       1  unknown         
-.NET Framework 4.6.2  .NET Framework       1  unknown         
-.NET Framework 4.7.1  .NET Framework       1  unknown         
-.NET Framework 4.7.2  .NET Framework       2  unknown         
+.NET Framework 1.0    .NET Framework       1  deprecated      
+.NET Framework 1.1    .NET Framework       1  deprecated      
+.NET Framework 2.0    .NET Framework       1  deprecated      
+.NET Framework 4.6.2  .NET Framework       1  supported       
+.NET Framework 4.7.1  .NET Framework       1  supported       
+.NET Framework 4.7.2  .NET Framework       2  supported       
 .NET Standard 2.0     .NET Standard        1  supported       
 (Unknown)             (Unknown)            1  unknown         
-Visual Basic 6        Visual Basic 6       1  unknown         
+Visual Basic 6        Visual Basic 6       1  deprecated      
 total frameworks                          19                  
 
 ";

@@ -276,20 +276,21 @@ namespace DotNetCensus.Core
                 //Unknown/gray
                 return "unknown";
             }
-            else if (framework.Contains(".NET Framework v1") ||
-                framework.Contains(".NET Framework v2") ||
-                framework.Contains(".NET Framework v3.0") ||
-                framework.Contains(".NET Framework v4.0") ||
-                framework.Contains(".NET Framework v4.1") ||
-                framework.Contains(".NET Framework v4.2") ||
-                framework.Contains(".NET Framework v4.3") ||
-                framework.Contains(".NET Framework v4.4") ||
-                framework.Contains(".NET Framework v4.5") ||
-                framework.Contains(".NET Framework v4.6.0") ||
-                framework.Contains(".NET Framework v4.6.1") ||
+            else if (framework == "vb6" ||
+                framework.Contains("v1") ||
+                framework.Contains("v2") ||
+                framework.Contains("v3.0") ||
+                framework.Contains("v4.0") ||
+                framework.Contains("v4.1") ||
+                framework.Contains("v4.2") ||
+                framework.Contains("v4.3") ||
+                framework.Contains("v4.4") ||
+                framework.Contains("v4.5") ||
+                framework == "v4.6.0" ||
+                framework == "v4.6.1" ||
                 framework.Contains("netcoreapp2") ||
-                framework.Contains("netcoreapp3.0") ||
-                framework.Contains("net5.0"))
+                framework == "netcoreapp3.0" ||
+                framework == "net5.0")
             {
                 //Unsupported/End of life/red
                 return "deprecated";
@@ -299,14 +300,13 @@ namespace DotNetCensus.Core
                 //Supported, but old/orange
                 return "EOL: 13-Dec-2022";
             }
-            else if (framework.Contains("net6.0") ||
-                framework.Contains("net7.0") ||
+            else if (framework == "net6.0" ||
+                framework == "net7.0" ||
                 framework.Contains("netstandard") ||
-                framework.Contains("Unity3d v2020") ||
-                framework.Contains(".NET Framework v3.5.0") ||
-                framework.Contains(".NET Framework v4.6.2") ||
-                framework.Contains(".NET Framework v4.7") ||
-                framework.Contains(".NET Framework v4.8"))
+                framework.Contains("v3.5.0") ||
+                framework == "net462" ||
+                framework.Contains("v4.7") ||
+                framework.Contains("v4.8"))
             {
                 //Supported/Ok/blue
                 return "supported";
