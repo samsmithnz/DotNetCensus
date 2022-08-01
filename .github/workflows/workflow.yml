@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: nugetPackage
-        path: src/DotNetCensus/bin/Release
+        path: src/DotNetCensus/nupkg
 
   release: 
     name: Release job
