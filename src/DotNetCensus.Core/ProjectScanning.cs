@@ -269,7 +269,7 @@ namespace DotNetCensus.Core
         //}
 
         // get a color to represent the support. Kinda rough for now, but highlights really old versions.
-        private static string? GetColor(string? framework)
+        public static string? GetColor(string? framework)
         {
             if (framework == null)
             {
@@ -278,13 +278,14 @@ namespace DotNetCensus.Core
             }
             else if (framework.Contains(".NET Framework v1") ||
                 framework.Contains(".NET Framework v2") ||
-                framework.Contains(".NET Framework v3") ||
+                framework.Contains(".NET Framework v3.0") ||
                 framework.Contains(".NET Framework v4.0") ||
                 framework.Contains(".NET Framework v4.1") ||
                 framework.Contains(".NET Framework v4.2") ||
                 framework.Contains(".NET Framework v4.3") ||
                 framework.Contains(".NET Framework v4.4") ||
                 framework.Contains(".NET Framework v4.5") ||
+                framework.Contains(".NET Framework v4.6.0") ||
                 framework.Contains(".NET Framework v4.6.1") ||
                 framework.Contains("net5.0"))
             {
@@ -301,6 +302,7 @@ namespace DotNetCensus.Core
                 framework.Contains("net7.0") ||
                 framework.Contains("netstandard") ||
                 framework.Contains("Unity3d v2020") ||
+                framework.Contains(".NET Framework v3.5.0") ||
                 framework.Contains(".NET Framework v4.6.2") ||
                 framework.Contains(".NET Framework v4.7") ||
                 framework.Contains(".NET Framework v4.8"))

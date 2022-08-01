@@ -26,6 +26,7 @@ namespace DotNetCensus.Core
                     {
                         Framework = project.FrameworkName,
                         FrameworkFamily = project.Family,
+                        Color = ProjectScanning.GetColor(project.FrameworkCode),
                         Count = 1 //it's the first time, start with a count of 1
                     });
                 }
