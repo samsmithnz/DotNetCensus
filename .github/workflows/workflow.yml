@@ -34,13 +34,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Release
-    - name: .NET publish
-      run: dotnet publish src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    - name: .NET pack NuGet package
+      run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
-        name: drop
-        path: src/DotNetCensus.Core/bin/Release
+        name: nugetPackage
+        path: src/DotNetCensus/nupkg
 
   release: 
     name: Release job
@@ -52,8 +52,8 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: drop
-        path: drop
+        name: nugetPackage
+        path: nugetPackage
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ needs.build.outputs.Version }}" 
@@ -65,3 +65,7 @@ jobs:
         tag: ${{ needs.build.outputs.Version }}
         name: Release ${{ needs.build.outputs.Version }}
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    - name: Publish nuget package to nuget.org
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
+      run: dotnet nuget push nugetPackage\*.nupkg --api-key "${{ secrets.NUGETTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      shell: pwsh    

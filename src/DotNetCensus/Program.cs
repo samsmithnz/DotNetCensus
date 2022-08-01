@@ -18,18 +18,14 @@ namespace DotNetCensus
                    .WithParsed(RunOptions)
                    .WithNotParsed(HandleParseError);
 
-
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
+                //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
                 List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
 
-                //foreach (FrameworkSummary item in results)
-                //{
-                //    Console.WriteLine(item.Framework + ": " + item.Count);
-                //}
-
+                //Create and output the table
                 ConsoleTable
                     .From<FrameworkSummary>(results)
                     .Configure(o => o.NumberAlignment = Alignment.Right)
@@ -40,7 +36,14 @@ namespace DotNetCensus
         static void RunOptions(Options opts)
         {
             //handle options
-            _directory = opts.Directory;
+            if (string.IsNullOrEmpty(opts.Directory) == true)
+            {
+                _directory = Directory.GetCurrentDirectory();
+            }
+            else
+            {
+                _directory = opts.Directory;
+            }
             _includeTotals = opts.IncludeTotals;
             //_outputFile = opts.OutputFile;
         }
@@ -48,9 +51,14 @@ namespace DotNetCensus
         static void HandleParseError(IEnumerable<Error> errs)
         {
             //handle errors
-            foreach (Error err in errs)
+            var excList = new List<Exception>();
+            foreach (var err in errs)
             {
-                Console.WriteLine(err.ToString());
+                excList.Add(new ArgumentException(err.ToString()));
+            }
+            if (excList.Any())
+            {
+                throw new AggregateException(excList);
             }
         }
     }

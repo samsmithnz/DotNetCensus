@@ -1,19 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>census</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/samsmithnz/DotNetCensus</PackageProjectUrl>
+		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
+		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="ConsoleTables" Version="2.4.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />
+		<PackageReference Include="ConsoleTables" Version="2.4.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DotNetCensus.Core\DotNetCensus.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DotNetCensus.Core\DotNetCensus.Core.csproj" />
+	</ItemGroup>
 
 </Project>
