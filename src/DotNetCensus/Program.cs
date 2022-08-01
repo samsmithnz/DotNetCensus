@@ -44,9 +44,14 @@ namespace DotNetCensus
         static void HandleParseError(IEnumerable<Error> errs)
         {
             //handle errors
-            foreach (Error err in errs)
+            var excList = new List<Exception>();
+            foreach (var err in errs)
             {
-                Console.WriteLine(err.ToString());
+                excList.Add(new ArgumentException(err.ToString()));
+            }
+            if (excList.Any())
+            {
+                throw new AggregateException(excList);
             }
         }
     }
