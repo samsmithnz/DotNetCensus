@@ -17,7 +17,7 @@ Currently supports:
 ## To use
 
 1. First install:
-`dotnet tool install -g dotnetcensus`
+`dotnet tool install -g dotnet-census`
 
 2. Then run the command in the directory you need to count versions:
 `dotnet census`
