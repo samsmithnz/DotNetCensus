@@ -13,8 +13,8 @@ public class ConsoleAppTests : BaseTests
             string[] parameters = new string[] { };
             StringWriter sw = new();
             string expected = @"
-Framework  FrameworkFamily  Count  Color
-----------------------------------------
+Framework  FrameworkFamily  Count  Status
+-----------------------------------------
 
 ";
 
@@ -37,7 +37,7 @@ Framework  FrameworkFamily  Count  Color
             string[] parameters = new string[] { "-d", SamplesPath };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count  Color 
+Framework             FrameworkFamily  Count  Status
 ----------------------------------------------------
 .NET 5.0              .NET                 1  red   
 .NET 6.0              .NET                 1  blue  
@@ -74,7 +74,7 @@ Visual Basic 6        Visual Basic 6       1  gray
             string[] parameters = new string[] { "-d", SamplesPath, "-t" };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count  Color 
+Framework             FrameworkFamily  Count  Status
 ----------------------------------------------------
 .NET 5.0              .NET                 1  red   
 .NET 6.0              .NET                 1  blue  

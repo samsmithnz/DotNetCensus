@@ -119,7 +119,7 @@ namespace DotNetCensus.Core
             //Add colors and families
             foreach (Project item in projects)
             {
-                item.Color = GetColor(item.FrameworkCode);
+                item.Color = GetStatus(item.FrameworkCode);
                 item.Family = GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = GetFriendlyName(item.FrameworkCode, item.Family);
             }
@@ -269,7 +269,7 @@ namespace DotNetCensus.Core
         //}
 
         // get a color to represent the support. Kinda rough for now, but highlights really old versions.
-        public static string? GetColor(string? framework)
+        public static string? GetStatus(string? framework)
         {
             if (framework == null)
             {
