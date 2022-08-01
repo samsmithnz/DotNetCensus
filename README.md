@@ -41,5 +41,5 @@ Framework             FrameworkFamily  Count
 .NET Framework 4.7.1  .NET Framework       1
 .NET Framework 4.7.2  .NET Framework       2
 .NET Standard 2.0     .NET Standard        1
-total frameworks                          13
+total frameworks                          12
 ```
