@@ -9,8 +9,11 @@ public class ConsoleAppTests : BaseTests
     public void RunSamplesTest()
     {
         //Arrange
-        StringWriter sw = new();
-        string expected = @"
+        if (SamplesPath != null)
+        {
+            string[] parameters = new string[] { "-d", SamplesPath };
+            StringWriter sw = new();
+            string expected = @"
 Framework             FrameworkFamily  Count
 --------------------------------------------
 .NET 5.0              .NET                 1
@@ -29,25 +32,26 @@ Visual Basic 6        Visual Basic 6       1
 
 ";
 
-        //Act
-        if (SamplesPath != null)
-        {
+            //Act
             Console.SetOut(sw);
-            Program.Main(new string[] { "-d", SamplesPath });
-        }
+            Program.Main(parameters);
 
-        //Asset
-        Assert.IsNotNull(expected);
-        Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+        }
     }
 
     [TestMethod]
     public void RunSamplesWithTotalsTest()
     {
         //Arrange
-        bool includeTotal = true;
-        StringWriter sw = new();
-        string expected = @"
+        if (SamplesPath != null)
+        {
+            string[] parameters = new string[] { "-d", SamplesPath, "-t" };
+            StringWriter sw = new();
+            string expected = @"
 Framework             FrameworkFamily  Count
 --------------------------------------------
 .NET 5.0              .NET                 1
@@ -66,23 +70,36 @@ Visual Basic 6        Visual Basic 6       1
 total frameworks                          16
 
 ";
-        //        string expected = @"
-        //Framework         FrameworkFamily  Count
-        //----------------------------------------
-        //net6.0            .NET                 1
-        //total frameworks                       1
 
-        //";
-        //Act
-        if (SamplesPath != null)
-        {
+            //Act
             Console.SetOut(sw);
-            Program.Main(new string[] { "-d", SamplesPath, "-i", includeTotal.ToString() });
-        }
+            Program.Main(parameters);
 
-        //Asset
-        Assert.IsNotNull(expected);
-        Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+        }
     }
 
+    [TestMethod]
+    public void RunSamplesWithInvalidParametersTest()
+    {
+        //Arrange
+        if (SamplesPath != null)
+        {
+            string[] parameters = new string[] { "-d", SamplesPath, "-z" }; //z is an invalid parameter
+            StringWriter sw = new();
+            string expected = @"
+CommandLine.UnknownOptionError
+";
+
+            //Act
+            Console.SetOut(sw);
+            Program.Main(parameters);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected, Environment.NewLine + sw.ToString());
+        }
+    }
 }

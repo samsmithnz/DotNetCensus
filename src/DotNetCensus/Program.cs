@@ -18,18 +18,14 @@ namespace DotNetCensus
                    .WithParsed(RunOptions)
                    .WithNotParsed(HandleParseError);
 
-
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
+                //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
                 List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
 
-                //foreach (FrameworkSummary item in results)
-                //{
-                //    Console.WriteLine(item.Framework + ": " + item.Count);
-                //}
-
+                //Create and output the table
                 ConsoleTable
                     .From<FrameworkSummary>(results)
                     .Configure(o => o.NumberAlignment = Alignment.Right)
