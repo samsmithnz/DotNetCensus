@@ -154,7 +154,7 @@ Sample.VB6.WinApp.vbp                       \Sample.VB6.Calculator\Sample.VB6.Wi
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace(@"\",""), Environment.NewLine + sw.ToString().Replace(@"\", ""));
+            Assert.AreEqual(expected.Replace(@"\", "/"), Environment.NewLine + sw.ToString().Replace(@"\", "/"));
         }
     }
 
