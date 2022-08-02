@@ -24,6 +24,7 @@ namespace DotNetCensus
             {
                 //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
+                //Need to sort so that Linux + Windows results are the same
                 List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
                 if (_includeRawResults == true)
                 {
