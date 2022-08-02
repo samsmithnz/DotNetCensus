@@ -13,8 +13,8 @@ public class ConsoleAppTests : BaseTests
             string[] parameters = new string[] { };
             StringWriter sw = new();
             string expected = @"
-Framework  FrameworkFamily  Count
----------------------------------
+Framework  FrameworkFamily  Count  Status
+-----------------------------------------
 
 ";
 
@@ -37,21 +37,26 @@ Framework  FrameworkFamily  Count
             string[] parameters = new string[] { "-d", SamplesPath };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count
---------------------------------------------
-.NET 5.0              .NET                 1
-.NET 6.0              .NET                 1
-.NET 7.0              .NET                 1
-.NET Core 3.1         .NET Core            3
-.NET Framework 1.0    .NET Framework       1
-.NET Framework 1.1    .NET Framework       1
-.NET Framework 2.0    .NET Framework       1
-.NET Framework 4.6.2  .NET Framework       1
-.NET Framework 4.7.1  .NET Framework       1
-.NET Framework 4.7.2  .NET Framework       2
-.NET Standard 2.0     .NET Standard        1
-(Unknown)             (Unknown)            1
-Visual Basic 6        Visual Basic 6       1
+Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 5.0              .NET                 1  deprecated      
+.NET 6.0              .NET                 1  supported       
+.NET 7.0              .NET                 1  supported       
+.NET Core 1.0         .NET Core            1  deprecated      
+.NET Core 1.1         .NET Core            1  deprecated      
+.NET Core 2.0         .NET Core            1  deprecated      
+.NET Core 2.1         .NET Core            1  deprecated      
+.NET Core 3.0         .NET Core            1  deprecated      
+.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework       1  deprecated      
+.NET Framework 1.1    .NET Framework       1  deprecated      
+.NET Framework 2.0    .NET Framework       1  deprecated      
+.NET Framework 4.6.2  .NET Framework       1  supported       
+.NET Framework 4.7.1  .NET Framework       1  supported       
+.NET Framework 4.7.2  .NET Framework       2  supported       
+.NET Standard 2.0     .NET Standard        1  supported       
+(Unknown)             (Unknown)            1  unknown         
+Visual Basic 6        Visual Basic 6       1  deprecated      
 
 ";
 
@@ -74,22 +79,27 @@ Visual Basic 6        Visual Basic 6       1
             string[] parameters = new string[] { "-d", SamplesPath, "-t" };
             StringWriter sw = new();
             string expected = @"
-Framework             FrameworkFamily  Count
---------------------------------------------
-.NET 5.0              .NET                 1
-.NET 6.0              .NET                 1
-.NET 7.0              .NET                 1
-.NET Core 3.1         .NET Core            3
-.NET Framework 1.0    .NET Framework       1
-.NET Framework 1.1    .NET Framework       1
-.NET Framework 2.0    .NET Framework       1
-.NET Framework 4.6.2  .NET Framework       1
-.NET Framework 4.7.1  .NET Framework       1
-.NET Framework 4.7.2  .NET Framework       2
-.NET Standard 2.0     .NET Standard        1
-(Unknown)             (Unknown)            1
-Visual Basic 6        Visual Basic 6       1
-total frameworks                          16
+Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 5.0              .NET                 1  deprecated      
+.NET 6.0              .NET                 1  supported       
+.NET 7.0              .NET                 1  supported       
+.NET Core 1.0         .NET Core            1  deprecated      
+.NET Core 1.1         .NET Core            1  deprecated      
+.NET Core 2.0         .NET Core            1  deprecated      
+.NET Core 2.1         .NET Core            1  deprecated      
+.NET Core 3.0         .NET Core            1  deprecated      
+.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework       1  deprecated      
+.NET Framework 1.1    .NET Framework       1  deprecated      
+.NET Framework 2.0    .NET Framework       1  deprecated      
+.NET Framework 4.6.2  .NET Framework       1  supported       
+.NET Framework 4.7.1  .NET Framework       1  supported       
+.NET Framework 4.7.2  .NET Framework       2  supported       
+.NET Standard 2.0     .NET Standard        1  supported       
+(Unknown)             (Unknown)            1  unknown         
+Visual Basic 6        Visual Basic 6       1  deprecated      
+total frameworks                          21                  
 
 ";
 

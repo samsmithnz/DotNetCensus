@@ -5,5 +5,6 @@
         public string Framework { get; set; } = "";
         public string FrameworkFamily { get; set; } = "";
         public int Count { get; set; }
+        public string? Status { get; set; }
     }
 }
