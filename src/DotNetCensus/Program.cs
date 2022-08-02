@@ -24,17 +24,18 @@ namespace DotNetCensus
             {
                 //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
+                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ToList();
                 if (_includeRawResults == true)
                 {
                     //If it's a raw output, remove the full path from each project
-                    foreach (Project item in projects)
+                    foreach (Project item in sortedProjects)
                     {
                         item.Path = item.Path.Replace(_directory, "");
                     }
 
                     //Create and output the table
                     ConsoleTable
-                        .From<Project>(projects)
+                        .From<Project>(sortedProjects)
                         .Configure(o => o.NumberAlignment = Alignment.Right)
                         .Write(Format.Minimal);
                 }
