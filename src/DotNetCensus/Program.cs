@@ -26,6 +26,12 @@ namespace DotNetCensus
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
                 if (_includeRawResults == true)
                 {
+                    //If it's a raw output, remove the full path from each project
+                    foreach (Project item in projects)
+                    {
+                        item.Path = item.Path.Replace(_directory, "");
+                    }
+
                     //Create and output the table
                     ConsoleTable
                         .From<Project>(projects)
