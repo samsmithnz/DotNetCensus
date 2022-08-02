@@ -9,6 +9,7 @@ namespace DotNetCensus
     {
         private static string? _directory;
         private static bool _includeTotals;
+        private static bool _includeRawResults;
         //private static string _outputFile;
 
         public static void Main(string[] args)
@@ -23,13 +24,32 @@ namespace DotNetCensus
             {
                 //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
-                List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
+                //Need to sort so that Linux + Windows results are the same
+                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
+                if (_includeRawResults == true)
+                {
+                    //If it's a raw output, remove the full path from each project
+                    foreach (Project item in sortedProjects)
+                    {
+                        item.Path = item.Path.Replace(_directory, "");
+                    }
 
-                //Create and output the table
-                ConsoleTable
-                    .From<FrameworkSummary>(results)
-                    .Configure(o => o.NumberAlignment = Alignment.Right)
-                    .Write(Format.Minimal);
+                    //Create and output the table
+                    ConsoleTable
+                        .From<Project>(sortedProjects)
+                        .Configure(o => o.NumberAlignment = Alignment.Right)
+                        .Write(Format.Minimal);
+                }
+                else
+                {
+                    List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
+                    //Create and output the table
+                    ConsoleTable
+                        .From<FrameworkSummary>(results)
+                        .Configure(o => o.NumberAlignment = Alignment.Right)
+                        .Write(Format.Minimal);
+                }
+
             }
         }
 
@@ -45,6 +65,7 @@ namespace DotNetCensus
                 _directory = opts.Directory;
             }
             _includeTotals = opts.IncludeTotals;
+            _includeRawResults = opts.IncludeRawResults;
             //_outputFile = opts.OutputFile;
         }
 
