@@ -8,7 +8,7 @@ Ever wanted to understand what your .NET portfolio looks like? Perhaps to unders
 Currently supports:
 - .NET Framework
 - .NET Standard
-- .NET Core
+- .NET Core 
 - .NET 5/6/7/etc
 - VB6 (!!!)
 
@@ -30,16 +30,23 @@ To add totals to the results, use the `-t` argument:
 
 This is a sample of the results: 
 ```
-Framework             FrameworkFamily  Count
---------------------------------------------
-.NET 5.0              .NET                 1
-.NET 6.0              .NET                 1
-.NET Core 3.1         .NET Core            3
-.NET Framework 1.1    .NET Framework       1
-.NET Framework 2.0    .NET Framework       1
-.NET Framework 4.6.2  .NET Framework       1
-.NET Framework 4.7.1  .NET Framework       1
-.NET Framework 4.7.2  .NET Framework       2
-.NET Standard 2.0     .NET Standard        1
-total frameworks                          12
+Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 5.0              .NET                 1  deprecated      
+.NET 6.0              .NET                 1  supported       
+.NET 7.0              .NET                 1  supported       
+.NET Core 2.0         .NET Core            1  deprecated      
+.NET Core 2.1         .NET Core            1  deprecated      
+.NET Core 3.0         .NET Core            1  deprecated      
+.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework       1  deprecated      
+.NET Framework 1.1    .NET Framework       1  deprecated      
+.NET Framework 2.0    .NET Framework       1  deprecated      
+.NET Framework 4.6.2  .NET Framework       1  supported       
+.NET Framework 4.7.1  .NET Framework       1  supported       
+.NET Framework 4.7.2  .NET Framework       2  supported       
+.NET Standard 2.0     .NET Standard        1  supported       
+(Unknown)             (Unknown)            1  unknown         
+Visual Basic 6        Visual Basic 6       1  deprecated      
+total frameworks                          19                  
 ```
