@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Text.Json;
 
 namespace DotNetCensus.Core
 {
@@ -24,7 +25,26 @@ namespace DotNetCensus.Core
                     case ".vbp":
                         projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
                         break;
-                        //default:
+                    default:
+                        //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
+                        if (fileInfo != null && fileInfo.Directory != null &&
+                            fileInfo.Name == "project.json")
+                        {
+                            //Check to see if it's a VB.NET or C# project
+                            int csFiles = new DirectoryInfo(fileInfo.Directory.FullName).GetFiles("*.cs", SearchOption.AllDirectories).Length;
+                            int vbFiles = new DirectoryInfo(fileInfo.Directory.FullName).GetFiles("*.vb", SearchOption.AllDirectories).Length;
+                            string language;
+                            if (csFiles >= vbFiles)
+                            {
+                                language = "csharp";
+                            }
+                            else
+                            {
+                                language = "vb.net";
+                            }
+                            projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+                        }
+                        break;
                         //    //Is it a Unity3d project?
                         //    if (fileInfo.Name == "ProjectVersion.txt")
                         //    {
@@ -45,7 +65,7 @@ namespace DotNetCensus.Core
             List<Project> projects = new();
 
             //Setup the project object
-            Project project = new()
+            Project? project = new()
             {
                 FileName = new FileInfo(filePath).Name,
                 Path = filePath,
@@ -55,6 +75,35 @@ namespace DotNetCensus.Core
             if (language == "vb6")
             {
                 project.FrameworkCode = "vb6";
+            }
+            else if (new FileInfo(filePath).Name == "project.json")
+            {
+                //Get the text of the file
+                string contents = File.ReadAllText(filePath);
+                //Load it into a JSON object
+                JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(contents);
+                //Search for the project version
+                //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
+                if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
+                {
+                    foreach (JsonProperty item in jsonElement.EnumerateObject())
+                    {
+                        if (item.NameEquals("netcoreapp1.0") == true)
+                        {
+                            project.FrameworkCode = "netcoreapp1.0";
+                            break;
+                        }
+                        else if (item.NameEquals("netcoreapp1.1") == true)
+                        {
+                            project.FrameworkCode = "netcoreapp1.1";
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    project = null;
+                }
             }
             else
             {
@@ -114,7 +163,10 @@ namespace DotNetCensus.Core
                 }
             }
 
-            projects.Add(project);
+            if (project != null)
+            {
+                projects.Add(project);
+            }
 
             //Add colors and families
             foreach (Project item in projects)
@@ -288,6 +340,7 @@ namespace DotNetCensus.Core
                 framework.Contains("v4.5") ||
                 framework == "v4.6.0" ||
                 framework == "v4.6.1" ||
+                framework.Contains("netcoreapp1") ||
                 framework.Contains("netcoreapp2") ||
                 framework == "netcoreapp3.0" ||
                 framework == "net5.0")
