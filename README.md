@@ -50,5 +50,5 @@ Framework             FrameworkFamily  Count  Status
 .NET Standard 2.0     .NET Standard        1  supported       
 (Unknown)             (Unknown)            1  unknown         
 Visual Basic 6        Visual Basic 6       1  deprecated      
-total frameworks                          19                  
+total frameworks                          21                  
 ```
