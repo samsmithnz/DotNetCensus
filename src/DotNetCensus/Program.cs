@@ -24,7 +24,7 @@ namespace DotNetCensus
             {
                 //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(_directory);
-                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ToList();
+                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
                 if (_includeRawResults == true)
                 {
                     //If it's a raw output, remove the full path from each project
