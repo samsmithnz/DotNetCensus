@@ -10,10 +10,11 @@ namespace DotNetCensus
         private static string? _directory;
         private static bool _includeTotals;
         private static bool _includeRawResults;
-        private static string _outputFile;
+        private static string? _outputFile;
 
         public static void Main(string[] args)
         {
+            StringWriter sw = new();
             //process arguments
             ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
                    .WithParsed(RunOptions)
@@ -34,12 +35,11 @@ namespace DotNetCensus
                         item.Path = item.Path.Replace(_directory, "");
                     }
 
-                    if (string.IsNullOrEmpty(_outputFile) == false)
-                    { 
-                        //Redirect output to string writer
-                        StringWriter sw = new();
-                        Console.SetOut(sw);
-                    }
+                    //if (string.IsNullOrEmpty(_outputFile) == false)
+                    //{ 
+                    //    //Redirect output to string writer
+                    //    Console.SetOut(sw);
+                    //}
 
                     //Create and output the table
                     ConsoleTable
@@ -49,22 +49,22 @@ namespace DotNetCensus
 
                     if (string.IsNullOrEmpty(_outputFile) == false)
                     {
-                        //Direct output back to console
-                        StreamWriter? standardOutput = new(Console.OpenStandardOutput());
-                        standardOutput.AutoFlush = true;
-                        Console.SetOut(standardOutput);
+                        ////Direct output back to console
+                        //StreamWriter? standardOutput = new(Console.OpenStandardOutput());
+                        //standardOutput.AutoFlush = true;
+                        //Console.SetOut(standardOutput);
+                        Console.WriteLine($"Exported results to '{_outputFile}'");
                     }
                 }
                 else
                 {
                     List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
 
-                    if (string.IsNullOrEmpty(_outputFile) == false)
-                    {
-                        //Redirect output to string writer
-                        StringWriter sw = new();
-                        Console.SetOut(sw);
-                    }
+                    //if (string.IsNullOrEmpty(_outputFile) == false)
+                    //{
+                    //    //Redirect output to string writer
+                    //    Console.SetOut(sw);
+                    //}
 
                     //Create and output the table
                     ConsoleTable
@@ -74,13 +74,13 @@ namespace DotNetCensus
 
                     if (string.IsNullOrEmpty(_outputFile) == false)
                     {
-                        //Direct output back to console
-                        StreamWriter? standardOutput = new(Console.OpenStandardOutput());
-                        standardOutput.AutoFlush = true;
-                        Console.SetOut(standardOutput);
+                        ////Direct output back to console
+                        //StreamWriter? standardOutput = new(Console.OpenStandardOutput());
+                        //standardOutput.AutoFlush = true;
+                        //Console.SetOut(standardOutput);
+                        Console.WriteLine($"Exported results to '{_outputFile}'");
                     }
                 }
-
             }
         }
         
