@@ -168,12 +168,12 @@ VBProj.vbproj                               /Sample.NetFrameworkInvalid.App/VBPr
 
 
     [TestMethod]
-    public void RunSamplesWithRawResultsToFileTest()
+    public void RunSamplesWithTotalsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
         {
-            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-o", "test.txt" };
+            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-o", "test.txt" };
             StringWriter sw = new();
             string consoleExpected = @"";
             string fileExpected = @"
