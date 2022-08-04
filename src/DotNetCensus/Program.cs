@@ -78,10 +78,21 @@ namespace DotNetCensus
                     else
                     {
                         //Create a CSV file
-
                         StreamWriter sw = File.CreateText(_outputFile);
-                        //sw.WriteLine
-
+                        sw.WriteLine("FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status");
+                        foreach (Project item in sortedProjects)
+                        {
+                            sw.WriteLine(item.FileName + "," +
+                                item.Path + "," +
+                                item.FrameworkCode + "," +
+                                item.FrameworkName + "," +
+                                item.Family + "," +
+                                item.Language + "," +
+                                item.Status);
+                        }
+                        sw.Close();
+                        //FileInfo fileInfo = new(_outputFile);
+                        
                         Console.WriteLine($"Exported results to '{_outputFile}'");
                     }
                 }
@@ -101,14 +112,14 @@ namespace DotNetCensus
                         .Configure(o => o.NumberAlignment = Alignment.Right)
                         .Write(Format.Minimal);
 
-                    if (string.IsNullOrEmpty(_outputFile) == false)
-                    {
-                        ////Direct output back to console
-                        //StreamWriter? standardOutput = new(Console.OpenStandardOutput());
-                        //standardOutput.AutoFlush = true;
-                        //Console.SetOut(standardOutput);
-                        Console.WriteLine($"Exported results to '{_outputFile}'");
-                    }
+                    //if (string.IsNullOrEmpty(_outputFile) == false)
+                    //{
+                    //    ////Direct output back to console
+                    //    //StreamWriter? standardOutput = new(Console.OpenStandardOutput());
+                    //    //standardOutput.AutoFlush = true;
+                    //    //Console.SetOut(standardOutput);
+                    //    Console.WriteLine($"Exported results to '{_outputFile}'");
+                    //}
                 }
             }
         }

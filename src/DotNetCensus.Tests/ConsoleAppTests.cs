@@ -177,7 +177,7 @@ VBProj.vbproj                               /Sample.NetFrameworkInvalid.App/VBPr
             StringWriter sw = new();
             string consoleExpected = @"";
             string fileExpected = @"
-    FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Color           
+    FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Status           
     -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     Assembly-CSharp.csproj                      /Sample.Unity2020/Assembly-CSharp.csproj                                         v4.7.1          .NET Framework 4.7.1  .NET Framework  csharp    supported       
     project.json                                /Sample.NetCore1.0.ConsoleApp/project.json                                       netcoreapp1.0   .NET Core 1.0         .NET Core       csharp    deprecated      
