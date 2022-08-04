@@ -1,3 +1,6 @@
+using Spectre.Console;
+using Spectre.Console.Testing;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -119,7 +122,7 @@ total frameworks                          21
         //Arrange
         if (SamplesPath != null)
         {
-            string[] parameters = new string[] { "-d", SamplesPath, "-r" };
+            string[] parameters = new string[] { "-d", SamplesPath, "--raw" };
             StringWriter sw = new();
             string expected = @"
 FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Color           
@@ -147,14 +150,19 @@ VBProj.vbproj                               /Sample.NetFramework2.0.App/VBProj.v
 VBProj.vbproj                               /Sample.NetFrameworkInvalid.App/VBProj.vbproj                                                    (Unknown)             (Unknown)       vb.net    unknown         
 
 ";
+            //var console = new TestConsole().SupportsAnsi(true);
 
             //Act
+            //AnsiConsole.Record();
             Console.SetOut(sw);
             Program.Main(parameters);
 
             //Asset
+            //var test = console.Output.ToString();
+            //var text = AnsiConsole.ExportText();
+            //Assert.IsNotNull(text);
+            //Assert.IsTrue( AnsiConsole.ExportText().Contains("VBProj.vbproj"));
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace(@"\", "/"), Environment.NewLine + sw.ToString().Replace(@"\", "/"));
         }
     }
 

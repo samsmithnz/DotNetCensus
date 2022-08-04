@@ -15,7 +15,6 @@ namespace DotNetCensus
 
         public static void Main(string[] args)
         {
-            StringWriter sw = new();
             //process arguments
             ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
                    .WithParsed(RunOptions)
@@ -36,54 +35,53 @@ namespace DotNetCensus
                         item.Path = item.Path.Replace(_directory, "");
                     }
 
-                    //if (string.IsNullOrEmpty(_outputFile) == false)
-                    //{ 
-                    //    //Redirect output to string writer
-                    //    Console.SetOut(sw);
+                    #region "Console.Ansi - awaiting support"
+
+                    //// Create a table
+                    //Table table = new();
+
+                    //// Add some columns
+                    //table.AddColumn("FileName");
+                    //table.AddColumn("Path");
+                    //table.AddColumn("FrameworkCode");
+                    //table.AddColumn("FrameworkName");
+                    //table.AddColumn("Family");
+                    //table.AddColumn("Language");
+                    //table.AddColumn("Status");
+                    ////table.AddColumn(new TableColumn("Bar").Centered());
+                    //table.Columns[1].NoWrap();
+
+                    //// Add some rows
+                    //foreach (Project item in sortedProjects)
+                    //{
+                    //    table.AddRow(item.FileName,
+                    //        item.Path,
+                    //        item.FrameworkCode,
+                    //        item.FrameworkName,
+                    //        item.Family,
+                    //        item.Language,
+                    //        item.Status);
                     //}
 
-                    // Create a table
-                    Table table = new();
+                    //// Render the table to the console
+                    //AnsiConsole.Write(table);
+                    #endregion
 
-                    // Add some columns
-                    table.AddColumn("FileName");
-                    table.AddColumn("Path");
-                    table.AddColumn("FrameworkCode");
-                    table.AddColumn("FrameworkName");
-                    table.AddColumn("Family");
-                    table.AddColumn("Language");
-                    table.AddColumn("Status");
-                    //table.AddColumn(new TableColumn("Bar").Centered());
-                    table.Columns[1].NoWrap();
-
-                    // Add some rows
-                    foreach (Project item in sortedProjects)
+                    if (string.IsNullOrEmpty(_outputFile) == true)
                     {
-                        table.AddRow(item.FileName,
-                            item.Path,
-                            item.FrameworkCode,
-                            item.FrameworkName,
-                            item.Family,
-                            item.Language,
-                            item.Status);
+                        //Create and output the table
+                        ConsoleTable
+                            .From<Project>(sortedProjects)
+                            .Configure(o => o.NumberAlignment = Alignment.Right)
+                            .Write(Format.Minimal);
                     }
-                    table.Expand();
-
-                    // Render the table to the console
-                    AnsiConsole.Write(table);
-
-                    ////Create and output the table
-                    //ConsoleTable
-                    //    .From<Project>(sortedProjects)
-                    //    .Configure(o => o.NumberAlignment = Alignment.Right)
-                    //    .Write(Format.Minimal);
-
-                    if (string.IsNullOrEmpty(_outputFile) == false)
+                    else
                     {
-                        ////Direct output back to console
-                        //StreamWriter? standardOutput = new(Console.OpenStandardOutput());
-                        //standardOutput.AutoFlush = true;
-                        //Console.SetOut(standardOutput);
+                        //Create a CSV file
+
+                        StreamWriter sw = File.CreateText(_outputFile);
+                        sw.WriteLine
+
                         Console.WriteLine($"Exported results to '{_outputFile}'");
                     }
                 }
@@ -114,7 +112,7 @@ namespace DotNetCensus
                 }
             }
         }
-        
+
         static void RunOptions(Options opts)
         {
             //handle options
