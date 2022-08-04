@@ -80,7 +80,7 @@ namespace DotNetCensus
                         //Create a CSV file
 
                         StreamWriter sw = File.CreateText(_outputFile);
-                        sw.WriteLine
+                        //sw.WriteLine
 
                         Console.WriteLine($"Exported results to '{_outputFile}'");
                     }
