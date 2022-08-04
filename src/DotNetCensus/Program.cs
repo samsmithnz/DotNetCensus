@@ -2,6 +2,7 @@
 using ConsoleTables;
 using DotNetCensus.Core;
 using DotNetCensus.Core.Models;
+using Spectre.Console;
 
 namespace DotNetCensus
 {
@@ -41,11 +42,41 @@ namespace DotNetCensus
                     //    Console.SetOut(sw);
                     //}
 
-                    //Create and output the table
-                    ConsoleTable
-                        .From<Project>(sortedProjects)
-                        .Configure(o => o.NumberAlignment = Alignment.Right)
-                        .Write(Format.Minimal);
+                    // Create a table
+                    Table table = new();
+
+                    // Add some columns
+                    table.AddColumn("FileName");
+                    table.AddColumn("Path");
+                    table.AddColumn("FrameworkCode");
+                    table.AddColumn("FrameworkName");
+                    table.AddColumn("Family");
+                    table.AddColumn("Language");
+                    table.AddColumn("Status");
+                    //table.AddColumn(new TableColumn("Bar").Centered());
+                    table.Columns[1].NoWrap();
+
+                    // Add some rows
+                    foreach (Project item in sortedProjects)
+                    {
+                        table.AddRow(item.FileName,
+                            item.Path,
+                            item.FrameworkCode,
+                            item.FrameworkName,
+                            item.Family,
+                            item.Language,
+                            item.Status);
+                    }
+                    table.Expand();
+
+                    // Render the table to the console
+                    AnsiConsole.Write(table);
+
+                    ////Create and output the table
+                    //ConsoleTable
+                    //    .From<Project>(sortedProjects)
+                    //    .Configure(o => o.NumberAlignment = Alignment.Right)
+                    //    .Write(Format.Minimal);
 
                     if (string.IsNullOrEmpty(_outputFile) == false)
                     {

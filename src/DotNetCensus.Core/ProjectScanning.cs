@@ -171,7 +171,7 @@ namespace DotNetCensus.Core
             //Add colors and families
             foreach (Project item in projects)
             {
-                item.Color = GetStatus(item.FrameworkCode);
+                item.Status = GetStatus(item.FrameworkCode);
                 item.Family = GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = GetFriendlyName(item.FrameworkCode, item.Family);
             }

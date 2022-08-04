@@ -25,7 +25,7 @@ public class ProjectScanningTests : BaseTests
         Assert.AreEqual("csharp", project1.Language);
         Assert.IsTrue(project1.Path?.Length > 0);
         Assert.IsTrue(project1.FileName?.Length > 0);
-        Assert.IsTrue(project1.Color?.Length > 0);
+        Assert.IsTrue(project1.Status?.Length > 0);
     }
 
     [TestMethod]
