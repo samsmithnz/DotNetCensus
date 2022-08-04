@@ -99,7 +99,6 @@ namespace DotNetCensus
                 else
                 {
                     List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
-
                     if (string.IsNullOrEmpty(_outputFile) == true)
                     {
                         //Create and output the table
