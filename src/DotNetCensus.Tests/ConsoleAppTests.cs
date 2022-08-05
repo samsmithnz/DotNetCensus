@@ -180,7 +180,7 @@ Framework  FrameworkFamily  Count  Status
         if (SamplesPath != null)
         {
             string file = "test2.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-o", file };
+            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-f", file };
             StringWriter sw = new();
             string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
 Assembly-CSharp.csproj,\Sample.Unity2020\Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
@@ -228,7 +228,7 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
         if (SamplesPath != null)
         {
             string file = "test.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-o", file };
+            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
