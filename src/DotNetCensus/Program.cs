@@ -7,7 +7,7 @@ namespace DotNetCensus
         private static string? _directory;
         private static bool _includeTotals;
         private static bool _includeRawResults;
-        private static string? _outputFile;
+        private static string? _file;
 
         public static void Main(string[] args)
         {
@@ -21,11 +21,11 @@ namespace DotNetCensus
             {
                 if (_includeRawResults == true)
                 {
-                    DataAccess.GetRawResults(_directory, _outputFile);
+                    DataAccess.GetRawResults(_directory, _file);
                 }
                 else
                 {
-                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _outputFile);
+                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _file);
                 }
             }
         }
@@ -43,9 +43,9 @@ namespace DotNetCensus
             }
             _includeTotals = opts.IncludeTotals;
             _includeRawResults = opts.IncludeRawResults;
-            if (string.IsNullOrEmpty(opts.OutputFile) == false)
+            if (string.IsNullOrEmpty(opts.File) == false)
             {
-                _outputFile = opts.OutputFile;
+                _file = opts.File;
             }
         }
 

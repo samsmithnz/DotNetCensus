@@ -383,6 +383,10 @@ namespace DotNetCensus.Core
             {
                 searchPattern = searchPattern ?? "*";
             }
+            else
+            {
+                searchPattern = "*.*";
+            }
 
             var queue = new Queue<string>();
             queue.Enqueue(path);

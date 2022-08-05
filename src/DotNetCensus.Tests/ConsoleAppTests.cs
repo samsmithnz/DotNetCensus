@@ -125,7 +125,7 @@ Framework  FrameworkFamily  Count  Status
     //        //Arrange
     //        if (SamplesPath != null)
     //        {
-    //            string? outputFile = null;
+    //            string? file = null;
     //            string[] parameters = new string[] { "-d", SamplesPath, "--raw" };
     //            //StringWriter sw = new();
     //            string expected = @"
@@ -179,8 +179,8 @@ Framework  FrameworkFamily  Count  Status
         //Arrange
         if (SamplesPath != null)
         {
-            string outputFile = "test2.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-o", outputFile };
+            string file = "test2.txt";
+            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-f", file };
             StringWriter sw = new();
             string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
 Assembly-CSharp.csproj,\Sample.Unity2020\Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
@@ -211,7 +211,7 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
             Program.Main(parameters);
             string result = sw.ToString();
             sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
             Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
@@ -227,8 +227,8 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
         //Arrange
         if (SamplesPath != null)
         {
-            string outputFile = "test.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-o", outputFile };
+            string file = "test.txt";
+            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
@@ -257,7 +257,7 @@ total frameworks,,21,
             Program.Main(parameters);
             string result = sw.ToString();
             sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
             Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
