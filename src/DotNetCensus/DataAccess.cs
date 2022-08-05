@@ -69,7 +69,7 @@ namespace DotNetCensus
             if (string.IsNullOrEmpty(outputFile) == true)
             {
                 //Create and output the table
-                ConsoleTable table = new("Framework  FrameworkFamily  Count  Status");
+                ConsoleTable table = new("Framework", "FrameworkFamily", "Count", "Status");
                 foreach (FrameworkSummary item in frameworks)
                 {
                     table.AddRow(item.Framework, item.FrameworkFamily, item.Count, item.Status);

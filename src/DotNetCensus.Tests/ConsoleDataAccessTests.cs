@@ -5,19 +5,19 @@ namespace DotNetCensus.Tests;
 public class ConsoleDataAccessTests : BaseTests
 {
     [TestMethod]
-    public void RunSamplesWithNoParametersTest()
+    public void FrameworkSummaryWithNoParametersTest()
     {
         //Arrange
+        bool includeTotals = false;
+        string? outputFile = null;
         if (SamplesPath != null)
         {
-            string[] parameters = Array.Empty<string>();
-            StringWriter sw = new();
             string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
 ";
 
             //Act
-            string result = DataAccess.GetFrameworkSummary("", false, null);
+            string? result = DataAccess.GetFrameworkSummary("", includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -26,42 +26,37 @@ public class ConsoleDataAccessTests : BaseTests
     }
 
     [TestMethod]
-    public void RunSamplesWithPathTest()
+    public void FrameworkSummaryWithPathTest()
     {
         //Arrange
+        bool includeTotals = false;
+        string? outputFile = null;
         if (SamplesPath != null)
         {
-            string[] parameters = new string[] { "-d", SamplesPath };
-            StringWriter sw = new();
-            string expected = @"
-Framework             FrameworkFamily  Count  Status          
+            string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
-.NET 5.0              .NET                 1  deprecated      
-.NET 6.0              .NET                 1  supported       
-.NET 7.0              .NET                 1  supported       
-.NET Core 1.0         .NET Core            1  deprecated      
-.NET Core 1.1         .NET Core            1  deprecated      
-.NET Core 2.0         .NET Core            1  deprecated      
-.NET Core 2.1         .NET Core            1  deprecated      
-.NET Core 3.0         .NET Core            1  deprecated      
-.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework       1  deprecated      
-.NET Framework 1.1    .NET Framework       1  deprecated      
-.NET Framework 2.0    .NET Framework       1  deprecated      
-.NET Framework 4.6.2  .NET Framework       1  supported       
-.NET Framework 4.7.1  .NET Framework       1  supported       
-.NET Framework 4.7.2  .NET Framework       2  supported       
-.NET Standard 2.0     .NET Standard        1  supported       
-(Unknown)             (Unknown)            1  unknown         
-Visual Basic 6        Visual Basic 6       1  deprecated      
-
+.NET 5.0              .NET             1      deprecated      
+.NET 6.0              .NET             1      supported       
+.NET 7.0              .NET             1      supported       
+.NET Core 1.0         .NET Core        1      deprecated      
+.NET Core 1.1         .NET Core        1      deprecated      
+.NET Core 2.0         .NET Core        1      deprecated      
+.NET Core 2.1         .NET Core        1      deprecated      
+.NET Core 3.0         .NET Core        1      deprecated      
+.NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework   1      deprecated      
+.NET Framework 1.1    .NET Framework   1      deprecated      
+.NET Framework 2.0    .NET Framework   1      deprecated      
+.NET Framework 4.6.2  .NET Framework   1      supported       
+.NET Framework 4.7.1  .NET Framework   1      supported       
+.NET Framework 4.7.2  .NET Framework   2      supported       
+.NET Standard 2.0     .NET Standard    1      supported       
+(Unknown)             (Unknown)        1      unknown         
+Visual Basic 6        Visual Basic 6   1      deprecated      
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = Environment.NewLine + sw.ToString();
-            sw.Close();
+            string? result = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -70,43 +65,38 @@ Visual Basic 6        Visual Basic 6       1  deprecated
     }
 
     [TestMethod]
-    public void RunSamplesWithTotalsTest()
+    public void FrameworkSummaryWithTotalsTest()
     {
         //Arrange
+        bool includeTotals = true;
+        string? outputFile = null;
         if (SamplesPath != null)
         {
-            string[] parameters = new string[] { "-d", SamplesPath, "-t" };
-            StringWriter sw = new();
-            string expected = @"
-Framework             FrameworkFamily  Count  Status          
+            string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
-.NET 5.0              .NET                 1  deprecated      
-.NET 6.0              .NET                 1  supported       
-.NET 7.0              .NET                 1  supported       
-.NET Core 1.0         .NET Core            1  deprecated      
-.NET Core 1.1         .NET Core            1  deprecated      
-.NET Core 2.0         .NET Core            1  deprecated      
-.NET Core 2.1         .NET Core            1  deprecated      
-.NET Core 3.0         .NET Core            1  deprecated      
-.NET Core 3.1         .NET Core            3  EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework       1  deprecated      
-.NET Framework 1.1    .NET Framework       1  deprecated      
-.NET Framework 2.0    .NET Framework       1  deprecated      
-.NET Framework 4.6.2  .NET Framework       1  supported       
-.NET Framework 4.7.1  .NET Framework       1  supported       
-.NET Framework 4.7.2  .NET Framework       2  supported       
-.NET Standard 2.0     .NET Standard        1  supported       
-(Unknown)             (Unknown)            1  unknown         
-Visual Basic 6        Visual Basic 6       1  deprecated      
-total frameworks                          21                  
-
+.NET 5.0              .NET             1      deprecated      
+.NET 6.0              .NET             1      supported       
+.NET 7.0              .NET             1      supported       
+.NET Core 1.0         .NET Core        1      deprecated      
+.NET Core 1.1         .NET Core        1      deprecated      
+.NET Core 2.0         .NET Core        1      deprecated      
+.NET Core 2.1         .NET Core        1      deprecated      
+.NET Core 3.0         .NET Core        1      deprecated      
+.NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
+.NET Framework 1.0    .NET Framework   1      deprecated      
+.NET Framework 1.1    .NET Framework   1      deprecated      
+.NET Framework 2.0    .NET Framework   1      deprecated      
+.NET Framework 4.6.2  .NET Framework   1      supported       
+.NET Framework 4.7.1  .NET Framework   1      supported       
+.NET Framework 4.7.2  .NET Framework   2      supported       
+.NET Standard 2.0     .NET Standard    1      supported       
+(Unknown)             (Unknown)        1      unknown         
+Visual Basic 6        Visual Basic 6   1      deprecated      
+total frameworks                       21                     
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = Environment.NewLine + sw.ToString();
-            sw.Close();
+            string? result = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -114,17 +104,55 @@ total frameworks                          21
         }
     }
 
+
     [TestMethod]
-    public void RunSamplesWithRawResultsTest()
+    public void FrameworkSummaryWithTotalsToFileTest()
     {
         //Arrange
+        bool includeTotals = true;
+        string? outputFile = "test.txt";
+        if (SamplesPath != null)
+        {         
+            string expected = @"Framework,FrameworkFamily,Count,Status
+.NET 5.0,.NET,1,deprecated
+.NET 6.0,.NET,1,supported
+.NET 7.0,.NET,1,supported
+.NET Core 1.0,.NET Core,1,deprecated
+.NET Core 1.1,.NET Core,1,deprecated
+.NET Core 2.0,.NET Core,1,deprecated
+.NET Core 2.1,.NET Core,1,deprecated
+.NET Core 3.0,.NET Core,1,deprecated
+.NET Core 3.1,.NET Core,3,EOL: 13-Dec-2022
+.NET Framework 1.0,.NET Framework,1,deprecated
+.NET Framework 1.1,.NET Framework,1,deprecated
+.NET Framework 2.0,.NET Framework,1,deprecated
+.NET Framework 4.6.2,.NET Framework,1,supported
+.NET Framework 4.7.1,.NET Framework,1,supported
+.NET Framework 4.7.2,.NET Framework,2,supported
+.NET Standard 2.0,.NET Standard,1,supported
+(Unknown),(Unknown),1,unknown
+Visual Basic 6,Visual Basic 6,1,deprecated
+total frameworks,,21,
+";
+
+            //Act
+            DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
+
+            //Asset
+            //Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
+            Assert.AreEqual(expected, contents);
+        }
+    }
+
+    [TestMethod]
+    public void RawResultsTest()
+    {
+        //Arrange
+        string? outputFile = null;
         if (SamplesPath != null)
         {
-            string? outputFile = null;
-            string[] parameters = new string[] { "-d", SamplesPath, "--raw" };
-            //StringWriter sw = new();
-            string expected = @"
-FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Status          
+            string expected = @"FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Status          
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Assembly-CSharp.csproj                      \Sample.Unity2020\Assembly-CSharp.csproj                                         v4.7.1          .NET Framework 4.7.1  .NET Framework  csharp    supported       
 project.json                                \Sample.NetCore1.0.ConsoleApp\project.json                                       netcoreapp1.0   .NET Core 1.0         .NET Core       csharp    deprecated      
@@ -147,36 +175,24 @@ VBProj.vbproj                               \Sample.NetFramework1.0.App\VBProj.v
 VBProj.vbproj                               \Sample.NetFramework1.1.App\VBProj.vbproj                                        v1.1            .NET Framework 1.1    .NET Framework  vb.net    deprecated      
 VBProj.vbproj                               \Sample.NetFramework2.0.App\VBProj.vbproj                                        v2.0            .NET Framework 2.0    .NET Framework  vb.net    deprecated      
 VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBProj.vbproj                                                    (Unknown)             (Unknown)       vb.net    unknown         
-
 ";
-            //var console = new TestConsole().SupportsAnsi(true);
 
             //Act
-            //AnsiConsole.Record();
-            //Console.SetOut(sw);
-            string result = DataAccess.GetRawResults(SamplesPath, null);
-            //string result = Environment.NewLine + sw.ToString();
-            //sw.Close();
+            string? result = DataAccess.GetRawResults(SamplesPath, outputFile);
 
             //Asset
-            //var test = console.Output.ToString();
-            //var text = AnsiConsole.ExportText();
-            //Assert.IsNotNull(text);
-            //Assert.IsTrue( AnsiConsole.ExportText().Contains("VBProj.vbproj"));
             Assert.IsNotNull(expected);
             Assert.AreEqual(expected, result);
         }
     }
 
     [TestMethod]
-    public void RunSamplesWithRawResultsToFileTest()
+    public void RawResultsToFileTest()
     {
         //Arrange
+        string? outputFile = "test2.txt";
         if (SamplesPath != null)
         {
-            string outputFile = "test2.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-o", outputFile };
-            StringWriter sw = new();
             string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
 Assembly-CSharp.csproj,\Sample.Unity2020\Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
 project.json,\Sample.NetCore1.0.ConsoleApp\project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
@@ -202,85 +218,14 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
+            DataAccess.GetRawResults(SamplesPath, outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
 
             //Asset
-            Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
+            //Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
             Assert.AreEqual(expected, contents);
         }
     }
 
-
-    [TestMethod]
-    public void RunSamplesWithTotalsToFileTest()
-    {
-        //Arrange
-        if (SamplesPath != null)
-        {
-            string outputFile = "test.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-t", "-o", outputFile };
-            StringWriter sw = new();
-            string expected = @"Framework,FrameworkFamily,Count,Status
-.NET 5.0,.NET,1,deprecated
-.NET 6.0,.NET,1,supported
-.NET 7.0,.NET,1,supported
-.NET Core 1.0,.NET Core,1,deprecated
-.NET Core 1.1,.NET Core,1,deprecated
-.NET Core 2.0,.NET Core,1,deprecated
-.NET Core 2.1,.NET Core,1,deprecated
-.NET Core 3.0,.NET Core,1,deprecated
-.NET Core 3.1,.NET Core,3,EOL: 13-Dec-2022
-.NET Framework 1.0,.NET Framework,1,deprecated
-.NET Framework 1.1,.NET Framework,1,deprecated
-.NET Framework 2.0,.NET Framework,1,deprecated
-.NET Framework 4.6.2,.NET Framework,1,supported
-.NET Framework 4.7.1,.NET Framework,1,supported
-.NET Framework 4.7.2,.NET Framework,2,supported
-.NET Standard 2.0,.NET Standard,1,supported
-(Unknown),(Unknown),1,unknown
-Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,21,
-";
-
-            //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
-
-            //Asset
-            Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected, contents);
-        }
-    }
-
-    [TestMethod]
-    public void RunSamplesWithInvalidParametersTest()
-    {
-        if (SamplesPath != null)
-        {
-            try
-            {
-                //Arrange
-                string[] parameters = new string[] { "-d", SamplesPath, "-z" }; //z is an invalid parameter
-                StringWriter sw = new();
-
-                //Act
-                Console.SetOut(sw);
-                Program.Main(parameters);
-
-            }
-            catch (Exception ex)
-            {
-                //Asset
-                Assert.IsNotNull(ex);
-                Assert.AreEqual("One or more errors occurred. (CommandLine.UnknownOptionError)", ex.Message);
-            }
-        }
-    }
+   
 }
