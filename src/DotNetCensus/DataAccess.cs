@@ -29,10 +29,12 @@ namespace DotNetCensus
             if (string.IsNullOrEmpty(outputFile) == true)
             {
                 //Create and output the table
-                ConsoleTable
+          string text=      ConsoleTable
                     .From<Project>(projects)
                     .Configure(o => o.NumberAlignment = Alignment.Right)
-                    .Write(Format.Minimal);
+                    .ToString();
+                Console.WriteLine(text);
+//                    .Write(Format.Minimal);
             }
             else
             {
