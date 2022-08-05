@@ -29,101 +29,11 @@ namespace DotNetCensus
                 List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
                 if (_includeRawResults == true)
                 {
-                    //If it's a raw output, remove the full path from each project
-                    foreach (Project item in sortedProjects)
-                    {
-                        item.Path = item.Path.Replace(_directory, "");
-                    }
-
-                    #region "Console.Ansi - awaiting support"
-
-                    //// Create a table
-                    //Table table = new();
-
-                    //// Add some columns
-                    //table.AddColumn("FileName");
-                    //table.AddColumn("Path");
-                    //table.AddColumn("FrameworkCode");
-                    //table.AddColumn("FrameworkName");
-                    //table.AddColumn("Family");
-                    //table.AddColumn("Language");
-                    //table.AddColumn("Status");
-                    ////table.AddColumn(new TableColumn("Bar").Centered());
-                    //table.Columns[1].NoWrap();
-
-                    //// Add some rows
-                    //foreach (Project item in sortedProjects)
-                    //{
-                    //    table.AddRow(item.FileName,
-                    //        item.Path,
-                    //        item.FrameworkCode,
-                    //        item.FrameworkName,
-                    //        item.Family,
-                    //        item.Language,
-                    //        item.Status);
-                    //}
-
-                    //// Render the table to the console
-                    //AnsiConsole.Write(table);
-                    #endregion
-
-                    if (string.IsNullOrEmpty(_outputFile) == true)
-                    {
-                        //Create and output the table
-                        ConsoleTable
-                            .From<Project>(sortedProjects)
-                            .Configure(o => o.NumberAlignment = Alignment.Right)
-                            .Write(Format.Minimal);
-                    }
-                    else
-                    {
-                        //Create a CSV file
-                        StreamWriter sw = File.CreateText(_outputFile);
-                        sw.WriteLine("FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status");
-                        foreach (Project item in sortedProjects)
-                        {
-                            sw.WriteLine(item.FileName + "," +
-                                item.Path + "," +
-                                item.FrameworkCode + "," +
-                                item.FrameworkName + "," +
-                                item.Family + "," +
-                                item.Language + "," +
-                                item.Status);
-                        }
-                        sw.Close();
-                        //FileInfo fileInfo = new(_outputFile);
-                        
-                        Console.WriteLine($"Exported results to '{_outputFile}'");
-                    }
+                    DataAccess.GetRawResults(_directory, _outputFile);
                 }
                 else
                 {
-                    List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
-                    if (string.IsNullOrEmpty(_outputFile) == true)
-                    {
-                        //Create and output the table
-                        ConsoleTable
-                            .From<FrameworkSummary>(results)
-                            .Configure(o => o.NumberAlignment = Alignment.Right)
-                            .Write(Format.Minimal);
-                    }
-                    else
-                    {
-                        //Create a CSV file
-                        StreamWriter sw = File.CreateText(_outputFile);
-                        sw.WriteLine("Framework,FrameworkFamily,Count,Status");
-                        foreach (FrameworkSummary item in results)
-                        {
-                            sw.WriteLine(item.Framework + "," +
-                                item.FrameworkFamily + "," +
-                                item.Count + "," +
-                                item.Status);
-                        }
-                        sw.Close();
-                        //FileInfo fileInfo = new(_outputFile);
-
-                        Console.WriteLine($"Exported results to '{_outputFile}'");
-                    }
+                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _outputFile);
                 }
             }
         }
