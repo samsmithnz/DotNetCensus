@@ -9,7 +9,7 @@ public class ConsoleDataAccessTests : BaseTests
     {
         //Arrange
         bool includeTotals = false;
-        string? outputFile = null;
+        string? file = null;
         if (SamplesPath != null)
         {
             string expected = @"Framework  FrameworkFamily  Count  Status
@@ -17,7 +17,7 @@ public class ConsoleDataAccessTests : BaseTests
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary("", includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary("", includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -30,7 +30,7 @@ public class ConsoleDataAccessTests : BaseTests
     {
         //Arrange
         bool includeTotals = false;
-        string? outputFile = null;
+        string? file = null;
         if (SamplesPath != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
@@ -56,7 +56,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -69,7 +69,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     {
         //Arrange
         bool includeTotals = true;
-        string? outputFile = null;
+        string? file = null;
         if (SamplesPath != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
@@ -96,7 +96,7 @@ total frameworks                       21
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -110,7 +110,7 @@ total frameworks                       21
     {
         //Arrange
         bool includeTotals = true;
-        string? outputFile = "test.txt";
+        string? file = "test.txt";
         if (SamplesPath != null)
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
@@ -136,8 +136,8 @@ total frameworks,,21,
 ";
 
             //Act
-            DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
+            DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
@@ -149,7 +149,7 @@ total frameworks,,21,
     public void RawResultsTest()
     {
         //Arrange
-        string? outputFile = null;
+        string? file = null;
         if (SamplesPath != null)
         {
             string expected = @"FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Status          
@@ -178,7 +178,7 @@ VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBPr
 ";
 
             //Act
-            string? contents = DataAccess.GetRawResults(SamplesPath, outputFile);
+            string? contents = DataAccess.GetRawResults(SamplesPath, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -190,7 +190,7 @@ VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBPr
     public void RawResultsToFileTest()
     {
         //Arrange
-        string? outputFile = "test2.txt";
+        string? file = "test2.txt";
         if (SamplesPath != null)
         {
             string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
@@ -218,8 +218,8 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
 ";
 
             //Act
-            DataAccess.GetRawResults(SamplesPath, outputFile);
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
+            DataAccess.GetRawResults(SamplesPath, file);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
