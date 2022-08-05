@@ -61,7 +61,7 @@ namespace DotNetCensus
             }
         }
 
-        public static string GetFrameworkSummary(string directory, bool includeTotals, string? outputFile)
+        public static string? GetFrameworkSummary(string directory, bool includeTotals, string? outputFile)
         {
             List<Project> projects = GetProjects(directory);
             List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);
