@@ -21,7 +21,7 @@ public class ConsoleDataAccessTests : BaseTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
@@ -60,7 +60,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
@@ -100,7 +100,7 @@ total frameworks                       21
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
@@ -141,7 +141,7 @@ total frameworks,,21,
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected, contents);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
@@ -182,7 +182,7 @@ VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBPr
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
@@ -219,11 +219,11 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
 
             //Act
             DataAccess.GetRawResults(SamplesPath, outputFile);
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected, contents);
+            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
         }
     }
 
