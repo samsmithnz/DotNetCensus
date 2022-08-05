@@ -17,7 +17,7 @@ public class ConsoleDataAccessTests : BaseTests
 ";
 
             //Act
-            string? result = DataAccess.GetFrameworkSummary("", includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary("", includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -56,7 +56,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? result = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -96,7 +96,7 @@ total frameworks                       21
 ";
 
             //Act
-            string? result = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -178,7 +178,7 @@ VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBPr
 ";
 
             //Act
-            string? result = DataAccess.GetRawResults(SamplesPath, outputFile);
+            string? contents = DataAccess.GetRawResults(SamplesPath, outputFile);
 
             //Asset
             Assert.IsNotNull(expected);
