@@ -215,7 +215,8 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
 
             //Asset
             Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected, contents);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+
         }
     }
 
@@ -260,7 +261,7 @@ total frameworks,,21,
 
             //Asset
             Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected, contents);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
 
@@ -278,7 +279,6 @@ total frameworks,,21,
                 //Act
                 Console.SetOut(sw);
                 Program.Main(parameters);
-
             }
             catch (Exception ex)
             {
