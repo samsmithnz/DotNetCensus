@@ -1,7 +1,4 @@
 ﻿using CommandLine;
-using ConsoleTables;
-using DotNetCensus.Core;
-using DotNetCensus.Core.Models;
 
 namespace DotNetCensus
 {
@@ -10,7 +7,7 @@ namespace DotNetCensus
         private static string? _directory;
         private static bool _includeTotals;
         private static bool _includeRawResults;
-        //private static string _outputFile;
+        private static string? _outputFile;
 
         public static void Main(string[] args)
         {
@@ -22,34 +19,14 @@ namespace DotNetCensus
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
-                //Run the calculations to get and aggregate the results
-                List<Project> projects = ProjectScanning.SearchDirectory(_directory);
-                //Need to sort so that Linux + Windows results are the same
-                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
                 if (_includeRawResults == true)
                 {
-                    //If it's a raw output, remove the full path from each project
-                    foreach (Project item in sortedProjects)
-                    {
-                        item.Path = item.Path.Replace(_directory, "");
-                    }
-
-                    //Create and output the table
-                    ConsoleTable
-                        .From<Project>(sortedProjects)
-                        .Configure(o => o.NumberAlignment = Alignment.Right)
-                        .Write(Format.Minimal);
+                    DataAccess.GetRawResults(_directory, _outputFile);
                 }
                 else
                 {
-                    List<FrameworkSummary> results = Census.AggregateFrameworks(projects, _includeTotals);
-                    //Create and output the table
-                    ConsoleTable
-                        .From<FrameworkSummary>(results)
-                        .Configure(o => o.NumberAlignment = Alignment.Right)
-                        .Write(Format.Minimal);
+                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _outputFile);
                 }
-
             }
         }
 
@@ -66,7 +43,10 @@ namespace DotNetCensus
             }
             _includeTotals = opts.IncludeTotals;
             _includeRawResults = opts.IncludeRawResults;
-            //_outputFile = opts.OutputFile;
+            if (string.IsNullOrEmpty(opts.OutputFile) == false)
+            {
+                _outputFile = opts.OutputFile;
+            }
         }
 
         static void HandleParseError(IEnumerable<Error> errs)
