@@ -3,9 +3,9 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A tool to conduct a census, to count different .NET versions, on a folder and/or repo.** 
+**A tool to conduct a census - count different .NET versions, on a target directory.** 
 
-Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio. DotNet Census is here to help.
+Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio? DotNet Census is here to help.
 
 Currently supports:
 - .NET Framework
