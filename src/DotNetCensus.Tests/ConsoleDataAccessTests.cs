@@ -21,7 +21,7 @@ public class ConsoleDataAccessTests : BaseTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
         }
     }
 
@@ -60,7 +60,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
         }
     }
 
@@ -100,7 +100,7 @@ total frameworks                       21
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
         }
     }
 
@@ -182,7 +182,7 @@ VBProj.vbproj                               \Sample.NetFrameworkInvalid.App\VBPr
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
         }
     }
 
