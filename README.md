@@ -1,6 +1,6 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
-[![Latest NuGet package](https://img.shields.io/nuget/v/DotNetCensus)](https://www.nuget.org/packages/DotNetCensus/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
 **A tool to conduct a census, to count different .NET versions, on a folder and/or repo.** 
