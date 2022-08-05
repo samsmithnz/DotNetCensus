@@ -112,7 +112,7 @@ total frameworks                       21
         bool includeTotals = true;
         string? outputFile = "test.txt";
         if (SamplesPath != null)
-        {         
+        {
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
 .NET 6.0,.NET,1,supported
@@ -227,5 +227,5 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
         }
     }
 
-   
+
 }
