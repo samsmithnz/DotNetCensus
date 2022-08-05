@@ -27,10 +27,10 @@ Currently supports:
 ## Command arguments
 Several options are supported:
 
--d|--directory Path to start scanning to .NET versions
--f|--file Path to file to output CSV data. 
--r|--raw Output raw data
--t|--total Add totals to results. Ignored when used with -r|--raw
+- `-d|--directory` Path to start scanning to .NET versions
+- `-f|--file` Path to file to output CSV data. 
+- `-r|--raw` Output raw data
+- `-t|--total` Add totals to results. Ignored when used with `-r|--raw`
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
