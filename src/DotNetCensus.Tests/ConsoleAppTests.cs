@@ -211,7 +211,7 @@ VBProj.vbproj,\Sample.NetFrameworkInvalid.App\VBProj.vbproj,,(Unknown),(Unknown)
             Program.Main(parameters);
             string result = sw.ToString();
             sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
 
             //Asset
             Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
@@ -256,7 +256,7 @@ total frameworks,,21,
             Program.Main(parameters);
             string result = sw.ToString();
             sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
 
             //Asset
             Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
