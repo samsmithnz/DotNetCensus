@@ -23,10 +23,6 @@ namespace DotNetCensus
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
-                //Run the calculations to get and aggregate the results
-                List<Project> projects = ProjectScanning.SearchDirectory(_directory);
-                //Need to sort so that Linux + Windows results are the same
-                List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
                 if (_includeRawResults == true)
                 {
                     DataAccess.GetRawResults(_directory, _outputFile);
