@@ -24,10 +24,10 @@ Currently supports:
 2. Then run the command in the directory you need to count versions:
 `dotnet census`
 
-To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
+### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
 
-To add totals to the results, use the `-t` argument:
+### To add totals to the results, use the `-t` argument:
 `dotnet census -t`
 
 This is a sample of the results: 
@@ -55,7 +55,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 total frameworks                       24                 
 ```
 
-To get raw results, use the `-r` argument:
+### To get raw results, use the `-r` argument:
 `dotnet census -r`
 
 A sample of raw results:
@@ -87,3 +87,6 @@ VBProj.vbproj                               \samples\Sample.NetFramework1.1.App\
 VBProj.vbproj                               \samples\Sample.NetFramework2.0.App\VBProj.vbproj                                        v2.0            .NET Framework 2.0    .NET Framework  vb.net    deprecated
 VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.App\VBProj.vbproj                                                    (Unknown)             (Unknown)       vb.net    unknown
 ```
+
+### To download results to a csv file, add the `-f` argument with a file name:
+`dotnet census -f results.csv`
