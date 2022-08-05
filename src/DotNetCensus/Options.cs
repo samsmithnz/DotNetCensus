@@ -12,7 +12,7 @@ namespace DotNetCensus
 
         [Option('r', "raw", Required = false, Default = false, HelpText = "Show raw results, instead of an aggregate")]
         public bool IncludeRawResults { get; set; }
-        
+
         [Option('o', "output", Required = false, HelpText = "Output file to create json file")]
         public string? OutputFile { get; set; }
     }

@@ -1,6 +1,3 @@
-using Spectre.Console;
-using Spectre.Console.Testing;
-
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]

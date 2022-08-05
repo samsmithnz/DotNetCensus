@@ -1,8 +1,4 @@
 ﻿using CommandLine;
-using ConsoleTables;
-using DotNetCensus.Core;
-using DotNetCensus.Core.Models;
-using Spectre.Console;
 
 namespace DotNetCensus
 {
