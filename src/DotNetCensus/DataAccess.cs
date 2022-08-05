@@ -16,7 +16,7 @@ namespace DotNetCensus
             return sortedProjects;
         }
 
-        public static void GetRawResults(string directory, string? outputFile)
+        public static string? GetRawResults(string directory, string? outputFile)
         {
             List<Project> projects = GetProjects(directory);
 
@@ -28,13 +28,14 @@ namespace DotNetCensus
 
             if (string.IsNullOrEmpty(outputFile) == true)
             {
-                //Create and output the table
-                string text = ConsoleTable
-                          .From<Project>(projects)
-                          .Configure(o => o.NumberAlignment = Alignment.Right)
-                          .ToString();
-                Console.WriteLine(text);
-                //                    .Write(Format.Minimal);
+                ConsoleTable table = new("FileName", "Path", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
+                foreach (Project item in projects)
+                {
+                    table.AddRow(item.FileName, item.Path, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
+                }
+                string result = table.ToMinimalString();
+                Console.WriteLine(result);
+                return result;
             }
             else
             {
@@ -51,42 +52,50 @@ namespace DotNetCensus
                         item.Language + "," +
                         item.Status);
                 }
-                sw.Close();
+                string? result = sw?.ToString();
+                sw?.Close();
 
                 //FileInfo fileInfo = new(_outputFile);
                 Console.WriteLine($"Exported results to '{outputFile}'");
+                return result;
             }
         }
 
-        public static void GetFrameworkSummary(string directory, bool includeTotals, string? outputFile)
+        public static string GetFrameworkSummary(string directory, bool includeTotals, string? outputFile)
         {
             List<Project> projects = GetProjects(directory);
-            List<FrameworkSummary> results = Census.AggregateFrameworks(projects, includeTotals);
+            List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);
 
             if (string.IsNullOrEmpty(outputFile) == true)
             {
                 //Create and output the table
-                ConsoleTable
-                    .From<FrameworkSummary>(results)
-                    .Configure(o => o.NumberAlignment = Alignment.Right)
-                    .Write(Format.Minimal);
+                ConsoleTable table = new("Framework  FrameworkFamily  Count  Status");
+                foreach (FrameworkSummary item in frameworks)
+                {
+                    table.AddRow(item.Framework, item.FrameworkFamily, item.Count, item.Status);
+                }
+                string result = table.ToMinimalString();
+                Console.WriteLine(result);
+                return result;
             }
             else
             {
                 //Create a CSV file
                 StreamWriter sw = File.CreateText(outputFile);
                 sw.WriteLine("Framework,FrameworkFamily,Count,Status");
-                foreach (FrameworkSummary item in results)
+                foreach (FrameworkSummary item in frameworks)
                 {
                     sw.WriteLine(item.Framework + "," +
                         item.FrameworkFamily + "," +
                         item.Count + "," +
                         item.Status);
                 }
-                sw.Close();
+                string? result = sw?.ToString();
+                sw?.Close();
 
                 //FileInfo fileInfo = new(_outputFile);
                 Console.WriteLine($"Exported results to '{outputFile}'");
+                return result;
             }
         }
     }

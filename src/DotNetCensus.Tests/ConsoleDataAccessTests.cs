@@ -2,7 +2,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ConsoleAppTests : BaseTests
+public class ConsoleDataAccessTests : BaseTests
 {
     [TestMethod]
     public void RunSamplesWithNoParametersTest()
@@ -12,17 +12,12 @@ public class ConsoleAppTests : BaseTests
         {
             string[] parameters = Array.Empty<string>();
             StringWriter sw = new();
-            string expected = @"
-Framework  FrameworkFamily  Count  Status
+            string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
-
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = Environment.NewLine + sw.ToString();
-            sw.Close();
+            string result = DataAccess.GetFrameworkSummary("", false, null);
 
             //Asset
             Assert.IsNotNull(expected);
