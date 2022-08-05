@@ -137,7 +137,7 @@ total frameworks,,21,
 
             //Act
             DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, outputFile);
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + outputFile);
+            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + outputFile);
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
