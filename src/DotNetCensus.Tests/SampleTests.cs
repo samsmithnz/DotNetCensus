@@ -22,9 +22,9 @@ public class SampleTests : BaseTests
         Assert.AreEqual(2, results.Find(i => i.FrameworkFamily == ".NET Standard")?.Count);
         Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Core 3.1")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Core")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Framework 4.5")?.Count);
+        Assert.AreEqual(2, results.Find(i => i.Framework == ".NET Framework 4.5")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Framework")?.Count);
-        Assert.AreEqual(10, results[^1].Count);
+        Assert.AreEqual(11, results[^1].Count);
     }
 
     [TestMethod]
@@ -38,9 +38,10 @@ public class SampleTests : BaseTests
         List<LanguageSummary> results = Census.AggregateLanguages(projects, includeTotal);
 
         //Asset
-        Assert.AreEqual(6, results.Count);
+        Assert.AreEqual(7, results.Count);
         Assert.AreEqual(6, results.Find(i => i.Language == "csharp")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Language == "vbDotNet")?.Count);
+        Assert.AreEqual(1, results.Find(i => i.Language == "vb.net")?.Count);
+        Assert.AreEqual(1, results.Find(i => i.Language == "fsharp")?.Count);
         Assert.AreEqual(10, results[^1].Count);
     }
 
@@ -60,7 +61,7 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(23, results.Count);
+        Assert.AreEqual(26, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
@@ -85,7 +86,7 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(22, results.Count);
+        Assert.AreEqual(25, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
@@ -189,7 +190,7 @@ public class SampleTests : BaseTests
                     FrameworkCode = "net45",
                     Family = ProjectScanning.GetFrameworkFamily("net45"),
                     FrameworkName = ProjectScanning.GetFriendlyName("net45", ProjectScanning.GetFrameworkFamily("net45")),
-                    Language = "vbDotNet",
+                    Language = "vb.net",
                     Path = @"c:\Project45"
                 },
                 new Project
@@ -215,6 +216,14 @@ public class SampleTests : BaseTests
                     FrameworkName = ProjectScanning.GetFriendlyName("v3.5", ProjectScanning.GetFrameworkFamily("v3.5")),
                     Language = "csharp",
                     Path = @"c:\Projectv35"
+                },
+                new Project
+                {
+                    FrameworkCode = "v4.5",
+                    Family = ProjectScanning.GetFrameworkFamily("v4.5"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("v4.5", ProjectScanning.GetFrameworkFamily("v4.5")),
+                    Language = "fsharp",
+                    Path = @"c:\Projectv45_FS"
                 },
                 new Project
                 {
