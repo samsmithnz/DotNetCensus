@@ -21,7 +21,7 @@ public class ConsoleDataAccessTests : BaseTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
 
@@ -67,7 +67,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
 
@@ -114,7 +114,7 @@ total frameworks                       31
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
 
@@ -162,7 +162,7 @@ total frameworks,,31,
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents.Replace("\\", "/"));
         }
     }
 
@@ -201,7 +201,8 @@ Sample.VB6.WinApp.vbp                       /Sample.VB6.Calculator/Sample.VB6.Wi
 VBProj.vbproj                               /Sample.NetFramework1.0.App/VBProj.vbproj                                        v1.0            .NET Framework 1.0    .NET Framework  vb.net    deprecated      
 VBProj.vbproj                               /Sample.NetFramework1.1.App/VBProj.vbproj                                        v1.1            .NET Framework 1.1    .NET Framework  vb.net    deprecated      
 VBProj.vbproj                               /Sample.NetFramework2.0.App/VBProj.vbproj                                        v2.0            .NET Framework 2.0    .NET Framework  vb.net    deprecated      
-VBProj.vbproj                               /Sample.NetFrameworkInvalid.App/VBProj.vbproj                                                    (Unknown)             (Unknown)       vb.net    unknown         
+VBProj.vbproj                               /Sample.NetFrameworkInvalid.App/VBProj.vbproj                                                    (Unknown)             (Unknown)       vb.net    unknown                                                                       (Unknown)             (Unknown)       csharp    unknown         
+web.config                                  /Sample.NetFramework3.5.Website/web.config                                                       (Unknown)             (Unknown)       csharp    unknown         
 WorldBankSample.csproj                      /Sample.NetCore1.1.ConsoleApp/Net40/WorldBankSample.csproj                       v4.0            .NET Framework 4.0    .NET Framework  csharp    deprecated      
 WorldBankSample.csproj                      /Sample.NetCore1.1.ConsoleApp/Net45/WorldBankSample.csproj                       v4.5            .NET Framework 4.5    .NET Framework  csharp    deprecated      
 WorldBankSample.csproj                      /Sample.NetFramework40.WebApp/WorldBankSample.csproj                             v4.0            .NET Framework 4.0    .NET Framework  csharp    deprecated      
@@ -213,7 +214,36 @@ WorldBankSample.csproj                      /Sample.NetFramework45.WebApp/WorldB
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\","/"), contents?.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void RawResultsWebConfigCountTest()
+    {
+        //Arrange
+        string? file = null;
+        int webConfigCount = 0;
+        if (SamplesPath != null)
+        {
+            //Act
+            string? contents = DataAccess.GetRawResults(SamplesPath, file);
+            if (contents != null)
+            {
+                string[] lines = contents.Split(Environment.NewLine);
+                for (int i = 0; i < lines.Length - 1; i++)
+                {
+                    if (lines[i].Contains("web.config"))
+                    {
+                        //Asset
+                        webConfigCount++;
+                    }
+                }
+            }
+
+            //Asset
+            Assert.IsNotNull(contents);
+            Assert.AreEqual(1, webConfigCount);
         }
     }
 
@@ -264,7 +294,7 @@ WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5
 
             //Asset
             //Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected.Replace("\\","/"), contents.Replace("\\","/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents.Replace("\\", "/"));
         }
     }
 
