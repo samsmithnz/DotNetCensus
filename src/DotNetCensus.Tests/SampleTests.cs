@@ -60,7 +60,7 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(21, results.Count);
+        Assert.AreEqual(23, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
@@ -85,7 +85,7 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(20, results.Count);
+        Assert.AreEqual(22, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
@@ -109,7 +109,7 @@ public class SampleTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(17, results[0].Count);
+        Assert.AreEqual(21, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
@@ -136,7 +136,7 @@ public class SampleTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(17, results[0].Count);
+        Assert.AreEqual(21, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
