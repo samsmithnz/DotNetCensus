@@ -101,5 +101,8 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 `dotnet census -f c:\temp\results.csv`
 
 
-# What's next?
+## What's next?
 - Ability to scan Git Repos
+
+## Contributions
+If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
