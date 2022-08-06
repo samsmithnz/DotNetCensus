@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="MasterPage" %>
+
+<!--!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Master Page</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="css/Site.css" rel="stylesheet" type="text/css" />
+    <link href="css/menu.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>   
+    
+</head>
+<body style="margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">
+
+    <form id="form1" runat="server">
+
+<table cellpadding='0' cellspacing='0' border="0" style="background-image:url('images/bg.jpg'); background-size:100%; width:100%;">
+<tr><td>
+<h1>&nbsp;</h1>
+</td></tr>
+</table>
+
+<%
+Response.Write (writeMenu());
+%>
+
+    <div>
+        <asp:Panel ID="panel_header" runat="server" Width="100%" BackColor="White">
+        </asp:Panel>
+        
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        
+        <p><br /></p>
+        <asp:Panel ID="panel_footer" runat="server" Width="100%" BackColor="#eeeeee">
+            <div style="text-align: center; position:fixed; width:100%; height:50px; bottom:0px; padding:0px; color:#999999; font-size:14px;">
+            <hr style="color: #eeeeee; width:100%;" noshade size="1" />
+            <a href="#">Terms of Service</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">Privacy</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">Security</a> 
+            &nbsp;&nbsp;&nbsp;&nbsp; 
+            Copyright &copy; 2013
+            </div>
+        </asp:Panel>
+                
+    </div>
+    </form>
+</body>
+</html>

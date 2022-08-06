@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.LoginControl
+{
+    background-color:#F7F7DE;
+    border-color:#CCCC99;
+    border-style:solid;
+    border-width:1px;
+    font-family:Verdana;
+    font-size:10pt;
+}

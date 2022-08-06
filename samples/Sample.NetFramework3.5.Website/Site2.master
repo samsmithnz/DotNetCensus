@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site2.master.cs" Inherits="MasterPage" %>
+
+<!--!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Master Page</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="css/menu.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>   
+</head>
+<body style="margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">
+
+    <form id="form1" runat="server">
+
+<table cellpadding='0' cellspacing='0' border="0" style="background-image:url('images/bg.jpg'); background-size:100%; width:100%;">
+<tr><td>
+<h1>&nbsp;</h1>
+</td></tr>
+</table>
+
+<%
+Response.Write (writeMenu());
+%>
+
+    <div>
+        <asp:Panel ID="panel_header" runat="server" Width="100%" BackColor="White">
+        </asp:Panel>
+        
+        <table style="width:100%;">
+        <tr>
+   
+        <td colspan="2">
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana"
+                Font-Size="0.8em" PathSeparator=" : ">
+                <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
+                <CurrentNodeStyle ForeColor="#333333" />
+                <NodeStyle Font-Bold="True" ForeColor="#990000" />
+                <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
+            </asp:SiteMapPath>
+        </td>
+            
+        </tr>
+        <tr>
+
+        <td style="vertical-align:top; width:150px;">
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+        
+        <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" ImageSet="Arrows"
+            onselectednodechanged="TreeView1_SelectedNodeChanged">
+            
+        <ParentNodeStyle Font-Bold="False" />
+                <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD"
+                    HorizontalPadding="0px" VerticalPadding="0px" />
+                <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black"
+                    HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                
+        </asp:TreeView>
+        
+        </td>
+        <td style="vertical-align:top;">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        
+        <asp:Panel ID="panel_footer" runat="server" Width="100%" BackColor="White">
+            <div style="text-align: center">
+            Copyright (C) 2013
+            </div>
+        </asp:Panel>
+        
+        </td>
+
+        </tr>
+        </table>
+       
+        
+    </div>
+    </form>
+</body>
+</html>
