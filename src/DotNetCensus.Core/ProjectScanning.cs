@@ -459,6 +459,7 @@ namespace DotNetCensus.Core
                 framework.Contains("v4.5") ||
                 framework == "v4.6.0" ||
                 framework == "v4.6.1" ||
+                framework == "net461" ||
                 framework.Contains("netcoreapp1") ||
                 framework.Contains("netcoreapp2") ||
                 framework == "netcoreapp3.0" ||
