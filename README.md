@@ -3,9 +3,9 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A tool to conduct a census, to count different .NET versions, on a folder and/or repo.** 
+**A tool to conduct a census - count different .NET versions, on a target directory.** 
 
-Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio. DotNet Census is here to help.
+Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio? DotNet Census is here to help.
 
 Currently supports:
 - .NET Framework
@@ -23,6 +23,14 @@ Currently supports:
 
 2. Then run the command in the directory you need to count versions:
 `dotnet census`
+
+## Command arguments
+Several options are supported:
+
+- `-d|--directory` Path to start scanning to .NET versions
+- `-f|--file` Path to file to output CSV data. 
+- `-r|--raw` Output raw data
+- `-t|--total` Add totals to results. Ignored when used with `-r|--raw`
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
