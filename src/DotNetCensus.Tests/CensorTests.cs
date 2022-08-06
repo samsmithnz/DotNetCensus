@@ -60,7 +60,7 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(19, results.Count);
+        Assert.AreEqual(21, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
@@ -85,7 +85,7 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(18, results.Count);
+        Assert.AreEqual(20, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
