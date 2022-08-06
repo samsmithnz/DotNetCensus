@@ -42,7 +42,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual(6, results.Find(i => i.Language == "csharp")?.Count);
         Assert.AreEqual(1, results.Find(i => i.Language == "vb.net")?.Count);
         Assert.AreEqual(1, results.Find(i => i.Language == "fsharp")?.Count);
-        Assert.AreEqual(10, results[^1].Count);
+        Assert.AreEqual(11, results[^1].Count);
     }
 
     [TestMethod]
@@ -66,7 +66,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(27, results[^1].Count);
+        Assert.AreEqual(30, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
