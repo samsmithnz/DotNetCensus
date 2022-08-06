@@ -99,3 +99,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 
 ### To download results to a csv file, add the `-f` argument with a file name:
 `dotnet census -f c:\temp\results.csv`
+
+
+# What's next?
+- Ability to scan Git Repos
