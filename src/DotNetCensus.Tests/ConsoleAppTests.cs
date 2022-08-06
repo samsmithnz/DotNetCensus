@@ -184,8 +184,8 @@ Framework  FrameworkFamily  Count  Status
             StringWriter sw = new();
             string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
 Assembly-CSharp.csproj,/Sample.Unity2020/Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
-Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,unknown
-Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,unknown
+Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
+Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
 project.json,/Sample.NetCore1.0.ConsoleApp/project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
 project.json,/Sample.NetCore1.1.ConsoleApp/project.json,netcoreapp1.1,.NET Core 1.1,.NET Core,csharp,deprecated
 Sample.MultipleTargets.ConsoleApp.csproj,/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,EOL: 13-Dec-2022
