@@ -457,8 +457,8 @@ namespace DotNetCensus.Core
                 framework.Contains("v4.3") ||
                 framework.Contains("v4.4") ||
                 framework.Contains("v4.5") ||
-                framework == "v4.6.0" ||
-                framework == "v4.6.1" ||
+                framework == "net45" || //Unclear if this should be net 45 or v4.5 - I've seen both in wild
+                framework == "net46" ||
                 framework == "net461" ||
                 framework.Contains("netcoreapp1") ||
                 framework.Contains("netcoreapp2") ||
@@ -478,7 +478,10 @@ namespace DotNetCensus.Core
                 framework.Contains("netstandard") ||
                 framework.Contains("v3.5") ||
                 framework == "net462" ||
+                framework == "v4.6.2" ||
+                framework.Contains("net47") ||
                 framework.Contains("v4.7") ||
+                framework.Contains("net48") ||
                 framework.Contains("v4.8"))
             {
                 //Supported/Ok/blue
