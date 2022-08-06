@@ -28,9 +28,9 @@ Currently supports:
 Several options are supported:
 
 - `-d|--directory`: target directory to scan for .NET versions
-- `-f|--file`: file [ath to output and save CSV data. 
+- `-f|--file`: file path to output and save CSV data. 
 - `-t|--total`: Add totals to results. Ignored when used with `-r|--raw`
-- `-r|--raw`: output raw data
+- `-r|--raw`: output raw data (instead of the default aggregated summary)
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
