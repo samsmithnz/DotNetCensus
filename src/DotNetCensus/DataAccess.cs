@@ -15,7 +15,7 @@ namespace DotNetCensus
                 //Run the calculations to get and aggregate the results
                 List<Project> projects = ProjectScanning.SearchDirectory(directory);
                 //Need to sort so that Linux + Windows results are the same
-                sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
+                sortedProjects = projects.OrderBy(o => o.Path).ToList();
             }
             return sortedProjects;
         }
@@ -32,10 +32,10 @@ namespace DotNetCensus
 
             if (string.IsNullOrEmpty(file) == true)
             {
-                ConsoleTable table = new("FileName", "Path", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
+                ConsoleTable table = new("Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
                 foreach (Project item in projects)
                 {
-                    table.AddRow(item.FileName, item.Path, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
+                    table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
                 }
                 string result = table.ToMinimalString();
                 Console.WriteLine(result);
@@ -45,11 +45,11 @@ namespace DotNetCensus
             {
                 //Create a CSV file
                 StreamWriter sw = File.CreateText(file);
-                sw.WriteLine("FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status");
+                sw.WriteLine("Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status");
                 foreach (Project item in projects)
                 {
-                    sw.WriteLine(item.FileName + "," +
-                        item.Path + "," +
+                    sw.WriteLine(item.Path + "," +
+                        item.FileName + "," +
                         item.FrameworkCode + "," +
                         item.FrameworkName + "," +
                         item.Family + "," +
