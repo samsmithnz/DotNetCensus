@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Ci35", ".", "{AC3D9EB3-3AAD-4B09-AE49-568208BCEA08}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/Ci35"
+		Debug.AspNetCompiler.PhysicalPath = "..\Ci35\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Ci35\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Ci35"
+		Release.AspNetCompiler.PhysicalPath = "..\Ci35\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Ci35\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "45179"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC3D9EB3-3AAD-4B09-AE49-568208BCEA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3D9EB3-3AAD-4B09-AE49-568208BCEA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
