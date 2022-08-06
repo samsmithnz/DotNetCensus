@@ -16,21 +16,26 @@ namespace DotNetCensus.Core
                 //foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.AllDirectories))
                 foreach (FileInfo fileInfo in EnumerateFiles(directory,"*.*"))
                 {
+                    bool foundProjectFile = false;
                     //if .NET project files are found, process them
                     switch (fileInfo.Extension.ToLower())
                     {
                         case ".csproj":
                         case ".sqlproj":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp"));
+                            foundProjectFile = true;
                             break;
                         case ".vbproj":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
+                            foundProjectFile = true;
                             break;
                         case ".fsproj":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
+                            foundProjectFile = true;
                             break;
                         case ".vbp":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
+                            foundProjectFile = true;
                             break;
                         default:
                             //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
@@ -50,7 +55,11 @@ namespace DotNetCensus.Core
                                     language = "vb.net";
                                 }
                                 projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+                                foundProjectFile = true;
                             }
+                            //else if (fileInfo != null && fileInfo.Directory != null &&
+                            //    fileInfo.Name == "web.config")
+                            //{ }
                             break;
                             //    //Is it a Unity3d project?
                             //    if (fileInfo.Name == "ProjectVersion.txt")
