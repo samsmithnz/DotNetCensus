@@ -20,17 +20,17 @@ Currently supports:
 
 1. First install:
 `dotnet tool install -g dotnet-census`
-
 2. Then run the command in the directory you need to count versions:
 `dotnet census`
+3. If you have an old version, you can update with `dotnet tool update -g dotnet-census`, and uninstall with `dotnet tool uninstall -g dotnet-census`
 
 ## Command arguments
 Several options are supported:
 
-- `-d|--directory` Path to start scanning to .NET versions
-- `-f|--file` Path to file to output CSV data. 
-- `-r|--raw` Output raw data
-- `-t|--total` Add totals to results. Ignored when used with `-r|--raw`
+- `-d|--directory`: target directory to scan for .NET versions
+- `-f|--file`: file path to output and save CSV data. 
+- `-t|--total`: Add totals to results. Ignored when used with `-r|--raw`
+- `-r|--raw`: output raw data (instead of the default aggregated summary)
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
@@ -97,4 +97,4 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 ```
 
 ### To download results to a csv file, add the `-f` argument with a file name:
-`dotnet census -f results.csv`
+`dotnet census -f c:\temp\results.csv`
