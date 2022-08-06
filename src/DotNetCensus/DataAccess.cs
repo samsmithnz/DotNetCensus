@@ -9,10 +9,14 @@ namespace DotNetCensus
 
         private static List<Project> GetProjects(string directory)
         {
-            //Run the calculations to get and aggregate the results
-            List<Project> projects = ProjectScanning.SearchDirectory(directory);
-            //Need to sort so that Linux + Windows results are the same
-            List<Project> sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
+            List<Project> sortedProjects = new();
+            if (string.IsNullOrEmpty(directory) == false)
+            {
+                //Run the calculations to get and aggregate the results
+                List<Project> projects = ProjectScanning.SearchDirectory(directory);
+                //Need to sort so that Linux + Windows results are the same
+                sortedProjects = projects.OrderBy(o => o.FileName).ThenBy(o => o.Path).ToList();
+            }
             return sortedProjects;
         }
 
