@@ -230,33 +230,33 @@ Framework  FrameworkFamily  Count  Status
 
         }
     }
-    
-//    [TestMethod]
-//    public void RunSamplesWithRawResultsToFile2Test()
-//    {
-//        //Arrange
-//        if (SamplesPath != null)
-//        {
-//            string file = "test2.txt";
-//            string[] parameters = new string[] { "-d", @"C:\Users\samsm\source\repos\DotNetCensus\samples\Sample.NETFramework4.6.1FSharp.HelloWorld", "-r", "-f", file };
-//            StringWriter sw = new();
-//            string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
-//dotnetapp-3.5.csproj,/Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,supported
-//";
 
-//            //Act
-//            Console.SetOut(sw);
-//            Program.Main(parameters);
-//            string result = sw.ToString();
-//            sw.Close();
-//            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
+    //    [TestMethod]
+    //    public void RunSamplesWithRawResultsToFile2Test()
+    //    {
+    //        //Arrange
+    //        if (SamplesPath != null)
+    //        {
+    //            string file = "test2.txt";
+    //            string[] parameters = new string[] { "-d", @"C:\Users\samsm\source\repos\DotNetCensus\samples\Sample.NETFramework4.6.1FSharp.HelloWorld", "-r", "-f", file };
+    //            StringWriter sw = new();
+    //            string expected = @"FileName,Path,FrameworkCode,FrameworkName,Family,Language,Status
+    //dotnetapp-3.5.csproj,/Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,supported
+    //";
 
-//            //Asset
-//            Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
-//            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+    //            //Act
+    //            Console.SetOut(sw);
+    //            Program.Main(parameters);
+    //            string result = sw.ToString();
+    //            sw.Close();
+    //            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
-//        }
-//    }
+    //            //Asset
+    //            Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
+    //            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+
+    //        }
+    //    }
 
 
     [TestMethod]
@@ -333,5 +333,5 @@ total frameworks,,32,
             }
         }
     }
-    
+
 }

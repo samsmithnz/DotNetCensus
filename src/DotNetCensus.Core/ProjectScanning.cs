@@ -231,7 +231,7 @@ namespace DotNetCensus.Core
                     {
                         string version = line.Replace("<add assembly=\"System.Core, Version=", "")
                             .Replace(", Culture=neutral, PublicKeyToken=B77A5C561934E089\"/>", "").Trim();
-                        project.FrameworkCode = "v" + version.Substring(0,3);
+                        project.FrameworkCode = "v" + version.Substring(0, 3);
                         break;
                     }
                 }
