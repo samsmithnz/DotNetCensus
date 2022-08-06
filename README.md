@@ -20,9 +20,9 @@ Currently supports:
 
 1. First install:
 `dotnet tool install -g dotnet-census`
-
 2. Then run the command in the directory you need to count versions:
 `dotnet census`
+3. If you have an old version, you can update with `dotnet tool update -g dotnet-census`, and uninstall with `dotnet tool uninstall -g dotnet-census`
 
 ## Command arguments
 Several options are supported:
