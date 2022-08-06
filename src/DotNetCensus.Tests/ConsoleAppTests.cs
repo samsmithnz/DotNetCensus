@@ -186,7 +186,7 @@ Framework  FrameworkFamily  Count  Status
 Assembly-CSharp.csproj,/Sample.Unity2020/Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
 Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
 Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
-dotnetapp-3.5.csproj,/Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,supported
+dotnetapp-3.5.csproj,/Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,EOL: 9-Jan-2029
 hello-world-fsharp.fsproj,/Sample.NetCore3.0.fsharp.ConsoleApp/hello-world-fsharp.fsproj,netcoreapp3.0,.NET Core 3.0,.NET Core,fsharp,deprecated
 HelloWorld.fsproj,/Sample.NETFramework4.6.1FSharp.HelloWorld/HelloWorld.fsproj,net461,.NET Framework 4.6.1,.NET Framework,fsharp,deprecated
 project.json,/Sample.NetCore1.0.ConsoleApp/project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
@@ -283,7 +283,7 @@ WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5
 .NET Framework 1.0,.NET Framework,1,deprecated
 .NET Framework 1.1,.NET Framework,1,deprecated
 .NET Framework 2.0,.NET Framework,1,deprecated
-.NET Framework 3.5,.NET Framework,1,supported
+.NET Framework 3.5,.NET Framework,1,EOL: 9-Jan-2029
 .NET Framework 4.0,.NET Framework,1,deprecated
 .NET Framework 4.5,.NET Framework,1,deprecated
 .NET Framework 4.6.1,.NET Framework,1,deprecated

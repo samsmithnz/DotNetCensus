@@ -473,10 +473,14 @@ namespace DotNetCensus.Core
                 //Supported, but old/orange
                 return "EOL: 13-Dec-2022";
             }
+            else if (framework.Contains("v3.5"))
+            {
+                //Supported, but old/orange
+                return "EOL: 9-Jan-2029";
+            }
             else if (framework.Contains("net6.0") ||
                 framework.Contains("net7.0") ||
                 framework.Contains("netstandard") ||
-                framework.Contains("v3.5") ||
                 framework == "net462" ||
                 framework == "v4.6.2" ||
                 framework.Contains("net47") ||
