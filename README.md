@@ -12,7 +12,8 @@ Currently supports:
 - .NET Standard
 - .NET Core 
 - .NET 5/6/7/etc
-- VB6 (!!!)
+
+As well as C#, VB.NET, F#, and VB6
 
 - Currently only works on folders. In the future will support GitHub repo scanning too.
 

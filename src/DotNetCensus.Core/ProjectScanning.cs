@@ -26,6 +26,9 @@ namespace DotNetCensus.Core
                         case ".vbproj":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
                             break;
+                        case ".fsproj":
+                            projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
+                            break;
                         case ".vbp":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
                             break;
@@ -358,8 +361,8 @@ namespace DotNetCensus.Core
                 //Supported, but old/orange
                 return "EOL: 13-Dec-2022";
             }
-            else if (framework == "net6.0" ||
-                framework == "net7.0" ||
+            else if (framework.Contains("net6.0") ||
+                framework.Contains("net7.0") ||
                 framework.Contains("netstandard") ||
                 framework.Contains("v3.5.0") ||
                 framework == "net462" ||

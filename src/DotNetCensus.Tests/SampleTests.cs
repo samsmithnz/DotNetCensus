@@ -2,7 +2,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class CensorTests : BaseTests
+public class SampleTests : BaseTests
 {
 
     [TestMethod]
@@ -22,9 +22,9 @@ public class CensorTests : BaseTests
         Assert.AreEqual(2, results.Find(i => i.FrameworkFamily == ".NET Standard")?.Count);
         Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Core 3.1")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Core")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Framework == ".NET Framework 4.5")?.Count);
+        Assert.AreEqual(2, results.Find(i => i.Framework == ".NET Framework 4.5")?.Count);
         Assert.AreEqual(1, results.Find(i => i.FrameworkFamily == ".NET Framework")?.Count);
-        Assert.AreEqual(10, results[^1].Count);
+        Assert.AreEqual(11, results[^1].Count);
     }
 
     [TestMethod]
@@ -38,10 +38,11 @@ public class CensorTests : BaseTests
         List<LanguageSummary> results = Census.AggregateLanguages(projects, includeTotal);
 
         //Asset
-        Assert.AreEqual(6, results.Count);
+        Assert.AreEqual(7, results.Count);
         Assert.AreEqual(6, results.Find(i => i.Language == "csharp")?.Count);
-        Assert.AreEqual(1, results.Find(i => i.Language == "vbDotNet")?.Count);
-        Assert.AreEqual(10, results[^1].Count);
+        Assert.AreEqual(1, results.Find(i => i.Language == "vb.net")?.Count);
+        Assert.AreEqual(1, results.Find(i => i.Language == "fsharp")?.Count);
+        Assert.AreEqual(11, results[^1].Count);
     }
 
     [TestMethod]
@@ -60,12 +61,12 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(19, results.Count);
+        Assert.AreEqual(26, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(21, results[^1].Count);
+        Assert.AreEqual(31, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -85,38 +86,11 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(18, results.Count);
+        Assert.AreEqual(25, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^1].Count);
         Assert.AreEqual("Visual Basic 6", results[^1].Framework);
-    }
-
-    [TestMethod]
-    public void AggregateSampleLanguagesWithTotalTest()
-    {
-        //Arrange
-        List<LanguageSummary>? results = null;
-        bool includeTotal = true;
-
-        //Act
-        if (SamplesPath != null)
-        {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
-            results = Census.AggregateLanguages(projects, includeTotal);
-        }
-
-        //Asset
-        Assert.IsNotNull(results);
-        Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(15, results[0].Count);
-        Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(5, results[1].Count);
-        Assert.AreEqual("vb.net", results[1].Language);
-        Assert.AreEqual(1, results[2].Count);
-        Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(21, results[3].Count);
-        Assert.AreEqual("total languages", results[3].Language);
     }
 
     [TestMethod]
@@ -135,13 +109,44 @@ public class CensorTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(15, results[0].Count);
+        Assert.AreEqual(4, results.Count);
+        Assert.AreEqual(23, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(5, results[1].Count);
-        Assert.AreEqual("vb.net", results[1].Language);
-        Assert.AreEqual(1, results[2].Count);
-        Assert.AreEqual("vb6", results[2].Language);
+        Assert.AreEqual(2, results[1].Count);
+        Assert.AreEqual("fsharp", results[1].Language);
+        Assert.AreEqual(5, results[2].Count);
+        Assert.AreEqual("vb.net", results[2].Language);
+        Assert.AreEqual(1, results[3].Count);
+        Assert.AreEqual("vb6", results[3].Language);
+    }
+
+    [TestMethod]
+    public void AggregateSampleLanguagesWithTotalTest()
+    {
+        //Arrange
+        List<LanguageSummary>? results = null;
+        bool includeTotal = true;
+
+        //Act
+        if (SamplesPath != null)
+        {
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            results = Census.AggregateLanguages(projects, includeTotal);
+        }
+
+        //Asset
+        Assert.IsNotNull(results);
+        Assert.AreEqual(5, results.Count);
+        Assert.AreEqual(23, results[0].Count);
+        Assert.AreEqual("csharp", results[0].Language);
+        Assert.AreEqual(2, results[1].Count);
+        Assert.AreEqual("fsharp", results[1].Language);
+        Assert.AreEqual(5, results[2].Count);
+        Assert.AreEqual("vb.net", results[2].Language);
+        Assert.AreEqual(1, results[3].Count);
+        Assert.AreEqual("vb6", results[3].Language);
+        Assert.AreEqual(31, results[4].Count);
+        Assert.AreEqual("total languages", results[4].Language);
     }
 
     private static List<Project> GenerateSampleData()
@@ -185,7 +190,7 @@ public class CensorTests : BaseTests
                     FrameworkCode = "net45",
                     Family = ProjectScanning.GetFrameworkFamily("net45"),
                     FrameworkName = ProjectScanning.GetFriendlyName("net45", ProjectScanning.GetFrameworkFamily("net45")),
-                    Language = "vbDotNet",
+                    Language = "vb.net",
                     Path = @"c:\Project45"
                 },
                 new Project
@@ -211,6 +216,14 @@ public class CensorTests : BaseTests
                     FrameworkName = ProjectScanning.GetFriendlyName("v3.5", ProjectScanning.GetFrameworkFamily("v3.5")),
                     Language = "csharp",
                     Path = @"c:\Projectv35"
+                },
+                new Project
+                {
+                    FrameworkCode = "v4.5",
+                    Family = ProjectScanning.GetFrameworkFamily("v4.5"),
+                    FrameworkName = ProjectScanning.GetFriendlyName("v4.5", ProjectScanning.GetFrameworkFamily("v4.5")),
+                    Language = "fsharp",
+                    Path = @"c:\Projectv45_FS"
                 },
                 new Project
                 {
