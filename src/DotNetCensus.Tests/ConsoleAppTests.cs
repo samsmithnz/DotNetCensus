@@ -206,6 +206,10 @@ VBProj.vbproj,/Sample.NetFramework1.0.App/VBProj.vbproj,v1.0,.NET Framework 1.0,
 VBProj.vbproj,/Sample.NetFramework1.1.App/VBProj.vbproj,v1.1,.NET Framework 1.1,.NET Framework,vb.net,deprecated
 VBProj.vbproj,/Sample.NetFramework2.0.App/VBProj.vbproj,v2.0,.NET Framework 2.0,.NET Framework,vb.net,deprecated
 VBProj.vbproj,/Sample.NetFrameworkInvalid.App/VBProj.vbproj,,(Unknown),(Unknown),vb.net,unknown
+WorldBankSample.csproj,/Sample.NetCore1.1.ConsoleApp/Net40/WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
+WorldBankSample.csproj,/Sample.NetCore1.1.ConsoleApp/Net45/WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
+WorldBankSample.csproj,/Sample.NetFramework40.WebApp/WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
+WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
 ";
 
             //Act
@@ -247,13 +251,15 @@ VBProj.vbproj,/Sample.NetFrameworkInvalid.App/VBProj.vbproj,,(Unknown),(Unknown)
 .NET Framework 1.0,.NET Framework,1,deprecated
 .NET Framework 1.1,.NET Framework,1,deprecated
 .NET Framework 2.0,.NET Framework,1,deprecated
+.NET Framework 4.0,.NET Framework,2,deprecated
+.NET Framework 4.5,.NET Framework,2,deprecated
 .NET Framework 4.6.2,.NET Framework,1,supported
 .NET Framework 4.7.1,.NET Framework,1,supported
 .NET Framework 4.7.2,.NET Framework,2,supported
 .NET Standard 2.0,.NET Standard,1,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,23,
+total frameworks,,27,
 ";
 
             //Act
