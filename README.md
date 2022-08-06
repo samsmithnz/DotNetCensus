@@ -47,7 +47,7 @@ Framework             FrameworkFamily  Count  Status
 .NET 6.0              .NET             3      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      in preview       
+.NET 7.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
 .NET Core 2.0         .NET Core        1      deprecated      
