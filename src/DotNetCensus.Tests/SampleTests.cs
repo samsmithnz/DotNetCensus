@@ -65,7 +65,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(23, results[^1].Count);
+        Assert.AreEqual(27, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -115,7 +115,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual("vb.net", results[1].Language);
         Assert.AreEqual(1, results[2].Count);
         Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(23, results[3].Count);
+        Assert.AreEqual(27, results[3].Count);
         Assert.AreEqual("total languages", results[3].Language);
     }
 
