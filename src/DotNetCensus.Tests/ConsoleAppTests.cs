@@ -195,6 +195,7 @@ Sample.MultipleTargets.ConsoleApp.csproj,/Sample.MultipleTargets.ConsoleApp/Samp
 Sample.MultipleTargets.ConsoleApp.csproj,/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,supported
 Sample.Net5.ConsoleApp.csproj,/Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 Sample.Net6.ConsoleApp.csproj,/Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
+Sample.Net6.ConsoleApp.csproj,/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
 Sample.Net7.ConsoleApp.csproj,/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj,net7.0,.NET 7.0,.NET,csharp,supported
 Sample.NetCore.ConsoleApp.csproj,/Sample.NetCore3.1.ConsoleApp/Sample.NetCore.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,EOL: 13-Dec-2022
 Sample.NetCore2.0.ConsoleApp.csproj,/Sample.NetCore2.0.ConsoleApp/Sample.NetCore2.0.ConsoleApp.csproj,netcoreapp2.0,.NET Core 2.0,.NET Core,csharp,deprecated
@@ -210,8 +211,7 @@ VBProj.vbproj,/Sample.NetFramework1.0.App/VBProj.vbproj,v1.0,.NET Framework 1.0,
 VBProj.vbproj,/Sample.NetFramework1.1.App/VBProj.vbproj,v1.1,.NET Framework 1.1,.NET Framework,vb.net,deprecated
 VBProj.vbproj,/Sample.NetFramework2.0.App/VBProj.vbproj,v2.0,.NET Framework 2.0,.NET Framework,vb.net,deprecated
 VBProj.vbproj,/Sample.NetFrameworkInvalid.App/VBProj.vbproj,,(Unknown),(Unknown),vb.net,unknown
-WorldBankSample.csproj,/Sample.NetCore1.1.ConsoleApp/Net40/WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
-WorldBankSample.csproj,/Sample.NetCore1.1.ConsoleApp/Net45/WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
+web.config,/Sample.NetFramework3.5.Website/web.config,,(Unknown),(Unknown),csharp,unknown
 WorldBankSample.csproj,/Sample.NetFramework40.WebApp/WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
 WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
 ";
@@ -242,7 +242,7 @@ WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5
             StringWriter sw = new();
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
-.NET 6.0,.NET,1,supported
+.NET 6.0,.NET,2,supported
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
 .NET 7.0,.NET,1,supported
@@ -257,14 +257,14 @@ WorldBankSample.csproj,/Sample.NetFramework45.WebApp/WorldBankSample.csproj,v4.5
 .NET Framework 1.1,.NET Framework,1,deprecated
 .NET Framework 2.0,.NET Framework,1,deprecated
 .NET Framework 3.5,.NET Framework,1,unknown
-.NET Framework 4.0,.NET Framework,2,deprecated
-.NET Framework 4.5,.NET Framework,2,deprecated
+.NET Framework 4.0,.NET Framework,1,deprecated
+.NET Framework 4.5,.NET Framework,1,deprecated
 .NET Framework 4.6.1,.NET Framework,1,unknown
 .NET Framework 4.6.2,.NET Framework,1,supported
 .NET Framework 4.7.1,.NET Framework,1,supported
 .NET Framework 4.7.2,.NET Framework,2,supported
 .NET Standard 2.0,.NET Standard,1,supported
-(Unknown),(Unknown),1,unknown
+(Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
 total frameworks,,31,
 ";

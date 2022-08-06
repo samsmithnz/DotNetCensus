@@ -101,79 +101,79 @@ namespace DotNetCensus.Core
             return projects;
         }
 
-        //Search directory for project files
-        public static List<Project> SearchDirectory2(string directory)
-        {
-            //search all directorys under the subdirectory, until we find a project file - then stop
+        ////Search directory for project files
+        //public static List<Project> SearchDirectoryOld(string directory)
+        //{
+        //    //search all directorys under the subdirectory, until we find a project file - then stop
 
 
-            List<Project> projects = new();
-            if (string.IsNullOrEmpty(directory) == false)
-            {
-                string currentDirectory = "";
-                bool foundProjectFile = false;
-                foreach (FileInfo fileInfo in EnumerateFiles(directory, "*.*"))
-                {
-                    if (fileInfo != null && fileInfo.Directory != null &&
-                        currentDirectory != fileInfo.Directory.FullName)
-                    {
-                        currentDirectory = fileInfo.Directory.FullName;
-                        foundProjectFile = false;
-                    }
-                    //if .NET project files are found, process them
-                    if (foundProjectFile == false)
-                    {
-                        switch (fileInfo.Extension.ToLower())
-                        {
-                            case ".csproj":
-                            case ".sqlproj":
-                                projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp"));
-                                foundProjectFile = true;
-                                break;
-                            case ".vbproj":
-                                projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
-                                foundProjectFile = true;
-                                break;
-                            case ".fsproj":
-                                projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
-                                foundProjectFile = true;
-                                break;
-                            case ".vbp":
-                                projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
-                                foundProjectFile = true;
-                                break;
+        //    List<Project> projects = new();
+        //    if (string.IsNullOrEmpty(directory) == false)
+        //    {
+        //        string currentDirectory = "";
+        //        bool foundProjectFile = false;
+        //        foreach (FileInfo fileInfo in EnumerateFiles(directory, "*.*"))
+        //        {
+        //            if (fileInfo != null && fileInfo.Directory != null &&
+        //                currentDirectory != fileInfo.Directory.FullName)
+        //            {
+        //                currentDirectory = fileInfo.Directory.FullName;
+        //                foundProjectFile = false;
+        //            }
+        //            //if .NET project files are found, process them
+        //            if (foundProjectFile == false)
+        //            {
+        //                switch (fileInfo.Extension.ToLower())
+        //                {
+        //                    case ".csproj":
+        //                    case ".sqlproj":
+        //                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp"));
+        //                        foundProjectFile = true;
+        //                        break;
+        //                    case ".vbproj":
+        //                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
+        //                        foundProjectFile = true;
+        //                        break;
+        //                    case ".fsproj":
+        //                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
+        //                        foundProjectFile = true;
+        //                        break;
+        //                    case ".vbp":
+        //                        projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
+        //                        foundProjectFile = true;
+        //                        break;
 
-                            default:
-                                //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
-                                if (fileInfo != null && fileInfo.Directory != null &&
-                                    fileInfo.Name == "project.json")
-                                {
-                                    //Check to see if it's a VB.NET or C# project
-                                    string language = GetLanguage(fileInfo.Directory.FullName);
-                                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
-                                    foundProjectFile = true;
-                                }
-                                else if (fileInfo != null && fileInfo.Directory != null &&
-                                    fileInfo.Name == "web.config")
-                                {
-                                    //Check to see if it's a VB.NET or C# project
-                                    string language = GetLanguage(fileInfo.Directory.FullName);
-                                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
-                                    foundProjectFile = true;
-                                }
-                                //    //Is it a Unity3d project?
-                                //    if (fileInfo.Name == "ProjectVersion.txt")
-                                //    {
-                                //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
-                                //    }
-                                break;
-                        }
-                    }
-                }
-            }
+        //                    default:
+        //                        //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
+        //                        if (fileInfo != null && fileInfo.Directory != null &&
+        //                            fileInfo.Name == "project.json")
+        //                        {
+        //                            //Check to see if it's a VB.NET or C# project
+        //                            string language = GetLanguage(fileInfo.Directory.FullName);
+        //                            projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+        //                            foundProjectFile = true;
+        //                        }
+        //                        else if (fileInfo != null && fileInfo.Directory != null &&
+        //                            fileInfo.Name == "web.config")
+        //                        {
+        //                            //Check to see if it's a VB.NET or C# project
+        //                            string language = GetLanguage(fileInfo.Directory.FullName);
+        //                            projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+        //                            foundProjectFile = true;
+        //                        }
+        //                        //    //Is it a Unity3d project?
+        //                        //    if (fileInfo.Name == "ProjectVersion.txt")
+        //                        //    {
+        //                        //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+        //                        //    }
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return projects;
-        }
+        //    return projects;
+        //}
 
         //Process individual project files
         private static List<Project> ProcessProjectFile(string filePath, string language)
@@ -350,13 +350,14 @@ namespace DotNetCensus.Core
                      frameworkCode.StartsWith("v3.") ||
                      frameworkCode.StartsWith("v4."))
             {
+                //Drop the v from the version string. (e.g. v3.0 becomes 3.0)
                 return family + " " + frameworkCode.Replace("v", "");
             }
             else if (frameworkCode.StartsWith("net4"))
             {
                 string number = frameworkCode.Replace("net", "");
                 string formattedNumber = "";
-                //Add .'s between each number. Gross.
+                //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
                 for (int i = 0; i < number.Length; i++)
                 {
                     formattedNumber += number[i];
@@ -474,7 +475,7 @@ namespace DotNetCensus.Core
             else if (framework.Contains("net6.0") ||
                 framework.Contains("net7.0") ||
                 framework.Contains("netstandard") ||
-                framework.Contains("v3.5.0") ||
+                framework.Contains("v3.5") ||
                 framework == "net462" ||
                 framework.Contains("v4.7") ||
                 framework.Contains("v4.8"))
