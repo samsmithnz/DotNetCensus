@@ -65,7 +65,7 @@ public class CensorTests : BaseTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(21, results[^1].Count);
+        Assert.AreEqual(23, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -109,13 +109,13 @@ public class CensorTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(15, results[0].Count);
+        Assert.AreEqual(17, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
         Assert.AreEqual(1, results[2].Count);
         Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(21, results[3].Count);
+        Assert.AreEqual(23, results[3].Count);
         Assert.AreEqual("total languages", results[3].Language);
     }
 
@@ -136,7 +136,7 @@ public class CensorTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(15, results[0].Count);
+        Assert.AreEqual(17, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(5, results[1].Count);
         Assert.AreEqual("vb.net", results[1].Language);
