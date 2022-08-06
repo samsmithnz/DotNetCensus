@@ -108,15 +108,17 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(21, results[0].Count);
+        Assert.AreEqual(5, results.Count);
+        Assert.AreEqual(23, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(5, results[1].Count);
-        Assert.AreEqual("vb.net", results[1].Language);
-        Assert.AreEqual(1, results[2].Count);
-        Assert.AreEqual("vb6", results[2].Language);
-        Assert.AreEqual(27, results[3].Count);
-        Assert.AreEqual("total languages", results[3].Language);
+        Assert.AreEqual(1, results[1].Count);
+        Assert.AreEqual("fsharp", results[1].Language);
+        Assert.AreEqual(5, results[2].Count);
+        Assert.AreEqual("vb.net", results[2].Language);
+        Assert.AreEqual(1, results[3].Count);
+        Assert.AreEqual("vb6", results[3].Language);
+        Assert.AreEqual(30, results[4].Count);
+        Assert.AreEqual("total languages", results[4].Language);
     }
 
     [TestMethod]
@@ -135,13 +137,15 @@ public class SampleTests : BaseTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(3, results.Count);
-        Assert.AreEqual(21, results[0].Count);
+        Assert.AreEqual(4, results.Count);
+        Assert.AreEqual(23, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(5, results[1].Count);
-        Assert.AreEqual("vb.net", results[1].Language);
-        Assert.AreEqual(1, results[2].Count);
-        Assert.AreEqual("vb6", results[2].Language);
+        Assert.AreEqual(1, results[1].Count);
+        Assert.AreEqual("fsharp", results[1].Language);
+        Assert.AreEqual(5, results[2].Count);
+        Assert.AreEqual("vb.net", results[2].Language);
+        Assert.AreEqual(1, results[3].Count);
+        Assert.AreEqual("vb6", results[3].Language);
     }
 
     private static List<Project> GenerateSampleData()

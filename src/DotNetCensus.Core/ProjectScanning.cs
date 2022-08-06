@@ -26,6 +26,9 @@ namespace DotNetCensus.Core
                         case ".vbproj":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
                             break;
+                        case ".fsproj":
+                            projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
+                            break;
                         case ".vbp":
                             projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
                             break;
