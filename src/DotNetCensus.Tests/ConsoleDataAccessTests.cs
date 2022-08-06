@@ -45,7 +45,7 @@ public class ConsoleDataAccessTests : BaseTests
 .NET Core 2.0         .NET Core        1      deprecated      
 .NET Core 2.1         .NET Core        1      deprecated      
 .NET Core 2.2         .NET Core        1      deprecated      
-.NET Core 3.0         .NET Core        1      deprecated      
+.NET Core 3.0         .NET Core        2      deprecated      
 .NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
@@ -91,7 +91,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET Core 2.0         .NET Core        1      deprecated      
 .NET Core 2.1         .NET Core        1      deprecated      
 .NET Core 2.2         .NET Core        1      deprecated      
-.NET Core 3.0         .NET Core        1      deprecated      
+.NET Core 3.0         .NET Core        2      deprecated      
 .NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
@@ -106,7 +106,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       30                     
+total frameworks                       31                     
 ";
 
             //Act
@@ -138,7 +138,7 @@ total frameworks                       30
 .NET Core 2.0,.NET Core,1,deprecated
 .NET Core 2.1,.NET Core,1,deprecated
 .NET Core 2.2,.NET Core,1,deprecated
-.NET Core 3.0,.NET Core,1,deprecated
+.NET Core 3.0,.NET Core,2,deprecated
 .NET Core 3.1,.NET Core,3,EOL: 13-Dec-2022
 .NET Framework 1.0,.NET Framework,1,deprecated
 .NET Framework 1.1,.NET Framework,1,deprecated
@@ -153,7 +153,7 @@ total frameworks                       30
 .NET Standard 2.0,.NET Standard,1,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,30,
+total frameworks,,31,
 ";
 
             //Act
@@ -179,6 +179,7 @@ Assembly-CSharp.csproj                      /Sample.Unity2020/Assembly-CSharp.cs
 Calculator.csproj                           /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    net6.0-ios      .NET 6.0-ios          .NET            csharp    supported       
 Calculator.csproj                           /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    net6.0-android  .NET 6.0-android      .NET            csharp    supported       
 dotnetapp-3.5.csproj                        /Sample.NetFramework3.5.Web/dotnetapp-3.5.csproj                                 v3.5            .NET Framework 3.5    .NET Framework  csharp    unknown         
+hello-world-fsharp.fsproj                   /Sample.NetCore3.0.fsharp.ConsoleApp/hello-world-fsharp.fsproj                   netcoreapp3.0   .NET Core 3.0         .NET Core       fsharp    deprecated      
 HelloWorld.fsproj                           /Sample.NETFramework4.5FSharp.HelloWorld/HelloWorld.fsproj                       net461          .NET Framework 4.6.1  .NET Framework  fsharp    unknown         
 project.json                                /Sample.NetCore1.0.ConsoleApp/project.json                                       netcoreapp1.0   .NET Core 1.0         .NET Core       csharp    deprecated      
 project.json                                /Sample.NetCore1.1.ConsoleApp/project.json                                       netcoreapp1.1   .NET Core 1.1         .NET Core       csharp    deprecated      
@@ -228,6 +229,7 @@ Assembly-CSharp.csproj,/Sample.Unity2020/Assembly-CSharp.csproj,v4.7.1,.NET Fram
 Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
 Calculator.csproj,/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
 dotnetapp-3.5.csproj,/Sample.NetFramework3.5.Web/dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,unknown
+hello-world-fsharp.fsproj,/Sample.NetCore3.0.fsharp.ConsoleApp/hello-world-fsharp.fsproj,netcoreapp3.0,.NET Core 3.0,.NET Core,fsharp,deprecated
 HelloWorld.fsproj,/Sample.NETFramework4.5FSharp.HelloWorld/HelloWorld.fsproj,net461,.NET Framework 4.6.1,.NET Framework,fsharp,unknown
 project.json,/Sample.NetCore1.0.ConsoleApp/project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
 project.json,/Sample.NetCore1.1.ConsoleApp/project.json,netcoreapp1.1,.NET Core 1.1,.NET Core,csharp,deprecated

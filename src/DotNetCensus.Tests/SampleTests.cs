@@ -66,7 +66,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(30, results[^1].Count);
+        Assert.AreEqual(31, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -94,35 +94,6 @@ public class SampleTests : BaseTests
     }
 
     [TestMethod]
-    public void AggregateSampleLanguagesWithTotalTest()
-    {
-        //Arrange
-        List<LanguageSummary>? results = null;
-        bool includeTotal = true;
-
-        //Act
-        if (SamplesPath != null)
-        {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
-            results = Census.AggregateLanguages(projects, includeTotal);
-        }
-
-        //Asset
-        Assert.IsNotNull(results);
-        Assert.AreEqual(5, results.Count);
-        Assert.AreEqual(23, results[0].Count);
-        Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(1, results[1].Count);
-        Assert.AreEqual("fsharp", results[1].Language);
-        Assert.AreEqual(5, results[2].Count);
-        Assert.AreEqual("vb.net", results[2].Language);
-        Assert.AreEqual(1, results[3].Count);
-        Assert.AreEqual("vb6", results[3].Language);
-        Assert.AreEqual(30, results[4].Count);
-        Assert.AreEqual("total languages", results[4].Language);
-    }
-
-    [TestMethod]
     public void AggregateSampleLanguagesNoTotalTest()
     {
         //Arrange
@@ -141,12 +112,41 @@ public class SampleTests : BaseTests
         Assert.AreEqual(4, results.Count);
         Assert.AreEqual(23, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(1, results[1].Count);
+        Assert.AreEqual(2, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
         Assert.AreEqual(5, results[2].Count);
         Assert.AreEqual("vb.net", results[2].Language);
         Assert.AreEqual(1, results[3].Count);
         Assert.AreEqual("vb6", results[3].Language);
+    }
+
+    [TestMethod]
+    public void AggregateSampleLanguagesWithTotalTest()
+    {
+        //Arrange
+        List<LanguageSummary>? results = null;
+        bool includeTotal = true;
+
+        //Act
+        if (SamplesPath != null)
+        {
+            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            results = Census.AggregateLanguages(projects, includeTotal);
+        }
+
+        //Asset
+        Assert.IsNotNull(results);
+        Assert.AreEqual(5, results.Count);
+        Assert.AreEqual(23, results[0].Count);
+        Assert.AreEqual("csharp", results[0].Language);
+        Assert.AreEqual(2, results[1].Count);
+        Assert.AreEqual("fsharp", results[1].Language);
+        Assert.AreEqual(5, results[2].Count);
+        Assert.AreEqual("vb.net", results[2].Language);
+        Assert.AreEqual(1, results[3].Count);
+        Assert.AreEqual("vb6", results[3].Language);
+        Assert.AreEqual(31, results[4].Count);
+        Assert.AreEqual("total languages", results[4].Language);
     }
 
     private static List<Project> GenerateSampleData()
