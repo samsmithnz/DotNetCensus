@@ -223,6 +223,19 @@ namespace DotNetCensus.Core
                     project = null;
                 }
             }
+            else if (new FileInfo(filePath).Name == "web.config")
+            {
+                foreach (string line in lines)
+                {
+                    if (line?.IndexOf("<add assembly=\"System.Core, Version=") >= 0)
+                    {
+                        string version = line.Replace("<add assembly=\"System.Core, Version=", "")
+                            .Replace(", Culture=neutral, PublicKeyToken=B77A5C561934E089\"/>", "").Trim();
+                        project.FrameworkCode = "v" + version.Substring(0,3);
+                        break;
+                    }
+                }
+            }
             else
             {
                 //scan the project file to identify the framework

@@ -196,7 +196,7 @@ total frameworks,,31,
 /Sample.NetFramework1.1.App/VBProj.vbproj                                        VBProj.vbproj                               v1.1            .NET Framework 1.1    .NET Framework  vb.net    deprecated      
 /Sample.NetFramework2.0.App/VBProj.vbproj                                        VBProj.vbproj                               v2.0            .NET Framework 2.0    .NET Framework  vb.net    deprecated      
 /Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj                              dotnetapp-3.5.csproj                        v3.5            .NET Framework 3.5    .NET Framework  csharp    EOL: 9-Jan-2029 
-/Sample.NetFramework3.5.Website/web.config                                       web.config                                                  (Unknown)             (Unknown)       csharp    unknown         
+/Sample.NetFramework3.5.Website/web.config                                       web.config                                  v3.5            .NET Framework 3.5    .NET Framework  csharp    EOL: 9-Jan-2029 
 /Sample.NETFramework4.6.1FSharp.HelloWorld/HelloWorld.fsproj                     HelloWorld.fsproj                           net461          .NET Framework 4.6.1  .NET Framework  fsharp    deprecated      
 /Sample.NetFramework40.WebApp/WorldBankSample.csproj                             WorldBankSample.csproj                      v4.0            .NET Framework 4.0    .NET Framework  csharp    deprecated      
 /Sample.NetFramework45.WebApp/WorldBankSample.csproj                             WorldBankSample.csproj                      v4.5            .NET Framework 4.5    .NET Framework  csharp    deprecated      
@@ -275,7 +275,7 @@ total frameworks,,31,
 /Sample.NetFramework1.1.App/VBProj.vbproj,VBProj.vbproj,v1.1,.NET Framework 1.1,.NET Framework,vb.net,deprecated
 /Sample.NetFramework2.0.App/VBProj.vbproj,VBProj.vbproj,v2.0,.NET Framework 2.0,.NET Framework,vb.net,deprecated
 /Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,EOL: 9-Jan-2029
-/Sample.NetFramework3.5.Website/web.config,web.config,,(Unknown),(Unknown),csharp,unknown
+/Sample.NetFramework3.5.Website/web.config,web.config,v3.5,.NET Framework 3.5,.NET Framework,csharp,EOL: 9-Jan-2029
 /Sample.NETFramework4.6.1FSharp.HelloWorld/HelloWorld.fsproj,HelloWorld.fsproj,net461,.NET Framework 4.6.1,.NET Framework,fsharp,deprecated
 /Sample.NetFramework40.WebApp/WorldBankSample.csproj,WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
 /Sample.NetFramework45.WebApp/WorldBankSample.csproj,WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
