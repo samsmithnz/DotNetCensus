@@ -36,7 +36,7 @@ public class ConsoleDataAccessTests : BaseTests
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
 .NET 5.0              .NET             1      deprecated      
-.NET 6.0              .NET             2      supported       
+.NET 6.0              .NET             3      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
 .NET 7.0              .NET             1      supported       
@@ -50,7 +50,7 @@ public class ConsoleDataAccessTests : BaseTests
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
 .NET Framework 2.0    .NET Framework   1      deprecated      
-.NET Framework 3.5    .NET Framework   1      EOL: 9-Jan-2029 
+.NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029 
 .NET Framework 4.0    .NET Framework   1      deprecated      
 .NET Framework 4.5    .NET Framework   1      deprecated      
 .NET Framework 4.6.1  .NET Framework   1      deprecated      
@@ -58,7 +58,7 @@ public class ConsoleDataAccessTests : BaseTests
 .NET Framework 4.7.1  .NET Framework   1      supported       
 .NET Framework 4.7.2  .NET Framework   2      supported       
 .NET Standard 2.0     .NET Standard    1      supported       
-(Unknown)             (Unknown)        2      unknown         
+(Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
 ";
 
@@ -82,7 +82,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
 .NET 5.0              .NET             1      deprecated      
-.NET 6.0              .NET             2      supported       
+.NET 6.0              .NET             3      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
 .NET 7.0              .NET             1      supported       
@@ -96,7 +96,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
 .NET Framework 2.0    .NET Framework   1      deprecated      
-.NET Framework 3.5    .NET Framework   1      EOL: 9-Jan-2029 
+.NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029 
 .NET Framework 4.0    .NET Framework   1      deprecated      
 .NET Framework 4.5    .NET Framework   1      deprecated      
 .NET Framework 4.6.1  .NET Framework   1      deprecated      
@@ -104,9 +104,9 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET Framework 4.7.1  .NET Framework   1      supported       
 .NET Framework 4.7.2  .NET Framework   2      supported       
 .NET Standard 2.0     .NET Standard    1      supported       
-(Unknown)             (Unknown)        2      unknown         
+(Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       31                     
+total frameworks                       32                     
 ";
 
             //Act
@@ -129,7 +129,7 @@ total frameworks                       31
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
-.NET 6.0,.NET,2,supported
+.NET 6.0,.NET,3,supported
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
 .NET 7.0,.NET,1,supported
@@ -143,7 +143,7 @@ total frameworks                       31
 .NET Framework 1.0,.NET Framework,1,deprecated
 .NET Framework 1.1,.NET Framework,1,deprecated
 .NET Framework 2.0,.NET Framework,1,deprecated
-.NET Framework 3.5,.NET Framework,1,EOL: 9-Jan-2029
+.NET Framework 3.5,.NET Framework,2,EOL: 9-Jan-2029
 .NET Framework 4.0,.NET Framework,1,deprecated
 .NET Framework 4.5,.NET Framework,1,deprecated
 .NET Framework 4.6.1,.NET Framework,1,deprecated
@@ -151,9 +151,9 @@ total frameworks                       31
 .NET Framework 4.7.1,.NET Framework,1,supported
 .NET Framework 4.7.2,.NET Framework,2,supported
 .NET Standard 2.0,.NET Standard,1,supported
-(Unknown),(Unknown),2,unknown
+(Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,31,
+total frameworks,,32,
 ";
 
             //Act
@@ -179,6 +179,7 @@ total frameworks,,31,
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj      Sample.MultipleTargets.ConsoleApp.csproj    net462          .NET Framework 4.6.2  .NET Framework  csharp    supported       
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj                            Sample.Net5.ConsoleApp.csproj               net5.0          .NET 5.0              .NET            csharp    deprecated      
 /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj                            Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
+/Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj                       Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-ios      .NET 6.0-ios          .NET            csharp    supported       
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-android  .NET 6.0-android      .NET            csharp    supported       
 /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                   Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
@@ -258,6 +259,7 @@ total frameworks,,31,
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,supported
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
+/Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
 /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
