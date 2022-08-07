@@ -5,13 +5,14 @@
 
 **A `dotnet` tool to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
 
-Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio? DotNet Census is here to help.
+Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what projects have .NET versions that have expired, the amount of technical debt, or just to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
 Currently supports:
+- .NET 5/6/7/etc
+- .NET Core  (including .NET Core 1 and 1.1 project.json formats)
 - .NET Framework (including .NET Framework 3.5 website formats)
 - .NET Standard
-- .NET Core  (including .NET Core 1 and 1.1 project.json formats)
-- .NET 5/6/7/etc
+
 
 As well as C#, VB.NET, F#, and VB6
 
