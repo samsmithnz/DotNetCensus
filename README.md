@@ -3,7 +3,7 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A tool to conduct a census - count different .NET versions, on a target directory.** 
+**A `dotnet` tool to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
 
 Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio? DotNet Census is here to help.
 
@@ -41,27 +41,34 @@ Several options are supported:
 
 This is a sample of the results: 
 ```
-Framework             FrameworkFamily  Count  Status
+Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
-.NET 5.0              .NET             1      deprecated
-.NET 6.0              .NET             4      supported
-.NET 7.0              .NET             1      supported
-.NET Core 1.0         .NET Core        1      deprecated
-.NET Core 1.1         .NET Core        1      deprecated
-.NET Core 2.0         .NET Core        1      deprecated
-.NET Core 2.1         .NET Core        1      deprecated
-.NET Core 3.0         .NET Core        1      deprecated
+.NET 5.0              .NET             1      deprecated      
+.NET 6.0              .NET             3      supported       
+.NET 6.0-android      .NET             1      supported       
+.NET 6.0-ios          .NET             1      supported       
+.NET 7.0              .NET             1      in preview      
+.NET Core 1.0         .NET Core        1      deprecated      
+.NET Core 1.1         .NET Core        1      deprecated      
+.NET Core 2.0         .NET Core        1      deprecated      
+.NET Core 2.1         .NET Core        1      deprecated      
+.NET Core 2.2         .NET Core        1      deprecated      
+.NET Core 3.0         .NET Core        2      deprecated      
 .NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework   1      deprecated
-.NET Framework 1.1    .NET Framework   1      deprecated
-.NET Framework 2.0    .NET Framework   1      deprecated
-.NET Framework 4.6.2  .NET Framework   1      supported
-.NET Framework 4.7.1  .NET Framework   1      supported
-.NET Framework 4.7.2  .NET Framework   2      supported
-.NET Standard 2.0     .NET Standard    1      supported
-(Unknown)             (Unknown)        1      unknown
-Visual Basic 6        Visual Basic 6   1      deprecated
-total frameworks                       24                 
+.NET Framework 1.0    .NET Framework   1      deprecated      
+.NET Framework 1.1    .NET Framework   1      deprecated      
+.NET Framework 2.0    .NET Framework   1      deprecated      
+.NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029 
+.NET Framework 4.0    .NET Framework   1      deprecated      
+.NET Framework 4.5    .NET Framework   1      deprecated      
+.NET Framework 4.6.1  .NET Framework   1      deprecated      
+.NET Framework 4.6.2  .NET Framework   1      supported       
+.NET Framework 4.7.1  .NET Framework   1      supported       
+.NET Framework 4.7.2  .NET Framework   2      supported       
+.NET Standard 2.0     .NET Standard    1      supported       
+(Unknown)             (Unknown)        1      unknown         
+Visual Basic 6        Visual Basic 6   1      deprecated      
+total frameworks                       32                     
 ```
 
 ### To get raw results, use the `-r` argument:
@@ -99,3 +106,10 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 
 ### To download results to a csv file, add the `-f` argument with a file name:
 `dotnet census -f c:\temp\results.csv`
+
+
+## What's next?
+- Ability to scan Git Repos
+
+## Contributions
+If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
