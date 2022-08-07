@@ -8,7 +8,7 @@
 Ever wanted to understand what your .NET portfolio looks like? Perhaps to understand what frameworks are expired, the amount of technical debt, or just to have more visibility into your portfolio? DotNet Census is here to help.
 
 Currently supports:
-- .NET Framework
+- .NET Framework (including .NET 1 and .NET 1.1 project.json and .NET 3.5 website formats)
 - .NET Standard
 - .NET Core 
 - .NET 5/6/7/etc
