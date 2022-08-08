@@ -3,19 +3,17 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A `dotnet` tool to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
+**A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
 
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
-DotNet Census currently supports versions in:
+DotNet Census currently supports these versions:
 - .NET 5/6/7/etc
 - .NET Core  (including .NET Core 1 and 1.1 project.json formats)
 - .NET Framework (including .NET Framework 3.5 website formats)
 - .NET Standard
 
 Supports the main .NET languages, including C#, VB.NET, F#, and VB6
-
-Note that this currently only works on folders. In the future it will support GitHub repo scanning too.
 
 ## To use
 
@@ -25,8 +23,10 @@ Note that this currently only works on folders. In the future it will support Gi
 `dotnet census`
 3. If you have an old version, you can update with `dotnet tool update -g dotnet-census`, and uninstall with `dotnet tool uninstall -g dotnet-census`
 
-## Command arguments
+## Console arguments
 Several options are supported:
+
+`dotnet census [-d|--directory <DIRECTORY>] [-f|--file <FILE>] [-t|--total] [-r|--raw]
 
 - `-d|--directory`: target directory to scan for .NET versions
 - `-f|--file`: file path to output and save CSV data. 
@@ -107,9 +107,8 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 ### To download results to a csv file, add the `-f` argument with a file name:
 `dotnet census -f c:\temp\results.csv`
 
-
 ## What's next?
-- Ability to scan Git Repos
+- Add ability to scan target Git Repos
 
 ## Contributions
 If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
