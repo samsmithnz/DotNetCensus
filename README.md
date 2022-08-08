@@ -5,7 +5,7 @@
 
 **A `dotnet` tool to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
 
-Ever wanted to understand what your .NET portfolio looks like? Do you know what projects have .NET versions that have expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
+Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
 DotNet Census currently supports versions in:
 - .NET 5/6/7/etc
