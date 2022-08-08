@@ -72,6 +72,28 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     }
 
     [TestMethod]
+    public void FrameworkSummaryWithDirectoryBuildPropsPathTest()
+    {
+        //Arrange
+        bool includeTotals = false;
+        string? file = null;
+        if (SamplesPath != null)
+        {
+            string expected = @"Framework             FrameworkFamily  Count  Status          
+--------------------------------------------------------------
+.NET 6.0              .NET             1      supported
+";
+
+            //Act
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath + @"\Sample.NET6.Directory.Build.props", includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
     public void FrameworkSummaryWithTotalsTest()
     {
         //Arrange
