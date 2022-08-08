@@ -8,6 +8,7 @@ namespace DotNetCensus.Tests
     public class BaseTests
     {
         public string? SamplesPath { get; set; }
+        public string? Samples2Path { get; set; }
 
         public BaseTests()
         {
@@ -16,7 +17,8 @@ namespace DotNetCensus.Tests
             {
                 //Hack: because of a .NET bug, I can't check that Parent is not null without adding a giant if that checks 6 times - and this is just a test... so suppressing the warning
 #pragma warning disable CS8604 // Possible null reference argument.
-                SamplesPath = Path.Combine(currentPath.Parent?.Parent?.Parent?.Parent?.Parent?.FullName, "samples"); ;
+                SamplesPath = Path.Combine(currentPath.Parent?.Parent?.Parent?.Parent?.Parent?.FullName, "samples");
+                Samples2Path = Path.Combine(currentPath.Parent?.Parent?.Parent?.Parent?.Parent?.FullName, "samples2");
 #pragma warning restore CS8604 // Possible null reference argument.
             }
         }
