@@ -85,7 +85,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(Samples2Path + @"\Sample.NET6.Directory.Build.props", includeTotals, file);
+            string? contents = DataAccess.GetRawResults(Samples2Path + @"\Sample.NET6.Directory.Build.props", file);
 
             //Asset
             Assert.IsNotNull(expected);

@@ -267,6 +267,11 @@ namespace DotNetCensus.Core
             {
                 return "Visual Basic 6";
             }
+            else if (frameworkCode.StartsWith("$(") && 
+                frameworkCode.EndsWith(")"))
+            {
+                return "[MSBuild Variable]";
+            }
             else
             {
                 return "(Unknown)";
