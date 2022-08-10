@@ -77,7 +77,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         //Arrange
         bool includeTotals = false;
         string? file = null;
-        if (Samples2Path != null)
+        if (SamplesPath != null)
         {
             string expected = @"Framework  FrameworkFamily  Count  Status   
 --------------------------------------------
@@ -85,7 +85,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(Samples2Path + @"\Sample.NET6.Directory.Build.props", includeTotals, file);
+            string? contents = DataAccess.GetFrameworkSummary(SamplesPath + @"\Sample.NET6.Directory.Build.props", includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
