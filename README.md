@@ -14,6 +14,7 @@ DotNet Census currently supports these versions:
 - .NET Standard
 
 Supports the main .NET languages, including C#, VB.NET, F#, and VB6
+Also supports [Directory.Build.props variables](#44) in project files
 
 ## To use
 
