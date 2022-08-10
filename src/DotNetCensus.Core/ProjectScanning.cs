@@ -1,5 +1,4 @@
 ﻿using DotNetCensus.Core.Models;
-using System.Security;
 using System.Text.Json;
 
 namespace DotNetCensus.Core
