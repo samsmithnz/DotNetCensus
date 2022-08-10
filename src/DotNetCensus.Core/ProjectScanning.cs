@@ -4,9 +4,10 @@ using System.Text.Json;
 
 namespace DotNetCensus.Core
 {
+    //TODO: Break this into smaller classes
     public static class ProjectScanning
     {
-        public static List<Project> SearchDirectory(string directory)
+        public static List<Project> SearchDirectory(string directory, FileInfo? directoryBuildPropFile = null)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
@@ -14,7 +15,7 @@ namespace DotNetCensus.Core
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                List<Project> directoryProjects = SearchProjects(fileInfo);
+                List<Project> directoryProjects = SearchProjects(fileInfo, directoryBuildPropFile);
                 if (directoryProjects.Count > 0)
                 {
                     projects.AddRange(directoryProjects);
@@ -39,29 +40,40 @@ namespace DotNetCensus.Core
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (foundProjectFile == false)
             {
+                //Check for a Directory.Build.props file first
+                FileInfo? newDirectoryBuildPropFile = null;
+                List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
+                if (directoryBuildPropFile != null)
+                {
+                    newDirectoryBuildPropFile = directoryBuildPropFile;
+                }
+                else if (directoryBuildPropFiles.Count > 0)
+                {
+                    newDirectoryBuildPropFile = directoryBuildPropFiles[0];
+                }
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
-                    projects.AddRange(SearchDirectory(subDirectory.FullName));
+                    projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
                 }
             }
 
             return projects;
         }
 
-        private static List<Project> SearchProjects(FileInfo fileInfo)
+        private static List<Project> SearchProjects(FileInfo fileInfo, FileInfo? directoryBuildPropFile = null)
         {
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {
                 case ".csproj":
                 case ".sqlproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp"));
+                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp", directoryBuildPropFile));
                     break;
                 case ".vbproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net"));
+                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net", directoryBuildPropFile));
                     break;
                 case ".fsproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp"));
+                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp", directoryBuildPropFile));
                     break;
                 case ".vbp":
                     projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
@@ -102,7 +114,7 @@ namespace DotNetCensus.Core
 
 
         //Process individual project files
-        private static List<Project> ProcessProjectFile(string filePath, string language)
+        private static List<Project> ProcessProjectFile(string filePath, string language, FileInfo? directoryBuildPropFile = null)
         {
             string[] lines = File.ReadAllLines(filePath);
 
@@ -157,7 +169,7 @@ namespace DotNetCensus.Core
                     {
                         string version = line.Replace("<add assembly=\"System.Core, Version=", "")
                             .Replace(", Culture=neutral, PublicKeyToken=B77A5C561934E089\"/>", "").Trim();
-                        project.FrameworkCode = "v" + version.Substring(0, 3);
+                        project.FrameworkCode = "v" + version[..3]; //.Substring(0, 3)
                         break;
                     }
                 }
@@ -170,25 +182,25 @@ namespace DotNetCensus.Core
                     //.NET Framework version element
                     if (line.IndexOf("<TargetFrameworkVersion>") > 0)
                     {
-                        project.FrameworkCode = line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim();
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFile);
                         break;
                     }
                     //.NET Core version element
                     else if (line.IndexOf("<TargetFramework>") > 0)
                     {
-                        project.FrameworkCode = line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim();
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFile);
                         break;
                     }
                     //Multiple .NET flavors element
                     else if (line.IndexOf("<TargetFrameworks>") > 0)
                     {
-                        string frameworks = line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim();
+                        string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFile);
                         string[] frameworkList = frameworks.Split(';');
                         for (int i = 0; i < frameworkList.Length - 1; i++)
                         {
                             if (i == 0)
                             {
-                                project.FrameworkCode = frameworkList[i];
+                                project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFile);
                             }
                             else
                             {
@@ -197,7 +209,7 @@ namespace DotNetCensus.Core
                                     FileName = new FileInfo(filePath).Name,
                                     Path = filePath,
                                     Language = language,
-                                    FrameworkCode = frameworkList[i]
+                                    FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFile)
                                 };
                                 projects.Add(additionalProject);
                             }
@@ -236,6 +248,31 @@ namespace DotNetCensus.Core
             return projects;
         }
 
+        //Check to see if the framework 
+        private static string CheckFrameworkCodeForVariable(string variable, FileInfo? directoryBuildProps)
+        {
+            if (variable.StartsWith("$(") == true && variable.EndsWith(")") == true)
+            {
+                //Open the Directory.Build.props file and look for the variable
+                string searchVariable = variable.Replace("$(", "").Replace(")", "");
+                if (directoryBuildProps != null)
+                {
+                    string[] lines = File.ReadAllLines(directoryBuildProps.FullName);
+                    foreach (string line in lines)
+                    {
+                        if (line?.IndexOf(searchVariable) >= 0)
+                        {
+                            variable = line.Replace("<" + searchVariable + ">", "")
+                                         .Replace("</" + searchVariable + ">", "")
+                                         .Trim();
+                            break;
+                        }
+                    }
+                }
+            }
+            return variable;
+        }
+
         public static string GetFrameworkFamily(string frameworkCode)
         {
             if (string.IsNullOrEmpty(frameworkCode) == true)
@@ -267,7 +304,7 @@ namespace DotNetCensus.Core
             {
                 return "Visual Basic 6";
             }
-            else if (frameworkCode.StartsWith("$(") && 
+            else if (frameworkCode.StartsWith("$(") &&
                 frameworkCode.EndsWith(")"))
             {
                 return "[MSBuild Variable]";
@@ -461,6 +498,6 @@ namespace DotNetCensus.Core
             }
             return language;
         }
-      
+
     }
 }

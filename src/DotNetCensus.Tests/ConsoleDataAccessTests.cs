@@ -79,13 +79,13 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         string? file = null;
         if (Samples2Path != null)
         {
-            string expected = @"Framework             FrameworkFamily  Count  Status          
---------------------------------------------------------------
-.NET 6.0              .NET             1      supported
+            string expected = @"Framework  FrameworkFamily  Count  Status   
+--------------------------------------------
+.NET 6.0   .NET             1      supported
 ";
 
             //Act
-            string? contents = DataAccess.GetRawResults(Samples2Path + @"\Sample.NET6.Directory.Build.props", file);
+            string? contents = DataAccess.GetFrameworkSummary(Samples2Path + @"\Sample.NET6.Directory.Build.props", includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
