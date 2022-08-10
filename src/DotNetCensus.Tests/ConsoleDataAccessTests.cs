@@ -69,7 +69,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
             Assert.IsNotNull(expected);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
-    }
+    }    
 
     [TestMethod]
     public void FrameworkSummaryWithDirectoryBuildPropsPathTest()
