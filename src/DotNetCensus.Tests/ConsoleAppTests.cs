@@ -271,7 +271,7 @@ Framework  FrameworkFamily  Count  Status
             StringWriter sw = new();
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
-.NET 6.0,.NET,3,supported
+.NET 6.0,.NET,4,supported
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
 .NET 7.0,.NET,1,in preview
@@ -295,7 +295,7 @@ Framework  FrameworkFamily  Count  Status
 .NET Standard 2.0,.NET Standard,1,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,32,
+total frameworks,,33,
 ";
 
             //Act
