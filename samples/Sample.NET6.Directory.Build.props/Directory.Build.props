@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <NetCoreTargetFramework>net6.0</NetCoreTargetFramework>
+    <NetStandardTargetFramework>netstandard2.0</NetStandardTargetFramework>
+    <NetFrameworkTargetFramework>net472</NetFrameworkTargetFramework>
+  </PropertyGroup>
+
+</Project>

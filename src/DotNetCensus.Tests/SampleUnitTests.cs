@@ -2,7 +2,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class SampleTests : BaseTests
+public class SampleUnitTests : BaseTests
 {
 
     [TestMethod]
@@ -66,7 +66,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(32, results[^1].Count);
+        Assert.AreEqual(33, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -110,7 +110,7 @@ public class SampleTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(24, results[0].Count);
+        Assert.AreEqual(25, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(2, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
@@ -137,7 +137,7 @@ public class SampleTests : BaseTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(5, results.Count);
-        Assert.AreEqual(24, results[0].Count);
+        Assert.AreEqual(25, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(2, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
@@ -145,7 +145,7 @@ public class SampleTests : BaseTests
         Assert.AreEqual("vb.net", results[2].Language);
         Assert.AreEqual(1, results[3].Count);
         Assert.AreEqual("vb6", results[3].Language);
-        Assert.AreEqual(32, results[4].Count);
+        Assert.AreEqual(33, results[4].Count);
         Assert.AreEqual("total languages", results[4].Language);
     }
 
