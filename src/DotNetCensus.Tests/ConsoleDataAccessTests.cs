@@ -151,7 +151,7 @@ total frameworks                       33
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
-.NET 6.0,.NET,3,supported
+.NET 6.0,.NET,4,supported
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
 .NET 7.0,.NET,1,in preview
@@ -175,7 +175,7 @@ total frameworks                       33
 .NET Standard 2.0,.NET Standard,1,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,32,
+total frameworks,,33,
 ";
 
             //Act
@@ -202,6 +202,7 @@ total frameworks,,32,
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj                            Sample.Net5.ConsoleApp.csproj               net5.0          .NET 5.0              .NET            csharp    deprecated      
 /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj                            Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
 /Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj                       Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
+/Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj            Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-ios      .NET 6.0-ios          .NET            csharp    supported       
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-android  .NET 6.0-android      .NET            csharp    supported       
 /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                   Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
@@ -282,6 +283,7 @@ total frameworks,,32,
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
 /Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
+/Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
 /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
