@@ -2,7 +2,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class SampleTests : BaseTests
+public class SampleUnitTests : BaseTests
 {
 
     [TestMethod]
