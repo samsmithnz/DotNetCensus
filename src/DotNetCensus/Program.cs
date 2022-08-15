@@ -21,7 +21,7 @@ namespace DotNetCensus
             {
                 if (_includeInventory == true)
                 {
-                    DataAccess.GetRawResults(_directory, _file);
+                    DataAccess.GetInventoryResults(_directory, _file);
                 }
                 else
                 {

@@ -120,7 +120,7 @@ Framework  FrameworkFamily  Count  Status
     //    }
 
     //    [TestMethod]
-    //    public void RunSamplesWithRawResultsTest()
+    //    public void RunSamplesWithInventoryResultsTest()
     //    {
     //        //Arrange
     //        if (SamplesPath != null)
@@ -159,7 +159,7 @@ Framework  FrameworkFamily  Count  Status
     //            //Act
     //            //AnsiConsole.Record();
     //            //Console.SetOut(sw);
-    //            string result = DataAccess.GetRawResults(SamplesPath, null);
+    //            string result = DataAccess.GetInventoryResults(SamplesPath, null);
     //            //string result = Environment.NewLine + sw.ToString();
     //            //sw.Close();
 
@@ -174,7 +174,7 @@ Framework  FrameworkFamily  Count  Status
     //    }
 
     [TestMethod]
-    public void RunSamplesWithRawResultsToFileTest()
+    public void RunSamplesWithInventoryResultsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
@@ -233,7 +233,7 @@ Framework  FrameworkFamily  Count  Status
     }
 
     //    [TestMethod]
-    //    public void RunSamplesWithRawResultsToFile2Test()
+    //    public void RunSamplesWithInventoryResultsToFile2Test()
     //    {
     //        //Arrange
     //        if (SamplesPath != null)

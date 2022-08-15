@@ -20,7 +20,7 @@ namespace DotNetCensus
             return sortedProjects;
         }
 
-        public static string? GetRawResults(string directory, string? file)
+        public static string? GetInventoryResults(string directory, string? file)
         {
             List<Project> projects = GetProjects(directory);
 

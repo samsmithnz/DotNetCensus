@@ -189,7 +189,7 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsTest()
+    public void InventoryResultsTest()
     {
         //Arrange
         string? file = null;
@@ -233,7 +233,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetRawResults(SamplesPath, file);
+            string? contents = DataAccess.GetInventoryResults(SamplesPath, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -242,7 +242,7 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsWebConfigCountTest()
+    public void InventoryResultsWebConfigCountTest()
     {
         //Arrange
         string? file = null;
@@ -250,7 +250,7 @@ total frameworks,,33,
         if (SamplesPath != null)
         {
             //Act
-            string? contents = DataAccess.GetRawResults(SamplesPath, file);
+            string? contents = DataAccess.GetInventoryResults(SamplesPath, file);
             if (contents != null)
             {
                 string[] lines = contents.Split(Environment.NewLine);
@@ -271,7 +271,7 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsToFileTest()
+    public void InventoryResultsToFileTest()
     {
         //Arrange
         string? file = "test2.txt";
@@ -314,7 +314,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetRawResults(SamplesPath, file);
+            DataAccess.GetInventoryResults(SamplesPath, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset

@@ -10,7 +10,7 @@ namespace DotNetCensus
         [Option('t', "total", Required = false, Default = false, HelpText = "Include totals in results. Ignored when used with -i|--inventory")]
         public bool IncludeTotals { get; set; }
 
-        [Option('i', "inventory", Required = false, Default = false, HelpText = "Show inventory of raw results, instead of an aggregate")]
+        [Option('i', "inventory", Required = false, Default = false, HelpText = "Show inventory of results, instead of an aggregate")]
         public bool IncludeInventory { get; set; }
         
         [Option('r', "repo", Required = false, Default = false, HelpText = "Git repo to search for projects. Can't be used at the same time as -d|--directory. Note that this -r argument was formed used by --raw - which is now achieved with -i|--inventory")]
