@@ -8,26 +8,23 @@ public class ConsoleAppTests : BaseTests
     public void RunSamplesWithNoParametersTest()
     {
         //Arrange
-        if (SamplesPath != null)
-        {
-            string[] parameters = Array.Empty<string>();
-            StringWriter sw = new();
-            string expected = @"
+        string[] parameters = Array.Empty<string>();
+        StringWriter sw = new();
+        string expected = @"
 Framework  FrameworkFamily  Count  Status
 -----------------------------------------
 
 ";
 
-            //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = Environment.NewLine + sw.ToString();
-            sw.Close();
+        //Act
+        Console.SetOut(sw);
+        Program.Main(parameters);
+        string result = Environment.NewLine + sw.ToString();
+        sw.Close();
 
-            //Asset
-            Assert.IsNotNull(expected);
-            Assert.AreEqual(expected, result);
-        }
+        //Asset
+        Assert.IsNotNull(expected);
+        Assert.AreEqual(expected, result);
     }
 
     //    [TestMethod]
@@ -180,7 +177,7 @@ Framework  FrameworkFamily  Count  Status
         if (SamplesPath != null)
         {
             string file = "test2.txt";
-            string[] parameters = new string[] { "-d", SamplesPath, "-r", "-f", file };
+            string[] parameters = new string[] { "-d", SamplesPath, "-i", "-f", file };
             StringWriter sw = new();
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,EOL: 13-Dec-2022

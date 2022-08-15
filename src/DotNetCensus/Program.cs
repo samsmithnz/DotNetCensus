@@ -5,6 +5,7 @@ namespace DotNetCensus
     public class Program
     {
         private static string? _directory;
+        private static string? _repo;
         private static bool _includeTotals;
         private static bool _includeInventory;
         private static string? _file;
@@ -17,15 +18,15 @@ namespace DotNetCensus
                    .WithNotParsed(HandleParseError);
 
             //If there is a folder to scan, run the process against it
-            if (string.IsNullOrEmpty(_directory) == false)
+            if (string.IsNullOrEmpty(_directory) == false || string.IsNullOrEmpty(_repo) == false)
             {
                 if (_includeInventory == true)
                 {
-                    DataAccess.GetInventoryResults(_directory, _file);
+                    DataAccess.GetInventoryResults(_directory, _repo, _file);
                 }
                 else
                 {
-                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _file);
+                    DataAccess.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
                 }
             }
         }
@@ -33,20 +34,30 @@ namespace DotNetCensus
         static void RunOptions(Options opts)
         {
             //handle options
-            if (string.IsNullOrEmpty(opts.Directory) == true)
+            //if (string.IsNullOrEmpty(opts.Directory) == true)
+            //{
+            //    //if (string.IsNullOrEmpty(opts.RepoUrl) == false)
+            //    //{
+            //    //    _repo = opts.RepoUrl;
+            //    //}
+            //    //else
+            //    //{
+            //    _directory = Directory.GetCurrentDirectory();
+            //    //}
+            //}
+            //else
+            //{
+            //    _directory = opts.Directory;
+            //}
+            _directory = opts.Directory;
+            _repo = opts.Repo;
+            if (_directory == null && _repo == null)
             {
                 _directory = Directory.GetCurrentDirectory();
             }
-            else
-            {
-                _directory = opts.Directory;
-            }
             _includeTotals = opts.IncludeTotals;
             _includeInventory = opts.IncludeInventory;
-            if (string.IsNullOrEmpty(opts.File) == false)
-            {
-                _file = opts.File;
-            }
+            _file = opts.File;
         }
 
         static void HandleParseError(IEnumerable<Error> errs)

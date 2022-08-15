@@ -9,20 +9,19 @@ public class ConsoleDataAccessTests : BaseTests
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = null;
+        string? repo = null;
         string? file = null;
-        if (SamplesPath != null)
-        {
-            string expected = @"Framework  FrameworkFamily  Count  Status
+        string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
 ";
 
-            //Act
-            string? contents = DataAccess.GetFrameworkSummary("", includeTotals, file);
+        //Act
+        string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
 
-            //Asset
-            Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
-        }
+        //Asset
+        Assert.IsNotNull(expected);
+        Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
     }
 
     [TestMethod]
@@ -30,8 +29,10 @@ public class ConsoleDataAccessTests : BaseTests
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = SamplesPath;
+        string? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
@@ -63,21 +64,23 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
-    }    
+    }
 
     [TestMethod]
     public void FrameworkSummaryWithDirectoryBuildPropsPathTest()
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = SamplesPath + @"/Sample.NET6.Directory.Build.props";
+        string? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework  FrameworkFamily  Count  Status   
 --------------------------------------------
@@ -85,7 +88,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath + @"/Sample.NET6.Directory.Build.props", includeTotals, file);
+            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -98,8 +101,10 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     {
         //Arrange
         bool includeTotals = true;
+        string? directory = null;
+        string? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
@@ -132,7 +137,7 @@ total frameworks                       33
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -146,8 +151,10 @@ total frameworks                       33
     {
         //Arrange
         bool includeTotals = true;
+        string? directory = null;
+        string? repo = null;
         string? file = "test.txt";
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
@@ -179,7 +186,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -192,8 +199,10 @@ total frameworks,,33,
     public void InventoryResultsTest()
     {
         //Arrange
+        string? directory = null;
+        string? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Path                                                                             FileName                                    FrameworkCode   FrameworkName         Family          Language  Status          
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,7 +242,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetInventoryResults(SamplesPath, file);
+            string? contents = DataAccess.GetInventoryResults(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -245,12 +254,14 @@ total frameworks,,33,
     public void InventoryResultsWebConfigCountTest()
     {
         //Arrange
+        string? directory = null;
+        string? repo = null;
         string? file = null;
         int webConfigCount = 0;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             //Act
-            string? contents = DataAccess.GetInventoryResults(SamplesPath, file);
+            string? contents = DataAccess.GetInventoryResults(directory, repo, file);
             if (contents != null)
             {
                 string[] lines = contents.Split(Environment.NewLine);
@@ -274,8 +285,10 @@ total frameworks,,33,
     public void InventoryResultsToFileTest()
     {
         //Arrange
+        string? directory = null;
+        string? repo = null;
         string? file = "test2.txt";
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,EOL: 13-Dec-2022
@@ -314,7 +327,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetInventoryResults(SamplesPath, file);
+            DataAccess.GetInventoryResults(directory, repo, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -323,5 +336,27 @@ total frameworks,,33,
         }
     }
 
+    [TestMethod]
+    public void FrameworkSummaryWithRepoTest()
+    {
+        //Arrange
+        bool includeTotals = false;
+        string? directory = null;
+        string? repo = "https://github.com/samsmithnz/DotNetCensus";
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework  FrameworkFamily  Count  Status
+-----------------------------------------
+";
+
+            //Act
+            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
 
 }
