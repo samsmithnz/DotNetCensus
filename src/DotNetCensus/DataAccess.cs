@@ -8,7 +8,7 @@ namespace DotNetCensus;
 
 public static class DataAccess
 {
-    private static List<Project> GetProjects(string? directory, string? repo)
+    private static List<Project> GetProjects(string? directory, Repo? repo)
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
@@ -17,11 +17,13 @@ public static class DataAccess
             //Run the calculations to get and aggregate the results
             projects = ProjectScanning.SearchDirectory(directory);
         }
-        else if (string.IsNullOrEmpty(repo) == false)
+        else if (repo != null)
         {
-            string? clientId = null;
-            string? clientSecret = null;
-            projects = Task.Run(async () => await GitHubAPI.GetRepoContents(clientId, clientSecret, "samsmithnz", "DotNetCensus", "main")).Result;
+            string? owner = repo.Owner;
+            string? repository = repo.Repository;
+            string? clientId = repo.User;
+            string? clientSecret = repo.Password;
+            projects = Task.Run(async () => await GitHubAPI.GetRepoContents(clientId, clientSecret, owner, repository, "main")).Result;
         }
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)
@@ -31,7 +33,7 @@ public static class DataAccess
         return sortedProjects;
     }
 
-    public static string? GetInventoryResults(string? directory, string? repo, string? file)
+    public static string? GetInventoryResults(string? directory, Repo? repo, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
 
@@ -79,7 +81,7 @@ public static class DataAccess
         }
     }
 
-    public static string? GetFrameworkSummary(string? directory, string? repo, bool includeTotals, string? file)
+    public static string? GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
         List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);

@@ -1,11 +1,12 @@
 ﻿using CommandLine;
+using DotNetCensus.Core.Models;
 
 namespace DotNetCensus;
 
 public class Program
 {
     private static string? _directory;
-    private static string? _repo;
+    private static Repo? _repo;
     private static bool _includeTotals;
     private static bool _includeInventory;
     private static string? _file;
@@ -18,7 +19,7 @@ public class Program
                .WithNotParsed(HandleParseError);
 
         //If there is a folder to scan, run the process against it
-        if (string.IsNullOrEmpty(_directory) == false || string.IsNullOrEmpty(_repo) == false)
+        if (string.IsNullOrEmpty(_directory) == false || _repo != null)
         {
             if (_includeInventory == true)
             {
@@ -35,7 +36,16 @@ public class Program
     {
         //handle options
         _directory = opts.Directory;
-        _repo = opts.Repo;            
+
+        //setup the GitHub repo details
+        if (opts.Owner != null && opts.Repo != null)
+        {
+            _repo = new Repo(opts.Owner, opts.Repo)
+            {
+                User = opts.Repo,
+                Password = opts.Password
+            };
+        }
         if (_directory == null && _repo == null)
         {
             //If both directory and repo are null, use the current directory

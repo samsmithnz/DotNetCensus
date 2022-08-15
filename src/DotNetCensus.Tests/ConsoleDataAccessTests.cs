@@ -10,7 +10,7 @@ public class ConsoleDataAccessTests : BaseTests
         //Arrange
         bool includeTotals = false;
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
@@ -30,7 +30,7 @@ public class ConsoleDataAccessTests : BaseTests
         //Arrange
         bool includeTotals = false;
         string? directory = SamplesPath;
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -78,7 +78,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         //Arrange
         bool includeTotals = false;
         string? directory = SamplesPath + @"/Sample.NET6.Directory.Build.props";
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -102,7 +102,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -152,7 +152,7 @@ total frameworks                       33
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = "test.txt";
         if (directory != null || repo != null)
         {
@@ -200,7 +200,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -255,7 +255,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = null;
         int webConfigCount = 0;
         if (directory != null || repo != null)
@@ -286,7 +286,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        string? repo = null;
+        Repo? repo = null;
         string? file = "test2.txt";
         if (directory != null || repo != null)
         {
@@ -342,7 +342,34 @@ total frameworks,,33,
         //Arrange
         bool includeTotals = false;
         string? directory = null;
-        string? repo = "https://github.com/samsmithnz/DotNetCensus";
+        Repo? repo = new("samsmithnz", "DotNetCensus");
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework  FrameworkFamily  Count  Status
+-----------------------------------------
+";
+
+            //Act
+            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void FrameworkSummaryWithUserNameAndPasswordRepoTest()
+    {
+        //Arrange
+        bool includeTotals = false;
+        string? directory = null;
+        Repo? repo = new("samsmithnz", "DotNetCensus")
+        {
+            User = null,
+            Password = null
+        };
         string? file = null;
         if (directory != null || repo != null)
         {

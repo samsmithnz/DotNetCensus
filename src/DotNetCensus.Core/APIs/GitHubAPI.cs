@@ -1,7 +1,6 @@
 ﻿using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http.Headers;
 
 namespace DotNetCensus.Core.APIs
@@ -13,6 +12,7 @@ namespace DotNetCensus.Core.APIs
         {
             List<Project> results = new();
             TreeResponse tree = new();
+
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}";
             string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
@@ -27,19 +27,24 @@ namespace DotNetCensus.Core.APIs
                 {
                     if (item != null && item.path != null)
                     {
-                        FileInfo file = new(item.path);
-                        if (file.Extension == ".csproj")
+                        FileInfo fileInfo = new(item.path);
+                        switch (fileInfo.Extension.ToLower())
                         {
-                            Project project = new()
-                            {
-                                Path = item.path
-                            };
-                            results.Add(project);
+                            case ".csproj":
+                            case ".sqlproj":
+                            case ".vbproj":
+                            case ".fsproj":
+                            case ".vbp":
+                                Project project = new()
+                                {
+                                    Path = item.path
+                                };
+                                results.Add(project);
+                                break;
                         }
                     }
                 }
             }
-
 
             return results;
         }
