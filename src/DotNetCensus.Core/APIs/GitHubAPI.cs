@@ -14,22 +14,29 @@ namespace DotNetCensus.Core.APIs
             List<Project> results = new();
             TreeResponse tree = new();
             //https://docs.github.com/en/rest/git/trees#get-a-tree
-            string url = $"/repos/{owner}/{repo}/git/trees/{branch}";
+            string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}";
             string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
             if (string.IsNullOrEmpty(response) == false)
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                tree = JsonConvert.DeserializeObject<List<TreeResponse>>(jsonObj?.ToString());
+                tree = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
             }
             if (tree != null && tree.tree.Length > 0)
             {
                 foreach (FileResponse item in tree.tree)
                 {
-                    Project project = new()
+                    if (item != null && item.path != null)
                     {
-                        Path = item.path
-                    };
-                    results.Add(project);
+                        FileInfo file = new(item.path);
+                        if (file.Extension == ".csproj")
+                        {
+                            Project project = new()
+                            {
+                                Path = item.path
+                            };
+                            results.Add(project);
+                        }
+                    }
                 }
             }
 
@@ -38,9 +45,9 @@ namespace DotNetCensus.Core.APIs
         }
 
 
-        public async static Task<string?> GetGitHubMessage(string url, string clientId, string clientSecret, bool processErrors = true)
+        public async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)
         {
-            HttpClient client = BuildHttpClient(url, clientId, clientSecret);
+            HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
             if (processErrors)
             {
@@ -49,7 +56,7 @@ namespace DotNetCensus.Core.APIs
             return await response.Content.ReadAsStringAsync();
         }
 
-        private static HttpClient BuildHttpClient(string url, string clientId, string clientSecret)
+        private static HttpClient BuildHttpClient(string? clientId, string? clientSecret, string url)
         {
             //Console.WriteLine($"Running GitHub url: {url}");
             if (!url.Contains("api.github.com"))

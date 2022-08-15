@@ -21,7 +21,7 @@ public static class DataAccess
         {
             string? clientId = null;
             string? clientSecret = null;
-            projects = Task.Run<List<Project>>(async () => await GitHubAPI.GetRepoContents(clientId, clientSecret, "samsmithnz", "DotNetCensus", "main")).Result;
+            projects = Task.Run(async () => await GitHubAPI.GetRepoContents(clientId, clientSecret, "samsmithnz", "DotNetCensus", "main")).Result;
         }
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)
