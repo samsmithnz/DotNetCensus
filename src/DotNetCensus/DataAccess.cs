@@ -24,7 +24,7 @@ namespace DotNetCensus
         {
             List<Project> projects = GetProjects(directory);
 
-            //If it's a raw output, remove the full path from each project
+            //If it's inventory output, remove the full path from each project
             foreach (Project item in projects)
             {
                 item.Path = item.Path.Replace(directory, "");

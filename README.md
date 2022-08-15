@@ -28,12 +28,13 @@ Additionally, this tool supports:
 ## Console arguments
 Several options are supported:
 
-`dotnet census [-d|--directory <DIRECTORY>] [-f|--file <FILE>] [-t|--total] [-r|--raw]
+`dotnet census [-d|--directory <DIRECTORY>] [-r|--repo <REPO>] [-f|--file <FILE>] [-t|--total] [-i|--inventory]`
 
 - `-d|--directory`: target directory to scan for .NET versions
+- `-r|--repo`: target repo to scan for .NET versions
 - `-f|--file`: file path to output and save CSV data. 
-- `-t|--total`: Add totals to results. Ignored when used with `-r|--raw`
-- `-r|--raw`: output raw data (instead of the default aggregated summary)
+- `-t|--total`: Add totals to results. Ignored when used with `-i|--inventory`
+- `-i|--inventory`: output inventory of all data (instead of the default aggregated summary)
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
@@ -73,10 +74,10 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 total frameworks                       32                     
 ```
 
-### To get raw results, use the `-r` argument:
-`dotnet census -r`
+### To get an inventory of results, use the `-i` argument:
+`dotnet census -i`
 
-A sample of raw results:
+A sample of inventory results:
 ```
 FileName                                    Path                                                                                     FrameworkCode   FrameworkName         Family          Language  Status
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

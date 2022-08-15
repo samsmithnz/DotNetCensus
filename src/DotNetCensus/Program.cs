@@ -6,7 +6,7 @@ namespace DotNetCensus
     {
         private static string? _directory;
         private static bool _includeTotals;
-        private static bool _includeRawResults;
+        private static bool _includeInventory;
         private static string? _file;
 
         public static void Main(string[] args)
@@ -19,7 +19,7 @@ namespace DotNetCensus
             //If there is a folder to scan, run the process against it
             if (string.IsNullOrEmpty(_directory) == false)
             {
-                if (_includeRawResults == true)
+                if (_includeInventory == true)
                 {
                     DataAccess.GetRawResults(_directory, _file);
                 }
@@ -42,7 +42,7 @@ namespace DotNetCensus
                 _directory = opts.Directory;
             }
             _includeTotals = opts.IncludeTotals;
-            _includeRawResults = opts.IncludeRawResults;
+            _includeInventory = opts.IncludeInventory;
             if (string.IsNullOrEmpty(opts.File) == false)
             {
                 _file = opts.File;

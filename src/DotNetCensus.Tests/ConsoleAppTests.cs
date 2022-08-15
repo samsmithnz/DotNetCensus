@@ -126,7 +126,7 @@ Framework  FrameworkFamily  Count  Status
     //        if (SamplesPath != null)
     //        {
     //            string? file = null;
-    //            string[] parameters = new string[] { "-d", SamplesPath, "--raw" };
+    //            string[] parameters = new string[] { "-d", SamplesPath, "--inventory" };
     //            //StringWriter sw = new();
     //            string expected = @"
     //FileName                                    Path                                                                             FrameworkCode   FrameworkName         Family          Language  Status          
