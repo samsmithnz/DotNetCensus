@@ -1,20 +1,31 @@
 ﻿using ConsoleTables;
 using DotNetCensus.Core;
+using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
+using System.Diagnostics.Metrics;
 
 namespace DotNetCensus;
 
 public static class DataAccess
 {
-
-    private static List<Project> GetProjects(string directory)
+    private static List<Project> GetProjects(string? directory, string? repo)
     {
+        List<Project> projects = new();
         List<Project> sortedProjects = new();
         if (string.IsNullOrEmpty(directory) == false)
         {
             //Run the calculations to get and aggregate the results
-            List<Project> projects = ProjectScanning.SearchDirectory(directory);
-            //Need to sort so that Linux + Windows results are the same
+            projects = ProjectScanning.SearchDirectory(directory);
+        }
+        else if (string.IsNullOrEmpty(repo) == false)
+        {
+            string? clientId = null;
+            string? clientSecret = null;
+            projects = Task.Run<List<Project>>(async () => await GitHubAPI.GetRepoContents(clientId, clientSecret, "samsmithnz", "DotNetCensus", "main")).Result;
+        }
+        //Need to sort so that Linux + Windows results are the same
+        if (projects != null)
+        {
             sortedProjects = projects.OrderBy(o => o.Path).ToList();
         }
         return sortedProjects;
@@ -22,12 +33,15 @@ public static class DataAccess
 
     public static string? GetInventoryResults(string? directory, string? repo, string? file)
     {
-        List<Project> projects = GetProjects(directory);
+        List<Project> projects = GetProjects(directory, repo);
 
         //If it's inventory output, remove the full path from each project
-        foreach (Project item in projects)
+        if (directory != null)
         {
-            item.Path = item.Path.Replace(directory, "");
+            foreach (Project item in projects)
+            {
+                item.Path = item.Path.Replace(directory, "");
+            }
         }
 
         if (string.IsNullOrEmpty(file) == true)
@@ -67,7 +81,7 @@ public static class DataAccess
 
     public static string? GetFrameworkSummary(string? directory, string? repo, bool includeTotals, string? file)
     {
-        List<Project> projects = GetProjects(directory);
+        List<Project> projects = GetProjects(directory, repo);
         List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);
 
         if (string.IsNullOrEmpty(file) == true)
