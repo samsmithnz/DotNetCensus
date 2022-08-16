@@ -1,29 +1,32 @@
 ﻿using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
 using Newtonsoft.Json;
+using RepoAutomation.Core.Models;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Web;
 
 namespace DotNetCensus.Core.APIs
 {
     public static class GitHubAPI
     {
-        public async static Task<List<Project>> GetRepoContents(string? clientId, string? clientSecret,
+        public async static Task<List<Project>> GetRepoFiles(string? clientId, string? clientSecret,
             string owner, string repo, string branch = "main")
         {
             List<Project> results = new();
-            TreeResponse tree = new();
+            TreeResponse treeResponse = new();
 
             //https://docs.github.com/en/rest/git/trees#get-a-tree
-            string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}";
+            string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
             string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
             if (string.IsNullOrEmpty(response) == false)
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                tree = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
+                treeResponse = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
             }
-            if (tree != null && tree.tree.Length > 0)
+            if (treeResponse != null && treeResponse.tree.Length > 0)
             {
-                foreach (FileResponse item in tree.tree)
+                foreach (FileResponse item in treeResponse.tree)
                 {
                     if (item != null && item.path != null)
                     {
@@ -37,7 +40,8 @@ namespace DotNetCensus.Core.APIs
                             case ".vbp":
                                 Project project = new()
                                 {
-                                    Path = item.path
+                                    Path = item.path,
+                                    FileName = fileInfo.Name
                                 };
                                 results.Add(project);
                                 break;
@@ -47,6 +51,31 @@ namespace DotNetCensus.Core.APIs
             }
 
             return results;
+        }
+
+        public async static Task<FileDetails?> GetRepoFileContents(string? clientId, string? clientSecret,
+            string owner, string repo, string path)
+        {
+            FileDetails? result = null;
+            if (clientId != null && clientSecret != null)
+            {
+                path = HttpUtility.UrlEncode(path);
+                string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
+                string? response = await GetGitHubMessage(url, clientId, clientSecret, false);
+                if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
+                {
+                    dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                    result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+
+                    //Decode the Base64 file contents result
+                    if (result != null && result.content != null)
+                    {
+                        byte[]? valueBytes = System.Convert.FromBase64String(result.content);
+                        result.content = Encoding.UTF8.GetString(valueBytes);
+                    }
+                }
+            }
+            return result;
         }
 
 
