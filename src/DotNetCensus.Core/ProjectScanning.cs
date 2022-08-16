@@ -58,6 +58,13 @@ namespace DotNetCensus.Core
             return projects;
         }
 
+        public static List<Project> SearchRepo()
+        {
+            List<Project> projects = new();
+
+            return projects;
+        }
+
         private static List<Project> SearchProjects(FileInfo fileInfo, FileInfo? directoryBuildPropFile = null)
         {
             string fileName = fileInfo.Name;

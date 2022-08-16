@@ -23,11 +23,11 @@ public class Program
         {
             if (_includeInventory == true)
             {
-                DataAccess.GetInventoryResults(_directory, _repo, _file);
+                Core.Main.GetInventoryResults(_directory, _repo, _file);
             }
             else
             {
-                DataAccess.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
+                Core.Main.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
             }
         }
     }

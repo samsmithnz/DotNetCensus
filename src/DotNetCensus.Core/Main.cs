@@ -3,9 +3,9 @@ using DotNetCensus.Core;
 using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 
-namespace DotNetCensus;
+namespace DotNetCensus.Core;
 
-public static class DataAccess
+public static class Main
 {
     private static List<Project> GetProjects(string? directory, Repo? repo)
     {

@@ -17,7 +17,7 @@ public class ConsoleDataAccessTests : BaseTests
 ";
 
         //Act
-        string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+        string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
         //Asset
         Assert.IsNotNull(expected);
@@ -64,7 +64,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -88,7 +88,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -137,7 +137,7 @@ total frameworks                       33
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -186,7 +186,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            Main.GetFrameworkSummary(directory, repo, includeTotals, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -242,7 +242,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetInventoryResults(directory, repo, file);
+            string? contents = Main.GetInventoryResults(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -261,7 +261,7 @@ total frameworks,,33,
         if (directory != null || repo != null)
         {
             //Act
-            string? contents = DataAccess.GetInventoryResults(directory, repo, file);
+            string? contents = Main.GetInventoryResults(directory, repo, file);
             if (contents != null)
             {
                 string[] lines = contents.Split(Environment.NewLine);
@@ -327,7 +327,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetInventoryResults(directory, repo, file);
+            Main.GetInventoryResults(directory, repo, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -352,7 +352,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -380,7 +380,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
