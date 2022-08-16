@@ -1,7 +1,6 @@
 ﻿using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
 using Newtonsoft.Json;
-using RepoAutomation.Core.Models;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
@@ -31,20 +30,15 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
-                        switch (fileInfo.Extension.ToLower())
+                        if (Classification.IsProjectFile(fileInfo.Name) == true)
                         {
-                            case ".csproj":
-                            case ".sqlproj":
-                            case ".vbproj":
-                            case ".fsproj":
-                            case ".vbp":
-                                Project project = new()
-                                {
-                                    Path = item.path,
-                                    FileName = fileInfo.Name
-                                };
-                                results.Add(project);
-                                break;
+                            Project project = new()
+                            {
+                                Path = item.path,
+                                FileName = fileInfo.Name
+                            };
+                            results.Add(project);
+                            break;
                         }
                     }
                 }

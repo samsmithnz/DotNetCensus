@@ -2,6 +2,32 @@
 
 public static class Classification
 {
+    public static bool IsProjectFile(string fileName, bool primaryScan = true)
+    {
+        if (primaryScan == true)
+        {
+            switch (new FileInfo(fileName).Extension.ToLower())
+            {
+                case ".csproj":
+                case ".sqlproj":
+                case ".vbproj":
+                case ".fsproj":
+                case ".vbp":
+                    return true;
+            }
+        }
+        else
+        {
+            switch (fileName.ToLower())
+            {
+                case "project.json":
+                case "web.config":
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public static string GetFrameworkFamily(string frameworkCode)
     {
         if (string.IsNullOrEmpty(frameworkCode) == true)

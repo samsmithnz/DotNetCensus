@@ -1,4 +1,6 @@
-﻿using DotNetCensus.Core.Models;
+﻿using DotNetCensus.Core.APIs;
+using DotNetCensus.Core.Models;
+using DotNetCensus.Core.Models.GitHub;
 using System.Text.Json;
 
 namespace DotNetCensus.Core
@@ -13,11 +15,14 @@ namespace DotNetCensus.Core
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                List<Project> directoryProjects = SearchProjects(fileInfo, directoryBuildPropFile);
-                if (directoryProjects.Count > 0)
+                if (Classification.IsProjectFile(fileInfo.Name) == true)
                 {
-                    projects.AddRange(directoryProjects);
-                    foundProjectFile = true;
+                    List<Project> directoryProjects = SearchProjectFile(fileInfo, null, directoryBuildPropFile);
+                    if (directoryProjects.Count > 0)
+                    {
+                        projects.AddRange(directoryProjects);
+                        foundProjectFile = true;
+                    }
                 }
             }
 
@@ -58,18 +63,47 @@ namespace DotNetCensus.Core
             return projects;
         }
 
-        public static List<Project> SearchRepo()
+        public async static Task<List<Project>> SearchRepo(string? clientId, string? clientSecret,
+            string owner, string repository, string branch = "main")
         {
             List<Project> projects = new();
+            bool foundProjectFile = false;
+
+            //Get all files for the current repo, looking for projects
+            List<Project> repoProjects = await GitHubAPI.GetRepoFiles(clientId, clientSecret,
+                   owner, repository, branch);
+
+            foreach (Project project in repoProjects)
+            {
+                FileInfo fileInfo = new(project.FileName);
+                if (Classification.IsProjectFile(fileInfo.Name) == true)
+                {
+                    foundProjectFile = true;
+                    FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                           owner, repository, project.Path);
+                    if (fileDetails != null)
+                    {
+                        List<Project> directoryProjects = SearchProjectFile(fileInfo, fileDetails.content, null);
+                        if (directoryProjects.Count > 0)
+                        {
+                            projects.AddRange(directoryProjects);
+                            foundProjectFile = true;
+                        }
+                    }
+                }
+            }
 
             return projects;
         }
 
-        private static List<Project> SearchProjects(FileInfo fileInfo, FileInfo? directoryBuildPropFile = null)
+        private static List<Project> SearchProjectFile(FileInfo fileInfo, string? content, FileInfo? directoryBuildPropFile = null)
         {
             string fileName = fileInfo.Name;
             string filePath = fileInfo.FullName;
-            string content = File.ReadAllText(filePath);
+            if (content == null)
+            {
+                content = File.ReadAllText(filePath);
+            }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {

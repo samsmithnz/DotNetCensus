@@ -22,7 +22,9 @@ public static class Main
             string? repository = repo.Repository;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
-            projects = Task.Run(async () => await GitHubAPI.GetRepoFiles(clientId, clientSecret, owner, repository, "main")).Result;
+            projects = Task.Run(async () => 
+                await ProjectScanning.SearchRepo(clientId, clientSecret, 
+                owner, repository, "main")).Result;
         }
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)

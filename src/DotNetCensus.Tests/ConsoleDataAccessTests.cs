@@ -346,9 +346,8 @@ total frameworks,,33,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework  FrameworkFamily  Count  Status 
-------------------------------------------
-           (Unknown)        34     unknown
+            string expected = @"Framework  FrameworkFamily  Count  Status
+-----------------------------------------
 ";
 
             //Act
@@ -374,9 +373,8 @@ total frameworks,,33,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework  FrameworkFamily  Count  Status 
-------------------------------------------
-           (Unknown)        34     unknown
+            string expected = @"Framework  FrameworkFamily  Count  Status
+-----------------------------------------
 ";
 
             //Act
