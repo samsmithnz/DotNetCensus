@@ -1,8 +1,10 @@
+using DotNetCensus.Tests.Helpers;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ProjectScanningTests : BaseTests
+public class ProjectScanningTests : DirectoryBasedTests
 {
     [TestMethod]
     public void SampleFrameworksCountTest()

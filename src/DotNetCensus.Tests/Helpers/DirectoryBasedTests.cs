@@ -1,15 +1,16 @@
 ﻿global using DotNetCensus.Core;
 global using DotNetCensus.Core.Models;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Extensions.Configuration;
 
-namespace DotNetCensus.Tests;
+namespace DotNetCensus.Tests.Helpers;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-public class BaseTests
+public class DirectoryBasedTests
 {
     public string? SamplesPath { get; set; }
 
-    public BaseTests()
+    public DirectoryBasedTests()
     {
         DirectoryInfo? currentPath = new(Directory.GetCurrentDirectory());
         if (currentPath != null)
@@ -19,5 +20,6 @@ public class BaseTests
             SamplesPath = Path.Combine(currentPath.Parent?.Parent?.Parent?.Parent?.Parent?.FullName, "samples");
 #pragma warning restore CS8604 // Possible null reference argument.
         }
+
     }
 }

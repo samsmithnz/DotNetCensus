@@ -1,8 +1,10 @@
+using DotNetCensus.Tests.Helpers;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ConsoleAppTests : BaseTests
+public class ConsoleAppTests : DirectoryBasedTests
 {
     [TestMethod]
     public void RunSamplesWithNoParametersTest()

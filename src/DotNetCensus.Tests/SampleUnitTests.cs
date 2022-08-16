@@ -1,8 +1,10 @@
+using DotNetCensus.Tests.Helpers;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class SampleUnitTests : BaseTests
+public class SampleUnitTests : DirectoryBasedTests
 {
 
     [TestMethod]
