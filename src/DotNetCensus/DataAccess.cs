@@ -2,7 +2,6 @@
 using DotNetCensus.Core;
 using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
-using System.Diagnostics.Metrics;
 
 namespace DotNetCensus;
 
