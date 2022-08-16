@@ -3,7 +3,6 @@ using System.Text.Json;
 
 namespace DotNetCensus.Core
 {
-    //TODO: Break this into smaller classes
     public static class ProjectScanning
     {
         public static List<Project> SearchDirectory(string directory, FileInfo? directoryBuildPropFile = null)
@@ -99,7 +98,7 @@ namespace DotNetCensus.Core
                 string language = Classification.GetLanguage(fileInfo.Directory.FullName);
                 projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
-            //Is it a .NET Framework 2.0 or 3.5 web site - which has no project file
+            //is it a .NET Framework 2.0 or 3.5 web site - which has no project file
             else if (fileInfo != null && fileInfo.Directory != null &&
                 fileInfo.Name == "web.config")
             {
