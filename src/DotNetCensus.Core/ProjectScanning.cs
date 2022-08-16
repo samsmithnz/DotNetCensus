@@ -76,6 +76,7 @@ namespace DotNetCensus.Core
             foreach (Project project in repoProjects)
             {
                 FileInfo fileInfo = new(project.FileName);
+                System.Diagnostics.Debug.WriteLine(fileInfo.FullName);
                 if (Classification.IsProjectFile(fileInfo.Name) == true)
                 {
                     foundProjectFile = true;

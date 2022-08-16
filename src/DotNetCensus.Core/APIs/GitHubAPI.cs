@@ -38,7 +38,6 @@ namespace DotNetCensus.Core.APIs
                                 FileName = fileInfo.Name
                             };
                             results.Add(project);
-                            break;
                         }
                     }
                 }
