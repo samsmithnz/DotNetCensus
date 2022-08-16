@@ -61,21 +61,24 @@ namespace DotNetCensus.Core
 
         private static List<Project> SearchProjects(FileInfo fileInfo, FileInfo? directoryBuildPropFile = null)
         {
+            string fileName = fileInfo.Name;
+            string filePath = fileInfo.FullName;
+            string content = File.ReadAllText(filePath);
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {
                 case ".csproj":
                 case ".sqlproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "csharp", directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFile));
                     break;
                 case ".vbproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb.net", directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFile));
                     break;
                 case ".fsproj":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "fsharp", directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFile));
                     break;
                 case ".vbp":
-                    projects.AddRange(ProcessProjectFile(fileInfo.FullName, "vb6"));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb6", content));
                     break;
             }
             return projects;
@@ -83,6 +86,9 @@ namespace DotNetCensus.Core
 
         private static List<Project> SearchSecondaryProjects(FileInfo fileInfo)
         {
+            string fileName = fileInfo.Name;
+            string filePath = fileInfo.FullName;
+            string content = File.ReadAllText(filePath);
             List<Project> projects = new();
 
             //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
@@ -91,7 +97,7 @@ namespace DotNetCensus.Core
             {
                 //Check to see if it's a VB.NET or C# project
                 string language = Classification.GetLanguage(fileInfo.Directory.FullName);
-                projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+                projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
             //Is it a .NET Framework 2.0 or 3.5 web site - which has no project file
             else if (fileInfo != null && fileInfo.Directory != null &&
@@ -99,13 +105,13 @@ namespace DotNetCensus.Core
             {
                 //Check to see if it's a VB.NET or C# project
                 string language = Classification.GetLanguage(fileInfo.Directory.FullName);
-                projects.AddRange(ProcessProjectFile(fileInfo.FullName, language));
+                projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
 
             //    //Is it a Unity3d project?
             //    if (fileInfo.Name == "ProjectVersion.txt")
             //    {
-            //        projects.AddRange(ProcessDotNetProjectFile(fileInfo.FullName, "csharp"));
+            //        projects.AddRange(ProcessDotNetProjectFile(fileName, filePath, "csharp", content));
             //    }
 
             return projects;
@@ -113,16 +119,16 @@ namespace DotNetCensus.Core
 
 
         //Process individual project files
-        private static List<Project> ProcessProjectFile(string filePath, string language, FileInfo? directoryBuildPropFile = null)
+        private static List<Project> ProcessProjectFile(string fileName, string filePath, string language, string content, FileInfo? directoryBuildPropFile = null)
         {
-            string[] lines = File.ReadAllLines(filePath);
+            string[] lines = content.Split(Environment.NewLine);
 
             List<Project> projects = new();
 
             //Setup the project object
             Project? project = new()
             {
-                FileName = new FileInfo(filePath).Name,
+                FileName = fileName, //new FileInfo(filePath).Name,
                 Path = filePath,
                 Language = language
             };
@@ -270,7 +276,7 @@ namespace DotNetCensus.Core
                 }
             }
             return variable;
-        }       
+        }
 
     }
 }
