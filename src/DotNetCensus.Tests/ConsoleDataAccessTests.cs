@@ -346,8 +346,10 @@ total frameworks,,33,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework  FrameworkFamily  Count  Status
------------------------------------------
+            string expected = @"Framework      FrameworkFamily  Count  Status          
+-------------------------------------------------------
+.NET Core 3.1  .NET Core        1      EOL: 13-Dec-2022
+(Unknown)      (Unknown)        1      unknown         
 ";
 
             //Act
@@ -373,8 +375,10 @@ total frameworks,,33,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework  FrameworkFamily  Count  Status
------------------------------------------
+            string expected = @"Framework      FrameworkFamily  Count  Status          
+-------------------------------------------------------
+.NET Core 3.1  .NET Core        1      EOL: 13-Dec-2022
+(Unknown)      (Unknown)        1      unknown         
 ";
 
             //Act

@@ -179,10 +179,8 @@ namespace DotNetCensus.Core
             }
             else if (new FileInfo(filePath).Name == "project.json")
             {
-                //Get the text of the file
-                string contents = File.ReadAllText(filePath);
                 //Load it into a JSON object
-                JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(contents);
+                JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
                 //Search for the project version
                 //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
                 if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))

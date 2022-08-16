@@ -17,7 +17,7 @@ namespace DotNetCensus.Core.APIs
 
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
-            string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (string.IsNullOrEmpty(response) == false)
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
@@ -51,22 +51,19 @@ namespace DotNetCensus.Core.APIs
             string owner, string repo, string path)
         {
             FileDetails? result = null;
-            if (clientId != null && clientSecret != null)
+            path = HttpUtility.UrlEncode(path);
+            string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
             {
-                path = HttpUtility.UrlEncode(path);
-                string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
-                string? response = await GetGitHubMessage(url, clientId, clientSecret, false);
-                if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
-                {
-                    dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                    result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
 
-                    //Decode the Base64 file contents result
-                    if (result != null && result.content != null)
-                    {
-                        byte[]? valueBytes = System.Convert.FromBase64String(result.content);
-                        result.content = Encoding.UTF8.GetString(valueBytes);
-                    }
+                //Decode the Base64 file contents result
+                if (result != null && result.content != null)
+                {
+                    byte[]? valueBytes = System.Convert.FromBase64String(result.content);
+                    result.content = Encoding.UTF8.GetString(valueBytes);
                 }
             }
             return result;
@@ -77,7 +74,8 @@ namespace DotNetCensus.Core.APIs
         {
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
-            if (processErrors)
+            //A debugging function
+            if (processErrors == true)
             {
                 response.EnsureSuccessStatusCode();
             }
