@@ -17,7 +17,7 @@ namespace DotNetCensus.Core
             {
                 if (Classification.IsProjectFile(fileInfo.Name) == true)
                 {
-                    List<Project> directoryProjects = SearchProjectFile(fileInfo, null, directoryBuildPropFile);
+                    List<Project> directoryProjects = SearchProjectFile(fileInfo, fileInfo.FullName, null, directoryBuildPropFile);
                     if (directoryProjects.Count > 0)
                     {
                         projects.AddRange(directoryProjects);
@@ -84,7 +84,7 @@ namespace DotNetCensus.Core
                            owner, repository, project.Path);
                     if (fileDetails != null)
                     {
-                        List<Project> directoryProjects = SearchProjectFile(fileInfo, fileDetails.content, null);
+                        List<Project> directoryProjects = SearchProjectFile(fileInfo, project.Path, fileDetails.content, null);
                         if (directoryProjects.Count > 0)
                         {
                             projects.AddRange(directoryProjects);
@@ -97,12 +97,12 @@ namespace DotNetCensus.Core
             return projects;
         }
 
-        private static List<Project> SearchProjectFile(FileInfo fileInfo, string? content, FileInfo? directoryBuildPropFile = null)
+        private static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath, string? content, FileInfo? directoryBuildPropFile = null)
         {
             string fileName = fileInfo.Name;
-            string filePath = fileInfo.FullName;
             if (content == null)
             {
+                //This is a directory search - not a repo search and we need to read in the contents of the file
                 content = File.ReadAllText(filePath);
             }
             List<Project> projects = new();

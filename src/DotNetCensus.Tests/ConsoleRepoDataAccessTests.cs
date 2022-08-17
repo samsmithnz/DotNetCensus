@@ -11,7 +11,7 @@ public class ConsoleRepoDataAccessTests : RepoBasedTests
     public void FrameworkSummaryWithRepoTest()
     {
         //Arrange
-        bool includeTotals = false;
+        bool includeTotals = true;
         string? directory = null;
         Repo? repo = new("samsmithnz", "DotNetCensus")
         {
@@ -46,10 +46,35 @@ public class ConsoleRepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        2      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
+total frameworks                       33                     
 ";
 
             //Act
             string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void InventoryResultsWithRepoTest()
+    {
+        //Arrange
+        string? directory = null;
+        Repo? repo = new("samsmithnz", "DotNetCensus")
+        {
+            User = GitHubId,
+            Password = GitHubSecret
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"";
+
+            //Act
+            string? contents = Main.GetInventoryResults(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
