@@ -150,30 +150,4 @@ src/DotNetCensus/DotNetCensus.csproj                                            
     //        }
     //    }
 
-    [TestMethod]
-    public void RepoDirectoryConstructionTest()
-    {
-        //Arrange
-        List<Project> projects = new() {
-            new Project()
-            {
-                FileName = "Sample.NetCore.ConsoleApp.csproj",
-                Path = "samples/abc/Sample.NetCore.ConsoleApp.csproj"
-            }
-        };
-
-        //Act
-        RepoDirectory dir = ProjectScanning.CreateRepoDirectoryStructure(projects);
-
-        //Asset
-        Assert.IsNotNull(dir);
-        Assert.AreEqual("samples", dir.Name);
-        Assert.AreEqual(1, dir.Directories.Count);
-        Assert.AreEqual(0, dir.Files.Count);
-        Assert.AreEqual("abc", dir.Directories[0].Name);
-        Assert.AreEqual(1, dir.Directories[0].Files.Count);
-        Assert.AreEqual("Sample.NetCore.ConsoleApp.csproj", dir.Directories[0].Files[0]);
-
-    }
-
 }

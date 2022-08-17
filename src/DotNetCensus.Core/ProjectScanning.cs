@@ -161,6 +161,10 @@ namespace DotNetCensus.Core
                     {
                         baseDir.Name = dirs[i];
                         baseDir.Path = dirs[i];
+                        if (i == dirs.Length - 1)
+                        {
+                            baseDir.Files.Add(dirs[i]);
+                        }
                     }
                     else if (i < dirs.Length - 1)
                     {
@@ -178,10 +182,6 @@ namespace DotNetCensus.Core
                             baseDir.Directories.Add(subDir);
                         }
                     }
-                    //if (i == dirs.Length - 1)
-                    //{
-                    //    baseDir.Files.Add(dirs[i]);
-                    //}
                 }
             }
             return baseDir;
