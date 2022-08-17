@@ -162,7 +162,7 @@ namespace DotNetCensus.Core
         //Process individual project files
         private static List<Project> ProcessProjectFile(string fileName, string filePath, string language, string content, FileInfo? directoryBuildPropFile = null)
         {
-            string[] lines = content.Split(Environment.NewLine);
+            string[] lines = content.Split('\n');
 
             List<Project> projects = new();
 
