@@ -4,7 +4,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ConsoleRepoDataAccessTests : RepoBasedTests
+public class RepoDataAccessTests : RepoBasedTests
 {
 
     [TestMethod]

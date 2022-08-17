@@ -4,7 +4,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ConsoleDirectoryDataAccessTests : DirectoryBasedTests
+public class DirectoryDataAccessTests : DirectoryBasedTests
 {
     [TestMethod]
     public void FrameworkSummaryWithNoParametersTest()

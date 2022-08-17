@@ -1,6 +1,8 @@
 ﻿using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
+using System.IO;
+using System.Reflection;
 using System.Text.Json;
 
 namespace DotNetCensus.Core
@@ -76,7 +78,7 @@ namespace DotNetCensus.Core
             foreach (Project project in repoProjects)
             {
                 FileInfo fileInfo = new(project.FileName);
-                System.Diagnostics.Debug.WriteLine(fileInfo.FullName);
+                //System.Diagnostics.Debug.WriteLine(fileInfo.FullName);
                 if (Classification.IsProjectFile(fileInfo.Name) == true)
                 {
                     foundProjectFile = true;
@@ -93,6 +95,50 @@ namespace DotNetCensus.Core
                     }
                 }
             }
+
+            //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
+            if (foundProjectFile == false)
+            {
+                foreach (Project project in repoProjects)
+                {
+                    FileInfo fileInfo = new(project.FileName);
+                    if (Classification.IsProjectFile(fileInfo.Name, false) == true)
+                    {
+                        foundProjectFile = true;
+                        FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                               owner, repository, project.Path);
+                        if (fileDetails != null)
+                        {
+                            List<Project> directoryProjects = SearchProjectFile(fileInfo, project.Path, fileDetails.content, null);
+                            if (directoryProjects.Count > 0)
+                            {
+                                projects.AddRange(directoryProjects);
+                                foundProjectFile = true;
+                            }
+                        }
+                    }
+                } 
+            }
+
+            ////If we still didn't find a project, then look deeper in the sub-directories.
+            //if (foundProjectFile == false)
+            //{
+            //    //Check for a Directory.Build.props file first
+            //    FileInfo? newDirectoryBuildPropFile = null;
+            //    List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
+            //    if (directoryBuildPropFile != null)
+            //    {
+            //        newDirectoryBuildPropFile = directoryBuildPropFile;
+            //    }
+            //    else if (directoryBuildPropFiles.Count > 0)
+            //    {
+            //        newDirectoryBuildPropFile = directoryBuildPropFiles[0];
+            //    }
+            //    foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
+            //    {
+            //        projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
+            //    }
+            //}
 
             return projects;
         }

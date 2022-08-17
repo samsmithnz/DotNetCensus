@@ -28,10 +28,12 @@ Additionally, this tool supports:
 ## Console arguments
 Several options are supported:
 
-`dotnet census [-d|--directory <DIRECTORY>] [-r|--repo <REPO>] [-f|--file <FILE>] [-t|--total] [-i|--inventory]`
+`dotnet census [-d|--directory <DIRECTORY>] [-r|--repo <REPO>] [-u|--user <USERNAME>] [-p|--password <PASSWORD>] [-f|--file <FILE>] [-t|--total] [-i|--inventory]`
 
 - `-d|--directory`: target directory to scan for .NET versions
-- `-r|--repo`: target repo to scan for .NET versions
+- `-r|--repo`: target GitHub repo to scan for .NET versions
+- `-u|--user`: target GitHub username to scan for .NET versions
+- `-p|--password`: target GitHub PAT Token to scan for .NET versions
 - `-f|--file`: file path to output and save CSV data. 
 - `-t|--total`: Add totals to results. Ignored when used with `-i|--inventory`
 - `-i|--inventory`: output inventory of all data (instead of the default aggregated summary)
