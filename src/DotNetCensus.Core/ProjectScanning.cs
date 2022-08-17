@@ -9,6 +9,7 @@ namespace DotNetCensus.Core
 {
     public static class ProjectScanning
     {
+        //Searches sub directories until we find a project file
         public static List<Project> SearchDirectory(string directory, FileInfo? directoryBuildPropFile = null)
         {
             List<Project> projects = new();
@@ -75,6 +76,11 @@ namespace DotNetCensus.Core
             List<Project> repoProjects = await GitHubAPI.GetRepoFiles(clientId, clientSecret,
                    owner, repository, branch);
 
+            //Recreate the folder structure with
+            //Directory. Sub-Dirs. Files. 
+
+            RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
+
             foreach (Project project in repoProjects)
             {
                 FileInfo fileInfo = new(project.FileName);
@@ -117,7 +123,7 @@ namespace DotNetCensus.Core
                             }
                         }
                     }
-                } 
+                }
             }
 
             ////If we still didn't find a project, then look deeper in the sub-directories.
@@ -142,6 +148,46 @@ namespace DotNetCensus.Core
 
             return projects;
         }
+
+        public static RepoDirectory CreateRepoDirectoryStructure(List<Project> projects)
+        {
+            RepoDirectory baseDir = new();
+            foreach (Project project in projects)
+            {
+                string[] dirs = project.Path.Split('/');
+                for (int i = 0; i <= dirs.Length - 1; i++)
+                {
+                    if (i == 0)
+                    {
+                        baseDir.Name = dirs[i];
+                        baseDir.Path = dirs[i];
+                    }
+                    else if (i < dirs.Length - 1)
+                    {
+                        if (baseDir.Directories.FirstOrDefault(d => d.Name == dirs[i]) == null)
+                        {
+                            RepoDirectory subDir = new()
+                            {
+                                Name = dirs[i],
+                                Path = baseDir.Path + "/" + dirs[i]
+                            };
+                            if (i + 1 == dirs.Length - 1)
+                            {
+                                subDir.Files.Add(dirs[i + 1]);
+                            }
+                            baseDir.Directories.Add(subDir);
+                        }
+                    }
+                    //if (i == dirs.Length - 1)
+                    //{
+                    //    baseDir.Files.Add(dirs[i]);
+                    //}
+                }
+            }
+            return baseDir;
+        }
+
+
 
         private static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath, string? content, FileInfo? directoryBuildPropFile = null)
         {

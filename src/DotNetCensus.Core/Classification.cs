@@ -22,6 +22,7 @@ public static class Classification
             {
                 case "project.json":
                 case "web.config":
+                case "Directory.Build.props":
                     return true;
             }
         }
