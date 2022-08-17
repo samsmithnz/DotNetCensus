@@ -17,7 +17,7 @@ public class Options
     public bool IncludeInventory { get; set; }
 
     [Option('o', "owner", Required = false, HelpText = "GitHub owner to search for projects. Can't be used at the same time as -d|--directory. Note that this -r argument was formed used by --raw - which is now achieved with -i|--inventory")]
-    public string? Owner { get; set; }    
+    public string? Owner { get; set; }
 
     [Option('r', "repo", Required = false, HelpText = "GitHub repo to search for projects. Can't be used at the same time as -d|--directory. Note that this -r argument was formed used by --raw - which is now achieved with -i|--inventory")]
     public string? Repo { get; set; }

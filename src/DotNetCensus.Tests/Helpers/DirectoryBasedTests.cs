@@ -1,9 +1,4 @@
-﻿global using DotNetCensus.Core;
-global using DotNetCensus.Core.Models;
-global using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Extensions.Configuration;
-
-namespace DotNetCensus.Tests.Helpers;
+﻿namespace DotNetCensus.Tests.Helpers;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class DirectoryBasedTests
