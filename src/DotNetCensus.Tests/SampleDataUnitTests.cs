@@ -4,7 +4,8 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class SampleUnitTests : DirectoryBasedTests
+[TestCategory("UnitTest")]
+public class SampleDataUnitTests : DirectoryBasedTests
 {
 
     [TestMethod]

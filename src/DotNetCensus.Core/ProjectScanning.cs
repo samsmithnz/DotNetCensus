@@ -60,7 +60,11 @@ namespace DotNetCensus.Core
                 }
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
-                    projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
+                    //Prevent blocking when debugging in Visual Studio.
+                    if (subDirectory.Name != ".vs")
+                    {
+                        projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
+                    }
                 }
             }
 

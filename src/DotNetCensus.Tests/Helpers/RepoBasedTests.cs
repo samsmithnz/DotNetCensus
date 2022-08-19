@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 namespace DotNetCensus.Tests.Helpers;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-public class RepoBasedTests
+public class RepoBasedTests : DirectoryBasedTests
 {
     public string? GitHubId { get; set; }
     public string? GitHubSecret { get; set; }
