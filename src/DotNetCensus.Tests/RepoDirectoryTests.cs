@@ -22,7 +22,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = ProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -45,7 +45,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = ProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -81,7 +81,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = ProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -107,7 +107,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = ProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);

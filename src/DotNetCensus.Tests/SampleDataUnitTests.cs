@@ -58,7 +58,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = DirectoryProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateFrameworks(projects, includeTotal);
         }
 
@@ -83,7 +83,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = DirectoryProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateFrameworks(projects, includeTotal);
         }
 
@@ -106,7 +106,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = DirectoryProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateLanguages(projects, includeTotal);
         }
 
@@ -133,7 +133,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            List<Project> projects = ProjectScanning.SearchDirectory(SamplesPath);
+            List<Project> projects = DirectoryProjectScanning.SearchDirectory(SamplesPath);
             results = Census.AggregateLanguages(projects, includeTotal);
         }
 

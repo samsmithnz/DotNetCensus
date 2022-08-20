@@ -12,7 +12,7 @@ public static class Main
         if (string.IsNullOrEmpty(directory) == false)
         {
             //Run the calculations to get and aggregate the results
-            projects = ProjectScanning.SearchDirectory(directory);
+            projects = DirectoryProjectScanning.SearchDirectory(directory);
         }
         else if (repo != null)
         {
@@ -21,7 +21,7 @@ public static class Main
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             projects = Task.Run(async () =>
-                await ProjectScanning.SearchRepo(clientId, clientSecret,
+                await RepoProjectScanning.SearchRepo(clientId, clientSecret,
                 owner, repository, "main")).Result;
         }
         //Need to sort so that Linux + Windows results are the same

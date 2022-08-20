@@ -16,7 +16,7 @@ public class ProjectScanningTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            results = ProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryProjectScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset
@@ -40,7 +40,7 @@ public class ProjectScanningTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            results = ProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryProjectScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset
