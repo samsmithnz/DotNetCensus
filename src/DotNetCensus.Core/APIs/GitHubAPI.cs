@@ -30,7 +30,7 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
-                        if (Classification.IsProjectFile(fileInfo.Name) == true || 
+                        if (Classification.IsProjectFile(fileInfo.Name) == true ||
                             Classification.IsProjectFile(fileInfo.Name, false) == true)
                         {
                             Project project = new()

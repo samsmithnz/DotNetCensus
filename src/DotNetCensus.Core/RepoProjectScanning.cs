@@ -1,7 +1,6 @@
 ﻿using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
-using System.Text.Json;
 
 namespace DotNetCensus.Core
 {

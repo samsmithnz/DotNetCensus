@@ -1,4 +1,3 @@
-using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Tests.Helpers;
 
 namespace DotNetCensus.Tests;
