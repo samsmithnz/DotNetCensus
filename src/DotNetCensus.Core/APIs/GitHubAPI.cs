@@ -31,13 +31,28 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
-                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true ||
-                            ProjectClassification.IsProjectFile(fileInfo.Name, false) == true)
+                        string path = item.path;
+                        if (string.IsNullOrEmpty(path) == false)
+                        {
+                            path = path.Replace(fileInfo.Name, "");
+                        }
+                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
                         {
                             Project project = new()
                             {
-                                Path = item.path,
-                                FileName = fileInfo.Name
+                                Path = path,
+                                FileName = fileInfo.Name,
+                                Order = 0
+                            };
+                            results.Add(project);
+                        }
+                        else if (ProjectClassification.IsProjectFile(fileInfo.Name, false) == true)
+                        {
+                            Project project = new()
+                            {
+                                Path = path,
+                                FileName = fileInfo.Name,
+                                Order = 1
                             };
                             results.Add(project);
                         }
@@ -46,7 +61,7 @@ namespace DotNetCensus.Core.APIs
             }
 
             //Sort the results to make directory processing easier
-            results = results.OrderBy(o => o.Path).ToList();
+            results = results.OrderBy(o => o.Path).ThenBy(o => o.Order).ToList();
 
             return results;
         }

@@ -9,6 +9,7 @@
         public string? Family { get; set; }
         public string? Language { get; set; }
         public string? Status { get; set; }
+        public int Order { get; set; } = 0;
         //public string? Content { get; set; }
     }
 }

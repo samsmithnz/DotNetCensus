@@ -35,6 +35,8 @@ namespace DotNetCensus.Core.Projects
             List<Project> projects = new();
             bool foundProjectFile = false;
 
+            System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
+
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
             foreach (string file in baseDir.Files)
             {
@@ -52,7 +54,6 @@ namespace DotNetCensus.Core.Projects
                     }
                 }
             }
-
 
             //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
             if (foundProjectFile == false)
@@ -118,13 +119,11 @@ namespace DotNetCensus.Core.Projects
             RepoDirectory baseDir = new();
             foreach (Project project in projects)
             {
-                string[] dirs = project.Path.Split('/');
+                string[] dirs = (project.Path + project.FileName).Split('/');
+                //Drop any empty items from the array
+                dirs = CleanArrayOfEmptyValues(dirs);
                 Queue<string> dirQueue = new(dirs);
-                // Drop the first item if it's nothing, as GitHub always shows even a simple file as "/filename"
-                if (dirQueue.Peek() == "")
-                {
-                    dirQueue.Dequeue();
-                }
+
                 //Create the root directory
                 if (string.IsNullOrEmpty(baseDir.Name) == true)
                 {
@@ -158,6 +157,19 @@ namespace DotNetCensus.Core.Projects
                 }
             }
             return baseDir;
+        }
+
+        private static string[] CleanArrayOfEmptyValues(string[] array)
+        {
+            List<string> items = new(array);
+            for (int i = items.Count - 1; i >= 0; i--)
+            {
+                if (string.IsNullOrEmpty(items[i]) == true)
+                {
+                    items.RemoveAt(i);
+                }
+            }
+            return items.ToArray();
         }
 
         private static RepoDirectory CreateRepoDirectoryStructure(Queue<string> dirQueue)
