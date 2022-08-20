@@ -17,30 +17,39 @@ namespace DotNetCensus.Core
             //Recreate the folder structure with the primary directory, sub-directories, and any files. 
             RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
 
-            List<Project> projects = await SearchRepoDirectory(baseDir, baseDir.Path, clientId, clientSecret,
-                            owner, repository);
+            List<Project> projects = await SearchRepoDirectory(baseDir, baseDir.Path,
+                clientId, clientSecret,
+                owner, repository);
 
+            return projects;
+        }
 
-            //foreach (Project project in repoProjects)
-            //{
-            //    FileInfo fileInfo = new(project.FileName);
-            //    //System.Diagnostics.Debug.WriteLine(fileInfo.FullName);
-            //    if (Classification.IsProjectFile(fileInfo.Name) == true)
-            //    {
-            //        foundProjectFile = true;
-            //        FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-            //               owner, repository, project.Path);
-            //        if (fileDetails != null)
-            //        {
-            //            List<Project> directoryProjects = SearchProjectFile(fileInfo, project.Path, fileDetails.content, null);
-            //            if (directoryProjects.Count > 0)
-            //            {
-            //                projects.AddRange(directoryProjects);
-            //                foundProjectFile = true;
-            //            }
-            //        }
-            //    }
-            //}
+        private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
+            string? clientId, string? clientSecret,
+            string owner, string repository)
+        {
+            List<Project> projects = new();
+            bool foundProjectFile = false;
+
+            //Now that the files are arranged in a directory/tree-like structure, start the simulated search
+            foreach (string file in baseDir.Files)
+            {
+                if (Classification.IsProjectFile(file) == true)
+                {
+                    FileInfo fileInfo = new(file);
+                    string filePath = (fullPath + "/" + file).Replace("//", "/");
+                    System.Diagnostics.Debug.WriteLine(filePath);
+                    FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                           owner, repository, filePath);
+                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null); //add directoryBuildProp file
+                    if (directoryProjects.Count > 0)
+                    {
+                        projects.AddRange(directoryProjects);
+                        foundProjectFile = true;
+                    }
+                }
+            }
+
 
             ////If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
             //if (foundProjectFile == false)
@@ -66,55 +75,6 @@ namespace DotNetCensus.Core
             //    }
             //}
 
-            ////If we still didn't find a project, then look deeper in the sub-directories.
-            //if (foundProjectFile == false)
-            //{
-            //    //Check for a Directory.Build.props file first
-            //    FileInfo? newDirectoryBuildPropFile = null;
-            //    List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
-            //    if (directoryBuildPropFile != null)
-            //    {
-            //        newDirectoryBuildPropFile = directoryBuildPropFile;
-            //    }
-            //    else if (directoryBuildPropFiles.Count > 0)
-            //    {
-            //        newDirectoryBuildPropFile = directoryBuildPropFiles[0];
-            //    }
-            //    foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
-            //    {
-            //        projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
-            //    }
-            //}
-
-            return projects;
-        }
-
-        private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
-            string? clientId, string? clientSecret,
-            string owner, string repository)
-        {
-            List<Project> projects = new();
-            bool foundProjectFile = false;
-
-            //Now that the files are arranged in a directory/tree-like structure, start the simulated search
-            foreach (string file in baseDir.Files)
-            {
-                if (Classification.IsProjectFile(file) == true)
-                {
-                    FileInfo fileInfo = new(file);
-                    string filePath = (fullPath + "/" + baseDir.Name + "/" + file).Replace("//", "/");
-                    FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-                           owner, repository, filePath);
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null); //add directoryBuildProp file
-                    if (directoryProjects.Count > 0)
-                    {
-                        projects.AddRange(directoryProjects);
-                        foundProjectFile = true;
-                    }
-                }
-            }
-
-
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (foundProjectFile == false)
             {
@@ -131,7 +91,8 @@ namespace DotNetCensus.Core
                 //}
                 foreach (RepoDirectory subDirectory in baseDir.Directories)
                 {
-                    projects.AddRange(await SearchRepoDirectory(subDirectory, fullPath,
+                    string filePath = (fullPath + "/" + subDirectory.Name).Replace("//", "/");
+                    projects.AddRange(await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
                         owner, repository));
                 }
@@ -155,7 +116,7 @@ namespace DotNetCensus.Core
                 //Create the root directory
                 if (string.IsNullOrEmpty(baseDir.Name) == true)
                 {
-                    baseDir.Name = "Root";
+                    baseDir.Name = "";
                     baseDir.Path = "/";
                 }
                 //If there is only one item left, it's a file!
@@ -232,7 +193,7 @@ namespace DotNetCensus.Core
             //    }
 
             //return new List<RepoDirectory>();
-        }       
+        }
 
     }
 }

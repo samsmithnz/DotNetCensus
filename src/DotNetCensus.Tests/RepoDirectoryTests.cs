@@ -26,7 +26,7 @@ public class RepoDirectoryTests : RepoBasedTests
 
         //Asset
         Assert.IsNotNull(dir);
-        Assert.AreEqual("Root", dir.Name);
+        Assert.AreEqual("", dir.Name);
         Assert.AreEqual(0, dir.Directories.Count);
         Assert.AreEqual(1, dir.Files.Count);
         Assert.AreEqual("Sample.NetCore.ConsoleApp.csproj", dir.Files[0]);
@@ -49,7 +49,7 @@ public class RepoDirectoryTests : RepoBasedTests
 
         //Asset
         Assert.IsNotNull(dir);
-        Assert.AreEqual("Root", dir.Name);
+        Assert.AreEqual("", dir.Name);
         Assert.AreEqual(1, dir.Directories.Count);
         Assert.AreEqual(0, dir.Files.Count);
         Assert.AreEqual("samples", dir.Directories[0].Name);
@@ -85,7 +85,7 @@ public class RepoDirectoryTests : RepoBasedTests
 
         //Asset
         Assert.IsNotNull(dir);
-        Assert.AreEqual("Root", dir.Name);
+        Assert.AreEqual("", dir.Name);
         Assert.AreEqual(1, dir.Directories.Count);
         Assert.AreEqual(0, dir.Files.Count);
         //Assert.AreEqual("abc", dir.Directories[0].Name);
@@ -111,7 +111,7 @@ public class RepoDirectoryTests : RepoBasedTests
 
         //Asset
         Assert.IsNotNull(dir);
-        Assert.AreEqual("Root", dir.Name);
+        Assert.AreEqual("", dir.Name);
         Assert.AreEqual(1, dir.Directories.Count);
         Assert.AreEqual(0, dir.Files.Count);
         //RepoDirectory abc = dir.Directories[0];
