@@ -17,9 +17,13 @@ namespace DotNetCensus.Core
             //Recreate the folder structure with the primary directory, sub-directories, and any files. 
             RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
 
-            List<Project> projects = await SearchRepoDirectory(baseDir, baseDir.Path,
-                clientId, clientSecret,
-                owner, repository);
+            List<Project> projects = new();
+            if (baseDir != null && baseDir.Path != null)
+            {
+                projects = await SearchRepoDirectory(baseDir, baseDir.Path,
+                    clientId, clientSecret,
+                    owner, repository);
+            }
 
             return projects;
         }
