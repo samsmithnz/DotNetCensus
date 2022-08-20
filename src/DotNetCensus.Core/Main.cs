@@ -1,5 +1,6 @@
 ﻿using ConsoleTables;
 using DotNetCensus.Core.Models;
+using DotNetCensus.Core.Projects;
 
 namespace DotNetCensus.Core;
 
@@ -12,7 +13,7 @@ public static class Main
         if (string.IsNullOrEmpty(directory) == false)
         {
             //Run the calculations to get and aggregate the results
-            projects = DirectoryProjectScanning.SearchDirectory(directory);
+            projects = DirectoryScanning.SearchDirectory(directory);
         }
         else if (repo != null)
         {
@@ -21,7 +22,7 @@ public static class Main
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             projects = Task.Run(async () =>
-                await RepoProjectScanning.SearchRepo(clientId, clientSecret,
+                await RepoScanning.SearchRepo(clientId, clientSecret,
                 owner, repository, "main")).Result;
         }
         //Need to sort so that Linux + Windows results are the same

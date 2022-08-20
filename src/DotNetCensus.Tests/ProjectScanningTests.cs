@@ -1,3 +1,4 @@
+using DotNetCensus.Core.Projects;
 using DotNetCensus.Tests.Helpers;
 
 namespace DotNetCensus.Tests;
@@ -16,7 +17,7 @@ public class ProjectScanningTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            results = DirectoryProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset
@@ -40,7 +41,7 @@ public class ProjectScanningTests : DirectoryBasedTests
         //Act
         if (SamplesPath != null)
         {
-            results = DirectoryProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset

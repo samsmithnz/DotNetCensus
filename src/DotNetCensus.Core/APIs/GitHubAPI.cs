@@ -1,5 +1,6 @@
 ﻿using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
+using DotNetCensus.Core.Projects;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -30,8 +31,8 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
-                        if (Classification.IsProjectFile(fileInfo.Name) == true ||
-                            Classification.IsProjectFile(fileInfo.Name, false) == true)
+                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true ||
+                            ProjectClassification.IsProjectFile(fileInfo.Name, false) == true)
                         {
                             Project project = new()
                             {

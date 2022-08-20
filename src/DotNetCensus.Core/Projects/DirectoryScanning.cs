@@ -1,10 +1,10 @@
 ﻿using DotNetCensus.Core.Models;
 
-namespace DotNetCensus.Core
+namespace DotNetCensus.Core.Projects
 {
-    public static class DirectoryProjectScanning
+    public static class DirectoryScanning
     {
-        //Searches sub directories until we find a project file
+        //Recursively search directories until a project file is found
         public static List<Project> SearchDirectory(string directory, FileInfo? directoryBuildPropFile = null)
         {
             List<Project> projects = new();
@@ -13,7 +13,7 @@ namespace DotNetCensus.Core
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                if (Classification.IsProjectFile(fileInfo.Name) == true)
+                if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
                 {
                     List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, directoryBuildPropFile);
                     if (directoryProjects.Count > 0)

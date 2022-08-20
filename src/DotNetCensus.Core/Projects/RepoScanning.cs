@@ -2,9 +2,9 @@
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
 
-namespace DotNetCensus.Core
+namespace DotNetCensus.Core.Projects
 {
-    public static class RepoProjectScanning
+    public static class RepoScanning
     {
         public async static Task<List<Project>> SearchRepo(string? clientId, string? clientSecret,
             string owner, string repository, string branch = "main")
@@ -16,6 +16,7 @@ namespace DotNetCensus.Core
             //Recreate the folder structure with the primary directory, sub-directories, and any files. 
             RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
 
+            //Recursively search directories until a project file is found
             List<Project> projects = new();
             if (baseDir != null && baseDir.Path != null)
             {
@@ -37,11 +38,10 @@ namespace DotNetCensus.Core
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
             foreach (string file in baseDir.Files)
             {
-                if (Classification.IsProjectFile(file) == true)
+                if (ProjectClassification.IsProjectFile(file) == true)
                 {
                     FileInfo fileInfo = new(file);
                     string filePath = (fullPath + "/" + file).Replace("//", "/");
-                    System.Diagnostics.Debug.WriteLine(filePath);
                     FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                            owner, repository, filePath);
                     List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null); //add directoryBuildProp file
@@ -54,35 +54,44 @@ namespace DotNetCensus.Core
             }
 
 
-            ////If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
-            //if (foundProjectFile == false)
-            //{
-            //    foreach (Project project in repoProjects)
-            //    {
-            //        FileInfo fileInfo = new(project.FileName);
-            //        if (Classification.IsProjectFile(fileInfo.Name, false) == true)
-            //        {
-            //            foundProjectFile = true;
-            //            FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-            //                   owner, repository, project.Path);
-            //            if (fileDetails != null)
-            //            {
-            //                List<Project> directoryProjects = SearchProjectFile(fileInfo, project.Path, fileDetails.content, null);
-            //                if (directoryProjects.Count > 0)
-            //                {
-            //                    projects.AddRange(directoryProjects);
-            //                    foundProjectFile = true;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
+            if (foundProjectFile == false)
+            {
+                foreach (string file in baseDir.Files)
+                {
+                    FileInfo fileInfo = new(file);
+                    if (ProjectClassification.IsProjectFile(file, false) == true)
+                    {
+                        foundProjectFile = true;
+                        string filePath = (fullPath + "/" + file).Replace("//", "/");
+                        FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                               owner, repository, filePath);
+                        if (fileDetails != null)
+                        {
+                            List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null);
+                            if (directoryProjects.Count > 0)
+                            {
+                                projects.AddRange(directoryProjects);
+                                foundProjectFile = true;
+                            }
+                        }
+                    }
+                }
+            }
 
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (foundProjectFile == false)
             {
                 ////Check for a Directory.Build.props file first
                 //FileInfo? newDirectoryBuildPropFile = null;
+                //foreach (string file in baseDir.Files)
+                //{
+                //    if (file == "Directory.Build.props")
+                //    {
+                //        newDirectoryBuildPropFile = directoryBuildPropFile;
+                //        break;
+                //    }
+                //}
                 //List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
                 //if (directoryBuildPropFile != null)
                 //{

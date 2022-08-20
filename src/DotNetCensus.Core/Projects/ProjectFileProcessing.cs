@@ -1,7 +1,7 @@
 ﻿using DotNetCensus.Core.Models;
 using System.Text.Json;
 
-namespace DotNetCensus.Core
+namespace DotNetCensus.Core.Projects
 {
     public static class ProjectFileProcessing
     {
@@ -18,16 +18,16 @@ namespace DotNetCensus.Core
             {
                 case ".csproj":
                 case ".sqlproj":
-                    projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFile));
                     break;
                 case ".vbproj":
-                    projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFile));
                     break;
                 case ".fsproj":
-                    projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFile));
                     break;
                 case ".vbp":
-                    projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, "vb6", content));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb6", content));
                     break;
             }
             return projects;
@@ -37,7 +37,7 @@ namespace DotNetCensus.Core
         {
             string fileName = fileInfo.Name;
             string filePath = fileInfo.FullName;
-            string content = System.IO.File.ReadAllText(filePath);
+            string content = File.ReadAllText(filePath);
             List<Project> projects = new();
 
             //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
@@ -45,16 +45,16 @@ namespace DotNetCensus.Core
                 fileInfo.Name == "project.json")
             {
                 //Check to see if it's a VB.NET or C# project
-                string language = Classification.GetLanguage(fileInfo.Directory.FullName);
-                projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, language, content));
+                string language = ProjectClassification.GetLanguage(fileInfo.Directory.FullName);
+                projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
             //is it a .NET Framework 2.0 or 3.5 web site - which has no project file
             else if (fileInfo != null && fileInfo.Directory != null &&
                 fileInfo.Name == "web.config")
             {
                 //Check to see if it's a VB.NET or C# project
-                string language = Classification.GetLanguage(fileInfo.Directory.FullName);
-                projects.AddRange(ProjectFileProcessing.ProcessProjectFile(fileName, filePath, language, content));
+                string language = ProjectClassification.GetLanguage(fileInfo.Directory.FullName);
+                projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
 
             //    //Is it a Unity3d project?
@@ -171,7 +171,7 @@ namespace DotNetCensus.Core
                     else if (line.IndexOf("<ProductVersion>") > 0 ||
                              line.IndexOf("ProductVersion = ") > 0)
                     {
-                        project.FrameworkCode = Classification.GetHistoricalFrameworkVersion(line);
+                        project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
                         //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
                     }
                     ////Unity 3d project files
@@ -191,9 +191,9 @@ namespace DotNetCensus.Core
             //Add colors and families
             foreach (Project item in projects)
             {
-                item.Status = Classification.GetStatus(item.FrameworkCode);
-                item.Family = Classification.GetFrameworkFamily(item.FrameworkCode);
-                item.FrameworkName = Classification.GetFriendlyName(item.FrameworkCode, item.Family);
+                item.Status = ProjectClassification.GetStatus(item.FrameworkCode);
+                item.Family = ProjectClassification.GetFrameworkFamily(item.FrameworkCode);
+                item.FrameworkName = ProjectClassification.GetFriendlyName(item.FrameworkCode, item.Family);
             }
 
             return projects;
@@ -208,7 +208,7 @@ namespace DotNetCensus.Core
                 string searchVariable = variable.Replace("$(", "").Replace(")", "");
                 if (directoryBuildProps != null)
                 {
-                    string[] lines = System.IO.File.ReadAllLines(directoryBuildProps.FullName);
+                    string[] lines = File.ReadAllLines(directoryBuildProps.FullName);
                     foreach (string line in lines)
                     {
                         if (line?.IndexOf(searchVariable) >= 0)

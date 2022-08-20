@@ -1,4 +1,5 @@
 using DotNetCensus.Core.Models.GitHub;
+using DotNetCensus.Core.Projects;
 using DotNetCensus.Tests.Helpers;
 
 namespace DotNetCensus.Tests;
@@ -22,7 +23,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -45,7 +46,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -81,7 +82,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);
@@ -107,7 +108,7 @@ public class RepoDirectoryTests : RepoBasedTests
         };
 
         //Act
-        RepoDirectory dir = RepoProjectScanning.CreateRepoDirectoryStructure(projects);
+        RepoDirectory dir = RepoScanning.CreateRepoDirectoryStructure(projects);
 
         //Asset
         Assert.IsNotNull(dir);

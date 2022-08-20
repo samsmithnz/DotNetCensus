@@ -1,6 +1,6 @@
-﻿namespace DotNetCensus.Core;
+﻿namespace DotNetCensus.Core.Projects;
 
-public static class Classification
+public static class ProjectClassification
 {
     public static bool IsProjectFile(string fileName, bool primaryScan = true)
     {
