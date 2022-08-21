@@ -34,7 +34,10 @@ namespace DotNetCensus.Core.Projects
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
-
+            if (baseDir.Name == "Sample.NetCore1.0.ConsoleApp")
+            {
+                int i = 0;
+            }
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
@@ -69,7 +72,7 @@ namespace DotNetCensus.Core.Projects
                                owner, repository, filePath);
                         if (fileDetails != null)
                         {
-                            List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null);
+                            List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo, filePath, fileDetails?.content);
                             if (directoryProjects.Count > 0)
                             {
                                 projects.AddRange(directoryProjects);

@@ -33,11 +33,14 @@ namespace DotNetCensus.Core.Projects
             return projects;
         }
 
-        public static List<Project> SearchSecondaryProjects(FileInfo fileInfo)
+        public static List<Project> SearchSecondaryProjects(FileInfo fileInfo, string filePath, string? content)
         {
-            string fileName = fileInfo.Name;
-            string filePath = fileInfo.FullName;
-            string content = File.ReadAllText(filePath);
+            string fileName = fileInfo.Name; 
+            if (content == null)
+            {
+                //This is a directory search - not a repo search and we need to read in the contents of the file
+                content = File.ReadAllText(filePath);
+            }
             List<Project> projects = new();
 
             //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...

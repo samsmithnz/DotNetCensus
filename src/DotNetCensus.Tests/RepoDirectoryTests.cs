@@ -18,7 +18,7 @@ public class RepoDirectoryTests : RepoBasedTests
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp.csproj",
-                Path = "/Sample.NetCore.ConsoleApp.csproj"
+                Path = "/"
             }
         };
 
@@ -41,7 +41,7 @@ public class RepoDirectoryTests : RepoBasedTests
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp.csproj",
-                Path = "samples/Sample.NetCore.ConsoleApp.csproj"
+                Path = "samples/"
             }
         };
 
@@ -67,17 +67,17 @@ public class RepoDirectoryTests : RepoBasedTests
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp1.csproj",
-                Path = "samples/Sample.NetCore.ConsoleApp1.csproj"
+                Path = "samples/"
             },
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp2.csproj",
-                Path = "samples/abc/Sample.NetCore.ConsoleApp2.csproj"
+                Path = "samples/abc/"
             },
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp3.csproj",
-                Path = "samples/def/Sample.NetCore.ConsoleApp3.csproj"
+                Path = "samples/def/"
             }
         };
 
@@ -103,7 +103,7 @@ public class RepoDirectoryTests : RepoBasedTests
             new Project()
             {
                 FileName = "Sample.NetCore.ConsoleApp.csproj",
-                Path = "samples/abc/def/ghi/Sample.NetCore.ConsoleApp.csproj"
+                Path = "samples/abc/def/ghi/"
             }
         };
 

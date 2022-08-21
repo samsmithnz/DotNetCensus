@@ -29,7 +29,7 @@ namespace DotNetCensus.Core.Projects
             {
                 foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
                 {
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo);
+                    List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo, fileInfo.FullName, null);
                     if (directoryProjects.Count > 0)
                     {
                         projects.AddRange(directoryProjects);
