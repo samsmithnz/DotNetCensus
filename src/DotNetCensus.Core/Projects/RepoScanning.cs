@@ -30,14 +30,11 @@ namespace DotNetCensus.Core.Projects
 
         private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
             string? clientId, string? clientSecret,
-            string owner, string repository)
+            string owner, string repository,
+            string? directoryBuildPropFileContent = null)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
-            if (baseDir.Name == "Sample.NetCore1.0.ConsoleApp")
-            {
-                int i = 0;
-            }
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
@@ -49,7 +46,7 @@ namespace DotNetCensus.Core.Projects
                     string filePath = (fullPath + "/" + file).Replace("//", "/");
                     FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                            owner, repository, filePath);
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null); //add directoryBuildProp file
+                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null, directoryBuildPropFileContent);
                     if (directoryProjects.Count > 0)
                     {
                         projects.AddRange(directoryProjects);
@@ -86,16 +83,23 @@ namespace DotNetCensus.Core.Projects
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (foundProjectFile == false)
             {
-                ////Check for a Directory.Build.props file first
-                //FileInfo? newDirectoryBuildPropFile = null;
-                //foreach (string file in baseDir.Files)
-                //{
-                //    if (file == "Directory.Build.props")
-                //    {
-                //        newDirectoryBuildPropFile = directoryBuildPropFile;
-                //        break;
-                //    }
-                //}
+                //Check for a Directory.Build.props file first
+                string? newDirectoryBuildPropFile = null;
+                foreach (string file in baseDir.Files)
+                {
+                    if (file == "Directory.Build.props")
+                    {
+                        string filePath = (fullPath + "/" + file).Replace("//", "/");
+                        FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                               owner, repository, filePath);
+                        if (fileDetails != null)
+                        {
+                            newDirectoryBuildPropFile = fileDetails.content;
+                        }
+                        //newDirectoryBuildPropFile = directoryBuildPropFile;
+                        break;
+                    }
+                }
                 //List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
                 //if (directoryBuildPropFile != null)
                 //{
@@ -110,7 +114,8 @@ namespace DotNetCensus.Core.Projects
                     string filePath = (fullPath + "/" + subDirectory.Name).Replace("//", "/");
                     projects.AddRange(await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
-                        owner, repository));
+                        owner, repository,
+                        newDirectoryBuildPropFile));
                 }
             }
 
@@ -122,6 +127,10 @@ namespace DotNetCensus.Core.Projects
             RepoDirectory baseDir = new();
             foreach (Project project in projects)
             {
+                if (project.Path.Contains("Sample.NetCore1.1.ConsoleApp"))
+                {
+                    int i = 0;
+                }
                 string[] dirs = (project.Path + project.FileName).Split('/');
                 //Drop any empty items from the array
                 dirs = CleanArrayOfEmptyValues(dirs);

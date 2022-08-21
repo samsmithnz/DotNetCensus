@@ -5,7 +5,10 @@ namespace DotNetCensus.Core.Projects
 {
     public static class ProjectFileProcessing
     {
-        public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath, string? content, FileInfo? directoryBuildPropFile = null)
+        public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath, 
+            string? content, 
+            FileInfo? directoryBuildPropFile = null,
+            string? directoryBuildPropFileContent = null)
         {
             string fileName = fileInfo.Name;
             if (content == null)
@@ -13,18 +16,23 @@ namespace DotNetCensus.Core.Projects
                 //This is a directory search - not a repo search and we need to read in the contents of the file
                 content = File.ReadAllText(filePath);
             }
+            //If there is a directory file being passed in - convert it to content
+            if (directoryBuildPropFile != null)
+            {
+                directoryBuildPropFileContent = File.ReadAllText(directoryBuildPropFile.FullName);
+            }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {
                 case ".csproj":
                 case ".sqlproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFileContent));
                     break;
                 case ".vbproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFileContent));
                     break;
                 case ".fsproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFile));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFileContent));
                     break;
                 case ".vbp":
                     projects.AddRange(ProcessProjectFile(fileName, filePath, "vb6", content));
@@ -70,7 +78,9 @@ namespace DotNetCensus.Core.Projects
         }
 
         //Process individual project files
-        public static List<Project> ProcessProjectFile(string fileName, string filePath, string language, string content, FileInfo? directoryBuildPropFile = null)
+        public static List<Project> ProcessProjectFile(string fileName, string filePath, 
+            string language, string content, 
+            string? directoryBuildPropFileContent = null)
         {
             string[] lines = content.Split('\n');
 
@@ -136,25 +146,25 @@ namespace DotNetCensus.Core.Projects
                     //.NET Framework version element
                     if (line.IndexOf("<TargetFrameworkVersion>") > 0)
                     {
-                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFile);
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //.NET Core version element
                     else if (line.IndexOf("<TargetFramework>") > 0)
                     {
-                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFile);
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //Multiple .NET flavors element
                     else if (line.IndexOf("<TargetFrameworks>") > 0)
                     {
-                        string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFile);
+                        string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                         string[] frameworkList = frameworks.Split(';');
                         for (int i = 0; i < frameworkList.Length - 1; i++)
                         {
                             if (i == 0)
                             {
-                                project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFile);
+                                project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent);
                             }
                             else
                             {
@@ -163,7 +173,7 @@ namespace DotNetCensus.Core.Projects
                                     FileName = new FileInfo(filePath).Name,
                                     Path = filePath,
                                     Language = language,
-                                    FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFile)
+                                    FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent)
                                 };
                                 projects.Add(additionalProject);
                             }
@@ -203,15 +213,15 @@ namespace DotNetCensus.Core.Projects
         }
 
         //Check to see if the framework 
-        private static string CheckFrameworkCodeForVariable(string variable, FileInfo? directoryBuildProps)
+        private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
             if (variable.StartsWith("$(") == true && variable.EndsWith(")") == true)
             {
                 //Open the Directory.Build.props file and look for the variable
                 string searchVariable = variable.Replace("$(", "").Replace(")", "");
-                if (directoryBuildProps != null)
+                if (directoryBuildPropFileContent != null)
                 {
-                    string[] lines = File.ReadAllLines(directoryBuildProps.FullName);
+                    string[] lines = directoryBuildPropFileContent.Split(Environment.NewLine);
                     foreach (string line in lines)
                     {
                         if (line?.IndexOf(searchVariable) >= 0)
