@@ -96,19 +96,9 @@ namespace DotNetCensus.Core.Projects
                         {
                             newDirectoryBuildPropFile = fileDetails.content;
                         }
-                        //newDirectoryBuildPropFile = directoryBuildPropFile;
                         break;
                     }
                 }
-                //List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
-                //if (directoryBuildPropFile != null)
-                //{
-                //    newDirectoryBuildPropFile = directoryBuildPropFile;
-                //}
-                //else if (directoryBuildPropFiles.Count > 0)
-                //{
-                //    newDirectoryBuildPropFile = directoryBuildPropFiles[0];
-                //}
                 foreach (RepoDirectory subDirectory in baseDir.Directories)
                 {
                     string filePath = (fullPath + "/" + subDirectory.Name).Replace("//", "/");
@@ -199,36 +189,7 @@ namespace DotNetCensus.Core.Projects
             {
                 repoDirectory.Directories.Add(CreateRepoDirectoryStructure(dirQueue));
             }
-            return repoDirectory;
-
-            //    if (i == 0)
-            //    {
-            //        baseDir.Name = dirs[i];
-            //        baseDir.Path = dirs[i];
-            //        if (i == dirs.Length - 1)
-            //        {
-            //            baseDir.Files.Add(dirs[i]);
-            //        }
-            //    }
-            //    else if (i < dirs.Length - 1)
-            //    {
-            //        baseDir.Directories.AddRange(ProcessDirectory(dirs));
-            //        //if (baseDir.Directories.FirstOrDefault(d => d.Name == dirs[i]) == null)
-            //        //{
-            //        //    RepoDirectory subDir = new()
-            //        //    {
-            //        //        Name = dirs[i],
-            //        //        Path = baseDir.Path + "/" + dirs[i]
-            //        //    };
-            //        //    if (i + 1 == dirs.Length - 1)
-            //        //    {
-            //        //        subDir.Files.Add(dirs[i + 1]);
-            //        //    }
-            //        //    baseDir.Directories.Add(subDir);
-            //        //}
-            //    }
-
-            //return new List<RepoDirectory>();
+            return repoDirectory;            
         }
 
     }
