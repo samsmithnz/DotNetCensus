@@ -160,7 +160,8 @@ namespace DotNetCensus.Core.Projects
             }
             return baseDir;
         }
-
+        
+        //Clean a string array of any empty/"" or null values
         private static string[] CleanArrayOfEmptyValues(string[] array)
         {
             List<string> items = new(array);
