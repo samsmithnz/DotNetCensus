@@ -5,8 +5,8 @@ namespace DotNetCensus.Core.Projects
 {
     public static class ProjectFileProcessing
     {
-        public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath, 
-            string? content, 
+        public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath,
+            string? content,
             FileInfo? directoryBuildPropFile = null,
             string? directoryBuildPropFileContent = null)
         {
@@ -43,7 +43,7 @@ namespace DotNetCensus.Core.Projects
 
         public static List<Project> SearchSecondaryProjects(FileInfo fileInfo, string filePath, string? content)
         {
-            string fileName = fileInfo.Name; 
+            string fileName = fileInfo.Name;
             if (content == null)
             {
                 //This is a directory search - not a repo search and we need to read in the contents of the file
@@ -78,8 +78,8 @@ namespace DotNetCensus.Core.Projects
         }
 
         //Process individual project files
-        public static List<Project> ProcessProjectFile(string fileName, string filePath, 
-            string language, string content, 
+        public static List<Project> ProcessProjectFile(string fileName, string filePath,
+            string language, string content,
             string? directoryBuildPropFileContent = null)
         {
             string[] lines = content.Split('\n');

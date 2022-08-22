@@ -124,7 +124,7 @@ namespace DotNetCensus.Core.Projects
                         newDirectoryBuildPropFile,
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
-                        projects2.Count > 0 && 
+                        projects2.Count > 0 &&
                         foldersDone.Contains(subDirectory.Name) == false)
                     {
                         projects.AddRange(projects2);
