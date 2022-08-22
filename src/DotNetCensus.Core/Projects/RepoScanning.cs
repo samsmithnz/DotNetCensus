@@ -14,7 +14,15 @@ namespace DotNetCensus.Core.Projects
                    owner, repository, branch);
 
             //Recreate the folder structure with the primary directory, sub-directories, and any files. 
-            RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
+            List<Project> repoProjects2 = new();
+            foreach (Project repoProject in repoProjects)
+            {
+                if (repoProject.Path.Contains("Sample.NET6.Directory.Build.props") == true)
+                {
+                    repoProjects2.Add(repoProject);
+                }
+            }
+            RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects2);
 
             //Recursively search directories until a project file is found
             List<Project> projects = new();
@@ -31,11 +39,17 @@ namespace DotNetCensus.Core.Projects
         private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
             string? clientId, string? clientSecret,
             string owner, string repository,
-            string? directoryBuildPropFileContent = null)
+            string? directoryBuildPropFileContent = null,
+            int currentRecursionLevel = 1)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
+
+            //if (baseDir.Name == ("Sample.NetCore1."))
+            //{
+            //    int i = 0;
+            //}
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
             foreach (string file in baseDir.Files)
@@ -74,6 +88,7 @@ namespace DotNetCensus.Core.Projects
                             {
                                 projects.AddRange(directoryProjects);
                                 foundProjectFile = true;
+                                break;
                             }
                         }
                     }
@@ -99,13 +114,23 @@ namespace DotNetCensus.Core.Projects
                         break;
                     }
                 }
+                HashSet<string> foldersDone = new();
                 foreach (RepoDirectory subDirectory in baseDir.Directories)
                 {
                     string filePath = (fullPath + "/" + subDirectory.Name).Replace("//", "/");
-                    projects.AddRange(await SearchRepoDirectory(subDirectory, filePath,
+                    List<Project> projects2 = await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
                         owner, repository,
-                        newDirectoryBuildPropFile));
+                        newDirectoryBuildPropFile,
+                        currentRecursionLevel + 1);
+                    if (subDirectory != null && subDirectory.Name != null &&
+                        projects2.Count > 0 && 
+                        foldersDone.Contains(subDirectory.Name) == false)
+                    {
+                        projects.AddRange(projects2);
+                        foldersDone.Add(subDirectory.Name);
+                        //break;
+                    }
                 }
             }
 
@@ -117,10 +142,6 @@ namespace DotNetCensus.Core.Projects
             RepoDirectory baseDir = new();
             foreach (Project project in projects)
             {
-                if (project.Path.Contains("Sample.NetCore1.1.ConsoleApp"))
-                {
-                    int i = 0;
-                }
                 string[] dirs = (project.Path + project.FileName).Split('/');
                 //Drop any empty items from the array
                 dirs = CleanArrayOfEmptyValues(dirs);
@@ -160,7 +181,7 @@ namespace DotNetCensus.Core.Projects
             }
             return baseDir;
         }
-        
+
         //Clean a string array of any empty/"" or null values
         private static string[] CleanArrayOfEmptyValues(string[] array)
         {
@@ -188,9 +209,10 @@ namespace DotNetCensus.Core.Projects
             }
             else
             {
+                //Else, recurively search the sub-directories
                 repoDirectory.Directories.Add(CreateRepoDirectoryStructure(dirQueue));
             }
-            return repoDirectory;            
+            return repoDirectory;
         }
 
     }

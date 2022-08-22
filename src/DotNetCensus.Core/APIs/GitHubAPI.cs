@@ -34,7 +34,8 @@ namespace DotNetCensus.Core.APIs
                         string path = item.path;
                         if (string.IsNullOrEmpty(path) == false)
                         {
-                            path = path.Replace(fileInfo.Name, "");
+                            //Danger: What if the file name is in the path? It will be replaced. 
+                            path = path.Replace("/" + fileInfo.Name, "/");
                         }
                         if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
                         {
@@ -72,6 +73,7 @@ namespace DotNetCensus.Core.APIs
             FileDetails? result = null;
             path = HttpUtility.UrlEncode(path);
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
+            System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
             {

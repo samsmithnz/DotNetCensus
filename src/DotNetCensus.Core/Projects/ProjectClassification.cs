@@ -22,7 +22,7 @@ public static class ProjectClassification
             {
                 case "project.json":
                 case "web.config":
-                case "Directory.Build.props":
+                case "directory.build.props":
                     return true;
             }
         }
