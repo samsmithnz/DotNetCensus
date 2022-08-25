@@ -22,11 +22,10 @@ public class RepoDataAccessTests : RepoBasedTests
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework           FrameworkFamily  Count  Status    
-------------------------------------------------------
-.NET Core 1.0       .NET Core        1      deprecated
-.NET Core 1.1       .NET Core        1      deprecated
-total frameworks                     4                
+            string expected = @"Framework         FrameworkFamily  Count  Status   
+---------------------------------------------------
+.NET 6.0          .NET             1      supported
+total frameworks                   1               
 ";
 
             //Act
@@ -51,7 +50,10 @@ total frameworks                     4
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = "";
+            string expected = @"Path                                                                           FileName                       FrameworkCode  FrameworkName  Family  Language  Status   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/samples/Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj  Sample.Net6.ConsoleApp.csproj  net6.0         .NET 6.0       .NET    csharp    supported
+";
             string notit = @"Path                                                                                     FileName                                    FrameworkCode              FrameworkName         Family          Language  Status          
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj      Sample.MultipleTargets.ConsoleApp.csproj    netcoreapp3.1              .NET Core 3.1         .NET Core       csharp    EOL: 13-Dec-2022
