@@ -2,6 +2,7 @@
 using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
 using Newtonsoft.Json;
+using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
@@ -31,6 +32,10 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
+                        if (fileInfo.Name.ToLower() == "directory.build.props")
+                        {
+                            int i = 0;
+                        }
                         string path = item.path;
                         if (string.IsNullOrEmpty(path) == false)
                         {
@@ -43,17 +48,18 @@ namespace DotNetCensus.Core.APIs
                             {
                                 Path = path,
                                 FileName = fileInfo.Name,
-                                Order = 0
+                                Order = 1
                             };
                             results.Add(project);
                         }
-                        else if (ProjectClassification.IsProjectFile(fileInfo.Name, false) == true)
+                        else if (ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
+                            fileInfo.Name.ToLower() == "directory.build.props")
                         {
                             Project project = new()
                             {
                                 Path = path,
                                 FileName = fileInfo.Name,
-                                Order = 1
+                                Order = 0
                             };
                             results.Add(project);
                         }

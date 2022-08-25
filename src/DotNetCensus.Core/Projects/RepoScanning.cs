@@ -52,43 +52,46 @@ namespace DotNetCensus.Core.Projects
             //}
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
-            foreach (string file in baseDir.Files)
-            {
-                if (ProjectClassification.IsProjectFile(file) == true)
-                {
-                    FileInfo fileInfo = new(file);
-                    string filePath = (fullPath + "/" + file).Replace("//", "/");
-                    FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-                           owner, repository, filePath);
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null, directoryBuildPropFileContent);
-                    if (directoryProjects.Count > 0)
-                    {
-                        projects.AddRange(directoryProjects);
-                        foundProjectFile = true;
-                    }
-                }
-            }
-
-            //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
-            if (foundProjectFile == false)
+            if (baseDir.Files.Count > 0)
             {
                 foreach (string file in baseDir.Files)
                 {
-                    FileInfo fileInfo = new(file);
-                    if (ProjectClassification.IsProjectFile(file, false) == true)
+                    if (ProjectClassification.IsProjectFile(file) == true)
                     {
-                        foundProjectFile = true;
+                        FileInfo fileInfo = new(file);
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                                owner, repository, filePath);
-                        if (fileDetails != null)
+                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null, directoryBuildPropFileContent);
+                        if (directoryProjects.Count > 0)
                         {
-                            List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo, filePath, fileDetails?.content);
-                            if (directoryProjects.Count > 0)
+                            projects.AddRange(directoryProjects);
+                            foundProjectFile = true;
+                        }
+                    }
+                }
+
+                //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
+                if (foundProjectFile == false)
+                {
+                    foreach (string file in baseDir.Files)
+                    {
+                        FileInfo fileInfo = new(file);
+                        if (ProjectClassification.IsProjectFile(file, false) == true)
+                        {
+                            foundProjectFile = true;
+                            string filePath = (fullPath + "/" + file).Replace("//", "/");
+                            FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
+                                   owner, repository, filePath);
+                            if (fileDetails != null)
                             {
-                                projects.AddRange(directoryProjects);
-                                foundProjectFile = true;
-                                break;
+                                List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo, filePath, fileDetails?.content);
+                                if (directoryProjects.Count > 0)
+                                {
+                                    projects.AddRange(directoryProjects);
+                                    foundProjectFile = true;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -99,7 +102,7 @@ namespace DotNetCensus.Core.Projects
             if (foundProjectFile == false)
             {
                 //Check for a Directory.Build.props file first
-                string? newDirectoryBuildPropFile = null;
+                string? newDirectoryBuildPropFileContent = null;
                 foreach (string file in baseDir.Files)
                 {
                     if (file == "Directory.Build.props")
@@ -109,7 +112,7 @@ namespace DotNetCensus.Core.Projects
                                owner, repository, filePath);
                         if (fileDetails != null)
                         {
-                            newDirectoryBuildPropFile = fileDetails.content;
+                            newDirectoryBuildPropFileContent = fileDetails.content;
                         }
                         break;
                     }
@@ -121,7 +124,7 @@ namespace DotNetCensus.Core.Projects
                     List<Project> projects2 = await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
                         owner, repository,
-                        newDirectoryBuildPropFile,
+                        newDirectoryBuildPropFileContent,
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
                         projects2.Count > 0 &&
@@ -139,47 +142,52 @@ namespace DotNetCensus.Core.Projects
 
         public static RepoDirectory CreateRepoDirectoryStructure(List<Project> projects)
         {
-            RepoDirectory baseDir = new();
+            //Create a base repo directory
+            RepoDirectory baseDir = new()
+            {
+                Name = "",
+                Path = "/"
+            };
+
+            //Loop through every project.
             foreach (Project project in projects)
             {
+                //Look at each level of the path
                 string[] dirs = (project.Path + project.FileName).Split('/');
                 //Drop any empty items from the array
                 dirs = CleanArrayOfEmptyValues(dirs);
                 Queue<string> dirQueue = new(dirs);
 
-                //Create the root directory
-                if (string.IsNullOrEmpty(baseDir.Name) == true)
-                {
-                    baseDir.Name = "";
-                    baseDir.Path = "/";
-                }
-                //If there is only one item left, it's a file!
-                if (dirQueue.Count == 1)
-                {
-                    baseDir.Files.Add(dirQueue.Dequeue());
-                }
-                else
-                {
-                    //Check if directory already exists in list - we don't want to add the same folder twice
-                    if (baseDir.Directories.Any(item => item.Name == dirQueue.Peek()) == false)
-                    {
-                        baseDir.Directories.Add(CreateRepoDirectoryStructure(dirQueue));
-                    }
-                    else
-                    {
-                        //Merge the duplicate directory with the existing directory
-                        RepoDirectory? baseDir2 = baseDir.Directories.Find(x => x.Name == dirQueue.Peek());
-                        //process the duplicate directory from the queue
-                        RepoDirectory repoDirectory = CreateRepoDirectoryStructure(dirQueue);
-                        if (baseDir2 != null)
-                        {
-                            baseDir2.Directories.AddRange(repoDirectory.Directories);
-                            baseDir2.Files.AddRange(repoDirectory.Files);
-                        }
-                    }
-                }
+                ParseDirectorys(baseDir, dirQueue);
+              
             }
             return baseDir;
+        }
+
+        private static void ParseDirectorys(RepoDirectory baseDir, Queue<string> dirQueue)
+        {
+            string name = dirQueue.Dequeue();
+
+            //Add any directories missing
+            if (baseDir.Directories.Any(r => r.Name == name) == false)
+            {
+                baseDir.Directories.Add(new()
+                {
+                    Name = name,
+                    Path = baseDir.Path + name + "/"
+                });
+            }
+
+            //If there are still items to process, recursively add sub directories
+            if (dirQueue.Count > 1)
+            {
+                ParseDirectorys(baseDir.Directories.Find(r => r.Name == name), dirQueue);
+            }
+            else if (dirQueue.Count == 1)
+            {
+                //Add files in the correct directory position
+                baseDir.Directories.Find(r => r.Name == name).Files.Add(dirQueue.Dequeue());
+            }
         }
 
         //Clean a string array of any empty/"" or null values

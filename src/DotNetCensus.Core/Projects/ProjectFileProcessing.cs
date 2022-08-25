@@ -21,6 +21,10 @@ namespace DotNetCensus.Core.Projects
             {
                 directoryBuildPropFileContent = File.ReadAllText(directoryBuildPropFile.FullName);
             }
+            if (directoryBuildPropFileContent != null)
+            {
+                int i = 0;
+            }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {
@@ -221,7 +225,7 @@ namespace DotNetCensus.Core.Projects
                 string searchVariable = variable.Replace("$(", "").Replace(")", "");
                 if (directoryBuildPropFileContent != null)
                 {
-                    string[] lines = directoryBuildPropFileContent.Split(Environment.NewLine);
+                    string[] lines = directoryBuildPropFileContent.Split("\n");
                     foreach (string line in lines)
                     {
                         if (line?.IndexOf(searchVariable) >= 0)

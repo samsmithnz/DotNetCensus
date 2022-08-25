@@ -51,7 +51,8 @@ total frameworks                     4
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Path                                                                                     FileName                                    FrameworkCode              FrameworkName         Family          Language  Status          
+            string expected = "";
+            string notit = @"Path                                                                                     FileName                                    FrameworkCode              FrameworkName         Family          Language  Status          
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj      Sample.MultipleTargets.ConsoleApp.csproj    netcoreapp3.1              .NET Core 3.1         .NET Core       csharp    EOL: 13-Dec-2022
 /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj      Sample.MultipleTargets.ConsoleApp.csproj    net462                     .NET Framework 4.6.2  .NET Framework  csharp    supported       
