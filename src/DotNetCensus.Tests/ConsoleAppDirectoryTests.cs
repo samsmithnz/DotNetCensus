@@ -5,7 +5,7 @@ namespace DotNetCensus.Tests;
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
 [TestCategory("IntegrationTest")]
-public class ConsoleDirectoryAppTests : DirectoryBasedTests
+public class ConsoleAppDirectoryTests : DirectoryBasedTests
 {
 
     [TestMethod]
