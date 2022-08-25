@@ -37,24 +37,15 @@ namespace DotNetCensus.Core.APIs
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
                         }
-                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
-                        {
-                            Project project = new()
-                            {
-                                Path = path,
-                                FileName = fileInfo.Name
-                            };
-                            results.Add(project);
-                        }
-                        else if (ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
+                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true ||
+                            ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
                             fileInfo.Name.ToLower() == "directory.build.props")
                         {
-                            Project project = new()
+                            results.Add(new Project() 
                             {
                                 Path = path,
                                 FileName = fileInfo.Name
-                            };
-                            results.Add(project);
+                            });
                         }
                     }
                 }
