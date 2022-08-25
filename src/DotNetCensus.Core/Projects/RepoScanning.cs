@@ -202,24 +202,5 @@ namespace DotNetCensus.Core.Projects
             return items.ToArray();
         }
 
-        //private static RepoDirectory CreateRepoDirectoryStructure(Queue<string> dirQueue)
-        //{
-        //    RepoDirectory repoDirectory = new()
-        //    {
-        //        Name = dirQueue.Dequeue()
-        //    };
-        //    //If there is just one item in the queue, then it's a file
-        //    if (dirQueue.Count == 1)
-        //    {
-        //        repoDirectory.Files.Add(dirQueue.Dequeue());
-        //    }
-        //    else
-        //    {
-        //        //Else, recurively search the sub-directories
-        //        repoDirectory.Directories.Add(CreateRepoDirectoryStructure(dirQueue));
-        //    }
-        //    return repoDirectory;
-        //}
-
     }
 }
