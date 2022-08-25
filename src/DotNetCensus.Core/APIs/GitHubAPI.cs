@@ -32,10 +32,6 @@ namespace DotNetCensus.Core.APIs
                     if (item != null && item.path != null)
                     {
                         FileInfo fileInfo = new(item.path);
-                        if (fileInfo.Name.ToLower() == "directory.build.props")
-                        {
-                            int i = 0;
-                        }
                         string path = item.path;
                         if (string.IsNullOrEmpty(path) == false)
                         {

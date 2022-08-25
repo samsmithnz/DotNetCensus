@@ -14,15 +14,7 @@ namespace DotNetCensus.Core.Projects
                    owner, repository, branch);
 
             //Recreate the folder structure with the primary directory, sub-directories, and any files. 
-            List<Project> repoProjects2 = new();
-            foreach (Project repoProject in repoProjects)
-            {
-                if (repoProject.Path.Contains("Sample.NET6.Directory.Build.props") == true)
-                {
-                    repoProjects2.Add(repoProject);
-                }
-            }
-            RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects2);
+            RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
 
             //Recursively search directories until a project file is found
             List<Project> projects = new();
@@ -45,11 +37,6 @@ namespace DotNetCensus.Core.Projects
             List<Project> projects = new();
             bool foundProjectFile = false;
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
-
-            //if (baseDir.Name == ("Sample.NetCore1."))
-            //{
-            //    int i = 0;
-            //}
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
             if (baseDir.Files.Count > 0)

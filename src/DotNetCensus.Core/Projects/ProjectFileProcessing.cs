@@ -21,10 +21,6 @@ namespace DotNetCensus.Core.Projects
             {
                 directoryBuildPropFileContent = File.ReadAllText(directoryBuildPropFile.FullName);
             }
-            if (directoryBuildPropFileContent != null)
-            {
-                int i = 0;
-            }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
             {
