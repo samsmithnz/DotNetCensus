@@ -41,7 +41,7 @@ namespace DotNetCensus.Core.APIs
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
                             fileInfo.Name.ToLower() == "directory.build.props")
                         {
-                            results.Add(new Project() 
+                            results.Add(new Project()
                             {
                                 Path = path,
                                 FileName = fileInfo.Name
@@ -78,6 +78,35 @@ namespace DotNetCensus.Core.APIs
                 }
             }
             return result;
+        }
+
+        public async static Task<List<string>?> GetGitHubOrganizationRepos(string? clientId, string? clientSecret, string organization)
+        {
+            List<string> results = new();
+            List<RepoResponse>? repos = null;
+
+            //https://docs.github.com/en/rest/repos/repos#list-organization-repositories
+            string url = $"https://api.github.com/orgs/{organization}/repos";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+            }
+            if (repos != null && repos.Count > 0)
+            {
+                foreach (RepoResponse item in repos)
+                {
+                    if (item != null &&
+                        item.archived == false &&
+                        item.disabled == false &&
+                        item.name != null)
+                    {
+                        results.Add(item.name);
+                    }
+                }
+            }
+            return results;
         }
 
         private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)

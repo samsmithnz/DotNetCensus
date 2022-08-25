@@ -1,4 +1,5 @@
 ﻿using ConsoleTables;
+using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Projects;
 
@@ -6,7 +7,7 @@ namespace DotNetCensus.Core;
 
 public static class Main
 {
-    private static List<Project> GetProjects(string? directory, Repo? repo)
+    private static List<Project> GetProjects(string? directory, Target? repo)
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
@@ -21,9 +22,26 @@ public static class Main
             string? repository = repo.Repository;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
-            projects = Task.Run(async () =>
-                await RepoScanning.SearchRepo(clientId, clientSecret,
-                owner, repository, "main")).Result;
+            if (repository != null)
+            {
+                projects = Task.Run(async () =>
+                    await RepoScanning.SearchRepo(clientId, clientSecret,
+                    owner, repository, "main")).Result;
+            }
+            else
+            {
+                List<string>? repos = Task.Run(async () =>
+                    await GitHubAPI.GetGitHubOrganizationRepos(clientId, clientSecret, owner)).Result;
+                if (repos != null)
+                {
+                    foreach (string item in repos)
+                    {
+                        projects.AddRange(Task.Run(async () =>
+                        await RepoScanning.SearchRepo(clientId, clientSecret,
+                        owner, item, "main")).Result);
+                    }
+                }
+            }
         }
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)
@@ -33,7 +51,7 @@ public static class Main
         return sortedProjects;
     }
 
-    public static string? GetInventoryResults(string? directory, Repo? repo, string? file)
+    public static string? GetInventoryResults(string? directory, Target? repo, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
 
@@ -81,7 +99,7 @@ public static class Main
         }
     }
 
-    public static string? GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals, string? file)
+    public static string? GetFrameworkSummary(string? directory, Target? repo, bool includeTotals, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
         List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);

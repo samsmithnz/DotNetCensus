@@ -6,7 +6,7 @@ namespace DotNetCensus;
 public class Program
 {
     private static string? _directory;
-    private static Repo? _repo;
+    private static Target? _repo;
     private static bool _includeTotals;
     private static bool _includeInventory;
     private static string? _file;
@@ -40,7 +40,7 @@ public class Program
         //setup the GitHub repo details
         if (opts.Owner != null && opts.Repo != null)
         {
-            _repo = new Repo(opts.Owner, opts.Repo)
+            _repo = new Target(opts.Owner, opts.Repo)
             {
                 User = opts.Repo,
                 Password = opts.Password

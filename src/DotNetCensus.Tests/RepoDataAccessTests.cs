@@ -14,7 +14,7 @@ public class RepoDataAccessTests : RepoBasedTests
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = new("samsmithnz", "DotNetCensus")
+        Target? repo = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -66,7 +66,7 @@ total frameworks                       36
     {
         //Arrange
         string? directory = null;
-        Repo? repo = new("samsmithnz", "DotNetCensus")
+        Target? repo = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -121,6 +121,7 @@ total frameworks                       36
             Assert.IsNotNull(expected);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
+    }
 
     [TestMethod]
     public void FrameworkSummaryWithGitHubOrganizationTest()
@@ -128,7 +129,7 @@ total frameworks                       36
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = new("SamSmithNZ-dotcom")
+        Target? repo = new("SamSmithNZ-dotcom")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -136,34 +137,24 @@ total frameworks                       36
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework             FrameworkFamily  Count  Status          
---------------------------------------------------------------
-.NET 5.0              .NET             1      deprecated      
-.NET 6.0              .NET             7      supported       
-.NET 6.0-android      .NET             1      supported       
-.NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      in preview      
-.NET Core 1.0         .NET Core        1      deprecated      
-.NET Core 1.1         .NET Core        1      deprecated      
-.NET Core 2.0         .NET Core        1      deprecated      
-.NET Core 2.1         .NET Core        1      deprecated      
-.NET Core 2.2         .NET Core        1      deprecated      
-.NET Core 3.0         .NET Core        2      deprecated      
-.NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
-.NET Framework 1.0    .NET Framework   1      deprecated      
-.NET Framework 1.1    .NET Framework   1      deprecated      
-.NET Framework 2.0    .NET Framework   1      deprecated      
-.NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029 
-.NET Framework 4.0    .NET Framework   1      deprecated      
-.NET Framework 4.5    .NET Framework   1      deprecated      
-.NET Framework 4.6.1  .NET Framework   1      deprecated      
-.NET Framework 4.6.2  .NET Framework   1      supported       
-.NET Framework 4.7.1  .NET Framework   1      supported       
-.NET Framework 4.7.2  .NET Framework   2      supported       
-.NET Standard 2.0     .NET Standard    1      supported       
-(Unknown)             (Unknown)        1      unknown         
-Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       36                     
+            string expected = @"Path                                                                                            FileName                                      FrameworkCode   FrameworkName         Family          Language  Status    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/MandMCounter/MandMCounter.Core/MandMCounter.Core.csproj                                        MandMCounter.Core.csproj                      net6.0          .NET 6.0              .NET            csharp    supported 
+/MandMCounter/MandMCounter.Service/MandMCounter.Service.csproj                                  MandMCounter.Service.csproj                   net6.0          .NET 6.0              .NET            csharp    supported 
+/MandMCounter/MandMCounter.Tests/MandMCounter.Tests.csproj                                      MandMCounter.Tests.csproj                     net6.0          .NET 6.0              .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.Database/SamSmithNZ.Database.sqlproj                                     SamSmithNZ.Database.sqlproj                   v4.7.2          .NET Framework 4.7.2  .NET Framework  csharp    supported 
+/SamSmithNZ/SamSmithNZ.FFLSetlistScraper.WinForms/SamSmithNZ.FFLSetlistScraper.WinForms.csproj  SamSmithNZ.FFLSetlistScraper.WinForms.csproj  net6.0-windows  .NET 6.0-windows      .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.FunctionalTests/SamSmithNZ.FunctionalTests.csproj                        SamSmithNZ.FunctionalTests.csproj             net6.0          .NET 6.0              .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.Service/SamSmithNZ.Service.csproj                                        SamSmithNZ.Service.csproj                     net6.0          .NET 6.0              .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.Tests/SamSmithNZ.Tests.csproj                                            SamSmithNZ.Tests.csproj                       net6.0          .NET 6.0              .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.Web/SamSmithNZ.Web.csproj                                                SamSmithNZ.Web.csproj                         net6.0          .NET 6.0              .NET            csharp    supported 
+/SamSmithNZ/SamSmithNZ.WorldCupGoals.WPF/SamSmithNZ.WorldCupGoals.WPF.csproj                    SamSmithNZ.WorldCupGoals.WPF.csproj           net6.0-windows  .NET 6.0-windows      .NET            csharp    supported 
+/SSNZ/SSNZ.FunctionalTests/SSNZ.FunctionalTests.csproj                                          SSNZ.FunctionalTests.csproj                   net5.0          .NET 5.0              .NET            csharp    deprecated
+/SSNZ/SSNZ.Tests/SSNZ.Tests.csproj                                                              SSNZ.Tests.csproj                             net5.0          .NET 5.0              .NET            csharp    deprecated
+/SSNZ/SSNZ.Web/SSNZ.Web.csproj                                                                  SSNZ.Web.csproj                               net5.0          .NET 5.0              .NET            csharp    deprecated
+/SSNZ/SSNZ.WebAPI/SSNZ.WebAPI.csproj                                                            SSNZ.WebAPI.csproj                            net5.0          .NET 5.0              .NET            csharp    deprecated
+/SSNZ/SSNZ.WinForms/SSNZ.WinForms.csproj                                                        SSNZ.WinForms.csproj                          net5.0-windows  .NET 5.0-windows      .NET            csharp    deprecated
+/SSNZ/SSNZ.WPF/SSNZ.WPF.csproj                                                                  SSNZ.WPF.csproj                               net5.0-windows  .NET 5.0-windows      .NET            csharp    deprecated
 ";
 
             //Act
@@ -180,7 +171,7 @@ total frameworks                       36
     {
         //Arrange
         string? directory = null;
-        Repo? repo = new("SamSmithNZ-dotcom")
+        Target? repo = new("SamSmithNZ-dotcom")
         {
             User = GitHubId,
             Password = GitHubSecret

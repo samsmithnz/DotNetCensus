@@ -13,7 +13,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
         //Arrange
         bool includeTotals = false;
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
@@ -33,7 +33,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
         //Arrange
         bool includeTotals = false;
         string? directory = SamplesPath;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -81,7 +81,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         //Arrange
         bool includeTotals = false;
         string? directory = SamplesPath + @"/Sample.NET6.Directory.Build.props";
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -105,7 +105,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -155,7 +155,7 @@ total frameworks                       33
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = "test.txt";
         if (directory != null || repo != null)
         {
@@ -203,7 +203,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         if (directory != null || repo != null)
         {
@@ -258,7 +258,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         int webConfigCount = 0;
         if (directory != null || repo != null)
@@ -289,7 +289,7 @@ total frameworks,,33,
     {
         //Arrange
         string? directory = null;
-        Repo? repo = null;
+        Target? repo = null;
         string? file = "test2.txt";
         if (directory != null || repo != null)
         {
