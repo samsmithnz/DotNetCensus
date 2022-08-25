@@ -131,8 +131,9 @@ Note: For large organizations, this will time out. Open to solutions on how to h
 For example, to download results from this organization:
 
 `dotnet census -o samsmithnz -u samsmithnz -p <PAT_TOKEN>`
+
 ## What's next?
-- Add ability to scan target other types of Git Repos (Azure DevOps), and experiment with scanning organizations
+- Add ability to scan target other types of Git Repos (Azure DevOps)
 
 ## Contributions
 If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
