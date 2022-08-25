@@ -119,6 +119,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 - Add the `-p` argument with the GitHub PAT Token password
 
 For example, to download results from this repository:
+
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 ## What's next?
