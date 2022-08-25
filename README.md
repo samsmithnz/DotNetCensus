@@ -122,6 +122,15 @@ For example, to download results from this repository:
 
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
+### To download results from a GitHub Organization, omit the `-r` argument
+- Add the `-o` argument with the GitHub owner or organiation
+- Add the `-u` argument with the GitHub user
+- Add the `-p` argument with the GitHub PAT Token password
+
+Note: For large organizations, this will time out. Open to solutions on how to handle this better.
+For example, to download results from this organization:
+
+`dotnet census -o samsmithnz -u samsmithnz -p <PAT_TOKEN>`
 ## What's next?
 - Add ability to scan target other types of Git Repos (Azure DevOps), and experiment with scanning organizations
 
