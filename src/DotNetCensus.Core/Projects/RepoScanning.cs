@@ -157,29 +157,34 @@ namespace DotNetCensus.Core.Projects
             return baseDir;
         }
 
-        private static void ParseDirectorys(RepoDirectory baseDir, Queue<string> dirQueue)
+        private static void ParseDirectorys(RepoDirectory? baseDir, Queue<string> dirQueue)
         {
             string name = dirQueue.Dequeue();
 
-            //Add any directories missing
-            if (baseDir.Directories.Any(r => r.Name == name) == false)
+            if (baseDir != null)
             {
-                baseDir.Directories.Add(new()
+                //Add any directories missing
+                if (baseDir.Directories.Any(r => r.Name == name) == false)
                 {
-                    Name = name,
-                    Path = baseDir.Path + name + "/"
-                });
-            }
+                    baseDir.Directories.Add(new()
+                    {
+                        Name = name,
+                        Path = baseDir.Path + name + "/"
+                    });
+                }
 
-            //If there are still items to process, recursively add sub directories
-            if (dirQueue.Count > 1)
-            {
-                ParseDirectorys(baseDir.Directories.Find(r => r.Name == name), dirQueue);
-            }
-            else if (dirQueue.Count == 1)
-            {
-                //Add files in the correct directory position
-                baseDir.Directories.Find(r => r.Name == name).Files.Add(dirQueue.Dequeue());
+                //If there are still items to process, recursively add sub directories
+                if (dirQueue.Count > 1 && baseDir != null && baseDir.Directories != null)
+                {
+                    ParseDirectorys(baseDir.Directories.Find(r => r.Name == name), dirQueue);
+                }
+                else if (dirQueue.Count == 1 && 
+                    baseDir != null &&
+                    baseDir.Directories != null)
+                {
+                    //Add files in the correct directory position
+                    baseDir?.Directories?.Find(r => r.Name == name)?.Files.Add(dirQueue.Dequeue());
+                }
             }
         }
 
