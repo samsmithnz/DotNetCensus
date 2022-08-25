@@ -178,7 +178,7 @@ namespace DotNetCensus.Core.Projects
                 {
                     ParseDirectorys(baseDir.Directories.Find(r => r.Name == name), dirQueue);
                 }
-                else if (dirQueue.Count == 1 && 
+                else if (dirQueue.Count == 1 &&
                     baseDir != null &&
                     baseDir.Directories != null)
                 {
