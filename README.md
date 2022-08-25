@@ -112,7 +112,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 ### To download results to a csv file, add the `-f` argument with a file name:
 `dotnet census -f c:\temp\results.csv`
 
-## To download results from a GitHub Repo, 
+### To download results from a GitHub Repo, 
 - Add the `-o` argument with the GitHub owner or organiation
 - Add the `-r` argument with the GitHub repo name
 - Add the `-u` argument with the GitHub user
