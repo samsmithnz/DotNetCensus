@@ -42,8 +42,7 @@ namespace DotNetCensus.Core.APIs
                             Project project = new()
                             {
                                 Path = path,
-                                FileName = fileInfo.Name,
-                                Order = 1
+                                FileName = fileInfo.Name
                             };
                             results.Add(project);
                         }
@@ -53,8 +52,7 @@ namespace DotNetCensus.Core.APIs
                             Project project = new()
                             {
                                 Path = path,
-                                FileName = fileInfo.Name,
-                                Order = 0
+                                FileName = fileInfo.Name
                             };
                             results.Add(project);
                         }
@@ -63,7 +61,7 @@ namespace DotNetCensus.Core.APIs
             }
 
             //Sort the results to make directory processing easier
-            results = results.OrderBy(o => o.Path).ThenBy(o => o.Order).ToList();
+            results = results.OrderBy(o => o.Path).ToList();
 
             return results;
         }
