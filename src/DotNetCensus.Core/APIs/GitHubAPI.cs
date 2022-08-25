@@ -2,7 +2,6 @@
 using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
 using Newtonsoft.Json;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;

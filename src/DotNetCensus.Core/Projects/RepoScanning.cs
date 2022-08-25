@@ -146,8 +146,8 @@ namespace DotNetCensus.Core.Projects
                 Queue<string> dirQueue = new(dirs);
 
                 if (dirQueue.Count > 1)
-                { 
-                ParseDirectorys(baseDir, dirQueue);
+                {
+                    ParseDirectorys(baseDir, dirQueue);
                 }
                 else if (dirQueue.Count == 1)
                 {
