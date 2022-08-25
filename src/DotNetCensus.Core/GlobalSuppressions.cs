@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is GitHub class", Scope = "member", Target = "~P:DotNetCensus.Core.Models.GitHub.FileDetails.size")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is GitHub class", Scope = "member", Target = "~P:DotNetCensus.Core.Models.GitHub.FileDetails.name")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is GitHub class", Scope = "member", Target = "~P:DotNetCensus.Core.Models.GitHub.FileDetails.path")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is GitHub class", Scope = "member", Target = "~P:DotNetCensus.Core.Models.GitHub.FileDetails.content")]
