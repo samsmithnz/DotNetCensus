@@ -1,66 +1,72 @@
 ﻿using CommandLine;
+using DotNetCensus.Core.Models;
 
-namespace DotNetCensus
+namespace DotNetCensus;
+
+public class Program
 {
-    public class Program
+    private static string? _directory;
+    private static Repo? _repo;
+    private static bool _includeTotals;
+    private static bool _includeInventory;
+    private static string? _file;
+
+    public static void Main(string[] args)
     {
-        private static string? _directory;
-        private static bool _includeTotals;
-        private static bool _includeRawResults;
-        private static string? _file;
+        //process arguments
+        ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
+               .WithParsed(RunOptions)
+               .WithNotParsed(HandleParseError);
 
-        public static void Main(string[] args)
+        //If there is a folder to scan, run the process against it
+        if (string.IsNullOrEmpty(_directory) == false || _repo != null)
         {
-            //process arguments
-            ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
-                   .WithParsed(RunOptions)
-                   .WithNotParsed(HandleParseError);
-
-            //If there is a folder to scan, run the process against it
-            if (string.IsNullOrEmpty(_directory) == false)
+            if (_includeInventory == true)
             {
-                if (_includeRawResults == true)
-                {
-                    DataAccess.GetRawResults(_directory, _file);
-                }
-                else
-                {
-                    DataAccess.GetFrameworkSummary(_directory, _includeTotals, _file);
-                }
-            }
-        }
-
-        static void RunOptions(Options opts)
-        {
-            //handle options
-            if (string.IsNullOrEmpty(opts.Directory) == true)
-            {
-                _directory = Directory.GetCurrentDirectory();
+                Core.Main.GetInventoryResults(_directory, _repo, _file);
             }
             else
             {
-                _directory = opts.Directory;
-            }
-            _includeTotals = opts.IncludeTotals;
-            _includeRawResults = opts.IncludeRawResults;
-            if (string.IsNullOrEmpty(opts.File) == false)
-            {
-                _file = opts.File;
+                Core.Main.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
             }
         }
+    }
 
-        static void HandleParseError(IEnumerable<Error> errs)
+    static void RunOptions(Options opts)
+    {
+        //handle options
+        _directory = opts.Directory;
+
+        //setup the GitHub repo details
+        if (opts.Owner != null && opts.Repo != null)
         {
-            //handle errors
-            var excList = new List<Exception>();
-            foreach (var err in errs)
+            _repo = new Repo(opts.Owner, opts.Repo)
             {
-                excList.Add(new ArgumentException(err.ToString()));
-            }
-            if (excList.Any())
-            {
-                throw new AggregateException(excList);
-            }
+                User = opts.Repo,
+                Password = opts.Password
+            };
+        }
+        if (_directory == null && _repo == null)
+        {
+            //If both directory and repo are null, use the current directory
+            _directory = Directory.GetCurrentDirectory();
+        }
+        _includeTotals = opts.IncludeTotals;
+        _includeInventory = opts.IncludeInventory;
+        _file = opts.File;
+    }
+
+    static void HandleParseError(IEnumerable<Error> errs)
+    {
+        //handle errors
+        var excList = new List<Exception>();
+        foreach (var err in errs)
+        {
+            excList.Add(new ArgumentException(err.ToString()));
+        }
+        if (excList.Any())
+        {
+            throw new AggregateException(excList);
         }
     }
 }

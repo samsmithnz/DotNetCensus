@@ -1,28 +1,30 @@
+using DotNetCensus.Tests.Helpers;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ConsoleDataAccessTests : BaseTests
+[TestCategory("IntegrationTest")]
+public class DirectoryDataAccessTests : DirectoryBasedTests
 {
     [TestMethod]
     public void FrameworkSummaryWithNoParametersTest()
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = null;
+        Repo? repo = null;
         string? file = null;
-        if (SamplesPath != null)
-        {
-            string expected = @"Framework  FrameworkFamily  Count  Status
+        string expected = @"Framework  FrameworkFamily  Count  Status
 -----------------------------------------
 ";
 
-            //Act
-            string? contents = DataAccess.GetFrameworkSummary("", includeTotals, file);
+        //Act
+        string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
-            //Asset
-            Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
-        }
+        //Asset
+        Assert.IsNotNull(expected);
+        Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
     }
 
     [TestMethod]
@@ -30,8 +32,10 @@ public class ConsoleDataAccessTests : BaseTests
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = SamplesPath;
+        Repo? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
@@ -63,21 +67,23 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
-    }    
+    }
 
     [TestMethod]
     public void FrameworkSummaryWithDirectoryBuildPropsPathTest()
     {
         //Arrange
         bool includeTotals = false;
+        string? directory = SamplesPath + @"/Sample.NET6.Directory.Build.props";
+        Repo? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework  FrameworkFamily  Count  Status   
 --------------------------------------------
@@ -85,7 +91,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath + @"/Sample.NET6.Directory.Build.props", includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -98,8 +104,10 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     {
         //Arrange
         bool includeTotals = true;
+        string? directory = null;
+        Repo? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
@@ -132,7 +140,7 @@ total frameworks                       33
 ";
 
             //Act
-            string? contents = DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -146,8 +154,10 @@ total frameworks                       33
     {
         //Arrange
         bool includeTotals = true;
+        string? directory = null;
+        Repo? repo = null;
         string? file = "test.txt";
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,1,deprecated
@@ -179,7 +189,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetFrameworkSummary(SamplesPath, includeTotals, file);
+            Main.GetFrameworkSummary(directory, repo, includeTotals, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -189,11 +199,13 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsTest()
+    public void InventoryResultsTest()
     {
         //Arrange
+        string? directory = null;
+        Repo? repo = null;
         string? file = null;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Path                                                                             FileName                                    FrameworkCode   FrameworkName         Family          Language  Status          
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,7 +245,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = DataAccess.GetRawResults(SamplesPath, file);
+            string? contents = Main.GetInventoryResults(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -242,15 +254,17 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsWebConfigCountTest()
+    public void InventoryResultsWebConfigCountTest()
     {
         //Arrange
+        string? directory = null;
+        Repo? repo = null;
         string? file = null;
         int webConfigCount = 0;
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             //Act
-            string? contents = DataAccess.GetRawResults(SamplesPath, file);
+            string? contents = Main.GetInventoryResults(directory, repo, file);
             if (contents != null)
             {
                 string[] lines = contents.Split(Environment.NewLine);
@@ -271,11 +285,13 @@ total frameworks,,33,
     }
 
     [TestMethod]
-    public void RawResultsToFileTest()
+    public void InventoryResultsToFileTest()
     {
         //Arrange
+        string? directory = null;
+        Repo? repo = null;
         string? file = "test2.txt";
-        if (SamplesPath != null)
+        if (directory != null || repo != null)
         {
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,EOL: 13-Dec-2022
@@ -314,7 +330,7 @@ total frameworks,,33,
 ";
 
             //Act
-            DataAccess.GetRawResults(SamplesPath, file);
+            Main.GetInventoryResults(directory, repo, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset

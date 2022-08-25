@@ -1,8 +1,12 @@
+using DotNetCensus.Core.Projects;
+using DotNetCensus.Tests.Helpers;
+
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-public class ProjectScanningTests : BaseTests
+[TestCategory("UnitTest")]
+public class ProjectScanningTests : DirectoryBasedTests
 {
     [TestMethod]
     public void SampleFrameworksCountTest()
@@ -13,7 +17,7 @@ public class ProjectScanningTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            results = ProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset
@@ -37,7 +41,7 @@ public class ProjectScanningTests : BaseTests
         //Act
         if (SamplesPath != null)
         {
-            results = ProjectScanning.SearchDirectory(SamplesPath);
+            results = DirectoryScanning.SearchDirectory(SamplesPath);
         }
 
         //Asset

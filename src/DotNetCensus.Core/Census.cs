@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using DotNetCensus.Core.Projects;
 
 namespace DotNetCensus.Core
 {
@@ -10,7 +11,7 @@ namespace DotNetCensus.Core
             List<FrameworkSummary> frameworkSummary = new();
             foreach (Project project in projects)
             {
-                project.Family = ProjectScanning.GetFrameworkFamily(project.FrameworkCode);
+                project.Family = ProjectClassification.GetFrameworkFamily(project.FrameworkCode);
                 if (string.IsNullOrEmpty(project.FrameworkCode) == true)
                 {
                     project.FrameworkCode = "(Unknown framework)";
@@ -26,7 +27,7 @@ namespace DotNetCensus.Core
                     {
                         Framework = project.FrameworkName,
                         FrameworkFamily = project.Family,
-                        Status = ProjectScanning.GetStatus(project.FrameworkCode),
+                        Status = ProjectClassification.GetStatus(project.FrameworkCode),
                         Count = 1 //it's the first time, start with a count of 1
                     });
                 }
