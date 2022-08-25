@@ -80,8 +80,7 @@ namespace DotNetCensus.Core.APIs
             return result;
         }
 
-
-        public async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)
+        private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)
         {
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
