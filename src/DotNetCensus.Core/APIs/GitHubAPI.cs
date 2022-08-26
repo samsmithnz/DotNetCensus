@@ -109,6 +109,26 @@ namespace DotNetCensus.Core.APIs
             return results;
         }
 
+        public async static Task<int?> GetRateLimit(string? clientId, string? clientSecret)
+        {
+            int result = 0;
+            RateLimit? rateLimit = null;
+
+            //https://docs.github.com/en/rest/rate-limit
+            string url = $"https://api.github.com/rate_limit";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                rateLimit = JsonConvert.DeserializeObject<RateLimit>(jsonObj?.ToString());
+            }
+            if (rateLimit != null && rateLimit.resources != null && rateLimit.resources.core != null)
+            {
+                result = rateLimit.resources.core.remaining;
+            }
+            return result;
+        }
+
         private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)
         {
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
