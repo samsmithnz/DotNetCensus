@@ -122,7 +122,7 @@ For example, to download results from this repository:
 
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
-### To download results from a GitHub Organization, omit the `-r` argument
+### To download results from a GitHub Organization, omit the `-r` argument. This does not currently work to get all owners repos - just organizations..
 - Add the `-o` argument with the GitHub owner or organiation
 - Add the `-u` argument with the GitHub user
 - Add the `-p` argument with the GitHub PAT Token password
