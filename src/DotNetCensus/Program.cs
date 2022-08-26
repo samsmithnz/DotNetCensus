@@ -14,7 +14,7 @@ public class Program
     public static void Main(string[] args)
     {
         //process arguments
-        ParserResult<Options>? result = Parser.Default.ParseArguments<Options>(args)
+        ParserResult<Options>? options = Parser.Default.ParseArguments<Options>(args)
                .WithParsed(RunOptions)
                .WithNotParsed(HandleParseError);
 
@@ -38,13 +38,24 @@ public class Program
         _directory = opts.Directory;
 
         //setup the GitHub repo details
-        if (opts.Owner != null && opts.Repo != null)
+        if (opts.Owner != null)
         {
-            _repo = new Target(opts.Owner, opts.Repo)
+            if (opts.Repo != null)
             {
-                User = opts.Repo,
-                Password = opts.Password
-            };
+                _repo = new Target(opts.Owner, opts.Repo)
+                {
+                    User = opts.Owner,
+                    Password = opts.Password
+                };
+            }
+            else
+            {
+                _repo = new Target(opts.Owner)
+                {
+                    User = opts.Owner,
+                    Password = opts.Password
+                };
+            }
         }
         if (_directory == null && _repo == null)
         {
