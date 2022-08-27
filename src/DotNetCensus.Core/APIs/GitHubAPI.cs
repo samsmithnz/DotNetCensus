@@ -18,6 +18,7 @@ namespace DotNetCensus.Core.APIs
 
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
+            System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (string.IsNullOrEmpty(response) == false)
             {
@@ -80,9 +81,9 @@ namespace DotNetCensus.Core.APIs
             return result;
         }
 
-        public async static Task<List<string>?> GetGitHubOrganizationRepos(string? clientId, string? clientSecret, string organization)
+        public async static Task<List<RepoResponse>?> GetGitHubOrganizationRepos(string? clientId, string? clientSecret, string organization)
         {
-            List<string> results = new();
+            List<RepoResponse> results = new();
             List<RepoResponse>? repos = null;
 
             //https://docs.github.com/en/rest/repos/repos#list-organization-repositories
@@ -90,19 +91,15 @@ namespace DotNetCensus.Core.APIs
             string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
             if (string.IsNullOrEmpty(response) == false)
             {
-                //if (response.Contains(@"""message"":""Not Found"""))
-                //{
-                //    List<string>? ownerResults = await GetGitHubOwnerRepos(clientId, clientSecret, organization);
-                //    if (ownerResults != null)
-                //    {
-                //        return ownerResults;
-                //    }
-                //}
-                //else
-                //{
-                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
-                //}
+                if (response.Contains(@"""message"":""Not Found"""))
+                {
+                    repos = await GetGitHubOwnerRepos(clientId, clientSecret, organization);
+                }
+                else
+                {
+                    dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                    repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+                }
             }
             if (repos != null && repos.Count > 0)
             {
@@ -113,16 +110,16 @@ namespace DotNetCensus.Core.APIs
                         item.disabled == false &&
                         item.name != null)
                     {
-                        results.Add(item.name);
+                        results.Add(item);
                     }
                 }
             }
             return results;
         }
 
-        public async static Task<List<string>?> GetGitHubOwnerRepos(string? clientId, string? clientSecret, string owner)
+        public async static Task<List<RepoResponse>?> GetGitHubOwnerRepos(string? clientId, string? clientSecret, string owner)
         {
-            List<string> results = new();
+            List<RepoResponse> results = new();
             List<RepoResponse>? repos = null;
 
             //https://docs.github.com/en/rest/repos/repos#list-repositories-for-the-authenticated-user
@@ -133,20 +130,7 @@ namespace DotNetCensus.Core.APIs
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
             }
-            if (repos != null && repos.Count > 0)
-            {
-                foreach (RepoResponse item in repos)
-                {
-                    if (item != null &&
-                        item.archived == false &&
-                        item.disabled == false &&
-                        item.name != null)
-                    {
-                        results.Add(item.name);
-                    }
-                }
-            }
-            return results;
+            return repos;
         }
 
         public async static Task<int?> GetRateLimit(string? clientId, string? clientSecret)

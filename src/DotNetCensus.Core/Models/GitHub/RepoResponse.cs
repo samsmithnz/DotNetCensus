@@ -11,5 +11,6 @@
         public bool? archived { get; set; }
         public bool? disabled { get; set; }
         public string? visibility { get; set; }
+        public string? default_branch { get; set; }
     }
 }

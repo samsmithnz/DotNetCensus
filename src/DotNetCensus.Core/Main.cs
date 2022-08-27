@@ -1,6 +1,7 @@
 ﻿using ConsoleTables;
 using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
+using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
 
 namespace DotNetCensus.Core;
@@ -30,15 +31,20 @@ public static class Main
             }
             else
             {
-                List<string>? repos = Task.Run(async () =>
+                List<RepoResponse>? repos = Task.Run(async () =>
                     await GitHubAPI.GetGitHubOrganizationRepos(clientId, clientSecret, owner)).Result;
                 if (repos != null)
                 {
-                    foreach (string item in repos)
+                    foreach (RepoResponse item in repos)
                     {
-                        projects.AddRange(Task.Run(async () =>
-                        await RepoScanning.SearchRepo(clientId, clientSecret,
-                        owner, item, "main")).Result);
+                        if (item != null &&
+                            item.name != null &&
+                            item.default_branch != null)
+                        {
+                            projects.AddRange(Task.Run(async () =>
+                            await RepoScanning.SearchRepo(clientId, clientSecret,
+                            owner, item.name, item.default_branch)).Result);
+                        }
                     }
                 }
             }
