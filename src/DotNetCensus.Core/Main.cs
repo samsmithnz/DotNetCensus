@@ -42,9 +42,16 @@ public static class Main
                             item.name != null &&
                             item.default_branch != null)
                         {
-                            projects.AddRange(Task.Run(async () =>
-                            await RepoScanning.SearchRepo(clientId, clientSecret,
-                            owner, item.name, item.default_branch)).Result);
+                            List<Project> newProjects = Task.Run(async () =>
+                                   await RepoScanning.SearchRepo(clientId, clientSecret,
+                                   owner, item.name, item.default_branch)).Result;
+                            //Add the organization and repo name to these projects
+                            foreach (Project project in newProjects)
+                            {
+                                project.Organization = owner;
+                                project.Repo = item.name;
+                            }
+                            projects.AddRange(newProjects);
                         }
                     }
                 }
@@ -53,7 +60,9 @@ public static class Main
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)
         {
-            sortedProjects = projects.OrderBy(o => o.Path).ToList();
+            sortedProjects = projects.OrderBy(o => o.Organization).
+                ThenBy(o => o.Repo).
+                ThenBy(o => o.Path).ToList();
         }
         return sortedProjects;
     }
