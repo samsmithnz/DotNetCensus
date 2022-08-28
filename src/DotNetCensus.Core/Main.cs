@@ -98,7 +98,14 @@ public static class Main
             ConsoleTable table = new(headers.ToArray());
             foreach (Project item in projects)
             {
-                table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
+                if (includeOrganizations == true && includeRepos == true)
+                {
+                    table.AddRow(item.Organization, item.Repo, item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
+                }
+                else
+                {
+                    table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
+                }
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
@@ -120,13 +127,28 @@ public static class Main
             sw.WriteLine(header.ToString());
             foreach (Project item in projects)
             {
-                sw.WriteLine(item.Path + "," +
-                    item.FileName + "," +
-                    item.FrameworkCode + "," +
-                    item.FrameworkName + "," +
-                    item.Family + "," +
-                    item.Language + "," +
-                    item.Status);
+                if (includeOrganizations == true && includeRepos == true)
+                {
+                    sw.WriteLine(item.Organization + "," +
+                       item.Repo + "," +
+                       item.Path + "," +
+                       item.FileName + "," +
+                       item.FrameworkCode + "," +
+                       item.FrameworkName + "," +
+                       item.Family + "," +
+                       item.Language + "," +
+                       item.Status);
+                }
+                else
+                {
+                    sw.WriteLine(item.Path + "," +
+                        item.FileName + "," +
+                        item.FrameworkCode + "," +
+                        item.FrameworkName + "," +
+                        item.Family + "," +
+                        item.Language + "," +
+                        item.Status);
+                }
             }
             string? result = sw?.ToString();
             sw?.Close();
