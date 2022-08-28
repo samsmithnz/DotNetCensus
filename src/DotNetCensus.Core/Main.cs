@@ -76,23 +76,23 @@ public static class Main
         //If it's inventory output, remove the full path from each project
         if (directory != null)
         {
-            if (projects.Count > 0)
+            foreach (Project item in projects)
             {
-                if (string.IsNullOrEmpty(projects[0].Organization) == false)
-                {
-                    includeOrganizations = true;
-                }
-                if (string.IsNullOrEmpty(projects[0].Organization) == false)
-                {
-                    includeRepos = true;
-                }
-                foreach (Project item in projects)
-                {
-                    item.Path = item.Path.Replace(directory, "");
-                }
+                item.Path = item.Path.Replace(directory, "");
             }
         }
 
+        if (projects.Count > 0)
+        {
+            if (string.IsNullOrEmpty(projects[0].Organization) == false)
+            {
+                includeOrganizations = true;
+            }
+            if (string.IsNullOrEmpty(projects[0].Organization) == false)
+            {
+                includeRepos = true;
+            }
+        }
         List<string> headers = new() { "Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status" };
         if (includeRepos == true)
         {
