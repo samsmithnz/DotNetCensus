@@ -9,10 +9,6 @@ namespace DotNetCensus.Core.Projects
         public async static Task<List<Project>> SearchRepo(string? clientId, string? clientSecret,
             string owner, string repository, string branch = "main")
         {
-            if (repository == "Big10GBRepo")
-            {
-                int i = 0;
-            }
             //Get all files for the current repo, looking for projects
             List<Project> repoProjects = await GitHubAPI.GetRepoFiles(clientId, clientSecret,
                    owner, repository, branch);
@@ -23,11 +19,19 @@ namespace DotNetCensus.Core.Projects
             //Recursively search directories until a project file is found
             List<Project> projects = new();
             if (baseDir != null && baseDir.Path != null && 
-                baseDir.Directories.Count > 0 && baseDir.Files.Count > 0)
+                (baseDir.Directories.Count > 0 || baseDir.Files.Count > 0))
             {
                 projects = await SearchRepoDirectory(baseDir, baseDir.Path,
                     clientId, clientSecret,
                     owner, repository);
+            }
+            else
+            {
+                Project blankProject = new()
+                {
+                    FrameworkCode = ""
+                };
+                projects.Add(blankProject);
             }
 
             return projects;

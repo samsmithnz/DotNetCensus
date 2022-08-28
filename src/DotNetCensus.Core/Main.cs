@@ -3,6 +3,7 @@ using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
+using System.Text;
 
 namespace DotNetCensus.Core;
 
@@ -70,9 +71,10 @@ public static class Main
             }
         }
 
+        List<string> headers = new() { "Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status" };
         if (string.IsNullOrEmpty(file) == true)
         {
-            ConsoleTable table = new("Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
+            ConsoleTable table = new(headers.ToArray());
             foreach (Project item in projects)
             {
                 table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
@@ -85,7 +87,16 @@ public static class Main
         {
             //Create a CSV file
             StreamWriter sw = File.CreateText(file);
-            sw.WriteLine("Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status");
+            StringBuilder header = new();
+            for (int i = 0; i <= headers.Count - 1; i++)
+            {
+                header.Append(headers[i]);
+                if (i < headers.Count - 1)
+                {
+                    header.Append(',');
+                }
+            }
+            sw.WriteLine(header.ToString());
             foreach (Project item in projects)
             {
                 sw.WriteLine(item.Path + "," +
