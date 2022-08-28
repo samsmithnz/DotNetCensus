@@ -61,17 +61,38 @@ public static class Main
     public static string? GetInventoryResults(string? directory, Target? repo, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
+        bool includeOrganizations = false;
+        bool includeRepos = false;
 
         //If it's inventory output, remove the full path from each project
         if (directory != null)
         {
-            foreach (Project item in projects)
+            if (projects.Count > 0)
             {
-                item.Path = item.Path.Replace(directory, "");
+                if (string.IsNullOrEmpty(projects[0].Organization) == false)
+                {
+                    includeOrganizations = true;
+                }
+                if (string.IsNullOrEmpty(projects[0].Organization) == false)
+                {
+                    includeRepos = true;
+                }
+                foreach (Project item in projects)
+                {
+                    item.Path = item.Path.Replace(directory, "");
+                }
             }
         }
 
         List<string> headers = new() { "Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status" };
+        if (includeRepos == true)
+        {
+            headers.Insert(0, "Repo");
+        }
+        if (includeOrganizations == true)
+        {
+            headers.Insert(0, "Organization");
+        }
         if (string.IsNullOrEmpty(file) == true)
         {
             ConsoleTable table = new(headers.ToArray());
