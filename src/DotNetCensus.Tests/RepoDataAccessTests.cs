@@ -201,62 +201,92 @@ SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.WPF/SSNZ.WPF.csproj               
         }
     }
 
-//    [TestMethod]
-//    public void FrameworkSummaryWithGitHubOwnerTest()
-//    {
-//        //Arrange
-//        bool includeTotals = true;
-//        string? directory = null;
-//        Target? repo = new("SamSmithNZ")
-//        {
-//            User = GitHubId,
-//            Password = GitHubSecret
-//        };
-//        string? file = null;
-//        if (directory != null || repo != null)
-//        {
-//            string expected = @"Framework          FrameworkFamily  Count  Status   
-//----------------------------------------------------
-//.NET 6.0           .NET             1      supported
-//.NET Standard 2.0  .NET Standard    1      supported
-//total frameworks                    2               
-//";
+    //    [TestMethod]
+    //    public void FrameworkSummaryWithGitHubOwnerTest()
+    //    {
+    //        //Arrange
+    //        bool includeTotals = true;
+    //        string? directory = null;
+    //        Target? repo = new("SamSmithNZ")
+    //        {
+    //            User = GitHubId,
+    //            Password = GitHubSecret
+    //        };
+    //        string? file = null;
+    //        if (directory != null || repo != null)
+    //        {
+    //            string expected = @"Framework          FrameworkFamily  Count  Status   
+    //----------------------------------------------------
+    //.NET 6.0           .NET             1      supported
+    //.NET Standard 2.0  .NET Standard    1      supported
+    //total frameworks                    2               
+    //";
 
-//            //Act
-//            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+    //            //Act
+    //            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
 
-//            //Asset
-//            Assert.IsNotNull(expected);
-//            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
-//        }
-//    }
+    //            //Asset
+    //            Assert.IsNotNull(expected);
+    //            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+    //        }
+    //    }
 
-//    [TestMethod]
-//    public void InventoryResultsWithGitHubOwnerTest()
-//    {
-//        //Arrange
-//        string? directory = null;
-//        Target? repo = new("SamSmithNZ")
-//        {
-//            User = GitHubId,
-//            Password = GitHubSecret
-//        };
-//        string? file = null;
-//        if (directory != null || repo != null)
-//        {
-//            string expected = @"Path                                                                                                   FileName                                             FrameworkCode   FrameworkName      Family         Language  Status   
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-///src/AzurePipelinesToGitHubActionsConverter.Core/AzurePipelinesToGitHubActionsConverter.Core.csproj    AzurePipelinesToGitHubActionsConverter.Core.csproj   netstandard2.0  .NET Standard 2.0  .NET Standard  csharp    supported
-///src/AzurePipelinesToGitHubActionsConverter.Tests/AzurePipelinesToGitHubActionsConverter.Tests.csproj  AzurePipelinesToGitHubActionsConverter.Tests.csproj  net6.0          .NET 6.0           .NET           csharp    supported
-//";
+    //    [TestMethod]
+    //    public void InventoryResultsWithGitHubOwnerTest()
+    //    {
+    //        //Arrange
+    //        string? directory = null;
+    //        Target? repo = new("SamSmithNZ")
+    //        {
+    //            User = GitHubId,
+    //            Password = GitHubSecret
+    //        };
+    //        string? file = null;
+    //        if (directory != null || repo != null)
+    //        {
+    //            string expected = @"Path                                                                                                   FileName                                             FrameworkCode   FrameworkName      Family         Language  Status   
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ///src/AzurePipelinesToGitHubActionsConverter.Core/AzurePipelinesToGitHubActionsConverter.Core.csproj    AzurePipelinesToGitHubActionsConverter.Core.csproj   netstandard2.0  .NET Standard 2.0  .NET Standard  csharp    supported
+    ///src/AzurePipelinesToGitHubActionsConverter.Tests/AzurePipelinesToGitHubActionsConverter.Tests.csproj  AzurePipelinesToGitHubActionsConverter.Tests.csproj  net6.0          .NET 6.0           .NET           csharp    supported
+    //";
 
-//            //Act
-//            string? contents = Main.GetInventoryResults(directory, repo, file);
+    //            //Act
+    //            string? contents = Main.GetInventoryResults(directory, repo, file);
 
-//            //Asset
-//            Assert.IsNotNull(expected);
-//            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
-//        }
-//    }
+    //            //Asset
+    //            Assert.IsNotNull(expected);
+    //            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+    //        }
+    //    }
 
+    [TestMethod]
+    public void FrameworkSummaryWithPrivateRepoTest()
+    {
+        //Arrange
+        bool includeTotals = true;
+        string? directory = null;
+        Target? repo = new("SamSmithNZ-dotcom", "SSNZPOC")
+        {
+            User = GitHubId,
+            Password = GitHubSecret
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework         FrameworkFamily  Count  Status    
+----------------------------------------------------
+.NET 5.0          .NET             4      deprecated
+.NET 5.0-windows  .NET             2      deprecated
+total frameworks                   6                
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
 }
+    
