@@ -122,5 +122,33 @@ total frameworks                       36
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
+    [TestMethod]
+    public void FrameworkSummaryWithPrivateRepoTest()
+    {
+        //Arrange
+        bool includeTotals = true;
+        string? directory = null;
+        Repo? repo = new("SamSmithNZ-dotcom", "SSNZPOC")
+        {
+            User = GitHubId,
+            Password = GitHubSecret
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework         FrameworkFamily  Count  Status    
+----------------------------------------------------
+.NET 5.0          .NET             4      deprecated
+.NET 5.0-windows  .NET             2      deprecated
+total frameworks                   6                
+";
 
+            //Act
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
 }
