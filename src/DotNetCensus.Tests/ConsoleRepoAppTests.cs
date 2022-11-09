@@ -22,10 +22,10 @@ public class ConsoleRepoAppTests : RepoBasedTests
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
 .NET 5.0              .NET             1      deprecated      
-.NET 6.0              .NET             7      supported       
+.NET 6.0              .NET             4      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      supported       
+.NET 7.0              .NET             4      supported       
 .NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
