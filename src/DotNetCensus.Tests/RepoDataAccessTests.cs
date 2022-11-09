@@ -111,9 +111,9 @@ total frameworks                       37
 /samples/Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                               Sample.SSDT.Database.sqlproj                v4.7.2          .NET Framework 4.7.2  .NET Framework  csharp    supported       
 /samples/Sample.Unity2020/Assembly-CSharp.csproj                                         Assembly-CSharp.csproj                      v4.7.1          .NET Framework 4.7.1  .NET Framework  csharp    supported       
 /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                     Sample.VB6.WinApp.vbp                       vb6             Visual Basic 6        Visual Basic 6  vb6       deprecated      
-/src/DotNetCensus.Core/DotNetCensus.Core.csproj                                          DotNetCensus.Core.csproj                    net6.0          .NET 6.0              .NET            csharp    supported       
-/src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                        DotNetCensus.Tests.csproj                   net6.0          .NET 6.0              .NET            csharp    supported       
-/src/DotNetCensus/DotNetCensus.csproj                                                    DotNetCensus.csproj                         net6.0          .NET 6.0              .NET            csharp    supported       
+/src/DotNetCensus.Core/DotNetCensus.Core.csproj                                          DotNetCensus.Core.csproj                    net7.0          .NET 7.0              .NET            csharp    supported       
+/src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                        DotNetCensus.Tests.csproj                   net7.0          .NET 7.0              .NET            csharp    supported       
+/src/DotNetCensus/DotNetCensus.csproj                                                    DotNetCensus.csproj                         net7.0          .NET 7.0              .NET            csharp    supported       
 ";
 
             //Act
