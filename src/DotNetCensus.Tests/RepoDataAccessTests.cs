@@ -25,10 +25,11 @@ public class RepoDataAccessTests : RepoBasedTests
             string expected = @"Framework             FrameworkFamily  Count  Status          
 --------------------------------------------------------------
 .NET 5.0              .NET             1      deprecated      
-.NET 6.0              .NET             7      supported       
+.NET 6.0              .NET             4      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      supported       
+.NET 7.0              .NET             4      supported       
+.NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
 .NET Core 2.0         .NET Core        1      deprecated      
@@ -49,7 +50,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       36                     
+total frameworks                       37                     
 ";
 
             //Act
@@ -86,6 +87,7 @@ total frameworks                       36
 /samples/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-android  .NET 6.0-android      .NET            csharp    supported       
 /samples/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                   Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
 /samples/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                            Sample.Net7.ConsoleApp.csproj               net7.0          .NET 7.0              .NET            csharp    supported       
+/samples/Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                            Sample.Net8.ConsoleApp.csproj               net8.0          .NET 8.0              .NET            csharp    in preview      
 /samples/Sample.NetCore1.0.ConsoleApp/project.json                                       project.json                                netcoreapp1.0   .NET Core 1.0         .NET Core       csharp    deprecated      
 /samples/Sample.NetCore1.1.ConsoleApp/project.json                                       project.json                                netcoreapp1.1   .NET Core 1.1         .NET Core       csharp    deprecated      
 /samples/Sample.NetCore2.0.ConsoleApp/Sample.NetCore2.0.ConsoleApp.csproj                Sample.NetCore2.0.ConsoleApp.csproj         netcoreapp2.0   .NET Core 2.0         .NET Core       csharp    deprecated      
@@ -109,9 +111,9 @@ total frameworks                       36
 /samples/Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                               Sample.SSDT.Database.sqlproj                v4.7.2          .NET Framework 4.7.2  .NET Framework  csharp    supported       
 /samples/Sample.Unity2020/Assembly-CSharp.csproj                                         Assembly-CSharp.csproj                      v4.7.1          .NET Framework 4.7.1  .NET Framework  csharp    supported       
 /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                     Sample.VB6.WinApp.vbp                       vb6             Visual Basic 6        Visual Basic 6  vb6       deprecated      
-/src/DotNetCensus.Core/DotNetCensus.Core.csproj                                          DotNetCensus.Core.csproj                    net6.0          .NET 6.0              .NET            csharp    supported       
-/src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                        DotNetCensus.Tests.csproj                   net6.0          .NET 6.0              .NET            csharp    supported       
-/src/DotNetCensus/DotNetCensus.csproj                                                    DotNetCensus.csproj                         net6.0          .NET 6.0              .NET            csharp    supported       
+/src/DotNetCensus.Core/DotNetCensus.Core.csproj                                          DotNetCensus.Core.csproj                    net7.0          .NET 7.0              .NET            csharp    supported       
+/src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                        DotNetCensus.Tests.csproj                   net7.0          .NET 7.0              .NET            csharp    supported       
+/src/DotNetCensus/DotNetCensus.csproj                                                    DotNetCensus.csproj                         net7.0          .NET 7.0              .NET            csharp    supported       
 ";
 
             //Act
