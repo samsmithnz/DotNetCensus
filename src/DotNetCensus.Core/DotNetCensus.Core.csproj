@@ -8,7 +8,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/samsmithnz/DotNetCensus.Core</PackageProjectUrl>
-		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
+		<PackageDescription>A library to find and count .NET versions</PackageDescription>
 		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
 		<Authors>SamSmithNZ</Authors>
 	</PropertyGroup>
