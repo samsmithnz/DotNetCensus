@@ -41,13 +41,20 @@ jobs:
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Release
-    - name: .NET pack NuGet package
+    - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
-        name: nugetPackage
+        name: nugetToolPackage
         path: src/DotNetCensus/nupkg
+    - name: .NET pack core projecty to NuGet package
+      run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    - name: Upload package back to GitHub
+      uses: actions/upload-artifact@v3
+      with:
+        name: nugetCorePackage
+        path: src/DotNetCensus.Core/nupkg
 
   release: 
     name: Release job
@@ -59,8 +66,13 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: nugetPackage
-        path: nugetPackage
+        name: nugetToolPackage
+        path: nugetToolPackage
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: nugetCorePackage
+        path: nugetCorePackage
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ needs.build.outputs.Version }}" 
@@ -72,7 +84,11 @@ jobs:
         tag: ${{ needs.build.outputs.Version }}
         name: Release ${{ needs.build.outputs.Version }}
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-    - name: Publish nuget package to nuget.org
+    - name: Publish nuget tool package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetPackage\*.nupkg --api-key "${{ secrets.NUGETTOKEN }}" --source "https://api.nuget.org/v3/index.json"
-      shell: pwsh    
+      run: dotnet nuget push nugetToolPackage\*.nupkg --api-key "${{ secrets.NUGETTOOLTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      shell: pwsh 
+    - name: Publish nuget core package to nuget.org
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
+      run: dotnet nuget push nugetCorePackage\*.nupkg --api-key "${{ secrets.NUGETCORETOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      shell: pwsh
