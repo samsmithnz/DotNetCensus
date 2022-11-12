@@ -121,6 +121,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 - Add the `-r` argument with the GitHub repo name
 - Add the `-u` argument with the GitHub user
 - Add the `-p` argument with the GitHub PAT Token password
+- Add the `-b` argument with the GitHub branch name (defaults to 'main')
 
 For example, to download results from this repository:
 

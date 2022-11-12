@@ -28,6 +28,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
 /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
 /Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj,Sample.Net7.ConsoleApp.csproj,net7.0,.NET 7.0,.NET,csharp,supported
+/Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj,Sample.Net7.ConsoleApp2.csproj,net7.0,.NET 7.0,.NET,csharp,supported
 /Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj,Sample.Net8.ConsoleApp.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.NetCore1.0.ConsoleApp/project.json,project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
 /Sample.NetCore1.1.ConsoleApp/project.json,project.json,netcoreapp1.1,.NET Core 1.1,.NET Core,csharp,deprecated
@@ -83,7 +84,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET 6.0,.NET,4,supported
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
-.NET 7.0,.NET,1,supported
+.NET 7.0,.NET,2,supported
 .NET 8.0,.NET,1,in preview
 .NET Core 1.0,.NET Core,1,deprecated
 .NET Core 1.1,.NET Core,1,deprecated
@@ -105,7 +106,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Standard 2.0,.NET Standard,1,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,34,
+total frameworks,,35,
 ";
 
             //Act
