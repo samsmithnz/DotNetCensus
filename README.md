@@ -97,6 +97,7 @@ Sample.MultipleTargets.ConsoleApp.csproj    \samples\Sample.MultipleTargets.Cons
 Sample.Net5.ConsoleApp.csproj               \samples\Sample.Net5.ConsoleApp\Sample.Net5.ConsoleApp.csproj                            net5.0          .NET 5.0              .NET            csharp    deprecated
 Sample.Net6.ConsoleApp.csproj               \samples\Sample.Net6.ConsoleApp\Sample.Net6.ConsoleApp.csproj                            net6.0          .NET 6.0              .NET            csharp    supported
 Sample.Net7.ConsoleApp.csproj               \samples\Sample.Net7.ConsoleApp\Sample.Net7.ConsoleApp.csproj                            net7.0          .NET 7.0              .NET            csharp    supported
+Sample.Net8.ConsoleApp.csproj               \samples\Sample.Net8.ConsoleApp\Sample.Net8.ConsoleApp.csproj                            net8.0          .NET 8.0              .NET            csharp    in preview
 Sample.NetCore.ConsoleApp.csproj            \samples\Sample.NetCore3.1.ConsoleApp\Sample.NetCore.ConsoleApp.csproj                   netcoreapp3.1   .NET Core 3.1         .NET Core       csharp    EOL: 13-Dec-2022
 Sample.NetCore2.0.ConsoleApp.csproj         \samples\Sample.NetCore2.0.ConsoleApp\Sample.NetCore2.0.ConsoleApp.csproj                netcoreapp2.0   .NET Core 2.0         .NET Core       csharp    deprecated
 Sample.NetCore2.1.ConsoleApp.csproj         \samples\Sample.NetCore2.1.ConsoleApp\Sample.NetCore2.1.ConsoleApp.csproj                netcoreapp2.1   .NET Core 2.1         .NET Core       csharp    deprecated
@@ -126,7 +127,8 @@ For example, to download results from this repository:
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 ## What's next?
-- Add ability to scan target other types of Git Repos (Azure DevOps), and experiment with scanning organizations
+- We are currently experimenting with scanning entire organizations
+- Possibly considering adding the ability to scan target other types of Git Repos (e.g. Azure DevOps, BitBucket, etc)
 
 ## Contributions
 If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
