@@ -35,7 +35,7 @@ public class RepoBasedTests : DirectoryBasedTests
             WorkingDirectory = Directory.GetCurrentDirectory(),
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
-            Arguments = "rev-parse --abbrev-ref HEAD"
+            Arguments = "branch --show-current"
         };
         Process process = new()
         {
