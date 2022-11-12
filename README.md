@@ -1,21 +1,23 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
-[![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census?label=nuget%20dotnet%20tool)](https://www.nuget.org/packages/dotnet-census/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
+**A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory or GitHub repo.** 
 
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
 DotNet Census currently supports these .NET versions:
-- .NET 5/6/7/etc
-- .NET Core  (including .NET Core 1 and 1.1 project.json formats)
-- .NET Framework (including .NET Framework 3.5 website formats)
-- .NET Standard
+- .NET 5, 6, 7, 8, etc
+- .NET Core 1 to 3.1  (including older .NET Core 1 and 1.1 project.json formats)
+- .NET Framework (including .NET Framework 3.5 website formats with no project files)
+- .NET Standard 1 to 2.1
 
 Additionally, this tool supports:
-- The main .NET languages, including C#, VB.NET, F#, and VB6
+- The main .NET languages, including C#, VB.NET, and F#
 - [Directory.Build.props variables](https://github.com/samsmithnz/DotNetCensus/issues/44) in project files
+- VB6 projects (as many are related to VB.NET projects)
 
 ## To use
 
@@ -52,7 +54,8 @@ Framework             FrameworkFamily  Count  Status
 .NET 6.0              .NET             3      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      in preview      
+.NET 7.0              .NET             1      supported       
+.NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
 .NET Core 2.0         .NET Core        1      deprecated      
@@ -73,7 +76,7 @@ Framework             FrameworkFamily  Count  Status
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       32                     
+total frameworks                       33                     
 ```
 
 ### To get an inventory of results, use the `-i` argument:
@@ -94,6 +97,7 @@ Sample.MultipleTargets.ConsoleApp.csproj    \samples\Sample.MultipleTargets.Cons
 Sample.Net5.ConsoleApp.csproj               \samples\Sample.Net5.ConsoleApp\Sample.Net5.ConsoleApp.csproj                            net5.0          .NET 5.0              .NET            csharp    deprecated
 Sample.Net6.ConsoleApp.csproj               \samples\Sample.Net6.ConsoleApp\Sample.Net6.ConsoleApp.csproj                            net6.0          .NET 6.0              .NET            csharp    supported
 Sample.Net7.ConsoleApp.csproj               \samples\Sample.Net7.ConsoleApp\Sample.Net7.ConsoleApp.csproj                            net7.0          .NET 7.0              .NET            csharp    supported
+Sample.Net8.ConsoleApp.csproj               \samples\Sample.Net8.ConsoleApp\Sample.Net8.ConsoleApp.csproj                            net8.0          .NET 8.0              .NET            csharp    in preview
 Sample.NetCore.ConsoleApp.csproj            \samples\Sample.NetCore3.1.ConsoleApp\Sample.NetCore.ConsoleApp.csproj                   netcoreapp3.1   .NET Core 3.1         .NET Core       csharp    EOL: 13-Dec-2022
 Sample.NetCore2.0.ConsoleApp.csproj         \samples\Sample.NetCore2.0.ConsoleApp\Sample.NetCore2.0.ConsoleApp.csproj                netcoreapp2.0   .NET Core 2.0         .NET Core       csharp    deprecated
 Sample.NetCore2.1.ConsoleApp.csproj         \samples\Sample.NetCore2.1.ConsoleApp\Sample.NetCore2.1.ConsoleApp.csproj                netcoreapp2.1   .NET Core 2.1         .NET Core       csharp    deprecated
@@ -123,7 +127,8 @@ For example, to download results from this repository:
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 ## What's next?
-- Add ability to scan target other types of Git Repos (Azure DevOps), and experiment with scanning organizations
+- We are currently experimenting with scanning entire [organizations](https://github.com/samsmithnz/DotNetCensus/pull/48)
+- Possibly considering adding the ability to scan target other types of Git Repos (e.g. Azure DevOps, BitBucket, etc)
 
 ## Contributions
 If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  
