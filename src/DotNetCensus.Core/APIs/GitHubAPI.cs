@@ -58,11 +58,11 @@ namespace DotNetCensus.Core.APIs
         }
 
         public async static Task<FileDetails?> GetRepoFileContents(string? clientId, string? clientSecret,
-            string owner, string repo, string path)
+            string owner, string repo, string path, string branch)
         {
             FileDetails? result = null;
             path = HttpUtility.UrlEncode(path);
-            string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
+            string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
             System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)

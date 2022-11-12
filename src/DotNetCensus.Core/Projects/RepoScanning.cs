@@ -22,7 +22,7 @@ namespace DotNetCensus.Core.Projects
             {
                 projects = await SearchRepoDirectory(baseDir, baseDir.Path,
                     clientId, clientSecret,
-                    owner, repository);
+                    owner, repository, branch);
             }
 
             return projects;
@@ -30,7 +30,7 @@ namespace DotNetCensus.Core.Projects
 
         private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
             string? clientId, string? clientSecret,
-            string owner, string repository,
+            string owner, string repository, string branch,
             string? directoryBuildPropFileContent = null,
             int currentRecursionLevel = 1)
         {
@@ -48,7 +48,7 @@ namespace DotNetCensus.Core.Projects
                         FileInfo fileInfo = new(file);
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-                               owner, repository, filePath);
+                               owner, repository, filePath, branch);
                         List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null, directoryBuildPropFileContent);
                         if (directoryProjects.Count > 0)
                         {
@@ -69,7 +69,7 @@ namespace DotNetCensus.Core.Projects
                             foundProjectFile = true;
                             string filePath = (fullPath + "/" + file).Replace("//", "/");
                             FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-                                   owner, repository, filePath);
+                                   owner, repository, filePath, branch);
                             if (fileDetails != null)
                             {
                                 List<Project> directoryProjects = ProjectFileProcessing.SearchSecondaryProjects(fileInfo, filePath, fileDetails?.content);
@@ -96,7 +96,7 @@ namespace DotNetCensus.Core.Projects
                     {
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
-                               owner, repository, filePath);
+                               owner, repository, filePath, branch);
                         if (fileDetails != null)
                         {
                             newDirectoryBuildPropFileContent = fileDetails.content;
@@ -110,7 +110,7 @@ namespace DotNetCensus.Core.Projects
                     string filePath = (fullPath + "/" + subDirectory.Name).Replace("//", "/");
                     List<Project> projects2 = await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
-                        owner, repository,
+                        owner, repository, branch,
                         newDirectoryBuildPropFileContent,
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
