@@ -22,7 +22,8 @@ public class DirectoryAndRepoDataAccessComparisonTests : RepoBasedTests
         Repo? repo2 = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
-            Password = GitHubSecret
+            Password = GitHubSecret,
+            Branch = GetCurrentBranch()
         };
         string? file2 = null;
 
