@@ -1,6 +1,7 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census)](https://www.nuget.org/packages/dotnet-census/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
 **A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
@@ -8,10 +9,10 @@
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
 DotNet Census currently supports these .NET versions:
-- .NET 5/6/7/etc
-- .NET Core  (including .NET Core 1 and 1.1 project.json formats)
-- .NET Framework (including .NET Framework 3.5 website formats)
-- .NET Standard
+- .NET 5, 6, 7, 8, etc
+- .NET Core 1 to 3.1  (including older .NET Core 1 and 1.1 project.json formats)
+- .NET Framework (including .NET Framework 3.5 website formats with no project files)
+- .NET Standard 1 to 2.1
 
 Additionally, this tool supports:
 - The main .NET languages, including C#, VB.NET, F#, and VB6
