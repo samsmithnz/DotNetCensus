@@ -214,7 +214,7 @@ total frameworks                   6
     //With help from https://stackoverflow.com/a/48458952/337421
     private static string GetCurrentBranch()
     {
-        string branchname = "";
+        string branchName = "";
         ProcessStartInfo startInfo = new("git.exe")
         {
             UseShellExecute = false,
@@ -231,13 +231,17 @@ total frameworks                   6
 
         if (process != null && process.StandardOutput != null)
         {
-            branchname = process?.StandardOutput.ReadLine();
-            if (string.IsNullOrEmpty(branchname) == true)
+            string? result = process.StandardOutput.ReadLine();
+            if (string.IsNullOrEmpty(result) == true)
             {
-                branchname = "main";
+                branchName = "main";
+            }
+            else
+            {
+                branchName = result;
             }
         }
 
-        return branchname;
+        return branchName;
     }
 }
