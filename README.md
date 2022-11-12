@@ -1,7 +1,7 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
-[![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census?logo=NuGet&label=nuget%20dotnet%20tool)](https://www.nuget.org/packages/dotnet-census/)
-[![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?logo=NuGet&label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census?label=nuget%20dotnet%20tool)](https://www.nuget.org/packages/dotnet-census/)
+[![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
 **A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory.** 
