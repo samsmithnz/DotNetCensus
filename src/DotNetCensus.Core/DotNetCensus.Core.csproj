@@ -1,9 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/samsmithnz/DotNetCensus.Core</PackageProjectUrl>
+		<PackageDescription>A library to find and count .NET versions</PackageDescription>
+		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
+		<Authors>SamSmithNZ</Authors>
+		<PackageId>DotNetCensus.Core</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>

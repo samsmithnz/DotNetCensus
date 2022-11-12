@@ -14,7 +14,7 @@ public class Program
     public static void Main(string[] args)
     {
         //process arguments
-        ParserResult<Options>? options = Parser.Default.ParseArguments<Options>(args)
+        Parser.Default.ParseArguments<Options>(args)
                .WithParsed(RunOptions)
                .WithNotParsed(HandleParseError);
 

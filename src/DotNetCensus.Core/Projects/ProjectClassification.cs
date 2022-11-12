@@ -210,7 +210,8 @@ public static class ProjectClassification
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net6.0") ||
+        else if (framework.Contains("net6.0") || 
+            framework.Contains("net7.0") ||
             framework.Contains("netstandard") ||
             framework == "net462" ||
             framework == "v4.6.2" ||
@@ -222,7 +223,7 @@ public static class ProjectClassification
             //Supported/Ok/blue
             return "supported";
         }
-        else if (framework.Contains("net7.0"))
+        else if (framework.Contains("net8.0"))
         {
             return "in preview";
         }
