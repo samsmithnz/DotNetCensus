@@ -18,11 +18,20 @@ namespace DotNetCensus.Core.Projects
 
             //Recursively search directories until a project file is found
             List<Project> projects = new();
-            if (baseDir != null && baseDir.Path != null)
+            if (baseDir != null && baseDir.Path != null && 
+                (baseDir.Directories.Count > 0 || baseDir.Files.Count > 0))
             {
                 projects = await SearchRepoDirectory(baseDir, baseDir.Path,
                     clientId, clientSecret,
                     owner, repository);
+            }
+            else
+            {
+                Project blankProject = new()
+                {
+                    FrameworkCode = ""
+                };
+                projects.Add(blankProject);
             }
 
             return projects;

@@ -18,6 +18,7 @@ namespace DotNetCensus.Core.APIs
 
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
+            System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (string.IsNullOrEmpty(response) == false)
             {
@@ -41,7 +42,7 @@ namespace DotNetCensus.Core.APIs
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
                             fileInfo.Name.ToLower() == "directory.build.props")
                         {
-                            results.Add(new Project() 
+                            results.Add(new Project()
                             {
                                 Path = path,
                                 FileName = fileInfo.Name
@@ -76,6 +77,78 @@ namespace DotNetCensus.Core.APIs
                     byte[]? valueBytes = System.Convert.FromBase64String(result.content);
                     result.content = Encoding.UTF8.GetString(valueBytes);
                 }
+            }
+            return result;
+        }
+
+        public async static Task<List<RepoResponse>?> GetGitHubOrganizationRepos(string? clientId, string? clientSecret, string organization)
+        {
+            List<RepoResponse> results = new();
+            List<RepoResponse>? repos = null;
+
+            //https://docs.github.com/en/rest/repos/repos#list-organization-repositories
+            string url = $"https://api.github.com/orgs/{organization}/repos";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, false);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                if (response.Contains(@"""message"":""Not Found"""))
+                {
+                    repos = await GetGitHubOwnerRepos(clientId, clientSecret, organization);
+                }
+                else
+                {
+                    dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                    repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+                }
+            }
+            if (repos != null && repos.Count > 0)
+            {
+                foreach (RepoResponse item in repos)
+                {
+                    if (item != null &&
+                        item.archived == false &&
+                        item.disabled == false &&
+                        item.name != null)
+                    {
+                        results.Add(item);
+                    }
+                }
+            }
+            return results;
+        }
+
+        public async static Task<List<RepoResponse>?> GetGitHubOwnerRepos(string? clientId, string? clientSecret, string owner)
+        {
+            List<RepoResponse> results = new();
+            List<RepoResponse>? repos = null;
+
+            //https://docs.github.com/en/rest/repos/repos#list-repositories-for-the-authenticated-user
+            string url = $"https://api.github.com/user/repos?affiliation=owner";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                repos = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+            }
+            return repos;
+        }
+
+        public async static Task<int?> GetRateLimit(string? clientId, string? clientSecret)
+        {
+            int result = 0;
+            RateLimit? rateLimit = null;
+
+            //https://docs.github.com/en/rest/rate-limit
+            string url = $"https://api.github.com/rate_limit";
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                rateLimit = JsonConvert.DeserializeObject<RateLimit>(jsonObj?.ToString());
+            }
+            if (rateLimit != null && rateLimit.resources != null && rateLimit.resources.core != null)
+            {
+                result = rateLimit.resources.core.remaining;
             }
             return result;
         }

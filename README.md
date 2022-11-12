@@ -112,7 +112,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 ### To download results to a csv file, add the `-f` argument with a file name:
 `dotnet census -f c:\temp\results.csv`
 
-## To download results from a GitHub Repo, 
+### To download results from a GitHub Repo, 
 - Add the `-o` argument with the GitHub owner or organiation
 - Add the `-r` argument with the GitHub repo name
 - Add the `-u` argument with the GitHub user
@@ -122,8 +122,18 @@ For example, to download results from this repository:
 
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
+### To download results from a GitHub Organization or Owner (personal account), omit the `-r` argument. Note that this is an experimental feature, and currently only downloads the first 30 repos...
+- Add the `-o` argument with the GitHub owner or organiation
+- Add the `-u` argument with the GitHub user
+- Add the `-p` argument with the GitHub PAT Token password
+
+Note: For large organizations, this will time out. Open to solutions on how to handle this better.
+For example, to download results from this organization:
+
+`dotnet census -o samsmithnz -u samsmithnz -p <PAT_TOKEN>`
+
 ## What's next?
-- Add ability to scan target other types of Git Repos (Azure DevOps), and experiment with scanning organizations
+- Add ability to scan target other types of Git Repos (Azure DevOps)
 
 ## Contributions
 If you have a sample that you think should have been picked up, please create an issue or a PR! I'm happy to consider anything, and I know this isn't perfect!  

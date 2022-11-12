@@ -15,11 +15,11 @@ public class DirectoryAndRepoDataAccessComparisonTests : RepoBasedTests
         //Arrange
         bool includeTotals = true;
         string? directory = SamplesPath?.Replace("samples", "");
-        Repo? repo = null;
+        Target? repo = null;
         string? file = null;
         bool includeTotals2 = true;
         string? directory2 = null;
-        Repo? repo2 = new("samsmithnz", "DotNetCensus")
+        Target? repo2 = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
             Password = GitHubSecret

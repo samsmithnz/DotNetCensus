@@ -9,12 +9,12 @@ public class RepoDataAccessTests : RepoBasedTests
 {
 
     [TestMethod]
-    public void FrameworkSummaryWithRepoTest()
+    public void FrameworkSummaryWithGitHubRepoTest()
     {
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = new("samsmithnz", "DotNetCensus")
+        Target? repo = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -63,11 +63,11 @@ total frameworks                       37
     }
 
     [TestMethod]
-    public void InventoryResultsWithRepoTest()
+    public void InventoryResultsWithGitHubRepoTest()
     {
         //Arrange
         string? directory = null;
-        Repo? repo = new("samsmithnz", "DotNetCensus")
+        Target? repo = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -124,13 +124,150 @@ total frameworks                       37
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
+
+    [TestMethod]
+    public void FrameworkSummaryWithGitHubOrganizationTest()
+    {
+        //Arrange
+        bool includeTotals = true;
+        string? directory = null;
+        Target? repo = new("SamSmithNZ-dotcom")
+        {
+            User = GitHubId,
+            Password = GitHubSecret
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework             FrameworkFamily  Count  Status    
+--------------------------------------------------------
+                      (Unknown)        2      unknown   
+.NET 5.0              .NET             4      deprecated
+.NET 5.0-windows      .NET             2      deprecated
+.NET 6.0              .NET             7      supported 
+.NET 6.0-windows      .NET             2      supported 
+.NET Framework 4.7.2  .NET Framework   1      supported 
+total frameworks                       18               
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void InventoryResultsWithGitHubOrganizationTest()
+    {
+        //Arrange
+        string? directory = null;
+        Target? repo = new("SamSmithNZ-dotcom")
+        {
+            User = GitHubId,
+            Password = GitHubSecret
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Organization       Repo            Path                                                                                            FileName                                      FrameworkCode   FrameworkName         Family          Language  Status    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SamSmithNZ-dotcom  .github                                                                                                                                                                                                                                 
+SamSmithNZ-dotcom  MandMCounter    /MandMCounter/MandMCounter.Core/MandMCounter.Core.csproj                                        MandMCounter.Core.csproj                      net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  MandMCounter    /MandMCounter/MandMCounter.Service/MandMCounter.Service.csproj                                  MandMCounter.Service.csproj                   net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  MandMCounter    /MandMCounter/MandMCounter.Tests/MandMCounter.Tests.csproj                                      MandMCounter.Tests.csproj                     net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  SamLearnsAzure                                                                                                                                                                                                                          
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.Database/SamSmithNZ.Database.sqlproj                                     SamSmithNZ.Database.sqlproj                   v4.7.2          .NET Framework 4.7.2  .NET Framework  csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.FFLSetlistScraper.WinForms/SamSmithNZ.FFLSetlistScraper.WinForms.csproj  SamSmithNZ.FFLSetlistScraper.WinForms.csproj  net6.0-windows  .NET 6.0-windows      .NET            csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.FunctionalTests/SamSmithNZ.FunctionalTests.csproj                        SamSmithNZ.FunctionalTests.csproj             net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.Service/SamSmithNZ.Service.csproj                                        SamSmithNZ.Service.csproj                     net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.Tests/SamSmithNZ.Tests.csproj                                            SamSmithNZ.Tests.csproj                       net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.Web/SamSmithNZ.Web.csproj                                                SamSmithNZ.Web.csproj                         net6.0          .NET 6.0              .NET            csharp    supported 
+SamSmithNZ-dotcom  SamSmithNZ.com  /SamSmithNZ/SamSmithNZ.WorldCupGoals.WPF/SamSmithNZ.WorldCupGoals.WPF.csproj                    SamSmithNZ.WorldCupGoals.WPF.csproj           net6.0-windows  .NET 6.0-windows      .NET            csharp    supported 
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.FunctionalTests/SSNZ.FunctionalTests.csproj                                          SSNZ.FunctionalTests.csproj                   net5.0          .NET 5.0              .NET            csharp    deprecated
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.Tests/SSNZ.Tests.csproj                                                              SSNZ.Tests.csproj                             net5.0          .NET 5.0              .NET            csharp    deprecated
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.Web/SSNZ.Web.csproj                                                                  SSNZ.Web.csproj                               net5.0          .NET 5.0              .NET            csharp    deprecated
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.WebAPI/SSNZ.WebAPI.csproj                                                            SSNZ.WebAPI.csproj                            net5.0          .NET 5.0              .NET            csharp    deprecated
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.WinForms/SSNZ.WinForms.csproj                                                        SSNZ.WinForms.csproj                          net5.0-windows  .NET 5.0-windows      .NET            csharp    deprecated
+SamSmithNZ-dotcom  SSNZPOC         /SSNZ/SSNZ.WPF/SSNZ.WPF.csproj                                                                  SSNZ.WPF.csproj                               net5.0-windows  .NET 5.0-windows      .NET            csharp    deprecated
+";
+
+            //Act
+            string? contents = Main.GetInventoryResults(directory, repo, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    //    [TestMethod]
+    //    public void FrameworkSummaryWithGitHubOwnerTest()
+    //    {
+    //        //Arrange
+    //        bool includeTotals = true;
+    //        string? directory = null;
+    //        Target? repo = new("SamSmithNZ")
+    //        {
+    //            User = GitHubId,
+    //            Password = GitHubSecret
+    //        };
+    //        string? file = null;
+    //        if (directory != null || repo != null)
+    //        {
+    //            string expected = @"Framework          FrameworkFamily  Count  Status   
+    //----------------------------------------------------
+    //.NET 6.0           .NET             1      supported
+    //.NET Standard 2.0  .NET Standard    1      supported
+    //total frameworks                    2               
+    //";
+
+    //            //Act
+    //            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+
+    //            //Asset
+    //            Assert.IsNotNull(expected);
+    //            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+    //        }
+    //    }
+
+    //    [TestMethod]
+    //    public void InventoryResultsWithGitHubOwnerTest()
+    //    {
+    //        //Arrange
+    //        string? directory = null;
+    //        Target? repo = new("SamSmithNZ")
+    //        {
+    //            User = GitHubId,
+    //            Password = GitHubSecret
+    //        };
+    //        string? file = null;
+    //        if (directory != null || repo != null)
+    //        {
+    //            string expected = @"Path                                                                                                   FileName                                             FrameworkCode   FrameworkName      Family         Language  Status   
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ///src/AzurePipelinesToGitHubActionsConverter.Core/AzurePipelinesToGitHubActionsConverter.Core.csproj    AzurePipelinesToGitHubActionsConverter.Core.csproj   netstandard2.0  .NET Standard 2.0  .NET Standard  csharp    supported
+    ///src/AzurePipelinesToGitHubActionsConverter.Tests/AzurePipelinesToGitHubActionsConverter.Tests.csproj  AzurePipelinesToGitHubActionsConverter.Tests.csproj  net6.0          .NET 6.0           .NET           csharp    supported
+    //";
+
+    //            //Act
+    //            string? contents = Main.GetInventoryResults(directory, repo, file);
+
+    //            //Asset
+    //            Assert.IsNotNull(expected);
+    //            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+    //        }
+    //    }
+
     [TestMethod]
     public void FrameworkSummaryWithPrivateRepoTest()
     {
         //Arrange
         bool includeTotals = true;
         string? directory = null;
-        Repo? repo = new("SamSmithNZ-dotcom", "SSNZPOC")
+        Target? repo = new("SamSmithNZ-dotcom", "SSNZPOC")
         {
             User = GitHubId,
             Password = GitHubSecret
@@ -154,3 +291,4 @@ total frameworks                   6
         }
     }
 }
+    
