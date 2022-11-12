@@ -29,7 +29,7 @@ public class RepoBasedTests : DirectoryBasedTests
     public string GetCurrentBranch()
     {
         string branchName = "";
-        ProcessStartInfo startInfo = new("git.exe")
+        ProcessStartInfo startInfo = new("git")
         {
             UseShellExecute = false,
             WorkingDirectory = Directory.GetCurrentDirectory(),
