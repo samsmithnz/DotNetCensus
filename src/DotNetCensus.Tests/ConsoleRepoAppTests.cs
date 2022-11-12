@@ -25,7 +25,7 @@ public class ConsoleRepoAppTests : RepoBasedTests
 .NET 6.0              .NET             4      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             4      supported       
+.NET 7.0              .NET             5      supported       
 .NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
@@ -47,7 +47,7 @@ public class ConsoleRepoAppTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       37                     
+total frameworks                       38                     
 
 ";
 
@@ -82,7 +82,7 @@ total frameworks                       37
 .NET 6.0              .NET             4      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             4      supported       
+.NET 7.0              .NET             5      supported       
 .NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
@@ -104,7 +104,7 @@ total frameworks                       37
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       37                     
+total frameworks                       38                     
 
 ";
 

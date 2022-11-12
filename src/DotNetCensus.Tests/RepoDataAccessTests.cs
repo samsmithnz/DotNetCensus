@@ -30,7 +30,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET 6.0              .NET             4      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             4      supported       
+.NET 7.0              .NET             5      supported       
 .NET 8.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
@@ -52,7 +52,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    1      supported       
 (Unknown)             (Unknown)        1      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
-total frameworks                       37                     
+total frameworks                       38                     
 ";
 
             //Act
@@ -144,6 +144,7 @@ total frameworks                       38
 /samples/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                    Calculator.csproj                           net6.0-android  .NET 6.0-android      .NET            csharp    supported       
 /samples/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                   Sample.Net6.ConsoleApp.csproj               net6.0          .NET 6.0              .NET            csharp    supported       
 /samples/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                            Sample.Net7.ConsoleApp.csproj               net7.0          .NET 7.0              .NET            csharp    supported       
+/samples/Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj                          Sample.Net7.ConsoleApp2.csproj              net7.0          .NET 7.0              .NET            csharp    supported       
 /samples/Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                            Sample.Net8.ConsoleApp.csproj               net8.0          .NET 8.0              .NET            csharp    in preview      
 /samples/Sample.NetCore1.0.ConsoleApp/project.json                                       project.json                                netcoreapp1.0   .NET Core 1.0         .NET Core       csharp    deprecated      
 /samples/Sample.NetCore1.1.ConsoleApp/project.json                                       project.json                                netcoreapp1.1   .NET Core 1.1         .NET Core       csharp    deprecated      

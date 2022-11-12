@@ -42,8 +42,9 @@ public class Program
         {
             _repo = new Repo(opts.Owner, opts.Repo)
             {
-                User = opts.Repo,
-                Password = opts.Password
+                User = opts.Repo, //This is not a typo - we are using the repo name as the user
+                Password = opts.Password,
+                Branch = opts.Branch
             };
         }
         if (_directory == null && _repo == null)
