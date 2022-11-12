@@ -127,7 +127,7 @@ For example, to download results from this repository:
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 ## What's next?
-- We are currently experimenting with scanning entire organizations
+- We are currently experimenting with scanning entire [organizations](https://github.com/samsmithnz/DotNetCensus/pull/48)
 - Possibly considering adding the ability to scan target other types of Git Repos (e.g. Azure DevOps, BitBucket, etc)
 
 ## Contributions
