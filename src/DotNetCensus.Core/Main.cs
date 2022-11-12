@@ -21,9 +21,14 @@ public static class Main
             string? repository = repo.Repository;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
+            string? branch = repo.Branch;
+            if (string.IsNullOrEmpty(branch) == true)
+            {
+                branch = "main";
+            }
             projects = Task.Run(async () =>
                 await RepoScanning.SearchRepo(clientId, clientSecret,
-                owner, repository, "main")).Result;
+                owner, repository, branch)).Result;
         }
         //Need to sort so that Linux + Windows results are the same
         if (projects != null)

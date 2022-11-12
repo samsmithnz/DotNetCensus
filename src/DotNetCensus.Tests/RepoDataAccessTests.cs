@@ -210,38 +210,4 @@ total frameworks                   6
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
-
-    //With help from https://stackoverflow.com/a/48458952/337421
-    private static string GetCurrentBranch()
-    {
-        string branchName = "";
-        ProcessStartInfo startInfo = new("git.exe")
-        {
-            UseShellExecute = false,
-            WorkingDirectory = Directory.GetCurrentDirectory(),
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            Arguments = "rev-parse --abbrev-ref HEAD"
-        };
-        Process process = new()
-        {
-            StartInfo = startInfo
-        };
-        process.Start();
-
-        if (process != null && process.StandardOutput != null)
-        {
-            string? result = process.StandardOutput.ReadLine();
-            if (string.IsNullOrEmpty(result) == true)
-            {
-                branchName = "main";
-            }
-            else
-            {
-                branchName = result;
-            }
-        }
-
-        return branchName;
-    }
 }
