@@ -218,7 +218,7 @@ total frameworks                   6
         ProcessStartInfo startInfo = new("git.exe")
         {
             UseShellExecute = false,
-            WorkingDirectory = "dir Here",
+            WorkingDirectory = Directory.GetCurrentDirectory(),
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
             Arguments = "rev-parse --abbrev-ref HEAD"
