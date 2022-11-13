@@ -29,8 +29,8 @@ public class DirectoryAndRepoDataAccessComparisonTests : RepoBasedTests
 
 
         //Act
-        string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
-        string? contents2 = Main.GetFrameworkSummary(directory2, repo2, includeTotals2, file2);
+        string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+        string? contents2 = Main.GetFrameworkSummaryAsString(directory2, repo2, includeTotals2, file2);
 
         //Asset
         Assert.IsNotNull(contents);

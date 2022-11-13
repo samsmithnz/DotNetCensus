@@ -23,11 +23,11 @@ public class Program
         {
             if (_includeInventory == true)
             {
-                Core.Main.GetInventoryResults(_directory, _repo, _file);
+                Core.Main.GetInventoryResultsAsString(_directory, _repo, _file);
             }
             else
             {
-                Core.Main.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
+                Core.Main.GetFrameworkSummaryAsString(_directory, _repo, _includeTotals, _file);
             }
         }
     }
