@@ -38,7 +38,7 @@ public static class Main
         return sortedProjects;
     }
 
-    public static string? GetInventoryResults(string? directory, Repo? repo, string? file)
+    public static string? GetInventoryResultsAsString(string? directory, Repo? repo, string? file)
     {
         List<Project> projects = GetProjects(directory, repo);
 
@@ -86,10 +86,31 @@ public static class Main
         }
     }
 
-    public static string? GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals, string? file)
+    /// <summary>
+    /// Return a list of Framework summary for each framework found 
+    /// </summary>
+    /// <param name="directory">directory to scan</param>
+    /// <param name="repo">GitHub repo to scan</param>
+    /// <param name="includeTotals">include a totals row</param>
+    /// <returns></returns>
+    public static List<FrameworkSummary> GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals)
     {
         List<Project> projects = GetProjects(directory, repo);
-        List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);
+        List<FrameworkSummary> frameworkSummary = Census.AggregateFrameworks(projects, includeTotals);
+        return frameworkSummary;
+    }
+
+    /// <summary>
+    /// Return a string of the framework summary. Can also write to a file
+    /// </summary>
+    /// <param name="directory">directory to scan</param>
+    /// <param name="repo">GitHub repo to scan</param>
+    /// <param name="includeTotals">include a totals row</param>
+    /// <param name="file">output string to a file</param>
+    /// <returns></returns>
+    public static string? GetFrameworkSummaryAsString(string? directory, Repo? repo, bool includeTotals, string? file)
+    {
+        List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
 
         if (string.IsNullOrEmpty(file) == true)
         {

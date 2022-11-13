@@ -20,7 +20,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 ";
 
         //Act
-        string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+        string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
         //Asset
         Assert.IsNotNull(expected);
@@ -68,7 +68,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -92,7 +92,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -141,7 +141,7 @@ total frameworks                       33
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -190,7 +190,7 @@ total frameworks,,33,
 ";
 
             //Act
-            Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
@@ -246,7 +246,7 @@ total frameworks,,33,
 ";
 
             //Act
-            string? contents = Main.GetInventoryResults(directory, repo, file);
+            string? contents = Main.GetInventoryResultsAsString(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -265,7 +265,7 @@ total frameworks,,33,
         if (directory != null || repo != null)
         {
             //Act
-            string? contents = Main.GetInventoryResults(directory, repo, file);
+            string? contents = Main.GetInventoryResultsAsString(directory, repo, file);
             if (contents != null)
             {
                 string[] lines = contents.Split(Environment.NewLine);
@@ -331,7 +331,7 @@ total frameworks,,33,
 ";
 
             //Act
-            Main.GetInventoryResults(directory, repo, file);
+            Main.GetInventoryResultsAsString(directory, repo, file);
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset

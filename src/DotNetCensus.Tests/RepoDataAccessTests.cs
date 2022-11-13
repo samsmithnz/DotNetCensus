@@ -56,7 +56,7 @@ total frameworks                       38
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -111,7 +111,7 @@ total frameworks                       38
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -175,7 +175,7 @@ total frameworks                       38
 ";
 
             //Act
-            string? contents = Main.GetInventoryResults(directory, repo, file);
+            string? contents = Main.GetInventoryResultsAsString(directory, repo, file);
 
             //Asset
             Assert.IsNotNull(expected);
@@ -204,7 +204,7 @@ total frameworks                   6
 ";
 
             //Act
-            string? contents = Main.GetFrameworkSummary(directory, repo, includeTotals, file);
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
 
             //Asset
             Assert.IsNotNull(expected);
