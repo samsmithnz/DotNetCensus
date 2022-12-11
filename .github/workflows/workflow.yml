@@ -40,13 +40,15 @@ jobs:
         AppSettings.GitHubClientId: "${{ secrets.GitHubClientId }}"
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
-      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
-    - run: find / -name "TestResults"
+      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=${{ github.workspace }}/TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
+    - run: |
+        cd/${{ github.workspace }}/TestResults
+        ls
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: TestResults/coverage.info
+        path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
     - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
