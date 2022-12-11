@@ -45,7 +45,7 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: TestResults/
+        path-to-lcov: TestResults/coverage.info
     - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
