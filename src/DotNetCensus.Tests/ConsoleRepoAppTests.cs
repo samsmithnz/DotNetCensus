@@ -33,7 +33,7 @@ public class ConsoleRepoAppTests : RepoBasedTests
 .NET Core 2.1         .NET Core        1      deprecated      
 .NET Core 2.2         .NET Core        1      deprecated      
 .NET Core 3.0         .NET Core        2      deprecated      
-.NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
+.NET Core 3.1         .NET Core        3      deprecated
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
 .NET Framework 2.0    .NET Framework   1      deprecated      
@@ -90,7 +90,7 @@ total frameworks                       38
 .NET Core 2.1         .NET Core        1      deprecated      
 .NET Core 2.2         .NET Core        1      deprecated      
 .NET Core 3.0         .NET Core        2      deprecated      
-.NET Core 3.1         .NET Core        3      EOL: 13-Dec-2022
+.NET Core 3.1         .NET Core        3      deprecated      
 .NET Framework 1.0    .NET Framework   1      deprecated      
 .NET Framework 1.1    .NET Framework   1      deprecated      
 .NET Framework 2.0    .NET Framework   1      deprecated      
