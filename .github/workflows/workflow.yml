@@ -40,13 +40,9 @@ jobs:
         AppSettings.GitHubClientId: "${{ secrets.GitHubClientId }}"
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
-      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug  /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
-      env:
-        CollectCoverage: true
-        CoverletOutput: TestResults/
-        CoverletOutputFormat: lcov
+      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug  /e:CollectCoverage=true /e:CoverletOutput=TestResults/ /e:CoverletOutputFormat=lcov
     - run: |
-        cd TestResults
+        cd/TestResults
         ls 
         #Get-ChildItem -Path TestResults -Filter *.* -Recurse -ErrorAction SilentlyContinue -Force
     - name: Coveralls
