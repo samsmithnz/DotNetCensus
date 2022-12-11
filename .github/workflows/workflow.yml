@@ -42,7 +42,7 @@ jobs:
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug  /e:CollectCoverage=true /e:CoverletOutput=TestResults/ /e:CoverletOutputFormat=lcov
     - run: |
-        cd/TestResults
+        cd/${{ github.workspace }}/TestResults
         ls 
         #Get-ChildItem -Path TestResults -Filter *.* -Recurse -ErrorAction SilentlyContinue -Force
     - name: Coveralls
