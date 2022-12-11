@@ -194,16 +194,11 @@ public static class ProjectClassification
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
             framework.Contains("netcoreapp2") ||
-            framework == "netcoreapp3.0" ||
+            framework.Contains("netcoreapp3") ||
             framework.Contains("net5.0"))
         {
             //Unsupported/End of life/red
             return "deprecated";
-        }
-        else if (framework == "netcoreapp3.1")
-        {
-            //Supported, but old/orange
-            return "EOL: 13-Dec-2022";
         }
         else if (framework.Contains("v3.5"))
         {
