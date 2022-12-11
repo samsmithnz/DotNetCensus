@@ -41,10 +41,6 @@ jobs:
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=${{ github.workspace }}/TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
-    - run: |
-        cd/${{ github.workspace }}/TestResults
-        ls
-      if: false
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
