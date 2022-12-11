@@ -44,6 +44,7 @@ jobs:
     - run: |
         cd/${{ github.workspace }}/TestResults
         ls
+      if: false
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
