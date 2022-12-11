@@ -45,7 +45,10 @@ jobs:
         CollectCoverage: true
         CoverletOutput: TestResults/
         CoverletOutputFormat: lcov
-    - run: Get-ChildItem -Path TestResults -Filter *.* -Recurse -ErrorAction SilentlyContinue -Force
+    - run: |
+        cd TestResults
+        ls 
+        #Get-ChildItem -Path TestResults -Filter *.* -Recurse -ErrorAction SilentlyContinue -Force
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
