@@ -20,7 +20,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
 		<PackageReference Include="Spectre.Console" Version="0.45.0" />
-		<PackageReference Include="System.Text.Json" Version="6.0.6" />
+		<PackageReference Include="System.Text.Json" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
