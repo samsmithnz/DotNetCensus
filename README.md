@@ -1,5 +1,7 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
+[![Coverage Status](https://coveralls.io/repos/github/samsmithnz/AzurePipelinesToGitHubActionsConverter/badge.svg?branch=main)](https://coveralls.io/github/samsmithnz/AzurePipelinesToGitHubActionsConverter?branch=main)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samsmithnz_DotNetCensus&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samsmithnz_DotNetCensus)
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census?label=nuget%20dotnet%20tool)](https://www.nuget.org/packages/dotnet-census/)
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
