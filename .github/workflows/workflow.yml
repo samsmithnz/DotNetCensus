@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
     - main
+  workflow_dispatch:
 jobs:
   build:
     name: Build job
@@ -41,10 +42,6 @@ jobs:
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=${{ github.workspace }}/TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
-    - run: |
-        cd/${{ github.workspace }}/TestResults
-        ls
-      if: false
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
@@ -105,7 +102,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"samsmithnz_SamSmithNZ.com" /o:"samsmithnz-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"samsmithnz_DotNetCensus" /o:"samsmithnz-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build src/DotNetCensus/DotNetCensus.csproj
           dotnet build src/DotNetCensus.Core/DotNetCensus.Core.csproj
           dotnet build src/DotNetCensus.Tests/DotNetCensus.Tests.csproj
