@@ -29,7 +29,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
-            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
         else
@@ -52,7 +52,7 @@ public static class Main
 
             //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
-            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
     }
@@ -80,7 +80,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
-            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
         else
@@ -100,7 +100,7 @@ public static class Main
 
             //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
-            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}" );
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
     }
