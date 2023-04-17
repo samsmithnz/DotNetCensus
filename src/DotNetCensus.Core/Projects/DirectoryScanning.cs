@@ -54,6 +54,11 @@ namespace DotNetCensus.Core.Projects
                 }
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
+                    // don't drill into git directory
+                    if (subDirectory.Name == ".git") {
+                        continue;
+                    }
+
                     //Prevent blocking when debugging in Visual Studio.
                     if (subDirectory.Name != ".vs")
                     {
