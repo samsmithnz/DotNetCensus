@@ -8,6 +8,7 @@ public static class Main
 {
     public static string? GetInventoryResultsAsString(string? directory, Repo? repo, string? file)
     {
+        DateTime startTime = DateTime.Now;
         List<Project> projects = GetProjects(directory, repo);
 
         //If it's inventory output, remove the full path from each project
@@ -28,6 +29,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
+            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
             return result;
         }
         else
@@ -50,6 +52,7 @@ public static class Main
 
             //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
+            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
             return result;
         }
     }
@@ -64,6 +67,7 @@ public static class Main
     /// <returns></returns>
     public static string? GetFrameworkSummaryAsString(string? directory, Repo? repo, bool includeTotals, string? file)
     {
+        DateTime startTime = DateTime.Now;
         List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
 
         if (string.IsNullOrEmpty(file) == true)
@@ -76,6 +80,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
+            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}");
             return result;
         }
         else
@@ -95,6 +100,7 @@ public static class Main
 
             //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
+            Console.WriteLine($"Time elapsed: {(DateTime.Now - startTime).TotalMinutes.ToString()}:{(DateTime.Now - startTime).TotalSeconds.ToString("00")}" );
             return result;
         }
     }
