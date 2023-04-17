@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -54,8 +55,12 @@ namespace DotNetCensus.Core.Projects
                 }
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
-                    //Prevent blocking when debugging in Visual Studio.
-                    if (subDirectory.Name != ".vs")
+                    //Avoid the .git and .vs directories, they tend to be large, slow down the scan, and we don't need the data within them.
+                    if (subDirectory.Name != ".devcontainer" && 
+                        subDirectory.Name != ".git" && 
+                        subDirectory.Name != ".github" && 
+                        subDirectory.Name != ".vs" && 
+                        subDirectory.Name != ".vscode")
                     {
                         projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
                     }

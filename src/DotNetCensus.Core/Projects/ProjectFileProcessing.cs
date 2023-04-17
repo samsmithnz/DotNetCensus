@@ -44,11 +44,6 @@ namespace DotNetCensus.Core.Projects
         public static List<Project> SearchSecondaryProjects(FileInfo fileInfo, string filePath, string? content)
         {
             string fileName = fileInfo.Name;
-            if (content == null)
-            {
-                //This is a directory search - not a repo search and we need to read in the contents of the file
-                content = File.ReadAllText(filePath);
-            }
             List<Project> projects = new();
 
             //is it a .NET Core 1.0 or 1.1 project? These didn't use the project file format...
@@ -57,6 +52,11 @@ namespace DotNetCensus.Core.Projects
             {
                 //Check to see if it's a VB.NET or C# project
                 string language = ProjectClassification.GetLanguage(fileInfo.Directory.FullName);
+                if (content == null)
+                {
+                    //This is a directory search - not a repo search and we need to read in the contents of the file
+                    content = File.ReadAllText(filePath);
+                }
                 projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
             //is it a .NET Framework 2.0 or 3.5 web site - which has no project file
@@ -65,6 +65,11 @@ namespace DotNetCensus.Core.Projects
             {
                 //Check to see if it's a VB.NET or C# project
                 string language = ProjectClassification.GetLanguage(fileInfo.Directory.FullName);
+                if (content == null)
+                {
+                    //This is a directory search - not a repo search and we need to read in the contents of the file
+                    content = File.ReadAllText(filePath);
+                }
                 projects.AddRange(ProcessProjectFile(fileName, filePath, language, content));
             }
 
