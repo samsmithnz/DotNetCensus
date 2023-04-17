@@ -63,6 +63,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
+            result = TextHelper.CleanTimingFromResult(result);
             Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
 
@@ -117,6 +118,7 @@ total frameworks,,35,
             string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
             //Asset
+            result = TextHelper.CleanTimingFromResult(result);
             Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }

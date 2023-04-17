@@ -59,6 +59,7 @@ total frameworks                       38
 
             //Asset
             Assert.IsNotNull(result);
+            result = TextHelper.CleanTimingFromResult(result);
             Assert.AreEqual(expected, result);
         }
     }
@@ -116,6 +117,7 @@ total frameworks                       38
 
             //Asset
             Assert.IsNotNull(result);
+            result = TextHelper.CleanTimingFromResult(result);
             Assert.AreEqual(expected, result);
         }
     }

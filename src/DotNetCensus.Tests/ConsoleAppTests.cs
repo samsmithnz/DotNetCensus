@@ -1,4 +1,5 @@
 using DotNetCensus.Tests.Helpers;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace DotNetCensus.Tests;
 
@@ -27,6 +28,7 @@ Framework  FrameworkFamily  Count  Status
 
         //Asset
         Assert.IsNotNull(expected);
+        result= TextHelper.CleanTimingFromResult(result);
         Assert.AreEqual(expected, result);
     }
 
