@@ -105,6 +105,20 @@ public static class Main
         }
     }
 
+    /// <summary>
+    /// Return a list of Framework summary for each framework found 
+    /// </summary>
+    /// <param name="directory">directory to scan</param>
+    /// <param name="repo">GitHub repo to scan</param>
+    /// <param name="includeTotals">include a totals row</param>
+    /// <returns></returns>
+    public static List<FrameworkSummary> GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals)
+    {
+        List<Project> projects = GetProjects(directory, repo);
+        List<FrameworkSummary> frameworkSummary = Census.AggregateFrameworks(projects, includeTotals);
+        return frameworkSummary;
+    }
+
 
     private static List<Project> GetProjects(string? directory, Repo? repo)
     {
@@ -136,19 +150,5 @@ public static class Main
             sortedProjects = projects.OrderBy(o => o.Path).ToList();
         }
         return sortedProjects;
-    }
-
-    /// <summary>
-    /// Return a list of Framework summary for each framework found 
-    /// </summary>
-    /// <param name="directory">directory to scan</param>
-    /// <param name="repo">GitHub repo to scan</param>
-    /// <param name="includeTotals">include a totals row</param>
-    /// <returns></returns>
-    private static List<FrameworkSummary> GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals)
-    {
-        List<Project> projects = GetProjects(directory, repo);
-        List<FrameworkSummary> frameworkSummary = Census.AggregateFrameworks(projects, includeTotals);
-        return frameworkSummary;
     }
 }
