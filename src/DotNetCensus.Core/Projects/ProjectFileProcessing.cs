@@ -7,7 +7,6 @@ namespace DotNetCensus.Core.Projects
     {
         public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath,
             string? content,
-            FileInfo? directoryBuildPropFile = null,
             string? directoryBuildPropFileContent = null)
         {
             string fileName = fileInfo.Name;
@@ -15,11 +14,6 @@ namespace DotNetCensus.Core.Projects
             {
                 //This is a directory search - not a repo search and we need to read in the contents of the file
                 content = File.ReadAllText(filePath);
-            }
-            //If there is a directory file being passed in - convert it to content
-            if (directoryBuildPropFile != null)
-            {
-                directoryBuildPropFileContent = File.ReadAllText(directoryBuildPropFile.FullName);
             }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
