@@ -255,6 +255,40 @@ total frameworks,,33,
     }
 
     [TestMethod]
+    public void InventoryMultipleDirectoryBuildPropsResultsTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"\Sample.Multiple.Directory.Build.Props";
+        Repo? repo = null;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Path                                                                                                       FileName                                      FrameworkCode                                                     FrameworkName      Family         Language  Status   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/src/tools/illink/src/analyzer/analyzer.csproj                                                             analyzer.csproj                                                                                                 (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj                                         ILLink.CodeFixProvider.csproj                 netstandard2.0                                                    .NET Standard 2.0  .NET Standard  csharp    supported
+/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj                                   ILLink.RoslynAnalyzer.csproj                  netstandard2.0                                                    .NET Standard 2.0  .NET Standard  csharp    supported
+/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                                                     ILLink.Tasks.csproj                           <NetCoreAppToolCurrentVersion>8.0</NetCoreAppToolCurrentVersion>  (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/src/linker/Mono.Linker.csproj                                                            Mono.Linker.csproj                                                                                              (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/src/tlens/tlens.csproj                                                                   tlens.csproj                                                                                                    (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/test/ILLink.RoslynAnalyzer.Tests.Generator/ILLink.RoslynAnalyzer.Tests.Generator.csproj  ILLink.RoslynAnalyzer.Tests.Generator.csproj  netstandard2.0                                                    .NET Standard 2.0  .NET Standard  csharp    supported
+/src/tools/illink/test/ILLink.RoslynAnalyzer.Tests/ILLink.RoslynAnalyzer.Tests.csproj                      ILLink.RoslynAnalyzer.Tests.csproj                                                                              (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/test/ILLink.Tasks.Tests/ILLink.Tasks.Tests.csproj                                        ILLink.Tasks.Tests.csproj                                                                                       (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/test/Mono.Linker.Tests.Cases.Expectations/Mono.Linker.Tests.Cases.Expectations.csproj    Mono.Linker.Tests.Cases.Expectations.csproj                                                                     (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/test/Mono.Linker.Tests.Cases/Mono.Linker.Tests.Cases.csproj                              Mono.Linker.Tests.Cases.csproj                                                                                  (Unknown)          (Unknown)      csharp    unknown  
+/src/tools/illink/test/Mono.Linker.Tests/Mono.Linker.Tests.csproj                                          Mono.Linker.Tests.csproj                                                                                        (Unknown)          (Unknown)      csharp    unknown  
+";
+
+            //Act
+            string? contents = Main.GetInventoryResultsAsString(directory, repo, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
     public void InventoryResultsWebConfigCountTest()
     {
         //Arrange
