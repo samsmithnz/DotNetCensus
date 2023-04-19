@@ -265,11 +265,6 @@ namespace DotNetCensus.Core.Projects
                     }
 
                 }
-
-
-                //string 
-                //project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
-
             }
 
             if (project != null)
