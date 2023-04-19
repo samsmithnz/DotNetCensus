@@ -197,7 +197,7 @@ public static class ProjectClassification
             framework.Contains("netcoreapp1") ||
             framework.Contains("netcoreapp2") ||
             framework.Contains("netcoreapp3") ||
-            framework.Contains("netcoreapp5") ||
+            framework.Contains("netcoreapp5") || //details about netcoreapp5 are unclear, but this scenario was mentioned as supported here: https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md
             framework.Contains("net5.0"))
         {
             //Unsupported/End of life/red
