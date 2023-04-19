@@ -198,8 +198,80 @@ namespace DotNetCensus.Core.Projects
                 //If we didn't find targetframework in the project file, check the Directory.Build.props file
                 if (fileName == "analyzer.csproj")
                 {
-                    Debug.WriteLine("HERE!");
+                    //Debug.WriteLine("HERE!");
+                    if (project.FrameworkCode == "" &&
+                        directoryBuildPropFileContent != null)
+                    {
+                        //Debug.WriteLine("HERE2!");
+                        //CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
+                        //while (directoryBuildPropFileContent.IndexOf("<TargetFramework>") >= 0)
+                        //{
+                        //    string line = directoryBuildPropFileContent.Substring(directoryBuildPropFileContent.IndexOf("<TargetFramework>"));
+                        //    line = line.Substring(0, line.IndexOf("</TargetFramework>") + 18);
+                        //    project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+                        //    directoryBuildPropFileContent = directoryBuildPropFileContent.Replace(line, "");
+                        //}
+                        lines = directoryBuildPropFileContent.Split("\n");
+                        foreach (string line in lines)
+                        {
+                            //.NET Framework version element
+                            if (line.IndexOf("<TargetFrameworkVersion>") > 0)
+                            {
+                                project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
+                                break;
+                            }
+                            //.NET Core version element
+                            else if (line.IndexOf("<TargetFramework>") > 0)
+                            {
+                                project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+                                break;
+                            }
+                            //Multiple .NET flavors element
+                            else if (line.IndexOf("<TargetFrameworks>") > 0)
+                            {
+                                string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
+                                string[] frameworkList = frameworks.Split(';');
+                                for (int i = 0; i < frameworkList.Length - 1; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent);
+                                    }
+                                    else
+                                    {
+                                        Project additionalProject = new()
+                                        {
+                                            FileName = new FileInfo(filePath).Name,
+                                            Path = filePath,
+                                            Language = language,
+                                            FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent)
+                                        };
+                                        projects.Add(additionalProject);
+                                    }
+                                }
+                                break;
+                            }
+                            //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
+                            else if (line.IndexOf("<ProductVersion>") > 0 ||
+                                     line.IndexOf("ProductVersion = ") > 0)
+                            {
+                                project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
+                                //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
+                            }
+                            ////Unity 3d project files
+                            //else if (line.Contains("m_EditorVersion:"))
+                            //{
+                            //    project.Framework = GetUnityFrameworkVersion(line);
+                            //    break;
+                            //}
+                        }
+
+                    }
                 }
+
+                //string 
+                //project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+
             }
 
             if (project != null)
@@ -221,16 +293,19 @@ namespace DotNetCensus.Core.Projects
         //Check to see if the framework 
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
-            if (variable.StartsWith("$(") == true && variable.EndsWith(")") == true)
+            if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
                 //Open the Directory.Build.props file and look for the variable
-                string searchVariable = variable.Replace("$(", "").Replace(")", "");
+                int pFrom = variable.IndexOf("$(") + "$(".Length;
+                int pTo = variable.LastIndexOf(")");
+                string searchVariable = variable.Substring(pFrom, pTo - pFrom);
+                //string searchVariable = variable.Replace("$(", "").Replace(")", "");
                 if (directoryBuildPropFileContent != null)
                 {
                     string[] lines = directoryBuildPropFileContent.Split("\n");
                     foreach (string line in lines)
                     {
-                        if (line?.IndexOf(searchVariable) >= 0)
+                        if (line?.IndexOf("<" + searchVariable + ">") >= 0)
                         {
                             variable = line.Replace("<" + searchVariable + ">", "")
                                          .Replace("</" + searchVariable + ">", "")
@@ -239,6 +314,10 @@ namespace DotNetCensus.Core.Projects
                         }
                     }
                 }
+            }
+            if (variable.Contains("$(") == true && variable.Contains(")") == true)
+            {
+                variable = CheckFrameworkCodeForVariable(variable, directoryBuildPropFileContent);
             }
             return variable;
         }
