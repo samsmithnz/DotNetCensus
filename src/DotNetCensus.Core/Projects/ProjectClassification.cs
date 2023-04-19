@@ -197,6 +197,7 @@ public static class ProjectClassification
             framework.Contains("netcoreapp1") ||
             framework.Contains("netcoreapp2") ||
             framework.Contains("netcoreapp3") ||
+            framework.Contains("netcoreapp5") ||
             framework.Contains("net5.0"))
         {
             //Unsupported/End of life/red
