@@ -199,16 +199,7 @@ namespace DotNetCensus.Core.Projects
                 //If we didn't find targetframework in the project file, check the Directory.Build.props file
                 if (project.FrameworkCode == "" &&
                     directoryBuildPropFileContent != null)
-                {
-                    //Debug.WriteLine("HERE2!");
-                    //CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
-                    //while (directoryBuildPropFileContent.IndexOf("<TargetFramework>") >= 0)
-                    //{
-                    //    string line = directoryBuildPropFileContent.Substring(directoryBuildPropFileContent.IndexOf("<TargetFramework>"));
-                    //    line = line.Substring(0, line.IndexOf("</TargetFramework>") + 18);
-                    //    project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
-                    //    directoryBuildPropFileContent = directoryBuildPropFileContent.Replace(line, "");
-                    //}
+                {                    
                     lines = directoryBuildPropFileContent.Split("\n");
                     foreach (string line in lines)
                     {
