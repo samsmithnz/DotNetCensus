@@ -1,6 +1,7 @@
 ﻿using DotNetCensus.Core.Models;
 using System.Diagnostics;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -293,12 +294,19 @@ namespace DotNetCensus.Core.Projects
         //Check to see if the framework 
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
+            string prefix = "";
+            string suffix = "";
             if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
                 //Open the Directory.Build.props file and look for the variable
-                int pFrom = variable.IndexOf("$(") + "$(".Length;
+                int pFrom = variable.IndexOf("$(") + ("$(").Length;
                 int pTo = variable.LastIndexOf(")");
                 string searchVariable = variable.Substring(pFrom, pTo - pFrom);
+                if (pFrom >= 2)
+                {
+                    prefix = variable.Substring(0, pFrom - 2);
+                }
+                suffix = variable.Substring(pTo + 1);
                 //string searchVariable = variable.Replace("$(", "").Replace(")", "");
                 if (directoryBuildPropFileContent != null)
                 {
@@ -319,7 +327,7 @@ namespace DotNetCensus.Core.Projects
             {
                 variable = CheckFrameworkCodeForVariable(variable, directoryBuildPropFileContent);
             }
-            return variable;
+            return prefix + variable + suffix;
         }
 
     }
