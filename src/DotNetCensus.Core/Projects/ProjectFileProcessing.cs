@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace DotNetCensus.Core.Projects
@@ -192,6 +193,12 @@ namespace DotNetCensus.Core.Projects
                     //    project.Framework = GetUnityFrameworkVersion(line);
                     //    break;
                     //}
+                }
+
+                //If we didn't find targetframework in the project file, check the Directory.Build.props file
+                if (fileName == "analyzer.csproj")
+                {
+                    Debug.WriteLine("HERE!");
                 }
             }
 

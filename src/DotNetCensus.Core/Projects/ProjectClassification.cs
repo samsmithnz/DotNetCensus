@@ -189,7 +189,9 @@ public static class ProjectClassification
             framework.Contains("v4.3") ||
             framework.Contains("v4.4") ||
             framework.Contains("v4.5") ||
-            framework == "net45" || //Unclear if this should be net 45 or v4.5 - I've seen both in wild
+            framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
+            framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
+            framework == "net45" || //Unclear if this should be net45 or v4.5 - I've seen both in wild
             framework == "net46" ||
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
