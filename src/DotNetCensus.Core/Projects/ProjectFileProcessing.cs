@@ -159,6 +159,10 @@ namespace DotNetCensus.Core.Projects
                     //Multiple .NET flavors element
                     else if (line.IndexOf("<TargetFrameworks>") > 0)
                     {
+                        if (project.FileName == "ILLink.Tasks.csproj")
+                        {
+                            int x = 0;
+                        }
                         string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                         string[] frameworkList = frameworks.Split(';');
                         for (int i = 0; i < frameworkList.Length - 1; i++)
@@ -278,46 +282,63 @@ namespace DotNetCensus.Core.Projects
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
             string variableResult = "";
-            string prefix = "";
-            string suffix = "";
             System.Diagnostics.Debug.WriteLine(variable);
             if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
                 string[] variables = variable.Split(';');
+                int i = 0;
                 foreach (string variableItem in variables)
                 {
-                    //Open the Directory.Build.props file and look for the variable
-                    int pFrom = variableItem.IndexOf("$(") + ("$(").Length;
-                    int pTo = variableItem.LastIndexOf(")");
-                    string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
-                    //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
-                    if (pFrom >= 2)
+                    if (variableItem.Trim().Length > 0 && variableItem.Contains("$(") == true && variableItem.Contains(")") == true)
                     {
-                        prefix = variableItem.Substring(0, pFrom - 2);
-                    }
-                    suffix = variable.Substring(pTo + 1);
-                    if (directoryBuildPropFileContent != null)
-                    {
-                        string processedVariable = "";
-                        string[] lines = directoryBuildPropFileContent.Split("\n");
-                        foreach (string line in lines)
+                        string prefix = "";
+                        string suffix = "";
+                        //Open the Directory.Build.props file and look for the variable
+                        int pFrom = variableItem.IndexOf("$(") + ("$(").Length;
+                        int pTo = variableItem.LastIndexOf(")");
+                        string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
+                        //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
+                        if (pFrom >= 2)
                         {
-                            if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                            prefix = variableItem.Substring(0, pFrom - 2);
+                        }
+                        suffix = variableItem.Substring(pTo + 1);
+                        if (directoryBuildPropFileContent != null)
+                        {
+                            string processedVariable = "";
+                            string[] lines = directoryBuildPropFileContent.Split("\n");
+                            foreach (string line in lines)
                             {
-                                processedVariable = line.Replace("<" + searchVariable + ">", "")
-                                             .Replace("</" + searchVariable + ">", "")
-                                             .Trim();
-                                break;
+                                if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                                {
+                                    processedVariable = line.Replace("<" + searchVariable + ">", "")
+                                                 .Replace("</" + searchVariable + ">", "")
+                                                 .Trim();
+                                    break;
+                                }
+                            }
+                            variableResult += prefix + processedVariable + suffix;
+                            if (i < variables.Length - 1)
+                            {
+                                variableResult += ";";
                             }
                         }
-                        variableResult = prefix + processedVariable + suffix;
                     }
+                    else
+                    {
+                        variableResult += variableItem + ";";
+                    }
+                    i++;
+                }
+                //If it's a variable within a variable, process it again
+                if (variableResult.Contains("$(") == true && variableResult.Contains(")") == true)
+                {
+                    variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
                 }
             }
-            //If it's a variable within a variable, process it again
-            if (variableResult.Contains("$(") == true && variableResult.Contains(")") == true)
+            else
             {
-                variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
+                variableResult = variable;
             }
             return variableResult;
         }
