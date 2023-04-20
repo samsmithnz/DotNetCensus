@@ -199,7 +199,7 @@ namespace DotNetCensus.Core.Projects
                 //If we didn't find targetframework in the project file, check the Directory.Build.props file
                 if (project.FrameworkCode == "" &&
                     directoryBuildPropFileContent != null)
-                {                    
+                {
                     lines = directoryBuildPropFileContent.Split("\n");
                     foreach (string line in lines)
                     {
@@ -277,42 +277,49 @@ namespace DotNetCensus.Core.Projects
         //Check to see if the framework 
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
+            string variableResult = "";
             string prefix = "";
             string suffix = "";
+            System.Diagnostics.Debug.WriteLine(variable);
             if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
-                //Open the Directory.Build.props file and look for the variable
-                int pFrom = variable.IndexOf("$(") + ("$(").Length;
-                int pTo = variable.LastIndexOf(")");
-                string searchVariable = variable.Substring(pFrom, pTo - pFrom);
-                //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
-                if (pFrom >= 2)
+                string[] variables = variable.Split(';');
+                foreach (string variableItem in variables)
                 {
-                    prefix = variable.Substring(0, pFrom - 2);
-                }
-                suffix = variable.Substring(pTo + 1);
-                //string searchVariable = variable.Replace("$(", "").Replace(")", "");
-                if (directoryBuildPropFileContent != null)
-                {
-                    string[] lines = directoryBuildPropFileContent.Split("\n");
-                    foreach (string line in lines)
+                    //Open the Directory.Build.props file and look for the variable
+                    int pFrom = variableItem.IndexOf("$(") + ("$(").Length;
+                    int pTo = variableItem.LastIndexOf(")");
+                    string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
+                    //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
+                    if (pFrom >= 2)
                     {
-                        if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                        prefix = variableItem.Substring(0, pFrom - 2);
+                    }
+                    suffix = variable.Substring(pTo + 1);
+                    if (directoryBuildPropFileContent != null)
+                    {
+                        string processedVariable = "";
+                        string[] lines = directoryBuildPropFileContent.Split("\n");
+                        foreach (string line in lines)
                         {
-                            variable = line.Replace("<" + searchVariable + ">", "")
-                                         .Replace("</" + searchVariable + ">", "")
-                                         .Trim();
-                            break;
+                            if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                            {
+                                processedVariable = line.Replace("<" + searchVariable + ">", "")
+                                             .Replace("</" + searchVariable + ">", "")
+                                             .Trim();
+                                break;
+                            }
                         }
+                        variableResult = prefix + processedVariable + suffix;
                     }
                 }
             }
             //If it's a variable within a variable, process it again
-            if (variable.Contains("$(") == true && variable.Contains(")") == true)
+            if (variableResult.Contains("$(") == true && variableResult.Contains(")") == true)
             {
-                variable = CheckFrameworkCodeForVariable(variable, directoryBuildPropFileContent);
+                variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
             }
-            return prefix + variable + suffix;
+            return variableResult;
         }
 
     }
