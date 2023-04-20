@@ -159,10 +159,6 @@ namespace DotNetCensus.Core.Projects
                     //Multiple .NET flavors element
                     else if (line.IndexOf("<TargetFrameworks>") > 0)
                     {
-                        if (project.FileName == "ILLink.Tasks.csproj")
-                        {
-                            int x = 0;
-                        }
                         string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                         string[] frameworkList = frameworks.Split(';');
                         for (int i = 0; i < frameworkList.Length - 1; i++)
