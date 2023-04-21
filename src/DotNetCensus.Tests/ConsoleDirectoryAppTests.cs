@@ -18,6 +18,13 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string[] parameters = new string[] { "-d", SamplesPath, "-i", "-f", file };
             StringWriter sw = new();
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj,ILLink.CodeFixProvider.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj,ILLink.RoslynAnalyzer.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,net472,.NET Framework 4.7.2,.NET Framework,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/linker/Mono.Linker.csproj,Mono.Linker.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/tlens/tlens.csproj,tlens.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,supported
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
@@ -86,7 +93,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET 6.0-android,.NET,1,supported
 .NET 6.0-ios,.NET,1,supported
 .NET 7.0,.NET,2,supported
-.NET 8.0,.NET,1,in preview
+.NET 8.0,.NET,5,in preview
 .NET Core 1.0,.NET Core,1,deprecated
 .NET Core 1.1,.NET Core,1,deprecated
 .NET Core 2.0,.NET Core,1,deprecated
@@ -103,11 +110,11 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Framework 4.6.1,.NET Framework,1,deprecated
 .NET Framework 4.6.2,.NET Framework,1,supported
 .NET Framework 4.7.1,.NET Framework,1,supported
-.NET Framework 4.7.2,.NET Framework,2,supported
-.NET Standard 2.0,.NET Standard,1,supported
+.NET Framework 4.7.2,.NET Framework,3,supported
+.NET Standard 2.0,.NET Standard,3,supported
 (Unknown),(Unknown),1,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,35,
+total frameworks,,42,
 ";
 
             //Act
