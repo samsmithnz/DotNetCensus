@@ -279,7 +279,7 @@ total frameworks,,33,
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace(directory,"").Replace("\\", "/"));
         }
     }
 
