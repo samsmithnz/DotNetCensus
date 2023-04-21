@@ -258,7 +258,7 @@ total frameworks,,33,
     public void InventoryMultipleDirectoryBuildPropsResultsTest()
     {
         //Arrange
-        string? directory = SamplesPath + @"\Sample.Multiple.Directory.Build.Props";
+        string? directory = SamplesPath + @"/Sample.Multiple.Directory.Build.Props";
         Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
