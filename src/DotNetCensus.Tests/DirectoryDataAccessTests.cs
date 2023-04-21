@@ -81,7 +81,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     {
         //Arrange
         bool includeTotals = false;
-        string? directory = SamplesPath + @"/Sample.NET6.Directory.Build.props";
+        string? directory = SamplesPath + @"\Sample.NET6.Directory.Build.props";
         Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
@@ -258,7 +258,7 @@ total frameworks,,33,
     public void InventoryMultipleDirectoryBuildPropsResultsTest()
     {
         //Arrange
-        string? directory = SamplesPath + @"/Sample.Multiple.Directory.Build.Props";
+        string? directory = SamplesPath + @"\Sample.Multiple.Directory.Build.Props";
         Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
@@ -279,7 +279,7 @@ total frameworks,,33,
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/").Replace(directory.Replace("\\","/"),""));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
 
