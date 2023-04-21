@@ -1,5 +1,7 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -7,7 +9,6 @@ namespace DotNetCensus.Core.Projects
     {
         public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath,
             string? content,
-            FileInfo? directoryBuildPropFile = null,
             string? directoryBuildPropFileContent = null)
         {
             string fileName = fileInfo.Name;
@@ -15,11 +16,6 @@ namespace DotNetCensus.Core.Projects
             {
                 //This is a directory search - not a repo search and we need to read in the contents of the file
                 content = File.ReadAllText(filePath);
-            }
-            //If there is a directory file being passed in - convert it to content
-            if (directoryBuildPropFile != null)
-            {
-                directoryBuildPropFileContent = File.ReadAllText(directoryBuildPropFile.FullName);
             }
             List<Project> projects = new();
             switch (fileInfo.Extension.ToLower())
@@ -199,6 +195,67 @@ namespace DotNetCensus.Core.Projects
                     //    break;
                     //}
                 }
+
+                //If we didn't find targetframework in the project file, check the Directory.Build.props file
+                if (project.FrameworkCode == "" &&
+                    directoryBuildPropFileContent != null)
+                {
+                    lines = directoryBuildPropFileContent.Split("\n");
+                    foreach (string line in lines)
+                    {
+                        //.NET Framework version element
+                        if (line.IndexOf("<TargetFrameworkVersion>") > 0)
+                        {
+                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
+                            break;
+                        }
+                        //.NET Core version element
+                        else if (line.IndexOf("<TargetFramework>") > 0)
+                        {
+                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+                            break;
+                        }
+                        //Multiple .NET flavors element
+                        else if (line.IndexOf("<TargetFrameworks>") > 0)
+                        {
+                            string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
+                            string[] frameworkList = frameworks.Split(';');
+                            for (int i = 0; i < frameworkList.Length - 1; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent);
+                                }
+                                else
+                                {
+                                    Project additionalProject = new()
+                                    {
+                                        FileName = new FileInfo(filePath).Name,
+                                        Path = filePath,
+                                        Language = language,
+                                        FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent)
+                                    };
+                                    projects.Add(additionalProject);
+                                }
+                            }
+                            break;
+                        }
+                        //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
+                        else if (line.IndexOf("<ProductVersion>") > 0 ||
+                                 line.IndexOf("ProductVersion = ") > 0)
+                        {
+                            project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
+                            //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
+                        }
+                        ////Unity 3d project files
+                        //else if (line.Contains("m_EditorVersion:"))
+                        //{
+                        //    project.Framework = GetUnityFrameworkVersion(line);
+                        //    break;
+                        //}
+                    }
+
+                }
             }
 
             if (project != null)
@@ -220,26 +277,65 @@ namespace DotNetCensus.Core.Projects
         //Check to see if the framework 
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
-            if (variable.StartsWith("$(") == true && variable.EndsWith(")") == true)
+            string variableResult = "";
+            if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
-                //Open the Directory.Build.props file and look for the variable
-                string searchVariable = variable.Replace("$(", "").Replace(")", "");
-                if (directoryBuildPropFileContent != null)
+                string[] variables = variable.Split(';');
+                int i = 0;
+                foreach (string variableItem in variables)
                 {
-                    string[] lines = directoryBuildPropFileContent.Split("\n");
-                    foreach (string line in lines)
+                    if (variableItem.Trim().Length > 0 && variableItem.Contains("$(") == true && variableItem.Contains(")") == true)
                     {
-                        if (line?.IndexOf(searchVariable) >= 0)
+                        string prefix = "";
+                        string suffix = "";
+                        //Open the Directory.Build.props file and look for the variable
+                        int pFrom = variableItem.IndexOf("$(") + ("$(").Length;
+                        int pTo = variableItem.LastIndexOf(")");
+                        string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
+                        //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
+                        if (pFrom >= 2)
                         {
-                            variable = line.Replace("<" + searchVariable + ">", "")
-                                         .Replace("</" + searchVariable + ">", "")
-                                         .Trim();
-                            break;
+                            prefix = variableItem.Substring(0, pFrom - 2);
+                        }
+                        suffix = variableItem.Substring(pTo + 1);
+                        if (directoryBuildPropFileContent != null)
+                        {
+                            string processedVariable = "";
+                            string[] lines = directoryBuildPropFileContent.Split("\n");
+                            foreach (string line in lines)
+                            {
+                                if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                                {
+                                    processedVariable = line.Replace("<" + searchVariable + ">", "")
+                                                 .Replace("</" + searchVariable + ">", "")
+                                                 .Trim();
+                                    break;
+                                }
+                            }
+                            variableResult += prefix + processedVariable + suffix;
+                            if (i < variables.Length - 1)
+                            {
+                                variableResult += ";";
+                            }
                         }
                     }
+                    else
+                    {
+                        variableResult += variableItem + ";";
+                    }
+                    i++;
+                }
+                //If it's a variable within a variable, process it again
+                if (variableResult.Contains("$(") == true && variableResult.Contains(")") == true)
+                {
+                    variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
                 }
             }
-            return variable;
+            else
+            {
+                variableResult = variable;
+            }
+            return variableResult;
         }
 
     }

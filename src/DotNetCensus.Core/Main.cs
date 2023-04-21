@@ -16,7 +16,15 @@ public static class Main
         {
             foreach (Project item in projects)
             {
-                item.Path = item.Path.Replace(directory, "");
+                if (OperatingSystem.IsWindows())
+                {
+                    //Fix any Linux path separators to be Windows ones
+                    item.Path = item.Path.Replace(directory.Replace("/", "\\"), "");
+                }
+                else
+                {
+                    item.Path = item.Path.Replace(directory, "");
+                }
             }
         }
 

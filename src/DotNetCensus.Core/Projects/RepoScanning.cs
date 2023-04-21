@@ -38,6 +38,12 @@ namespace DotNetCensus.Core.Projects
             bool foundProjectFile = false;
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
+            string newDirectoryBuildPropFileContent = null;
+            if (directoryBuildPropFileContent != null)
+            {
+                newDirectoryBuildPropFileContent = directoryBuildPropFileContent;
+            }
+
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
             if (baseDir.Files.Count > 0)
             {
@@ -49,7 +55,7 @@ namespace DotNetCensus.Core.Projects
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                                owner, repository, filePath, branch);
-                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, null, directoryBuildPropFileContent);
+                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, newDirectoryBuildPropFileContent);
                         if (directoryProjects.Count > 0)
                         {
                             projects.AddRange(directoryProjects);
@@ -89,7 +95,6 @@ namespace DotNetCensus.Core.Projects
             if (foundProjectFile == false)
             {
                 //Check for a Directory.Build.props file first
-                string? newDirectoryBuildPropFileContent = null;
                 foreach (string file in baseDir.Files)
                 {
                     if (file == "Directory.Build.props")
@@ -99,7 +104,11 @@ namespace DotNetCensus.Core.Projects
                                owner, repository, filePath, branch);
                         if (fileDetails != null)
                         {
-                            newDirectoryBuildPropFileContent = fileDetails.content;
+                            if (newDirectoryBuildPropFileContent == null)
+                            {
+                                newDirectoryBuildPropFileContent = "";
+                            }
+                            newDirectoryBuildPropFileContent += fileDetails.content;
                         }
                         break;
                     }

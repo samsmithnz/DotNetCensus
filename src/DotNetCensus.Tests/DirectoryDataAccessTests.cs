@@ -44,7 +44,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
 .NET 7.0              .NET             2      supported      
-.NET 8.0              .NET             1      in preview     
+.NET 8.0              .NET             5      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
 .NET Core 1.1         .NET Core        1      deprecated     
 .NET Core 2.0         .NET Core        1      deprecated     
@@ -61,8 +61,8 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET Framework 4.6.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.2  .NET Framework   1      supported      
 .NET Framework 4.7.1  .NET Framework   1      supported      
-.NET Framework 4.7.2  .NET Framework   2      supported      
-.NET Standard 2.0     .NET Standard    1      supported      
+.NET Framework 4.7.2  .NET Framework   3      supported      
+.NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        1      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
 ";
@@ -243,6 +243,35 @@ total frameworks,,33,
 /Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                               Sample.SSDT.Database.sqlproj                v4.7.2          .NET Framework 4.7.2  .NET Framework  csharp    supported       
 /Sample.Unity2020/Assembly-CSharp.csproj                                         Assembly-CSharp.csproj                      v4.7.1          .NET Framework 4.7.1  .NET Framework  csharp    supported       
 /Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                     Sample.VB6.WinApp.vbp                       vb6             Visual Basic 6        Visual Basic 6  vb6       deprecated      
+";
+
+            //Act
+            string? contents = Main.GetInventoryResultsAsString(directory, repo, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void InventoryMultipleDirectoryBuildPropsResultsTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"/Sample.Multiple.Directory.Build.Props";
+        Repo? repo = null;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Path                                                                      FileName                       FrameworkCode   FrameworkName         Family          Language  Status    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/src/tools/illink/src/analyzer/analyzer.csproj                            analyzer.csproj                net8.0          .NET 8.0              .NET            csharp    in preview
+/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj        ILLink.CodeFixProvider.csproj  netstandard2.0  .NET Standard 2.0     .NET Standard   csharp    supported 
+/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj  ILLink.RoslynAnalyzer.csproj   netstandard2.0  .NET Standard 2.0     .NET Standard   csharp    supported 
+/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                    ILLink.Tasks.csproj            net472          .NET Framework 4.7.2  .NET Framework  csharp    supported 
+/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                    ILLink.Tasks.csproj            net8.0          .NET 8.0              .NET            csharp    in preview
+/src/tools/illink/src/linker/Mono.Linker.csproj                           Mono.Linker.csproj             net8.0          .NET 8.0              .NET            csharp    in preview
+/src/tools/illink/src/tlens/tlens.csproj                                  tlens.csproj                   net8.0          .NET 8.0              .NET            csharp    in preview
 ";
 
             //Act

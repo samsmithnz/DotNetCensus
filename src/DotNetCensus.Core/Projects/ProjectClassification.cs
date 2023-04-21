@@ -189,12 +189,15 @@ public static class ProjectClassification
             framework.Contains("v4.3") ||
             framework.Contains("v4.4") ||
             framework.Contains("v4.5") ||
-            framework == "net45" || //Unclear if this should be net 45 or v4.5 - I've seen both in wild
+            framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
+            framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
+            framework == "net45" || //Unclear if this should be net45 or v4.5 - I've seen both in wild
             framework == "net46" ||
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
             framework.Contains("netcoreapp2") ||
             framework.Contains("netcoreapp3") ||
+            framework.Contains("netcoreapp5") || //details about netcoreapp5 are unclear, but this scenario was mentioned as supported here: https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md
             framework.Contains("net5.0"))
         {
             //Unsupported/End of life/red
