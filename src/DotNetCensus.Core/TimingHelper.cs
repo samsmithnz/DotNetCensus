@@ -4,17 +4,20 @@
     {
         public static string GetTime(TimeSpan timespan)
         {
-            if (timespan.TotalMinutes > 1)
+            int mins = (int)timespan.TotalMinutes;
+            int secs = (int)timespan.TotalSeconds - (mins * 60);
+            int ms = (int)timespan.TotalMilliseconds - (secs * 1000) - (mins * 60 * 1000);
+            if (mins > 0)
             {
-                return $"{timespan.TotalMinutes.ToString()}:{timespan.TotalSeconds.ToString("00")}.{timespan.TotalMilliseconds.ToString("0")} mins";
+                return $"{mins.ToString()}:{secs.ToString("00")}.{ms.ToString("0")} mins";
             }
-            else if (timespan.TotalSeconds > 1) 
+            else if (secs>0) 
             {
-                return $"{timespan.TotalSeconds.ToString("0")}.{timespan.TotalMilliseconds.ToString("0")} seconds";
+                return $"{secs.ToString("0")}.{ms.ToString("0")} seconds";
             }
             else
             {
-                return $"{timespan.TotalMilliseconds.ToString("0")} ms";
+                return $"{ms.ToString("0")} ms";
             }
         }
     }
