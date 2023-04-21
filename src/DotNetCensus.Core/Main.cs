@@ -18,6 +18,7 @@ public static class Main
             {
                 if (OperatingSystem.IsWindows())
                 {
+                    //Fix any Linux path separators to be Windows ones
                     item.Path = item.Path.Replace(directory.Replace("/", "\\"), "");
                 }
                 else
