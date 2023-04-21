@@ -278,7 +278,6 @@ namespace DotNetCensus.Core.Projects
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
             string variableResult = "";
-            System.Diagnostics.Debug.WriteLine(variable);
             if (variable.Contains("$(") == true && variable.Contains(")") == true)
             {
                 string[] variables = variable.Split(';');
