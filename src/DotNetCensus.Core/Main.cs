@@ -18,7 +18,7 @@ public static class Main
             {
                 if (OperatingSystem.IsWindows())
                 {
-                    item.Path = item.Path.Replace(directory.Replace("\\", "/"), "");
+                    item.Path = item.Path.Replace(directory.Replace("/", "\\"), "");
                 }
                 else
                 {
