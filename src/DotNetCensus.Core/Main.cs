@@ -16,7 +16,14 @@ public static class Main
         {
             foreach (Project item in projects)
             {
-                item.Path = item.Path.Replace(directory, "");
+                if (OperatingSystem.IsWindows())
+                {
+                    item.Path = item.Path.Replace(directory.Replace("\\", "/"), "");
+                }
+                else
+                {
+                    item.Path = item.Path.Replace(directory, "");
+                }
             }
         }
 
