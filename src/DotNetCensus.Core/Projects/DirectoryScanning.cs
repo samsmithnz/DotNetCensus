@@ -41,7 +41,7 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we still didn't find a project, then look deeper in the sub-directories.
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
                 //Check for a Directory.Build.props file first
                 FileInfo? newDirectoryBuildPropFile = null;

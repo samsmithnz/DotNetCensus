@@ -65,7 +65,7 @@ namespace DotNetCensus.Core.Projects
                 }
 
                 //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
-                if (foundProjectFile == false)
+                if (!foundProjectFile)
                 {
                     foreach (string file in baseDir.Files)
                     {
