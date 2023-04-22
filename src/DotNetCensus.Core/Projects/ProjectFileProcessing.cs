@@ -326,7 +326,7 @@ namespace DotNetCensus.Core.Projects
                     i++;
                 }
                 //If it's a variable within a variable, process it again
-                if (variableResult.Contains("$(") == true && variableResult.Contains(")") == true)
+                if (variableResult.Contains("$(") && variableResult.Contains(")"))
                 {
                     variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
                 }
