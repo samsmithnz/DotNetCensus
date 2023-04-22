@@ -144,7 +144,7 @@ public static class Main
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             string? branch = repo.Branch;
-            if (string.IsNullOrEmpty(branch) == true)
+            if (string.IsNullOrEmpty(branch))
             {
                 branch = "main";
             }
