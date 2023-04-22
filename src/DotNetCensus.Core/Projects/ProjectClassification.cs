@@ -137,7 +137,7 @@ public static class ProjectClassification
 
         //Only process the earliest Visual Studio's, as the later versions should be picked up by the product version
         //Note that this may not be entirely accurate - for example, VS2008 could ignore a .NET 3 version, but these should be pretty rare - even if it misidentifies .NET framework 1/2/3 - the story is the same - these are wildly obsolete and need to be resolved.
-        if (productVersion.StartsWith("7.0") == true)
+        if (productVersion.StartsWith("7.0"))
         {
             return "v1.0";
         }
