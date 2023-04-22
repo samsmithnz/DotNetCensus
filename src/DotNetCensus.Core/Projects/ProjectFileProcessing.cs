@@ -128,7 +128,7 @@ namespace DotNetCensus.Core.Projects
             {
                 foreach (string line in lines)
                 {
-                    if (line?.IndexOf("<add assembly=\"System.Core, Version=") >= 0)
+                    if (line.Contains("<add assembly=\"System.Core, Version="))
                     {
                         string version = line.Replace("<add assembly=\"System.Core, Version=", "")
                             .Replace(", Culture=neutral, PublicKeyToken=B77A5C561934E089\"/>", "").Trim();
@@ -143,19 +143,19 @@ namespace DotNetCensus.Core.Projects
                 foreach (string line in lines)
                 {
                     //.NET Framework version element
-                    if (line.IndexOf("<TargetFrameworkVersion>") >= 0)
+                    if (line.Contains("<TargetFrameworkVersion>"))
                     {
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //.NET Core version element
-                    else if (line.IndexOf("<TargetFramework>") >= 0)
+                    else if (line.Contains("<TargetFramework>"))
                     {
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //Multiple .NET flavors element
-                    else if (line.IndexOf("<TargetFrameworks>") >= 0)
+                    else if (line.Contains("<TargetFrameworks>"))
                     {
                         string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                         string[] frameworkList = frameworks.Split(';');
@@ -180,8 +180,8 @@ namespace DotNetCensus.Core.Projects
                         break;
                     }
                     //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
-                    else if (line.IndexOf("<ProductVersion>") >= 0 ||
-                             line.IndexOf("ProductVersion = ") >= 0)
+                    else if (line.Contains("<ProductVersion>") ||
+                             line.Contains("ProductVersion = "))
                     {
                         project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
                         //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
@@ -202,19 +202,19 @@ namespace DotNetCensus.Core.Projects
                     foreach (string line in lines)
                     {
                         //.NET Framework version element
-                        if (line.IndexOf("<TargetFrameworkVersion>") >= 0)
+                        if (line.Contains("<TargetFrameworkVersion>"))
                         {
                             project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                             break;
                         }
                         //.NET Core version element
-                        else if (line.IndexOf("<TargetFramework>") >= 0)
+                        else if (line.Contains("<TargetFramework>"))
                         {
                             project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
                             break;
                         }
                         //Multiple .NET flavors element
-                        else if (line.IndexOf("<TargetFrameworks>") >= 0)
+                        else if (line.Contains("<TargetFrameworks>"))
                         {
                             string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                             string[] frameworkList = frameworks.Split(';');
@@ -239,8 +239,8 @@ namespace DotNetCensus.Core.Projects
                             break;
                         }
                         //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
-                        else if (line.IndexOf("<ProductVersion>") >= 0 ||
-                                 line.IndexOf("ProductVersion = ") >= 0)
+                        else if (line.Contains("<ProductVersion>") ||
+                                 line.Contains("ProductVersion = "))
                         {
                             project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
                             //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
@@ -287,7 +287,7 @@ namespace DotNetCensus.Core.Projects
                         string prefix = "";
                         string suffix = "";
                         //Open the Directory.Build.props file and look for the variable
-                        int pFrom = variableItem.IndexOf("$(") + ("$(").Length;
+                        int pFrom = variableItem.IndexOf("$(") + 2; // ("$(").Length;
                         int pTo = variableItem.LastIndexOf(")");
                         string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
                         //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
@@ -302,7 +302,7 @@ namespace DotNetCensus.Core.Projects
                             string[] lines = directoryBuildPropFileContent.Split("\n");
                             foreach (string line in lines)
                             {
-                                if (line?.IndexOf("<" + searchVariable + ">") >= 0)
+                                if (line.Contains("<" + searchVariable + ">"))
                                 {
                                     processedVariable = line.Replace("<" + searchVariable + ">", "")
                                                  .Replace("</" + searchVariable + ">", "")

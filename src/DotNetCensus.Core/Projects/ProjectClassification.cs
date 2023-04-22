@@ -97,7 +97,7 @@ public static class ProjectClassification
                 formattedNumber.Append(number[i]);
                 if (i < number.Length - 1)
                 {
-                    formattedNumber.Append(".");
+                    formattedNumber.Append('.');
                 }
             }
             return family + " " + formattedNumber;
