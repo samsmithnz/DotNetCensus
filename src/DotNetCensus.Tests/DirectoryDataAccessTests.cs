@@ -368,6 +368,5 @@ total frameworks,,33,
             Assert.AreEqual(expected.Replace("\\", "/"), contents.Replace("\\", "/"));
         }
     }
-
-
+   
 }
