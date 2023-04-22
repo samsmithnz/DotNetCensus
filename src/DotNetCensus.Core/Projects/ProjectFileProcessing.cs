@@ -316,20 +316,20 @@ namespace DotNetCensus.Core.Projects
                             variableResult.Append(suffix);
                             if (i < variables.Length - 1)
                             {
-                                variableResult.Append(";");
+                                variableResult.Append(';');
                             }
                         }
                     }
                     else
                     {
                         variableResult.Append(variableItem);
-                        variableResult.Append(";");
+                        variableResult.Append(';');
                     }
                     i++;
                 }
                 //If it's a variable within a variable, process it again
                 if (variableResult.ToString().Contains("$(") &&
-                    variableResult.ToString().Contains(")"))
+                    variableResult.ToString().Contains(')'))
                 {
                     string variableResultTmp = variableResult.ToString();
                     variableResult = new();
