@@ -330,8 +330,9 @@ namespace DotNetCensus.Core.Projects
                 if (variableResult.ToString().Contains("$(") &&
                     variableResult.ToString().Contains(")"))
                 {
+                    string variableResultTmp = variableResult.ToString();
                     variableResult = new();
-                    variableResult.Append(CheckFrameworkCodeForVariable(variableResult.ToString(), directoryBuildPropFileContent));
+                    variableResult.Append(CheckFrameworkCodeForVariable(variableResultTmp, directoryBuildPropFileContent));
                 }
             }
             else
