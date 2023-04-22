@@ -56,7 +56,7 @@ namespace DotNetCensus.Core
             List<LanguageSummary> languageSummary = new();
             foreach (Project project in projects)
             {
-                if (string.IsNullOrEmpty(project.Language) == true)
+                if (string.IsNullOrEmpty(project.Language))
                 {
                     project.Language = "(Unknown language)";
                 }
