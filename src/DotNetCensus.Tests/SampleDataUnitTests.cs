@@ -65,7 +65,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
 
         //Asset
         Assert.IsNotNull(results);
-        Assert.AreEqual(27, results.Count);
+        Assert.AreEqual(28, results.Count);
         Assert.AreEqual(1, results[0].Count);
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
