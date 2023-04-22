@@ -19,7 +19,7 @@ public class Program
                .WithNotParsed(HandleParseError);
 
         //If there is a folder to scan, run the process against it
-        if (string.IsNullOrEmpty(_directory) == false || _repo != null)
+        if (!string.IsNullOrEmpty(_directory) || _repo != null)
         {
             if (_includeInventory == true)
             {
