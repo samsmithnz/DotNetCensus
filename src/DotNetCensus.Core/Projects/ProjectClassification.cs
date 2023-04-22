@@ -69,7 +69,7 @@ public static class ProjectClassification
     public static string GetFriendlyName(string frameworkCode, string family)
     {
 
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
