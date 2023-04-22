@@ -21,10 +21,11 @@ public class ConsoleRepoAppTests : RepoBasedTests
             StringWriter sw = new();
             string expected = @"Framework             FrameworkFamily  Count  Status         
 -------------------------------------------------------------
-.NET 5.0              .NET             1      deprecated     
+.NET 5.0              .NET             2      deprecated     
 .NET 6.0              .NET             4      supported      
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
+.NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             5      supported      
 .NET 8.0              .NET             5      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
@@ -45,9 +46,9 @@ public class ConsoleRepoAppTests : RepoBasedTests
 .NET Framework 4.7.1  .NET Framework   1      supported      
 .NET Framework 4.7.2  .NET Framework   3      supported      
 .NET Standard 2.0     .NET Standard    3      supported      
-(Unknown)             (Unknown)        1      unknown        
+(Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       45                    
+total frameworks                       48                    
 
 ";
 
@@ -79,10 +80,11 @@ total frameworks                       45
             StringWriter sw = new();
             string expected = @"Framework             FrameworkFamily  Count  Status         
 -------------------------------------------------------------
-.NET 5.0              .NET             1      deprecated     
+.NET 5.0              .NET             2      deprecated     
 .NET 6.0              .NET             4      supported      
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
+.NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             5      supported      
 .NET 8.0              .NET             5      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
@@ -103,9 +105,9 @@ total frameworks                       45
 .NET Framework 4.7.1  .NET Framework   1      supported      
 .NET Framework 4.7.2  .NET Framework   3      supported      
 .NET Standard 2.0     .NET Standard    3      supported      
-(Unknown)             (Unknown)        1      unknown        
+(Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       45                    
+total frameworks                       48                    
 
 ";
 
