@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Text;
 using System.Text.Json;
 
 namespace DotNetCensus.Core.Projects
@@ -275,7 +276,7 @@ namespace DotNetCensus.Core.Projects
         //Check to see if the framework 
         private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
         {
-            string variableResult = "";
+            StringBuilder variableResult = new;
             if (variable.Contains("$(") && variable.Contains(")"))
             {
                 string[] variables = variable.Split(';');
@@ -310,30 +311,34 @@ namespace DotNetCensus.Core.Projects
                                     break;
                                 }
                             }
-                            variableResult += prefix + processedVariable + suffix;
+                            variableResult.Append(prefix);
+                            variableResult.Append(processedVariable);
+                            variableResult.Append(suffix);
                             if (i < variables.Length - 1)
                             {
-                                variableResult += ";";
+                                variableResult.Append(";");
                             }
                         }
                     }
                     else
                     {
-                        variableResult += variableItem + ";";
+                        variableResult.Append(variableItem + ";");
                     }
                     i++;
                 }
                 //If it's a variable within a variable, process it again
-                if (variableResult.Contains("$(") && variableResult.Contains(")"))
+                if (variableResult.ToString().Contains("$(") &&
+                    variableResult.ToString().Contains(")"))
                 {
-                    variableResult = CheckFrameworkCodeForVariable(variableResult, directoryBuildPropFileContent);
+                    variableResult = new();
+                    variableResult.Append(CheckFrameworkCodeForVariable(variableResult.ToString(), directoryBuildPropFileContent));
                 }
             }
             else
             {
-                variableResult = variable;
+                variableResult.Append(variable);
             }
-            return variableResult;
+            return variableResult.ToString();
         }
 
     }
