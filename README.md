@@ -10,6 +10,8 @@
 
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
 
+*DotNet Census scans a target directory or GitHub repo and counts all of the different .NET versions. It can also output a CSV file with the results.*
+
 DotNet Census currently supports these .NET versions:
 - .NET 5, 6, 7, 8, etc
 - .NET Core 1 to 3.1  (including older .NET Core 1 and 1.1 project.json formats)
@@ -20,6 +22,8 @@ Additionally, this tool supports:
 - The main .NET languages, C#, VB.NET, and F#
 - [Directory.Build.props variables](https://github.com/samsmithnz/DotNetCensus/issues/44) in project files
 - VB6 projects (as many are related to VB.NET projects)
+
+If we missed a version - please add an issue and we will add it! 
 
 ## To use
 
