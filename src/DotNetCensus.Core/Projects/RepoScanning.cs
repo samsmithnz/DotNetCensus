@@ -92,7 +92,7 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we still didn't find a project, then look deeper in the sub-directories.
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
                 //Check for a Directory.Build.props file first
                 foreach (string file in baseDir.Files)
@@ -124,7 +124,7 @@ namespace DotNetCensus.Core.Projects
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
                         projects2.Count > 0 &&
-                        foldersDone.Contains(subDirectory.Name) == false)
+                        !foldersDone.Contains(subDirectory.Name))
                     {
                         projects.AddRange(projects2);
                         foldersDone.Add(subDirectory.Name);
