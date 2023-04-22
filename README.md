@@ -6,11 +6,10 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
-**A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory or GitHub repo.** 
+**A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory or GitHub repo. It can also output a CSV file with the results, or conduct a full inventory of all detected project files.** 
+*DotNet Census scans a target directory or GitHub repo and counts all of the different .NET versions. *
 
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
-
-*DotNet Census scans a target directory or GitHub repo and counts all of the different .NET versions. It can also output a CSV file with the results.*
 
 DotNet Census currently supports these .NET versions:
 - .NET 5, 6, 7, 8, etc
