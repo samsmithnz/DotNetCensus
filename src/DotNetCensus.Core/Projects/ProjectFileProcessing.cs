@@ -322,7 +322,8 @@ namespace DotNetCensus.Core.Projects
                     }
                     else
                     {
-                        variableResult.Append(variableItem + ";");
+                        variableResult.Append(variableItem);
+                        variableResult.Append(";");
                     }
                     i++;
                 }
