@@ -43,7 +43,7 @@ namespace DotNetCensus.Core
             List<FrameworkSummary> sortedFrameworks = frameworkSummary.OrderBy(o => o.Framework).ToList();
 
             //Add a total line if we need one
-            if (includeTotal == true)
+            if (includeTotal)
             {
                 sortedFrameworks.Add(new FrameworkSummary { Framework = "total frameworks", Count = total });
             }
