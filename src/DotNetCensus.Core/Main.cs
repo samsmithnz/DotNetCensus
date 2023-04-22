@@ -132,7 +132,7 @@ public static class Main
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
-        if (string.IsNullOrEmpty(directory) == false)
+        if (!string.IsNullOrEmpty(directory))
         {
             //Run the calculations to get and aggregate the results
             projects = DirectoryScanning.SearchDirectory(directory);
