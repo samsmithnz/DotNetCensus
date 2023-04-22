@@ -7,9 +7,15 @@
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
 
 **A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory or GitHub repo. It can also output a CSV file with the results, or conduct a full inventory of all detected project files.** 
-*DotNet Census scans a target directory or GitHub repo and counts all of the different .NET versions. *
 
 Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
+
+## How it works
+1. It scans for project files (csproj, vbproj, fsproj, vb6proj, etc)
+2. It reads the project files and extracts the .NET version
+3. It counts the number of projects using each version and outputs the results to the console or csv file
+4. If it can't find a project file, it will look for older project formats (such as .NET Core 1 and 1.1 project.json formats, and .NET Framework 3.5 website formats with no project files)
+5. Once a project file is found, it will stop scanning subdirectories (Note there is an [issue](https://github.com/samsmithnz/DotNetCensus/issues/88) to continue scanning)
 
 DotNet Census currently supports these .NET versions:
 - .NET 5, 6, 7, 8, etc
