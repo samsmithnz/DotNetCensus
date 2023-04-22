@@ -31,7 +31,7 @@ public static class ProjectClassification
 
     public static string GetFrameworkFamily(string frameworkCode)
     {
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
