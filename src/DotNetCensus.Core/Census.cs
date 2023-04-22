@@ -85,7 +85,7 @@ namespace DotNetCensus.Core
             List<LanguageSummary> sortedLanguages = languageSummary.OrderBy(o => o.Language).ToList();
 
             //Add a total line if we need one
-            if (includeTotal == true)
+            if (includeTotal)
             {
                 sortedLanguages.Add(new LanguageSummary { Language = "total languages", Count = total });
             }
