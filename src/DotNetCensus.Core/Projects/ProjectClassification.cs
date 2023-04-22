@@ -4,7 +4,7 @@ public static class ProjectClassification
 {
     public static bool IsProjectFile(string fileName, bool primaryScan = true)
     {
-        if (primaryScan == true)
+        if (primaryScan)
         {
             switch (new FileInfo(fileName).Extension.ToLower())
             {
