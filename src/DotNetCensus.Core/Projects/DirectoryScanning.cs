@@ -15,7 +15,7 @@ namespace DotNetCensus.Core.Projects
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
+                if (ProjectClassification.IsProjectFile(fileInfo.Name))
                 {
                     List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, newDirectoryBuildPropFileContent);
                     if (directoryProjects.Count > 0)
