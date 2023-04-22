@@ -38,7 +38,7 @@ namespace DotNetCensus.Core.Projects
             bool foundProjectFile = false;
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
-            string newDirectoryBuildPropFileContent = null;
+            string? newDirectoryBuildPropFileContent = null;
             if (directoryBuildPropFileContent != null)
             {
                 newDirectoryBuildPropFileContent = directoryBuildPropFileContent;
