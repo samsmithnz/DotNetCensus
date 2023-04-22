@@ -296,7 +296,7 @@ namespace DotNetCensus.Core.Projects
                         {
                             prefix = variableItem[..(pFrom - 2)];
                         }
-                        suffix = variableItem.Substring(pTo + 1);
+                        suffix = variableItem[(pTo + 1)..];
                         if (directoryBuildPropFileContent != null)
                         {
                             string processedVariable = "";
