@@ -12,7 +12,7 @@ namespace DotNetCensus.Core
             foreach (Project project in projects)
             {
                 project.Family = ProjectClassification.GetFrameworkFamily(project.FrameworkCode);
-                if (string.IsNullOrEmpty(project.FrameworkCode) == true)
+                if (string.IsNullOrEmpty(project.FrameworkCode))
                 {
                     project.FrameworkCode = "(Unknown framework)";
                 }
