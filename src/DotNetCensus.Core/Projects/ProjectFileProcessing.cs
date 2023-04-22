@@ -290,11 +290,11 @@ namespace DotNetCensus.Core.Projects
                         //Open the Directory.Build.props file and look for the variable
                         int pFrom = variableItem.IndexOf("$(") + 2; // ("$(").Length;
                         int pTo = variableItem.LastIndexOf(")");
-                        string searchVariable = variableItem.Substring(pFrom, pTo - pFrom);
+                        string searchVariable = variableItem[pFrom..pTo];
                         //Capture the suffix and prefix if the variable is with regular text, for example "net$(variable)"
                         if (pFrom >= 2)
                         {
-                            prefix = variableItem.Substring(0, pFrom - 2);
+                            prefix = variableItem[..(pFrom - 2)];
                         }
                         suffix = variableItem.Substring(pTo + 1);
                         if (directoryBuildPropFileContent != null)
