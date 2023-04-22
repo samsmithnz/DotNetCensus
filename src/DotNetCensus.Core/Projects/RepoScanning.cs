@@ -203,7 +203,7 @@ namespace DotNetCensus.Core.Projects
             List<string> items = new(array);
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                if (string.IsNullOrEmpty(items[i]) == true)
+                if (string.IsNullOrEmpty(items[i]))
                 {
                     items.RemoveAt(i);
                 }
