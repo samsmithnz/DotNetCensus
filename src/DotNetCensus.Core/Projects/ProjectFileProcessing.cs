@@ -1,7 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
-using System.Diagnostics;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DotNetCensus.Core.Projects
 {

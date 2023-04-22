@@ -1,5 +1,4 @@
 using DotNetCensus.Tests.Helpers;
-using System.Diagnostics;
 
 namespace DotNetCensus.Tests;
 

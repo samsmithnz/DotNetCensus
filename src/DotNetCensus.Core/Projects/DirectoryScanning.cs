@@ -1,5 +1,4 @@
 ﻿using DotNetCensus.Core.Models;
-using System.Diagnostics;
 
 namespace DotNetCensus.Core.Projects
 {

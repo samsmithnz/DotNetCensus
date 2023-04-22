@@ -11,7 +11,7 @@
             {
                 return $"{mins.ToString()}:{secs.ToString("00")}.{ms.ToString("0")} mins";
             }
-            else if (secs>0) 
+            else if (secs > 0)
             {
                 return $"{secs.ToString("0")}.{ms.ToString("0")} seconds";
             }
