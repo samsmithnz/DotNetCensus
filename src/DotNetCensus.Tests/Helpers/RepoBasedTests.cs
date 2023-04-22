@@ -26,7 +26,7 @@ public class RepoBasedTests : DirectoryBasedTests
     }
 
     //With help from https://stackoverflow.com/a/48458952/337421
-    public string GetCurrentBranch()
+    public static string GetCurrentBranch()
     {
         string branchName = "";
         ProcessStartInfo startInfo = new("git")
@@ -46,7 +46,7 @@ public class RepoBasedTests : DirectoryBasedTests
         if (process != null && process.StandardOutput != null)
         {
             string? result = process.StandardOutput.ReadLine();
-            if (string.IsNullOrEmpty(result) == true)
+            if (string.IsNullOrEmpty(result))
             {
                 branchName = "main";
             }

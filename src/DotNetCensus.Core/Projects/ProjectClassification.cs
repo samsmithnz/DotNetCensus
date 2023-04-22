@@ -1,10 +1,12 @@
-﻿namespace DotNetCensus.Core.Projects;
+﻿using System.Text;
+
+namespace DotNetCensus.Core.Projects;
 
 public static class ProjectClassification
 {
     public static bool IsProjectFile(string fileName, bool primaryScan = true)
     {
-        if (primaryScan == true)
+        if (primaryScan)
         {
             switch (new FileInfo(fileName).Extension.ToLower())
             {
@@ -31,7 +33,7 @@ public static class ProjectClassification
 
     public static string GetFrameworkFamily(string frameworkCode)
     {
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
@@ -69,7 +71,7 @@ public static class ProjectClassification
     public static string GetFriendlyName(string frameworkCode, string family)
     {
 
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
@@ -88,14 +90,14 @@ public static class ProjectClassification
         else if (frameworkCode.StartsWith("net4"))
         {
             string number = frameworkCode.Replace("net", "");
-            string formattedNumber = "";
+            StringBuilder formattedNumber = new();
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
-                formattedNumber += number[i];
+                formattedNumber.Append(number[i]);
                 if (i < number.Length - 1)
                 {
-                    formattedNumber += ".";
+                    formattedNumber.Append('.');
                 }
             }
             return family + " " + formattedNumber;
@@ -137,15 +139,15 @@ public static class ProjectClassification
 
         //Only process the earliest Visual Studio's, as the later versions should be picked up by the product version
         //Note that this may not be entirely accurate - for example, VS2008 could ignore a .NET 3 version, but these should be pretty rare - even if it misidentifies .NET framework 1/2/3 - the story is the same - these are wildly obsolete and need to be resolved.
-        if (productVersion.StartsWith("7.0") == true)
+        if (productVersion.StartsWith("7.0"))
         {
             return "v1.0";
         }
-        else if (productVersion.StartsWith("7.1") == true)
+        else if (productVersion.StartsWith("7.1"))
         {
             return "v1.1";
         }
-        else if (productVersion.StartsWith("8.0") == true)
+        else if (productVersion.StartsWith("8.0"))
         {
             return "v2.0";
         }
@@ -208,7 +210,7 @@ public static class ProjectClassification
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net6.0") || 
+        else if (framework.Contains("net6.0") ||
             framework.Contains("net7.0") ||
             framework.Contains("netstandard") ||
             framework == "net462" ||

@@ -19,7 +19,7 @@ namespace DotNetCensus.Core.APIs
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false)
+            if (!string.IsNullOrEmpty(response))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 treeResponse = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
@@ -32,16 +32,16 @@ namespace DotNetCensus.Core.APIs
                     {
                         FileInfo fileInfo = new(item.path);
                         string path = item.path;
-                        if (string.IsNullOrEmpty(path) == false)
+                        if (!string.IsNullOrEmpty(path))
                         {
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
                         }
-                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true ||
-                            ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
+                        if (ProjectClassification.IsProjectFile(fileInfo.Name) ||
+                            ProjectClassification.IsProjectFile(fileInfo.Name, false) ||
                             fileInfo.Name.ToLower() == "directory.build.props")
                         {
-                            results.Add(new Project() 
+                            results.Add(new Project()
                             {
                                 Path = path,
                                 FileName = fileInfo.Name
@@ -65,7 +65,7 @@ namespace DotNetCensus.Core.APIs
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
             System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
+            if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
@@ -85,7 +85,7 @@ namespace DotNetCensus.Core.APIs
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
             //A debugging function
-            if (processErrors == true)
+            if (processErrors)
             {
                 response.EnsureSuccessStatusCode();
             }
@@ -104,7 +104,7 @@ namespace DotNetCensus.Core.APIs
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SamsRepoAutomation", "0.1"));
             //If we use a id/secret, we significantly increase the rate from 60 requests an hour to 5000. https://developer.github.com/v3/#rate-limiting
-            if (string.IsNullOrEmpty(clientId) == false && string.IsNullOrEmpty(clientSecret) == false)
+            if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", clientId, clientSecret))));
             }

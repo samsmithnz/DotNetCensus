@@ -28,7 +28,7 @@ public static class Main
             }
         }
 
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             ConsoleTable table = new("Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
             foreach (Project item in projects)
@@ -78,7 +78,7 @@ public static class Main
         DateTime startTime = DateTime.Now;
         List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
 
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             //Create and output the table
             ConsoleTable table = new("Framework", "FrameworkFamily", "Count", "Status");
@@ -132,7 +132,7 @@ public static class Main
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
-        if (string.IsNullOrEmpty(directory) == false)
+        if (!string.IsNullOrEmpty(directory))
         {
             //Run the calculations to get and aggregate the results
             projects = DirectoryScanning.SearchDirectory(directory);
@@ -144,7 +144,7 @@ public static class Main
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             string? branch = repo.Branch;
-            if (string.IsNullOrEmpty(branch) == true)
+            if (string.IsNullOrEmpty(branch))
             {
                 branch = "main";
             }

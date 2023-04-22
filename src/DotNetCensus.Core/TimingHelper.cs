@@ -9,15 +9,15 @@
             int ms = (int)timespan.TotalMilliseconds - (secs * 1000) - (mins * 60 * 1000);
             if (mins > 0)
             {
-                return $"{mins.ToString()}:{secs.ToString("00")}.{ms.ToString("0")} mins";
+                return $"{mins}:{secs:00}.{ms:0} mins";
             }
-            else if (secs>0) 
+            else if (secs > 0)
             {
-                return $"{secs.ToString("0")}.{ms.ToString("0")} seconds";
+                return $"{secs:0}.{ms:0} seconds";
             }
             else
             {
-                return $"{ms.ToString("0")} ms";
+                return $"{ms:0} ms";
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using DotNetCensus.Core.Models;
-using System.Diagnostics;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -15,7 +14,7 @@ namespace DotNetCensus.Core.Projects
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
+                if (ProjectClassification.IsProjectFile(fileInfo.Name))
                 {
                     List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, newDirectoryBuildPropFileContent);
                     if (directoryProjects.Count > 0)
@@ -27,7 +26,7 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
                 foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
                 {
@@ -41,7 +40,7 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we still didn't find a project, then look deeper in the sub-directories.
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
                 //Check for a Directory.Build.props file first
                 FileInfo? newDirectoryBuildPropFile = null;
