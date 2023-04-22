@@ -109,12 +109,12 @@ namespace DotNetCensus.Core.Projects
                 {
                     foreach (JsonProperty item in jsonElement.EnumerateObject())
                     {
-                        if (item.NameEquals("netcoreapp1.0") == true)
+                        if (item.NameEquals("netcoreapp1.0"))
                         {
                             project.FrameworkCode = "netcoreapp1.0";
                             break;
                         }
-                        else if (item.NameEquals("netcoreapp1.1") == true)
+                        else if (item.NameEquals("netcoreapp1.1"))
                         {
                             project.FrameworkCode = "netcoreapp1.1";
                             break;
