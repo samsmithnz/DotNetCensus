@@ -32,7 +32,7 @@ namespace DotNetCensus.Core.APIs
                     {
                         FileInfo fileInfo = new(item.path);
                         string path = item.path;
-                        if (string.IsNullOrEmpty(path) == false)
+                        if (!string.IsNullOrEmpty(path))
                         {
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
