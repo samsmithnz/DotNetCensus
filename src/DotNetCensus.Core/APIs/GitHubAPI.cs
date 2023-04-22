@@ -85,7 +85,7 @@ namespace DotNetCensus.Core.APIs
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
             //A debugging function
-            if (processErrors == true)
+            if (processErrors)
             {
                 response.EnsureSuccessStatusCode();
             }
