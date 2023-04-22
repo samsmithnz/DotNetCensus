@@ -78,7 +78,7 @@ public static class Main
         DateTime startTime = DateTime.Now;
         List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
 
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             //Create and output the table
             ConsoleTable table = new("Framework", "FrameworkFamily", "Count", "Status");
