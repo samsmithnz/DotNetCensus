@@ -49,7 +49,7 @@ namespace DotNetCensus.Core.Projects
             {
                 foreach (string file in baseDir.Files)
                 {
-                    if (ProjectClassification.IsProjectFile(file) == true)
+                    if (ProjectClassification.IsProjectFile(file))
                     {
                         FileInfo fileInfo = new(file);
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
