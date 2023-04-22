@@ -19,7 +19,7 @@ namespace DotNetCensus.Core.APIs
             //https://docs.github.com/en/rest/git/trees#get-a-tree
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false)
+            if (!string.IsNullOrEmpty(response))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 treeResponse = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
