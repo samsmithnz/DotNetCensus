@@ -65,7 +65,7 @@ namespace DotNetCensus.Core.APIs
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
             System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
+            if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found""") )
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
