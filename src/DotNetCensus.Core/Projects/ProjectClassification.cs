@@ -141,11 +141,11 @@ public static class ProjectClassification
         {
             return "v1.0";
         }
-        else if (productVersion.StartsWith("7.1") == true)
+        else if (productVersion.StartsWith("7.1"))
         {
             return "v1.1";
         }
-        else if (productVersion.StartsWith("8.0") == true)
+        else if (productVersion.StartsWith("8.0"))
         {
             return "v2.0";
         }
