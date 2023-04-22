@@ -41,7 +41,7 @@ namespace DotNetCensus.Core.APIs
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
                             fileInfo.Name.ToLower() == "directory.build.props")
                         {
-                            results.Add(new Project() 
+                            results.Add(new Project()
                             {
                                 Path = path,
                                 FileName = fileInfo.Name
@@ -65,7 +65,7 @@ namespace DotNetCensus.Core.APIs
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
             System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found""") )
+            if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
@@ -104,7 +104,7 @@ namespace DotNetCensus.Core.APIs
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SamsRepoAutomation", "0.1"));
             //If we use a id/secret, we significantly increase the rate from 60 requests an hour to 5000. https://developer.github.com/v3/#rate-limiting
-            if (string.IsNullOrEmpty(clientId) == false && string.IsNullOrEmpty(clientSecret) == false)
+            if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", clientId, clientSecret))));
             }
