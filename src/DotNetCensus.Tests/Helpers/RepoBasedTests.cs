@@ -26,7 +26,7 @@ public class RepoBasedTests : DirectoryBasedTests
     }
 
     //With help from https://stackoverflow.com/a/48458952/337421
-    public string GetCurrentBranch()
+    public static string GetCurrentBranch()
     {
         string branchName = "";
         ProcessStartInfo startInfo = new("git")
