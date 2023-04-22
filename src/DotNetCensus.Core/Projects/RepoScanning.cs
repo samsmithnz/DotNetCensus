@@ -173,7 +173,7 @@ namespace DotNetCensus.Core.Projects
             if (baseDir != null)
             {
                 //Add any directories missing
-                if (baseDir.Directories.Any(r => r.Name == name) == false)
+                if (!baseDir.Directories.Any(r => r.Name == name))
                 {
                     baseDir.Directories.Add(new()
                     {
