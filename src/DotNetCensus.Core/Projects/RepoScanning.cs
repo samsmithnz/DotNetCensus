@@ -1,6 +1,7 @@
 ﻿using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
+using System.Text;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -38,10 +39,10 @@ namespace DotNetCensus.Core.Projects
             bool foundProjectFile = false;
             System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
-            string? newDirectoryBuildPropFileContent = null;
+            StringBuilder newDirectoryBuildPropFileContent = new();
             if (directoryBuildPropFileContent != null)
             {
-                newDirectoryBuildPropFileContent = directoryBuildPropFileContent;
+                newDirectoryBuildPropFileContent.Append(directoryBuildPropFileContent);
             }
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
@@ -55,7 +56,7 @@ namespace DotNetCensus.Core.Projects
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                                owner, repository, filePath, branch);
-                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, newDirectoryBuildPropFileContent);
+                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, newDirectoryBuildPropFileContent.ToString());
                         if (directoryProjects.Count > 0)
                         {
                             projects.AddRange(directoryProjects);
@@ -104,11 +105,7 @@ namespace DotNetCensus.Core.Projects
                                owner, repository, filePath, branch);
                         if (fileDetails != null)
                         {
-                            if (newDirectoryBuildPropFileContent == null)
-                            {
-                                newDirectoryBuildPropFileContent = "";
-                            }
-                            newDirectoryBuildPropFileContent += fileDetails.content;
+                            newDirectoryBuildPropFileContent.Append(fileDetails.content);
                         }
                         break;
                     }
@@ -120,7 +117,7 @@ namespace DotNetCensus.Core.Projects
                     List<Project> projects2 = await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
                         owner, repository, branch,
-                        newDirectoryBuildPropFileContent,
+                        newDirectoryBuildPropFileContent.ToString(),
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
                         projects2.Count > 0 &&
