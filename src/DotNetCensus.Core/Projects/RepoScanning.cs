@@ -70,7 +70,7 @@ namespace DotNetCensus.Core.Projects
                     foreach (string file in baseDir.Files)
                     {
                         FileInfo fileInfo = new(file);
-                        if (ProjectClassification.IsProjectFile(file, false) == true)
+                        if (ProjectClassification.IsProjectFile(file, false))
                         {
                             foundProjectFile = true;
                             string filePath = (fullPath + "/" + file).Replace("//", "/");
