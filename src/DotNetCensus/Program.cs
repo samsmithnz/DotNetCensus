@@ -21,7 +21,7 @@ public class Program
         //If there is a folder to scan, run the process against it
         if (!string.IsNullOrEmpty(_directory) || _repo != null)
         {
-            if (_includeInventory == true)
+            if (_includeInventory)
             {
                 Core.Main.GetInventoryResultsAsString(_directory, _repo, _file);
             }
