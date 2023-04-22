@@ -143,19 +143,19 @@ namespace DotNetCensus.Core.Projects
                 foreach (string line in lines)
                 {
                     //.NET Framework version element
-                    if (line.IndexOf("<TargetFrameworkVersion>") > 0)
+                    if (line.IndexOf("<TargetFrameworkVersion>") >= 0)
                     {
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //.NET Core version element
-                    else if (line.IndexOf("<TargetFramework>") > 0)
+                    else if (line.IndexOf("<TargetFramework>") >= 0)
                     {
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
                     //Multiple .NET flavors element
-                    else if (line.IndexOf("<TargetFrameworks>") > 0)
+                    else if (line.IndexOf("<TargetFrameworks>") >= 0)
                     {
                         string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                         string[] frameworkList = frameworks.Split(';');
@@ -180,8 +180,8 @@ namespace DotNetCensus.Core.Projects
                         break;
                     }
                     //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
-                    else if (line.IndexOf("<ProductVersion>") > 0 ||
-                             line.IndexOf("ProductVersion = ") > 0)
+                    else if (line.IndexOf("<ProductVersion>") >= 0 ||
+                             line.IndexOf("ProductVersion = ") >= 0)
                     {
                         project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
                         //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
@@ -202,19 +202,19 @@ namespace DotNetCensus.Core.Projects
                     foreach (string line in lines)
                     {
                         //.NET Framework version element
-                        if (line.IndexOf("<TargetFrameworkVersion>") > 0)
+                        if (line.IndexOf("<TargetFrameworkVersion>") >= 0)
                         {
                             project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                             break;
                         }
                         //.NET Core version element
-                        else if (line.IndexOf("<TargetFramework>") > 0)
+                        else if (line.IndexOf("<TargetFramework>") >= 0)
                         {
                             project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
                             break;
                         }
                         //Multiple .NET flavors element
-                        else if (line.IndexOf("<TargetFrameworks>") > 0)
+                        else if (line.IndexOf("<TargetFrameworks>") >= 0)
                         {
                             string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
                             string[] frameworkList = frameworks.Split(';');
@@ -239,8 +239,8 @@ namespace DotNetCensus.Core.Projects
                             break;
                         }
                         //Visual Studio version (for old .NET Framework versions that were tied directly to Visual Studio versions) 
-                        else if (line.IndexOf("<ProductVersion>") > 0 ||
-                                 line.IndexOf("ProductVersion = ") > 0)
+                        else if (line.IndexOf("<ProductVersion>") >= 0 ||
+                                 line.IndexOf("ProductVersion = ") >= 0)
                         {
                             project.FrameworkCode = ProjectClassification.GetHistoricalFrameworkVersion(line);
                             //Note: Since product version could appear first in the lines list, and we could still find a target version, don't break out of the loop
