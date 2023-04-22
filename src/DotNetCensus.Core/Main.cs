@@ -28,7 +28,7 @@ public static class Main
             }
         }
 
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             ConsoleTable table = new("Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status");
             foreach (Project item in projects)
