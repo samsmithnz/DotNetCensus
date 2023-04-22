@@ -284,7 +284,7 @@ namespace DotNetCensus.Core.Projects
                 int i = 0;
                 foreach (string variableItem in variables)
                 {
-                    if (variableItem.Trim().Length > 0 && variableItem.Contains("$(") == true && variableItem.Contains(")") == true)
+                    if (variableItem.Trim().Length > 0 && variableItem.Contains("$(") && variableItem.Contains(")"))
                     {
                         string prefix = "";
                         string suffix = "";
