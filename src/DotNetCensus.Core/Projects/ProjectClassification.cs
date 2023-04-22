@@ -1,4 +1,6 @@
-﻿namespace DotNetCensus.Core.Projects;
+﻿using System.Text;
+
+namespace DotNetCensus.Core.Projects;
 
 public static class ProjectClassification
 {
@@ -88,14 +90,14 @@ public static class ProjectClassification
         else if (frameworkCode.StartsWith("net4"))
         {
             string number = frameworkCode.Replace("net", "");
-            string formattedNumber = "";
+            StringBuilder formattedNumber = new();
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
-                formattedNumber += number[i];
+                formattedNumber.Append(number[i]);
                 if (i < number.Length - 1)
                 {
-                    formattedNumber += ".";
+                    formattedNumber.Append(".");
                 }
             }
             return family + " " + formattedNumber;
