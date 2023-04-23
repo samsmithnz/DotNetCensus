@@ -31,6 +31,7 @@ public static class ProjectClassification
         return false;
     }
 
+    //set families/versions here: https://learn.microsoft.com/en-us/dotnet/standard/frameworks
     public static string GetFrameworkFamily(string frameworkCode)
     {
         if (string.IsNullOrEmpty(frameworkCode))
@@ -54,6 +55,26 @@ public static class ProjectClassification
         {
             return ".NET Core";
         }
+        else if (frameworkCode.StartsWith("netcore"))
+        {
+            return "Windows Store";
+        }
+        else if (frameworkCode.StartsWith("netmf"))
+        {
+            return ".NET Micro Framework";
+        }
+        else if (frameworkCode.StartsWith("sl"))
+        {
+            return "Silverlight";
+        }
+        else if (frameworkCode.StartsWith("wp"))
+        {
+            return "Windows Phone";
+        }
+        else if (frameworkCode.StartsWith("uap"))
+        {
+            return "Universal Windows Platform";
+        }
         else if (frameworkCode.StartsWith("net")) //net5.0, net6.0, etc)
         {
             return ".NET";
@@ -64,7 +85,7 @@ public static class ProjectClassification
         }
         else
         {
-            return "(Unknown)";
+            return $"(Unknown: {frameworkCode})";
         }
     }
 
