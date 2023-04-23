@@ -149,6 +149,12 @@ namespace DotNetCensus.Core.Projects
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
                         break;
                     }
+                    //.NET Xamarin version element
+                    else if (line.Contains("<TargetFrameworkIdentifier>"))
+                    {
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkIdentifier>", "").Replace("</TargetFrameworkIdentifier>", "").Trim(), directoryBuildPropFileContent);
+                        break;
+                    }
                     //.NET Core version element
                     else if (line.Contains("<TargetFramework>"))
                     {
