@@ -1,7 +1,7 @@
 # Project docs for each version of .NET
 
 ## .NET Core, .NET 5+, and .NET Standard 
-Projects uses `TargetFramework`
+Projects use `TargetFramework` to identify version
 ``` *.csproj
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -12,7 +12,7 @@ Projects uses `TargetFramework`
 
 
 ## .NET Framework 
-Projects use `TargetFrameworkVersion`
+Projects use `TargetFrameworkVersion` to identify version
 ``` *.csproj
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -22,7 +22,7 @@ Projects use `TargetFrameworkVersion`
 ```
 
 ## Multiple frameworks 
-With .NET Core 2 -> 3.1, .NET 5+, .NET Standard 1+, and .NET Framework: projects use `TargetFrameworks` with a ; separator
+With .NET Core 2 -> 3.1, .NET 5+, .NET Standard 1+, and .NET Framework: projects use `TargetFrameworks` with a ; separator to identify version
 ``` *.csproj
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
