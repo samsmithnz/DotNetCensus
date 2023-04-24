@@ -47,6 +47,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
+    - name: Upload package back to GitHub
+      uses: actions/upload-artifact@v3
+      with:
+        name: nugetToolPackage_Linux
+        path: src/DotNetCensus/nupkg
 
 
   pack:
@@ -59,8 +64,8 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: nugetToolPackage
-        path: nugetToolPackage
+        name: nugetToolPackage_Linux
+        path: nugetToolPackage_Linux
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ needs.build.outputs.Version }}" 
