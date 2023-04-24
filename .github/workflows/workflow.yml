@@ -47,26 +47,43 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
-    - name: .NET pack tool to NuGet package
-      run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+
+
+  pack:
+    name: Pack all pieces into a single NuGet package
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: 
+    - build
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: nugetToolPackage
+        path: nugetToolPackage
+    - name: Display GitVersion outputs
+      run: |
+        echo "Version: ${{ needs.build.outputs.Version }}" 
+        echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}"
+    - name: pack dotnet tool to NuGet package
+      run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ needs.build.outputs.Version }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
         name: nugetToolPackage
         path: src/DotNetCensus/nupkg
-    - name: .NET pack core projecty to NuGet package
-      run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    - name: pack core libary to NuGet package
+      run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ needs.build.outputs.Version }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
         name: nugetCorePackage
         path: src/DotNetCensus.Core/nupkg
 
-
   sonarCloud:
     name: Run SonarCloud analysis
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' 
+    if: github.ref == 'refs/heads/main' && false
     steps:
       - name: Run Sonarcloud test
         uses: samsmithnz/SamsDotNetSonarCloudAction@1.2.0
@@ -84,7 +101,7 @@ jobs:
     needs: 
     - build
     - sonarCloud
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && false
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
