@@ -28,15 +28,17 @@ Additionally, this tool supports:
 - [Directory.Build.props variables](https://github.com/samsmithnz/DotNetCensus/issues/44) in project files
 - VB6 projects (as many are related to VB.NET projects)
 
-If we missed a version - please add an issue and we will add it! 
+If we missed a version - please add an issue and we will fix it! 
 
 ## To use
 
-1. First install:
+1. This tool requires the .NET 6 or .NET 7 SDK to be installed.
+2. Then install:
 `dotnet tool install -g dotnet-census`
-2. Then run the command in the directory you need to count versions:
+3. Then run the command in the directory you need to count versions:
 `dotnet census`
-3. If you have an old version, you can update with `dotnet tool update -g dotnet-census`, and uninstall with `dotnet tool uninstall -g dotnet-census`
+4. If you have an old version, you can update with: `dotnet tool update -g dotnet-census` 
+5. To uninstall, use: `dotnet tool uninstall -g dotnet-census`
 
 ## Console arguments
 Several options are supported:
