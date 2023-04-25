@@ -106,7 +106,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
     {
         //Arrange
         bool includeTotals = true;
-        string? directory = null;
+        string? directory = SamplesPath;
         Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
@@ -156,7 +156,7 @@ total frameworks                       33
     {
         //Arrange
         bool includeTotals = true;
-        string? directory = null;
+        string? directory = SamplesPath;
         Repo? repo = null;
         string? file = "test.txt";
         if (directory != null || repo != null)
@@ -204,7 +204,7 @@ total frameworks,,33,
     public void InventoryResultsTest()
     {
         //Arrange
-        string? directory = null;
+        string? directory = SamplesPath;
         Repo? repo = null;
         string? file = null;
         if (directory != null || repo != null)
@@ -289,7 +289,7 @@ total frameworks,,33,
     public void InventoryResultsWebConfigCountTest()
     {
         //Arrange
-        string? directory = null;
+        string? directory = SamplesPath;
         Repo? repo = null;
         string? file = null;
         int webConfigCount = 0;
@@ -320,7 +320,7 @@ total frameworks,,33,
     public void InventoryResultsToFileTest()
     {
         //Arrange
-        string? directory = null;
+        string? directory = SamplesPath;
         Repo? repo = null;
         string? file = "test2.txt";
         if (directory != null || repo != null)
@@ -370,8 +370,6 @@ total frameworks,,33,
             Assert.AreEqual(expected.Replace("\\", "/"), contents.Replace("\\", "/"));
         }
     }
-
-
 
     [TestMethod]
     public void FrameworkSummaryMultipleDirectoryMAUICalculatorResultsTest()
