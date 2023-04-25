@@ -82,7 +82,7 @@ total frameworks                       48
             string expected = @"Framework             FrameworkFamily  Count  Status         
 -------------------------------------------------------------
 .NET 5.0              .NET             2      deprecated     
-.NET 6.0              .NET             4      supported      
+.NET 6.0              .NET             6      supported      
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
@@ -108,7 +108,7 @@ total frameworks                       48
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       48                    
+total frameworks                       50                    
 ";
 
             //Act
