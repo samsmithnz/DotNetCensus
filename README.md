@@ -28,7 +28,7 @@ Additionally, this tool supports:
 - [Directory.Build.props variables](https://github.com/samsmithnz/DotNetCensus/issues/44) in project files
 - VB6 projects (as many are related to VB.NET projects)
 
-If we missed a version - please add an issue and we will add it! 
+If we missed a version - please add an issue and we will fix it! 
 
 ## To use
 
