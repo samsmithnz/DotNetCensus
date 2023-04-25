@@ -45,6 +45,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029
 .NET Framework 4.0    .NET Framework   1      deprecated     
 .NET Framework 4.5    .NET Framework   1      deprecated     
+.NET Framework 4.5.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.2  .NET Framework   1      supported      
 .NET Framework 4.7.1  .NET Framework   1      supported      
@@ -52,7 +53,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       50                    
+total frameworks                       51                    
 ";
 
             //Act
