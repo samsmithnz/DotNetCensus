@@ -441,12 +441,10 @@ total frameworks                       3
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework             FrameworkFamily  Count  Status   
--------------------------------------------------------
-.NET 6.0-android      .NET             1      supported
-.NET 6.0-ios          .NET             1      supported
-.NET 6.0-maccatalyst  .NET             1      supported
-total frameworks                       3               
+            string expected = @"Framework         FrameworkFamily  Count  Status    
+----------------------------------------------------
+.NET 8.0          .NET             1      in preview
+total frameworks                   1                
 ";
 
             //Act
