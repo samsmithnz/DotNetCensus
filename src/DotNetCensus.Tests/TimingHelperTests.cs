@@ -11,7 +11,7 @@ public class TimingHelperTests
         TimeSpan timespan = TimeSpan.FromMinutes(1.5);
 
         // Act
-        string result = TimingHelper.FormatTime(timespan);
+        string result = TimingHelper.GetTime(timespan);
 
         // Assert
         Assert.AreEqual("1:30.0 mins", result);
@@ -24,7 +24,7 @@ public class TimingHelperTests
         TimeSpan timespan = TimeSpan.FromSeconds(1.5);
 
         // Act
-        string result = TimingHelper.FormatTime(timespan);
+        string result = TimingHelper.GetTime(timespan);
 
         // Assert
         Assert.AreEqual("1.0 seconds", result);
@@ -37,7 +37,7 @@ public class TimingHelperTests
         TimeSpan timespan = TimeSpan.FromMilliseconds(1.5);
 
         // Act
-        string result = TimingHelper.FormatTime(timespan);
+        string result = TimingHelper.GetTime(timespan);
 
         // Assert
         Assert.AreEqual("1 ms", result);
