@@ -26,7 +26,7 @@ public class RepoDataAccessTests : RepoBasedTests
             string expected = @"Framework             FrameworkFamily  Count  Status         
 -------------------------------------------------------------
 .NET 5.0              .NET             2      deprecated     
-.NET 6.0              .NET             4      supported      
+.NET 6.0              .NET             6      supported      
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
@@ -45,6 +45,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029
 .NET Framework 4.0    .NET Framework   1      deprecated     
 .NET Framework 4.5    .NET Framework   1      deprecated     
+.NET Framework 4.5.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.2  .NET Framework   1      supported      
 .NET Framework 4.7.1  .NET Framework   1      supported      
@@ -52,7 +53,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       48                    
+total frameworks                       51                    
 ";
 
             //Act
@@ -82,7 +83,7 @@ total frameworks                       48
             string expected = @"Framework             FrameworkFamily  Count  Status         
 -------------------------------------------------------------
 .NET 5.0              .NET             2      deprecated     
-.NET 6.0              .NET             4      supported      
+.NET 6.0              .NET             6      supported      
 .NET 6.0-android      .NET             1      supported      
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
@@ -101,6 +102,7 @@ total frameworks                       48
 .NET Framework 3.5    .NET Framework   2      EOL: 9-Jan-2029
 .NET Framework 4.0    .NET Framework   1      deprecated     
 .NET Framework 4.5    .NET Framework   1      deprecated     
+.NET Framework 4.5.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.1  .NET Framework   1      deprecated     
 .NET Framework 4.6.2  .NET Framework   1      supported      
 .NET Framework 4.7.1  .NET Framework   1      supported      
@@ -108,7 +110,7 @@ total frameworks                       48
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       48                    
+total frameworks                       51                    
 ";
 
             //Act
@@ -174,6 +176,7 @@ total frameworks                       48
 /samples/Sample.NETFramework4.6.1FSharp.HelloWorld/HelloWorld.fsproj                                                    HelloWorld.fsproj                           net461              .NET Framework 4.6.1  .NET Framework  fsharp    deprecated     
 /samples/Sample.NetFramework40.WebApp/WorldBankSample.csproj                                                            WorldBankSample.csproj                      v4.0                .NET Framework 4.0    .NET Framework  csharp    deprecated     
 /samples/Sample.NetFramework45.WebApp/WorldBankSample.csproj                                                            WorldBankSample.csproj                      v4.5                .NET Framework 4.5    .NET Framework  csharp    deprecated     
+/samples/Sample.NetFramework451.WebApp/WorldBankSample.csproj                                                           WorldBankSample.csproj                      v4.5.1              .NET Framework 4.5.1  .NET Framework  csharp    deprecated     
 /samples/Sample.NetFrameworkInvalid.App/VBProj.vbproj                                                                   VBProj.vbproj                                                   (Unknown)             (Unknown)       vb.net    unknown        
 /samples/Sample.NetFrameworkVBNet.ConsoleApp/Sample.NetFrameworkVBNet.ConsoleApp.vbproj                                 Sample.NetFrameworkVBNet.ConsoleApp.vbproj  netcoreapp3.1       .NET Core 3.1         .NET Core       vb.net    deprecated     
 /samples/Sample.NetStandard.Class/Sample.NetStandard.Class.csproj                                                       Sample.NetStandard.Class.csproj             netstandard2.0      .NET Standard 2.0     .NET Standard   csharp    supported      
@@ -181,8 +184,10 @@ total frameworks                       48
 /samples/Sample.Unity2020/Assembly-CSharp.csproj                                                                        Assembly-CSharp.csproj                      v4.7.1              .NET Framework 4.7.1  .NET Framework  csharp    supported      
 /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                                                    Sample.VB6.WinApp.vbp                       vb6                 Visual Basic 6        Visual Basic 6  vb6       deprecated     
 /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                         DotNetCensus.Core.csproj                    net7.0              .NET 7.0              .NET            csharp    supported      
+/src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                         DotNetCensus.Core.csproj                    net6.0              .NET 6.0              .NET            csharp    supported      
 /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                       DotNetCensus.Tests.csproj                   net7.0              .NET 7.0              .NET            csharp    supported      
 /src/DotNetCensus/DotNetCensus.csproj                                                                                   DotNetCensus.csproj                         net7.0              .NET 7.0              .NET            csharp    supported      
+/src/DotNetCensus/DotNetCensus.csproj                                                                                   DotNetCensus.csproj                         net6.0              .NET 6.0              .NET            csharp    supported      
 ";
 
             //Act

@@ -274,6 +274,7 @@ namespace DotNetCensus.Core.Projects
                 item.Status = ProjectClassification.GetStatus(item.FrameworkCode);
                 item.Family = ProjectClassification.GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = ProjectClassification.GetFriendlyName(item.FrameworkCode, item.Family);
+                //Debug.WriteLine($"Framework: {item.FrameworkCode}; Name: {item.FrameworkName}; Project: {item.FileName}");
             }
 
             return projects;
