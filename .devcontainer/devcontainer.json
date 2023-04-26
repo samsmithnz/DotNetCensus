@@ -21,7 +21,9 @@
 			"extensions": [
 				"ms-dotnettools.csharp",
 				"formulahendry.dotnet-test-explorer",
-				"hbenl.vscode-test-explorer"
+				"hbenl.vscode-test-explorer",
+				"github.copilot-nightly",
+				"github.copilot"
 			]
 		}
 	},
