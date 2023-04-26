@@ -68,16 +68,60 @@ namespace DotNetCensus.Core.APIs
             if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                try
+                {
+                    result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                }
+                catch (Newtonsoft.Json.JsonSerializationException ex)
+                {
+                    FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
+                    if (fileDetails != null &&
+                        fileDetails.Length > 1)
+                    {
+                        foreach (FileDetails item in fileDetails)
+                        {
+                            if (item.type == "file")
+                            {
+                                result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
+                                break;
+                            }
+                        }
+                    }
+                }
+                //else
+                //{
+                //    FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
+                //    if (fileDetails != null &&
+                //        fileDetails.Length > 1)
+                //    {
+                //        foreach (FileDetails item in fileDetails)
+                //        {
+                //            if (item.type == "file")
+                //            {
+                //                result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
 
                 //Decode the Base64 file contents result
                 if (result != null && result.content != null)
                 {
-                    byte[]? valueBytes = System.Convert.FromBase64String(result.content);
-                    result.content = Encoding.UTF8.GetString(valueBytes);
+                    if (IsBase64String(result.content))
+                    {
+                        byte[]? valueBytes = System.Convert.FromBase64String(result.content);
+                        result.content = Encoding.UTF8.GetString(valueBytes);
+                    }
                 }
             }
             return result;
+        }
+
+        private static bool IsBase64String(string base64)
+        {
+            Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
+            return Convert.TryFromBase64String(base64, buffer, out int bytesParsed);
         }
 
         private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)

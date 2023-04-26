@@ -99,7 +99,7 @@ namespace DotNetCensus.Core.Projects
                 foreach (string file in baseDir.Files)
                 {
                     FileInfo fileInfo = new(file);
-                    if (fileInfo.Extension == ".props")
+                    if (fileInfo.Extension.ToLower() == ".props")
                     {
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
