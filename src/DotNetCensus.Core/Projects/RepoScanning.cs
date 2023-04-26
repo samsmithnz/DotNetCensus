@@ -98,7 +98,8 @@ namespace DotNetCensus.Core.Projects
                 //Check for a *.props files first
                 foreach (string file in baseDir.Files)
                 {
-                    if (file == "Directory.Build.props")
+                    FileInfo fileInfo = new(file);
+                    if (fileInfo.Extension == ".props")
                     {
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,

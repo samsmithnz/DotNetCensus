@@ -39,7 +39,7 @@ namespace DotNetCensus.Core.APIs
                         }
                         if (ProjectClassification.IsProjectFile(fileInfo.Name) ||
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) ||
-                            fileInfo.Extension.ToLower() == "directory.build.props")
+                            fileInfo.Extension.ToLower() == ".props")
                         {
                             results.Add(new Project()
                             {
