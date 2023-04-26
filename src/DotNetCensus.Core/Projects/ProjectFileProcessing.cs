@@ -141,19 +141,30 @@ namespace DotNetCensus.Core.Projects
             else
             {
                 //scan the project file to identify the framework
+                string identifier = "";
+                bool isAndroidApp = false;
                 foreach (string line in lines)
                 {
                     //.NET Framework version element
                     if (line.Contains("<TargetFrameworkVersion>"))
                     {
                         project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
-                        break;
+                        //don't break here - we need to confirm the .NET framework version by checking other properties 
                     }
                     //.NET Xamarin version element
                     else if (line.Contains("<TargetFrameworkIdentifier>"))
                     {
-                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkIdentifier>", "").Replace("</TargetFrameworkIdentifier>", "").Trim(), directoryBuildPropFileContent);
-                        break;
+                        identifier = line.Replace("<TargetFrameworkIdentifier>", "").Replace("</TargetFrameworkIdentifier>", "").Trim();
+                        if (identifier == "MonoAndroid" || identifier == "Xamarin.iOS" || identifier == "Xamarin.Mac" || identifier == "Xamarin.TVOS" || identifier == "Xamarin.WatchOS")
+                        {
+                            project.FrameworkCode = identifier;
+                        }
+                        //don't break here - we need to confirm the .NET framework version by checking other properties 
+                    }
+                    else if (line.Contains("<AndroidApplication>True</AndroidApplication>"))
+                    {
+                        isAndroidApp = true;
+                        //don't break here - we need to confirm the .NET framework version by checking other properties 
                     }
                     //.NET Core version element
                     else if (line.Contains("<TargetFramework>"))
