@@ -90,10 +90,6 @@ public static class ProjectClassification
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
-            if (frameworkCode == "net451")
-            {
-                int j = 0;
-            }
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
