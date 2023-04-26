@@ -27,7 +27,6 @@ public class DirectoryAndRepoDataAccessComparisonTests : RepoBasedTests
         };
         string? file2 = null;
 
-
         //Act
         string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
         string? contents2 = Main.GetFrameworkSummaryAsString(directory2, repo2, includeTotals2, file2);
