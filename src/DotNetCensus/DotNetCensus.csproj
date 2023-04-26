@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -14,7 +14,7 @@
 		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
 		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
 		<Authors>SamSmithNZ</Authors>
-	<AssemblyName>dotnet-census</AssemblyName>
+		<AssemblyName>dotnet-census</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
