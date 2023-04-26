@@ -91,7 +91,6 @@ public static class ProjectClassification
 
     public static string GetFriendlyName(string frameworkCode, string family)
     {
-
         if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
@@ -112,6 +111,10 @@ public static class ProjectClassification
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
+            if (frameworkCode == "net451")
+            {
+                int j = 0;
+            }
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
@@ -214,7 +217,7 @@ public static class ProjectClassification
             framework.Contains("v4.5") ||
             framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
             framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
-            framework == "net45" || //Unclear if this should be net45 or v4.5 - I've seen both in wild
+            framework.Contains("net45") || //Unclear if this should be net45 or v4.5 - I've seen both in wild
             framework == "net46" ||
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
