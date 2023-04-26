@@ -1,3 +1,7 @@
 {
-    "dotnet-test-explorer.testProjectPath": "**/*Tests.@(csproj|vbproj|fsproj)"
+    "dotnet-test-explorer.testProjectPath": "**/*Tests.@(csproj|vbproj|fsproj)",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.advanced": {
+        "debug.conversation": true
+    }
 }
