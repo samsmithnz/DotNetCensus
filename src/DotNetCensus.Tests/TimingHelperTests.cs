@@ -1,7 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+namespace DotNetCensus.Tests;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
+[TestCategory("UnitTest")]
 public class TimingHelperTests
 {
     [TestMethod]
@@ -21,25 +22,25 @@ public class TimingHelperTests
     public void TimingHelper_ReturnsCorrectStringForOneSecond()
     {
         // Arrange
-        TimeSpan timespan = TimeSpan.FromSeconds(1.5);
+        TimeSpan timespan = TimeSpan.FromSeconds(1.55);
 
         // Act
         string result = TimingHelper.GetTime(timespan);
 
         // Assert
-        Assert.AreEqual("1.0 seconds", result);
+        Assert.AreEqual("1.550 seconds", result);
     }
 
     [TestMethod]
     public void TimingHelper_ReturnsCorrectStringForOneMillisecond()
     {
         // Arrange
-        TimeSpan timespan = TimeSpan.FromMilliseconds(1.5);
+        TimeSpan timespan = TimeSpan.FromMilliseconds(33);
 
         // Act
         string result = TimingHelper.GetTime(timespan);
 
         // Assert
-        Assert.AreEqual("1 ms", result);
+        Assert.AreEqual("33 ms", result);
     }
 }
