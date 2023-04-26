@@ -431,4 +431,31 @@ total frameworks                       3
         }
     }
 
+    [TestMethod]
+    public void FrameworkSummaryGenericPropsFileResultsTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"/Sample.GenericProps.File";
+        Repo? repo = null;
+        bool includeTotals = true;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework             FrameworkFamily  Count  Status   
+-------------------------------------------------------
+.NET 6.0-android      .NET             1      supported
+.NET 6.0-ios          .NET             1      supported
+.NET 6.0-maccatalyst  .NET             1      supported
+total frameworks                       3               
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
 }
