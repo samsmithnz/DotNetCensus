@@ -70,7 +70,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(47, results[^1].Count);
+        Assert.AreEqual(48, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
@@ -114,7 +114,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(4, results.Count);
-        Assert.AreEqual(39, results[0].Count);
+        Assert.AreEqual(40, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(2, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
