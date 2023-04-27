@@ -87,7 +87,7 @@ total frameworks                       52
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             5      supported      
-.NET 8.0              .NET             6      in preview     
+.NET 8.0              .NET             7      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
 .NET Core 1.1         .NET Core        1      deprecated     
 .NET Core 2.0         .NET Core        1      deprecated     
@@ -107,10 +107,10 @@ total frameworks                       52
 .NET Framework 4.7.1  .NET Framework   1      supported      
 .NET Framework 4.7.2  .NET Framework   3      supported      
 .NET Standard 2.0     .NET Standard    3      supported      
-(Unknown)             (Unknown)        3      unknown        
+(Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
 total frameworks                       53                    
-
+    
 ";
 
             //Act
