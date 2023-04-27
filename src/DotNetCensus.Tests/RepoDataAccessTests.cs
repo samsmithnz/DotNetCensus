@@ -18,7 +18,7 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             User = GitHubId,
             Password = GitHubSecret,
-            Branch = "main"
+            Branch = GetCurrentBranch()
         };
         string? file = null;
         if (directory != null || repo != null)
