@@ -199,6 +199,7 @@ total frameworks                       53
             Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
         }
     }
+
     [TestMethod]
     public void FrameworkSummaryWithPrivateRepoTest()
     {
