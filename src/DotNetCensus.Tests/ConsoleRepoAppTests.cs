@@ -17,6 +17,7 @@ public class ConsoleRepoAppTests : RepoBasedTests
                 "-r", "dotnetcensus",
                 "-u", GitHubId,
                 "-p", GitHubSecret,
+                "-b", GetCurrentBranch(),
                 "-t" };
             StringWriter sw = new();
             string expected = @"Framework             FrameworkFamily  Count  Status         
