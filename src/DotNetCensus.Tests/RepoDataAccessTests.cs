@@ -108,9 +108,9 @@ total frameworks                       52
 .NET Framework 4.7.1  .NET Framework   1      supported      
 .NET Framework 4.7.2  .NET Framework   3      supported      
 .NET Standard 2.0     .NET Standard    3      supported      
-(Unknown)             (Unknown)        2      unknown        
+(Unknown)             (Unknown)        3      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       52                    
+total frameworks                       53                    
 ";
 
             //Act
