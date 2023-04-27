@@ -434,10 +434,35 @@ total frameworks                       3
     }
 
     [TestMethod]
-    public void FrameworkSummaryGenericPropsFileResultsTest()
+    public void FrameworkSummaryGenericPropsFileTest()
     {
         //Arrange
         string? directory = SamplesPath + @"/Sample.GenericProps.File";
+        Repo? repo = null;
+        bool includeTotals = true;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework         FrameworkFamily  Count  Status    
+----------------------------------------------------
+.NET 8.0          .NET             1      in preview
+total frameworks                   1                
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void FrameworkSummaryGenericPropsFileNoProjectVariableTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"/Sample.GenericProps.File.NoProjectVariable";
         Repo? repo = null;
         bool includeTotals = true;
         string? file = null;
