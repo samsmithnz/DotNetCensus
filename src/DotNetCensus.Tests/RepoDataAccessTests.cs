@@ -31,7 +31,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             5      supported      
-.NET 8.0              .NET             5      in preview     
+.NET 8.0              .NET             6      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
 .NET Core 1.1         .NET Core        1      deprecated     
 .NET Core 2.0         .NET Core        1      deprecated     
@@ -53,7 +53,7 @@ public class RepoDataAccessTests : RepoBasedTests
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       51                    
+total frameworks                       52                    
 ";
 
             //Act
@@ -137,6 +137,7 @@ total frameworks                       52
         {
             string expected = @"Path                                                                                                                    FileName                                    FrameworkCode       FrameworkName         Family          Language  Status         
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/samples/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj                                                         xUnit.tests.csproj                          net8.0              .NET 8.0              .NET            csharp    in preview     
 /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj                            analyzer.csproj                             net8.0              .NET 8.0              .NET            csharp    in preview     
 /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj        ILLink.CodeFixProvider.csproj               netstandard2.0      .NET Standard 2.0     .NET Standard   csharp    supported      
 /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj  ILLink.RoslynAnalyzer.csproj                netstandard2.0      .NET Standard 2.0     .NET Standard   csharp    supported      
