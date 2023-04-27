@@ -130,13 +130,15 @@ total frameworks                       53
         Repo? repo = new("samsmithnz", "DotNetCensus")
         {
             User = GitHubId,
-            Password = GitHubSecret
+            Password = GitHubSecret,
+            Branch = GetCurrentBranch()
         };
         string? file = null;
         if (directory != null || repo != null)
         {
             string expected = @"Path                                                                                                                    FileName                                    FrameworkCode       FrameworkName         Family          Language  Status         
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/samples/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                  powershell-win-core.csproj                  net8.0              .NET 8.0              .NET            csharp    in preview     
 /samples/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj                                                         xUnit.tests.csproj                          net8.0              .NET 8.0              .NET            csharp    in preview     
 /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj                            analyzer.csproj                             net8.0              .NET 8.0              .NET            csharp    in preview     
 /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj        ILLink.CodeFixProvider.csproj               netstandard2.0      .NET Standard 2.0     .NET Standard   csharp    supported      
