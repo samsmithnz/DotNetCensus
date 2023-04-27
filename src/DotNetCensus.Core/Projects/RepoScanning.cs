@@ -108,7 +108,6 @@ namespace DotNetCensus.Core.Projects
                         {
                             curentPropFileContent.Append(fileDetails.content);
                         }
-                        break;
                     }
                 }
                 HashSet<string> foldersDone = new();
