@@ -42,22 +42,24 @@ namespace DotNetCensus.Core.Projects
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (!foundProjectFile)
             {
-                //Check for a .props file first
-                FileInfo? newPropFile = null;
+                //Check for .props files 
                 List<FileInfo> propFiles = new DirectoryInfo(directory).GetFiles("*.props", SearchOption.TopDirectoryOnly).ToList();
                 if (propFiles.Count > 0)
                 {
-                    newPropFile = propFiles[0];
-                }
-                //If there is a directory file being passed in - convert it to content
-                if (newPropFile != null)
-                {
-                    if (propFileContent == null)
+                    foreach (FileInfo fileInfo in propFiles)
                     {
-                        propFileContent = "";
+                        //If there is a directory file being passed in - convert it to content
+                        if (fileInfo != null)
+                        {
+                            if (propFileContent == null)
+                            {
+                                propFileContent = "";
+                            }
+                            propFileContent += File.ReadAllText(fileInfo.FullName);
+                        }
                     }
-                    propFileContent += File.ReadAllText(newPropFile.FullName);
                 }
+
 
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {

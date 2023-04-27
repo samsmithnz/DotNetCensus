@@ -18,6 +18,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string[] parameters = new string[] { "-d", SamplesPath, "-i", "-f", file };
             StringWriter sw = new();
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
+/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj,xUnit.tests.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj,ILLink.CodeFixProvider.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
@@ -99,7 +100,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET 6.0-ios,.NET,1,supported
 .NET 6.0-maccatalyst,.NET,1,supported
 .NET 7.0,.NET,2,supported
-.NET 8.0,.NET,6,in preview
+.NET 8.0,.NET,7,in preview
 .NET Core 1.0,.NET Core,1,deprecated
 .NET Core 1.1,.NET Core,1,deprecated
 .NET Core 2.0,.NET Core,1,deprecated
@@ -121,7 +122,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Standard 2.0,.NET Standard,3,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,47,
+total frameworks,,48,
 ";
 
             //Act

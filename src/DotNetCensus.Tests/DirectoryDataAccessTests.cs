@@ -45,7 +45,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             2      supported      
-.NET 8.0              .NET             6      in preview     
+.NET 8.0              .NET             7      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
 .NET Core 1.1         .NET Core        1      deprecated     
 .NET Core 2.0         .NET Core        1      deprecated     
@@ -120,7 +120,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET 6.0-ios          .NET             1      supported      
 .NET 6.0-maccatalyst  .NET             1      supported      
 .NET 7.0              .NET             2      supported      
-.NET 8.0              .NET             6      in preview     
+.NET 8.0              .NET             7      in preview     
 .NET Core 1.0         .NET Core        1      deprecated     
 .NET Core 1.1         .NET Core        1      deprecated     
 .NET Core 2.0         .NET Core        1      deprecated     
@@ -142,7 +142,7 @@ Visual Basic 6        Visual Basic 6   1      deprecated
 .NET Standard 2.0     .NET Standard    3      supported      
 (Unknown)             (Unknown)        2      unknown        
 Visual Basic 6        Visual Basic 6   1      deprecated     
-total frameworks                       47                    
+total frameworks                       48                    
 ";
 
             //Act
@@ -172,7 +172,7 @@ total frameworks                       47
 .NET 6.0-ios,.NET,1,supported
 .NET 6.0-maccatalyst,.NET,1,supported
 .NET 7.0,.NET,2,supported
-.NET 8.0,.NET,6,in preview
+.NET 8.0,.NET,7,in preview
 .NET Core 1.0,.NET Core,1,deprecated
 .NET Core 1.1,.NET Core,1,deprecated
 .NET Core 2.0,.NET Core,1,deprecated
@@ -194,7 +194,7 @@ total frameworks                       47
 .NET Standard 2.0,.NET Standard,3,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,47,
+total frameworks,,48,
 ";
 
             //Act
@@ -218,6 +218,7 @@ total frameworks,,47,
         {
             string expected = @"Path                                                                                                            FileName                                    FrameworkCode       FrameworkName         Family          Language  Status         
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                  powershell-win-core.csproj                  net8.0              .NET 8.0              .NET            csharp    in preview     
 /Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj                                                         xUnit.tests.csproj                          net8.0              .NET 8.0              .NET            csharp    in preview     
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj                            analyzer.csproj                             net8.0              .NET 8.0              .NET            csharp    in preview     
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj        ILLink.CodeFixProvider.csproj               netstandard2.0      .NET Standard 2.0     .NET Standard   csharp    supported      
@@ -347,6 +348,7 @@ total frameworks,,47,
         if (directory != null || repo != null)
         {
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
+/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj,xUnit.tests.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj,ILLink.CodeFixProvider.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
@@ -434,10 +436,35 @@ total frameworks                       3
     }
 
     [TestMethod]
-    public void FrameworkSummaryGenericPropsFileResultsTest()
+    public void FrameworkSummaryGenericPropsFileTest()
     {
         //Arrange
         string? directory = SamplesPath + @"/Sample.GenericProps.File";
+        Repo? repo = null;
+        bool includeTotals = true;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework         FrameworkFamily  Count  Status    
+----------------------------------------------------
+.NET 8.0          .NET             1      in preview
+total frameworks                   1                
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
+    public void FrameworkSummaryGenericPropsFileNoProjectVariableTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"/Sample.GenericProps.File.NoProjectVariable";
         Repo? repo = null;
         bool includeTotals = true;
         string? file = null;
