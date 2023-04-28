@@ -44,6 +44,7 @@ public static class ProjectClassification
                  frameworkCode.StartsWith("v2.") ||
                  frameworkCode.StartsWith("v3.") ||
                  frameworkCode.StartsWith("v4.") ||
+                 frameworkCode.StartsWith("net3") ||
                  frameworkCode.StartsWith("net4") ||
                  frameworkCode.StartsWith("Unity"))
         {
@@ -69,6 +70,10 @@ public static class ProjectClassification
 
     public static string GetFriendlyName(string frameworkCode, string family)
     {
+        if (frameworkCode == "net35")
+        {
+            int i = 0;
+        }
         if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
