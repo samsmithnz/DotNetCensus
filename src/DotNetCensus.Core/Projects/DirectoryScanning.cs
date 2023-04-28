@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Text;
 
 namespace DotNetCensus.Core.Projects
 {
@@ -43,6 +44,7 @@ namespace DotNetCensus.Core.Projects
             if (!foundProjectFile)
             {
                 //Check for .props files 
+                StringBuilder propFileContentSB = new();
                 List<FileInfo> propFiles = new DirectoryInfo(directory).GetFiles("*.props", SearchOption.TopDirectoryOnly).ToList();
                 if (propFiles.Count > 0)
                 {
@@ -51,11 +53,7 @@ namespace DotNetCensus.Core.Projects
                         //If there is a directory file being passed in - convert it to content
                         if (fileInfo != null)
                         {
-                            if (propFileContent == null)
-                            {
-                                propFileContent = "";
-                            }
-                            propFileContent += File.ReadAllText(fileInfo.FullName);
+                            propFileContentSB.Append(File.ReadAllText(fileInfo.FullName));
                         }
                     }
                 }
@@ -70,7 +68,7 @@ namespace DotNetCensus.Core.Projects
                         subDirectory.Name != ".vs" &&
                         subDirectory.Name != ".vscode")
                     {
-                        projects.AddRange(SearchDirectory(subDirectory.FullName, propFileContent));
+                        projects.AddRange(SearchDirectory(subDirectory.FullName, propFileContentSB.ToString()));
                     }
                 }
             }

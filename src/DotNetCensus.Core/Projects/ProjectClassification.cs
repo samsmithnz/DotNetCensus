@@ -70,10 +70,6 @@ public static class ProjectClassification
 
     public static string GetFriendlyName(string frameworkCode, string family)
     {
-        if (frameworkCode == "net35")
-        {
-            int i = 0;
-        }
         if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
