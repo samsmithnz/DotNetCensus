@@ -72,7 +72,7 @@ namespace DotNetCensus.Core.APIs
                 {
                     result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
                 }
-                catch (Newtonsoft.Json.JsonSerializationException ex)
+                catch (Newtonsoft.Json.JsonSerializationException)
                 {
                     FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
                     if (fileDetails != null &&
@@ -88,31 +88,14 @@ namespace DotNetCensus.Core.APIs
                         }
                     }
                 }
-                //else
-                //{
-                //    FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
-                //    if (fileDetails != null &&
-                //        fileDetails.Length > 1)
-                //    {
-                //        foreach (FileDetails item in fileDetails)
-                //        {
-                //            if (item.type == "file")
-                //            {
-                //                result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
-                //                break;
-                //            }
-                //        }
-                //    }
-                //}
 
                 //Decode the Base64 file contents result
-                if (result != null && result.content != null)
+                if (result != null && 
+                    result.content != null && 
+                    IsBase64String(result.content))
                 {
-                    if (IsBase64String(result.content))
-                    {
-                        byte[]? valueBytes = System.Convert.FromBase64String(result.content);
-                        result.content = Encoding.UTF8.GetString(valueBytes);
-                    }
+                    byte[]? valueBytes = System.Convert.FromBase64String(result.content);
+                    result.content = Encoding.UTF8.GetString(valueBytes);
                 }
             }
             return result;
