@@ -120,7 +120,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Framework 4.5.1,.NET Framework,1,deprecated
 .NET Framework 4.5.2,.NET Framework,1,deprecated
 .NET Framework 4.6.1,.NET Framework,1,deprecated
-.NET Framework 4.6.2,.NET Framework,1,supported
+.NET Framework 4.6.2,.NET Framework,1,EOL: 12-Jan-2027
 .NET Framework 4.7.1,.NET Framework,1,supported
 .NET Framework 4.7.2,.NET Framework,3,supported
 .NET Standard 2.0,.NET Standard,3,supported
