@@ -209,6 +209,12 @@ public static class ProjectClassification
             //Unsupported/End of life/red
             return "deprecated";
         }
+        else if (framework == "net462" ||
+            framework == "v4.6.2")
+        {
+            //Supported, but old/orange
+            return "EOL: 12-Jan-2027";
+        }
         else if (framework.Contains("v3.5") ||
             framework == "net35")
         {
@@ -218,8 +224,6 @@ public static class ProjectClassification
         else if (framework.Contains("net6.0") ||
             framework.Contains("net7.0") ||
             framework.Contains("netstandard") ||
-            framework == "net462" ||
-            framework == "v4.6.2" ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
             framework.Contains("net48") ||
