@@ -203,7 +203,8 @@ public static class ProjectClassification
             //Unsupported/End of life/red
             return "deprecated";
         }
-        else if (framework.Contains("v3.5"))
+        else if (framework.Contains("v3.5") ||
+            framework == "net35")
         {
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
