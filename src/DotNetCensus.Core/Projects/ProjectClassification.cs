@@ -85,7 +85,12 @@ public static class ProjectClassification
             //Drop the v from the version string. (e.g. v3.0 becomes 3.0)
             return family + " " + frameworkCode.Replace("v", "");
         }
-        else if (frameworkCode.StartsWith("net4"))
+        else if (frameworkCode == "net40-client")
+        {
+            return family + " 4.0 Client Profile";
+        }
+        else if (frameworkCode.StartsWith("net3") ||
+            frameworkCode.StartsWith("net4"))
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
