@@ -93,7 +93,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string file = "test.txt";
             string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
-            string expected = @"Framework,FrameworkFamily,Count,Status
+        string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,2,deprecated
 .NET 6.0,.NET,4,supported
 .NET 6.0-android,.NET,1,supported
@@ -112,7 +112,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Framework 1.1,.NET Framework,1,deprecated
 .NET Framework 2.0,.NET Framework,1,deprecated
 .NET Framework 3.5,.NET Framework,2,EOL: 9-Jan-2029
-.NET Framework 4.0,.NET Framework,1,deprecated
+.NET Framework 4.0,.NET Framework,2,unknown
 .NET Framework 4.5,.NET Framework,1,deprecated
 .NET Framework 4.5.1,.NET Framework,1,deprecated
 .NET Framework 4.6.1,.NET Framework,1,deprecated
@@ -122,7 +122,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 .NET Standard 2.0,.NET Standard,3,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,48,
+total frameworks,,49,
 ";
 
             //Act

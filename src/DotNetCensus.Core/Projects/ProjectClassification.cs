@@ -87,7 +87,7 @@ public static class ProjectClassification
         }
         else if (frameworkCode == "net40-client")
         {
-            return family + " 4.0 Client Profile";
+            return family + " 4.0";
         }
         else if (frameworkCode.StartsWith("net3") ||
             frameworkCode.StartsWith("net4"))
