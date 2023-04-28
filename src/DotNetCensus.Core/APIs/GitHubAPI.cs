@@ -80,7 +80,7 @@ namespace DotNetCensus.Core.APIs
                     {
                         foreach (FileDetails item in fileDetails)
                         {
-                            if (item.type == "file")
+                            if (item.type == "file" && item != null && item.path != null)
                             {
                                 result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
                                 break;
@@ -90,8 +90,8 @@ namespace DotNetCensus.Core.APIs
                 }
 
                 //Decode the Base64 file contents result
-                if (result != null && 
-                    result.content != null && 
+                if (result != null &&
+                    result.content != null &&
                     IsBase64String(result.content))
                 {
                     byte[]? valueBytes = System.Convert.FromBase64String(result.content);
