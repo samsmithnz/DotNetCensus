@@ -18,6 +18,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string[] parameters = new string[] { "-d", SamplesPath, "-i", "-f", file };
             StringWriter sw = new();
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
+/Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,net35,.NET Framework 3.5,.NET Framework,fsharp,EOL: 9-Jan-2029
 /Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj,xUnit.tests.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
