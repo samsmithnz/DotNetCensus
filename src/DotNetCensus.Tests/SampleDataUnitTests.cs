@@ -116,7 +116,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         Assert.AreEqual(4, results.Count);
         Assert.AreEqual(42, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
-        Assert.AreEqual(2, results[1].Count);
+        Assert.AreEqual(3, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
         Assert.AreEqual(5, results[2].Count);
         Assert.AreEqual("vb.net", results[2].Language);
