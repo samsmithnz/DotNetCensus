@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
@@ -265,6 +266,7 @@ namespace DotNetCensus.Core.Projects
             //Add colors and families
             foreach (Project item in projects)
             {
+                Debug.WriteLine("item.FrameworkCode:" + item.FrameworkCode);
                 item.Status = ProjectClassification.GetStatus(item.FrameworkCode);
                 item.Family = ProjectClassification.GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = ProjectClassification.GetFriendlyName(item.FrameworkCode, item.Family);
