@@ -30,3 +30,15 @@ With .NET Core 2 -> 3.1, .NET 5+, .NET Standard 1+, and .NET Framework: projects
   </PropertyGroup>
 </Project>
 ```
+
+Current benchmarks:
+- aspnetcore: 566/735
+- fsharp: 16/2482
+- Mono: 753/1072
+- PowerShell: 0/38
+- roslyn: 77/324
+- Runner: 0/9
+- SDK: 181/ 463
+- StackExchange.Redis: 0/1
+- winforms: 42/49
+- wpf: 0/51 
