@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
@@ -101,29 +102,38 @@ namespace DotNetCensus.Core.Projects
             else if (new FileInfo(filePath).Name == "project.json")
             {
                 //Load it into a JSON object
-                JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
-                //Search for the project version
-                //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
-                if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
+                try
                 {
-                    foreach (JsonProperty item in jsonElement.EnumerateObject())
+                    JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
+                    //Search for the project version
+                    //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
+                    if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
                     {
-                        if (item.NameEquals("netcoreapp1.0"))
+                        foreach (JsonProperty item in jsonElement.EnumerateObject())
                         {
-                            project.FrameworkCode = "netcoreapp1.0";
-                            break;
-                        }
-                        else if (item.NameEquals("netcoreapp1.1"))
-                        {
-                            project.FrameworkCode = "netcoreapp1.1";
-                            break;
+                            if (item.NameEquals("netcoreapp1.0"))
+                            {
+                                project.FrameworkCode = "netcoreapp1.0";
+                                break;
+                            }
+                            else if (item.NameEquals("netcoreapp1.1"))
+                            {
+                                project.FrameworkCode = "netcoreapp1.1";
+                                break;
+                            }
                         }
                     }
+                    else
+                    {
+                        project = null;
+                    }
                 }
-                else
-                {
+                catch
+                {   
+                    //sometimes the json is invalid - just skip over the issue
                     project = null;
                 }
+
             }
             else if (new FileInfo(filePath).Name == "web.config")
             {
@@ -265,6 +275,7 @@ namespace DotNetCensus.Core.Projects
             //Add colors and families
             foreach (Project item in projects)
             {
+                Debug.WriteLine("item.FrameworkCode:" + item.FrameworkCode);
                 item.Status = ProjectClassification.GetStatus(item.FrameworkCode);
                 item.Family = ProjectClassification.GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = ProjectClassification.GetFriendlyName(item.FrameworkCode, item.Family);

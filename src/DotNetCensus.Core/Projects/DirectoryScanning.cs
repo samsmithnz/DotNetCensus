@@ -51,6 +51,7 @@ namespace DotNetCensus.Core.Projects
                         //If there is a directory file being passed in - convert it to content
                         if (fileInfo != null)
                         {
+                            //Note: don't make this a stringbuilder - it breaks the recursive search
                             if (propFileContent == null)
                             {
                                 propFileContent = "";

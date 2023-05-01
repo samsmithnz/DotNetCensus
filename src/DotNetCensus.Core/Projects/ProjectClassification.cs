@@ -44,6 +44,7 @@ public static class ProjectClassification
                  frameworkCode.StartsWith("v2.") ||
                  frameworkCode.StartsWith("v3.") ||
                  frameworkCode.StartsWith("v4.") ||
+                 frameworkCode.StartsWith("net3") ||
                  frameworkCode.StartsWith("net4") ||
                  frameworkCode.StartsWith("Unity"))
         {
@@ -85,7 +86,12 @@ public static class ProjectClassification
             //Drop the v from the version string. (e.g. v3.0 becomes 3.0)
             return family + " " + frameworkCode.Replace("v", "");
         }
-        else if (frameworkCode.StartsWith("net4"))
+        else if (frameworkCode == "net40-client")
+        {
+            return family + " 4.0";
+        }
+        else if (frameworkCode.StartsWith("net3") ||
+            frameworkCode.StartsWith("net4"))
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
@@ -191,6 +197,7 @@ public static class ProjectClassification
             framework.Contains("v4.5") ||
             framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
             framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
+            framework.Contains("net40") ||
             framework.Contains("net45") || //Unclear if this should be net45 or v4.5 - I've seen both in wild
             framework == "net46" ||
             framework == "net461" ||
@@ -203,6 +210,12 @@ public static class ProjectClassification
             //Unsupported/End of life/red
             return "deprecated";
         }
+        else if (framework == "net462" ||
+            framework == "v4.6.2")
+        {
+            //Supported, but old/orange
+            return "EOL: 12-Jan-2027";
+        }
         else if (framework.Contains("v3.5") ||
             framework == "net35")
         {
@@ -212,8 +225,6 @@ public static class ProjectClassification
         else if (framework.Contains("net6.0") ||
             framework.Contains("net7.0") ||
             framework.Contains("netstandard") ||
-            framework == "net462" ||
-            framework == "v4.6.2" ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
             framework.Contains("net48") ||
