@@ -31,7 +31,7 @@ Additionally, this tool supports:
 If we missed a version - please add an issue and we will fix it! 
 
 **Current limitations:**
-- Scanning tends to struggle with large projects with many .props file dependencies. It does a decent job processing them, but if there is a lot of inheritance - it tends to lose it's way, especially in extra large and complicated code bases such as aspnetcore and roslyn. This is something I continue to optimze, but I'm not sure I'm geting impact - these projects are much larger than projects I deal with on a day to day basis. 
+- Scanning can struggle to identify versions with very very large projects (for example [roslyn](https://github.com/dotnet/roslyn) or [aspnetcore](https://github.com/dotnet/aspnetcore)) when there are multiple .props file dependencies and/or build variables. 
 
 ## To use
 
