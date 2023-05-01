@@ -519,4 +519,28 @@ total frameworks                     1
         }
     }
 
+    [TestMethod]
+    public void FrameworkSummaryWebSharpWithInvalidJSONTest()
+    {
+        //Arrange
+        string? directory = SamplesPath + @"/Sample.Invalid.Project.Json";
+        Repo? repo = null;
+        bool includeTotals = true;
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework         FrameworkFamily  Count  Status
+------------------------------------------------
+total frameworks                   0            
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
 }

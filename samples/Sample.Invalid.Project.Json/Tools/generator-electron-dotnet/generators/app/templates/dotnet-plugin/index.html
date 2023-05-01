@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%- displayName %></title>
+  </head>
+  <body>
+    <h1><%- displayName %></h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+    <div id="pluginTarget" />
+      <script>
+        var pluginTarget = document.getElementById("pluginTarget");
+        var moduleEl = require('electron-dotnet').Embed({
+            name: 'plugin',
+            id: 'plugin',
+            width: 300,
+            height: 200,
+            src: '<%- className %>.<%- className %>',
+            path: "./src/bin/Debug/net451"
+        });
+        pluginTarget.appendChild(moduleEl);
+
+      </script>
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
