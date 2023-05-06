@@ -76,7 +76,7 @@ total frameworks                       56
         {
             User = GitHubId,
             Password = GitHubSecret,
-            Branch = GetCurrentBranch()
+            Branch = "main"
         };
         string? file = null;
         if (directory != null || repo != null)
