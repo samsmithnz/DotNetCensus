@@ -67,6 +67,37 @@ total frameworks                       56
     }
 
     [TestMethod]
+    public void FrameworkSummaryWithAzurePipelinesToGitHubActionsConverterRepoTest()
+    {
+        //Arrange
+        bool includeTotals = true;
+        string? directory = null;
+        Repo? repo = new("samsmithnz", "AzurePipelinesToGitHubActionsConverter")
+        {
+            User = GitHubId,
+            Password = GitHubSecret,
+            Branch = "main"
+        };
+        string? file = null;
+        if (directory != null || repo != null)
+        {
+            string expected = @"Framework          FrameworkFamily  Count  Status   
+----------------------------------------------------
+.NET 7.0           .NET             1      supported
+.NET Standard 2.0  .NET Standard    1      supported
+total frameworks                    2               
+";
+
+            //Act
+            string? contents = Main.GetFrameworkSummaryAsString(directory, repo, includeTotals, file);
+
+            //Asset
+            Assert.IsNotNull(expected);
+            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+        }
+    }
+
+    [TestMethod]
     public void FrameworkSummaryWithCurrentRepoAndBranchTest()
     {
         //Arrange
