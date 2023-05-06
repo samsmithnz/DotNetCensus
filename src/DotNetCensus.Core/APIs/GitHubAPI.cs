@@ -28,7 +28,7 @@ namespace DotNetCensus.Core.APIs
             {
                 foreach (FileResponse item in treeResponse.tree)
                 {
-                    if (item != null && item.path != null)
+                    if (item != null && item.path != null && item.type == "blob")
                     {
                         FileInfo fileInfo = new(item.path);
                         string path = item.path;
@@ -36,6 +36,10 @@ namespace DotNetCensus.Core.APIs
                         {
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
+                        }
+                        if (path == fileInfo.Name)
+                        {
+                            path = "/";
                         }
                         if (ProjectClassification.IsProjectFile(fileInfo.Name) ||
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) ||
