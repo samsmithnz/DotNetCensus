@@ -121,7 +121,7 @@ total frameworks                       56
 (Unknown)             (Unknown)        2      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
 total frameworks                       64                     
-    
+
 ";
 
             //Act
