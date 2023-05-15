@@ -65,7 +65,15 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET Framework 4.6.2  .NET Framework   1      EOL: 12-Jan-2027
 .NET Framework 4.7.1  .NET Framework   1      supported       
 .NET Framework 4.7.2  .NET Framework   3      supported       
+.NET Standard 1.0     .NET Standard    1      supported       
+.NET Standard 1.1     .NET Standard    1      supported       
+.NET Standard 1.2     .NET Standard    1      supported       
+.NET Standard 1.3     .NET Standard    1      supported       
+.NET Standard 1.4     .NET Standard    1      supported       
+.NET Standard 1.5     .NET Standard    1      supported       
+.NET Standard 1.6     .NET Standard    1      supported       
 .NET Standard 2.0     .NET Standard    3      supported       
+.NET Standard 2.1     .NET Standard    1      supported       
 (Unknown)             (Unknown)        2      unknown         
 Visual Basic 6        Visual Basic 6   1      deprecated      
 ";
