@@ -105,7 +105,6 @@ public static class Main
             string? result = sw?.ToString();
             sw?.Close();
 
-            //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
             Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
