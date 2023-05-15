@@ -444,13 +444,18 @@ total frameworks,,64,
 /Sample.NetFramework1.0.App/VBProj.vbproj,VBProj.vbproj,v1.0,.NET Framework 1.0,.NET Framework,vb.net,deprecated
 /Sample.NetFramework1.1.App/VBProj.vbproj,VBProj.vbproj,v1.1,.NET Framework 1.1,.NET Framework,vb.net,deprecated
 /Sample.NetFramework2.0.App/VBProj.vbproj,VBProj.vbproj,v2.0,.NET Framework 2.0,.NET Framework,vb.net,deprecated
+/Sample.NetFramework3.0.WebApp/dotnetapp-3.0.csproj,dotnetapp-3.0.csproj,v3.0,.NET Framework 3.0,.NET Framework,csharp,deprecated
 /Sample.NetFramework3.5.WebApp/dotnetapp-3.5.csproj,dotnetapp-3.5.csproj,v3.5,.NET Framework 3.5,.NET Framework,csharp,EOL: 9-Jan-2029
 /Sample.NetFramework3.5.Website/web.config,web.config,v3.5,.NET Framework 3.5,.NET Framework,csharp,EOL: 9-Jan-2029
 /Sample.NETFramework4.6.1FSharp.HelloWorld/HelloWorld.fsproj,HelloWorld.fsproj,net461,.NET Framework 4.6.1,.NET Framework,fsharp,deprecated
-/Sample.NetFramework40.WebApp/WorldBankSample.csproj,WorldBankSample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
-/Sample.NetFramework45.WebApp/WorldBankSample.csproj,WorldBankSample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
-/Sample.NetFramework451.WebApp/WorldBankSample.csproj,WorldBankSample.csproj,v4.5.1,.NET Framework 4.5.1,.NET Framework,csharp,deprecated
+/Sample.NetFramework40.WebApp/Sample.csproj,Sample.csproj,v4.0,.NET Framework 4.0,.NET Framework,csharp,deprecated
+/Sample.NetFramework45.WebApp/Sample.csproj,Sample.csproj,v4.5,.NET Framework 4.5,.NET Framework,csharp,deprecated
+/Sample.NetFramework451.WebApp/Sample.csproj,Sample.csproj,v4.5.1,.NET Framework 4.5.1,.NET Framework,csharp,deprecated
 /Sample.NetFramework452.App/ClassLibrary2/ClassLibrary2.csproj,ClassLibrary2.csproj,v4.5.2,.NET Framework 4.5.2,.NET Framework,csharp,deprecated
+/Sample.NetFramework46.WebApp/Sample.csproj,Sample.csproj,v4.6,.NET Framework 4.6,.NET Framework,csharp,deprecated
+/Sample.NetFramework47.App/ClassLibrary2/ClassLibrary2.csproj,ClassLibrary2.csproj,v4.7,.NET Framework 4.7,.NET Framework,csharp,supported
+/Sample.NetFramework48.App/ClassLibrary2/ClassLibrary2.csproj,ClassLibrary2.csproj,v4.8,.NET Framework 4.8,.NET Framework,csharp,supported
+/Sample.NetFramework481.App/ClassLibrary2/ClassLibrary2.csproj,ClassLibrary2.csproj,v4.8.1,.NET Framework 4.8.1,.NET Framework,csharp,supported
 /Sample.NetFrameworkInvalid.App/VBProj.vbproj,VBProj.vbproj,,(Unknown),(Unknown),vb.net,unknown
 /Sample.NetFrameworkVBNet.ConsoleApp/Sample.NetFrameworkVBNet.ConsoleApp.vbproj,Sample.NetFrameworkVBNet.ConsoleApp.vbproj,netcoreapp3.1,.NET Core 3.1,.NET Core,vb.net,deprecated
 /Sample.NetStandard1.0.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.0,.NET Standard 1.0,.NET Standard,csharp,supported
