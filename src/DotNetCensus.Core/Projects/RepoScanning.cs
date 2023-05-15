@@ -125,7 +125,6 @@ namespace DotNetCensus.Core.Projects
                     {
                         projects.AddRange(projects2);
                         foldersDone.Add(subDirectory.Name);
-                        //break;
                     }
                 }
             }

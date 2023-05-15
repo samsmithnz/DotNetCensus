@@ -90,7 +90,7 @@ namespace DotNetCensus.Core.Projects
             //Setup the project object
             Project? project = new()
             {
-                FileName = fileName, //new FileInfo(filePath).Name,
+                FileName = fileName, 
                 Path = filePath,
                 Language = language
             };
@@ -106,7 +106,6 @@ namespace DotNetCensus.Core.Projects
                 {
                     JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
                     //Search for the project version
-                    //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
                     if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
                     {
                         foreach (JsonProperty item in jsonElement.EnumerateObject())
