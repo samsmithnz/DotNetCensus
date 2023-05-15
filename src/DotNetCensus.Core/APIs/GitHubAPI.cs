@@ -67,7 +67,7 @@ namespace DotNetCensus.Core.APIs
             FileDetails? result = null;
             path = HttpUtility.UrlEncode(path);
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
-            System.Diagnostics.Debug.WriteLine(url);
+            //System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
