@@ -90,7 +90,7 @@ namespace DotNetCensus.Core.Projects
             //Setup the project object
             Project? project = new()
             {
-                FileName = fileName, //new FileInfo(filePath).Name,
+                FileName = fileName, 
                 Path = filePath,
                 Language = language
             };
