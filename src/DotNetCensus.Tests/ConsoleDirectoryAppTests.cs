@@ -65,7 +65,15 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 /Sample.NetFramework452.App/ClassLibrary2/ClassLibrary2.csproj,ClassLibrary2.csproj,v4.5.2,.NET Framework 4.5.2,.NET Framework,csharp,deprecated
 /Sample.NetFrameworkInvalid.App/VBProj.vbproj,VBProj.vbproj,,(Unknown),(Unknown),vb.net,unknown
 /Sample.NetFrameworkVBNet.ConsoleApp/Sample.NetFrameworkVBNet.ConsoleApp.vbproj,Sample.NetFrameworkVBNet.ConsoleApp.vbproj,netcoreapp3.1,.NET Core 3.1,.NET Core,vb.net,deprecated
-/Sample.NetStandard.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
+/Sample.NetStandard1.0.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.0,.NET Standard 1.0,.NET Standard,csharp,supported
+/Sample.NetStandard1.1.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.1,.NET Standard 1.1,.NET Standard,csharp,supported
+/Sample.NetStandard1.2.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.2,.NET Standard 1.2,.NET Standard,csharp,supported
+/Sample.NetStandard1.3.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.3,.NET Standard 1.3,.NET Standard,csharp,supported
+/Sample.NetStandard1.4.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.4,.NET Standard 1.4,.NET Standard,csharp,supported
+/Sample.NetStandard1.5.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.5,.NET Standard 1.5,.NET Standard,csharp,supported
+/Sample.NetStandard1.6.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard1.6,.NET Standard 1.6,.NET Standard,csharp,supported
+/Sample.NetStandard2.0.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
+/Sample.NetStandard2.1.Class/Sample.NetStandard.Class.csproj,Sample.NetStandard.Class.csproj,netstandard2.1,.NET Standard 2.1,.NET Standard,csharp,supported
 /Sample.SSDT.Database/Sample.SSDT.Database.sqlproj,Sample.SSDT.Database.sqlproj,v4.7.2,.NET Framework 4.7.2,.NET Framework,csharp,supported
 /Sample.Unity2020/Assembly-CSharp.csproj,Assembly-CSharp.csproj,v4.7.1,.NET Framework 4.7.1,.NET Framework,csharp,supported
 /Sample.VB6.Calculator/Sample.VB6.WinApp.vbp,Sample.VB6.WinApp.vbp,vb6,Visual Basic 6,Visual Basic 6,vb6,deprecated
