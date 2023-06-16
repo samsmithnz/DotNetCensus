@@ -28,7 +28,7 @@ namespace DotNetCensus.Core.APIs
             {
                 foreach (FileResponse item in treeResponse.tree)
                 {
-                    if (item != null && item.path != null)
+                    if (item != null && item.path != null && item.type == "blob")
                     {
                         FileInfo fileInfo = new(item.path);
                         string path = item.path;
@@ -37,9 +37,13 @@ namespace DotNetCensus.Core.APIs
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
                         }
+                        if (path == fileInfo.Name)
+                        {
+                            path = "/";
+                        }
                         if (ProjectClassification.IsProjectFile(fileInfo.Name) ||
                             ProjectClassification.IsProjectFile(fileInfo.Name, false) ||
-                            fileInfo.Name.ToLower() == "directory.build.props")
+                            fileInfo.Extension.ToLower() == ".props")
                         {
                             results.Add(new Project()
                             {
@@ -63,21 +67,48 @@ namespace DotNetCensus.Core.APIs
             FileDetails? result = null;
             path = HttpUtility.UrlEncode(path);
             string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
-            System.Diagnostics.Debug.WriteLine(url);
+            //System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                try
+                {
+                    result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
+                    if (fileDetails != null &&
+                        fileDetails.Length > 1)
+                    {
+                        foreach (FileDetails item in fileDetails)
+                        {
+                            if (item.type == "file" && item != null && item.path != null)
+                            {
+                                result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 //Decode the Base64 file contents result
-                if (result != null && result.content != null)
+                if (result != null &&
+                    result.content != null &&
+                    IsBase64String(result.content))
                 {
                     byte[]? valueBytes = System.Convert.FromBase64String(result.content);
                     result.content = Encoding.UTF8.GetString(valueBytes);
                 }
             }
             return result;
+        }
+
+        private static bool IsBase64String(string base64)
+        {
+            Span<byte> buffer = new(new byte[base64.Length]);
+            return Convert.TryFromBase64String(base64, buffer, out _);
         }
 
         private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)

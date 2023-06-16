@@ -32,17 +32,17 @@ namespace DotNetCensus.Core.Projects
         private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
             string? clientId, string? clientSecret,
             string owner, string repository, string branch,
-            string? directoryBuildPropFileContent = null,
+            string? propFileContent = null,
             int currentRecursionLevel = 1)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
-            System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
+            //System.Diagnostics.Debug.WriteLine("Processing " + baseDir.Name + " at " + fullPath);
 
-            StringBuilder newDirectoryBuildPropFileContent = new();
-            if (directoryBuildPropFileContent != null)
+            StringBuilder curentPropFileContent = new();
+            if (propFileContent != null)
             {
-                newDirectoryBuildPropFileContent.Append(directoryBuildPropFileContent);
+                curentPropFileContent.Append(propFileContent);
             }
 
             //Now that the files are arranged in a directory/tree-like structure, start the simulated search
@@ -56,7 +56,7 @@ namespace DotNetCensus.Core.Projects
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                                owner, repository, filePath, branch);
-                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, newDirectoryBuildPropFileContent.ToString());
+                        List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, filePath, fileDetails?.content, curentPropFileContent.ToString());
                         if (directoryProjects.Count > 0)
                         {
                             projects.AddRange(directoryProjects);
@@ -95,19 +95,19 @@ namespace DotNetCensus.Core.Projects
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (!foundProjectFile)
             {
-                //Check for a Directory.Build.props file first
+                //Check for a *.props files first
                 foreach (string file in baseDir.Files)
                 {
-                    if (file == "Directory.Build.props")
+                    FileInfo fileInfo = new(file);
+                    if (fileInfo.Extension.ToLower() == ".props")
                     {
                         string filePath = (fullPath + "/" + file).Replace("//", "/");
                         FileDetails? fileDetails = await GitHubAPI.GetRepoFileContents(clientId, clientSecret,
                                owner, repository, filePath, branch);
                         if (fileDetails != null)
                         {
-                            newDirectoryBuildPropFileContent.Append(fileDetails.content);
+                            curentPropFileContent.Append(fileDetails.content);
                         }
-                        break;
                     }
                 }
                 HashSet<string> foldersDone = new();
@@ -117,7 +117,7 @@ namespace DotNetCensus.Core.Projects
                     List<Project> projects2 = await SearchRepoDirectory(subDirectory, filePath,
                         clientId, clientSecret,
                         owner, repository, branch,
-                        newDirectoryBuildPropFileContent.ToString(),
+                        curentPropFileContent.ToString(),
                         currentRecursionLevel + 1);
                     if (subDirectory != null && subDirectory.Name != null &&
                         projects2.Count > 0 &&
@@ -125,7 +125,6 @@ namespace DotNetCensus.Core.Projects
                     {
                         projects.AddRange(projects2);
                         foldersDone.Add(subDirectory.Name);
-                        //break;
                     }
                 }
             }

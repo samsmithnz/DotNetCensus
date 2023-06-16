@@ -1,4 +1,5 @@
 ﻿using DotNetCensus.Core.Models;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
@@ -8,7 +9,7 @@ namespace DotNetCensus.Core.Projects
     {
         public static List<Project> SearchProjectFile(FileInfo fileInfo, string filePath,
             string? content,
-            string? directoryBuildPropFileContent = null)
+            string? propFileContent = null)
         {
             string fileName = fileInfo.Name;
             if (content == null)
@@ -21,13 +22,13 @@ namespace DotNetCensus.Core.Projects
             {
                 case ".csproj":
                 case ".sqlproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, directoryBuildPropFileContent));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "csharp", content, propFileContent));
                     break;
                 case ".vbproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, directoryBuildPropFileContent));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "vb.net", content, propFileContent));
                     break;
                 case ".fsproj":
-                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, directoryBuildPropFileContent));
+                    projects.AddRange(ProcessProjectFile(fileName, filePath, "fsharp", content, propFileContent));
                     break;
                 case ".vbp":
                     projects.AddRange(ProcessProjectFile(fileName, filePath, "vb6", content));
@@ -80,7 +81,7 @@ namespace DotNetCensus.Core.Projects
         //Process individual project files
         public static List<Project> ProcessProjectFile(string fileName, string filePath,
             string language, string content,
-            string? directoryBuildPropFileContent = null)
+            string? propFileContent = null)
         {
             string[] lines = content.Split('\n');
 
@@ -89,7 +90,7 @@ namespace DotNetCensus.Core.Projects
             //Setup the project object
             Project? project = new()
             {
-                FileName = fileName, //new FileInfo(filePath).Name,
+                FileName = fileName, 
                 Path = filePath,
                 Language = language
             };
@@ -101,29 +102,37 @@ namespace DotNetCensus.Core.Projects
             else if (new FileInfo(filePath).Name == "project.json")
             {
                 //Load it into a JSON object
-                JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
-                //Search for the project version
-                //jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement);
-                if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
+                try
                 {
-                    foreach (JsonProperty item in jsonElement.EnumerateObject())
+                    JsonElement jsonObject = JsonSerializer.Deserialize<JsonElement>(content);
+                    //Search for the project version
+                    if (jsonObject.TryGetProperty("frameworks", out JsonElement jsonElement))
                     {
-                        if (item.NameEquals("netcoreapp1.0"))
+                        foreach (JsonProperty item in jsonElement.EnumerateObject())
                         {
-                            project.FrameworkCode = "netcoreapp1.0";
-                            break;
-                        }
-                        else if (item.NameEquals("netcoreapp1.1"))
-                        {
-                            project.FrameworkCode = "netcoreapp1.1";
-                            break;
+                            if (item.NameEquals("netcoreapp1.0"))
+                            {
+                                project.FrameworkCode = "netcoreapp1.0";
+                                break;
+                            }
+                            else if (item.NameEquals("netcoreapp1.1"))
+                            {
+                                project.FrameworkCode = "netcoreapp1.1";
+                                break;
+                            }
                         }
                     }
+                    else
+                    {
+                        project = null;
+                    }
                 }
-                else
-                {
+                catch
+                {   
+                    //sometimes the json is invalid - just skip over the issue
                     project = null;
                 }
+
             }
             else if (new FileInfo(filePath).Name == "web.config")
             {
@@ -146,25 +155,25 @@ namespace DotNetCensus.Core.Projects
                     //.NET Framework version element
                     if (line.Contains("<TargetFrameworkVersion>"))
                     {
-                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), propFileContent);
                         break;
                     }
                     //.NET Core version element
                     else if (line.Contains("<TargetFramework>"))
                     {
-                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+                        project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), propFileContent);
                         break;
                     }
                     //Multiple .NET flavors element
                     else if (line.Contains("<TargetFrameworks>"))
                     {
-                        string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
+                        string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), propFileContent);
                         string[] frameworkList = frameworks.Split(';');
                         for (int i = 0; i <= frameworkList.Length - 1; i++)
                         {
                             if (i == 0)
                             {
-                                project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent);
+                                project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], propFileContent);
                             }
                             else
                             {
@@ -173,7 +182,7 @@ namespace DotNetCensus.Core.Projects
                                     FileName = new FileInfo(filePath).Name,
                                     Path = filePath,
                                     Language = language,
-                                    FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent)
+                                    FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], propFileContent)
                                 };
                                 projects.Add(additionalProject);
                             }
@@ -195,35 +204,35 @@ namespace DotNetCensus.Core.Projects
                     //}
                 }
 
-                //If we didn't find targetframework in the project file, check the Directory.Build.props file
+                //If we didn't find targetframework in the project file, check any .props files
                 if (project.FrameworkCode == "" &&
-                    directoryBuildPropFileContent != null)
+                    propFileContent != null)
                 {
-                    lines = directoryBuildPropFileContent.Split("\n");
+                    lines = propFileContent.Split("\n");
                     foreach (string line in lines)
                     {
                         //.NET Framework version element
                         if (line.Contains("<TargetFrameworkVersion>"))
                         {
-                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), directoryBuildPropFileContent);
+                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworkVersion>", "").Replace("</TargetFrameworkVersion>", "").Trim(), propFileContent);
                             break;
                         }
                         //.NET Core version element
                         else if (line.Contains("<TargetFramework>"))
                         {
-                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), directoryBuildPropFileContent);
+                            project.FrameworkCode = CheckFrameworkCodeForVariable(line.Replace("<TargetFramework>", "").Replace("</TargetFramework>", "").Trim(), propFileContent);
                             break;
                         }
                         //Multiple .NET flavors element
                         else if (line.Contains("<TargetFrameworks>"))
                         {
-                            string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), directoryBuildPropFileContent);
+                            string frameworks = CheckFrameworkCodeForVariable(line.Replace("<TargetFrameworks>", "").Replace("</TargetFrameworks>", "").Trim(), propFileContent);
                             string[] frameworkList = frameworks.Split(';');
                             for (int i = 0; i < frameworkList.Length - 1; i++)
                             {
                                 if (i == 0)
                                 {
-                                    project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent);
+                                    project.FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], propFileContent);
                                 }
                                 else
                                 {
@@ -232,7 +241,7 @@ namespace DotNetCensus.Core.Projects
                                         FileName = new FileInfo(filePath).Name,
                                         Path = filePath,
                                         Language = language,
-                                        FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], directoryBuildPropFileContent)
+                                        FrameworkCode = CheckFrameworkCodeForVariable(frameworkList[i], propFileContent)
                                     };
                                     projects.Add(additionalProject);
                                 }
@@ -265,16 +274,18 @@ namespace DotNetCensus.Core.Projects
             //Add colors and families
             foreach (Project item in projects)
             {
+                //Debug.WriteLine("item.FrameworkCode:" + item.FrameworkCode);
                 item.Status = ProjectClassification.GetStatus(item.FrameworkCode);
                 item.Family = ProjectClassification.GetFrameworkFamily(item.FrameworkCode);
                 item.FrameworkName = ProjectClassification.GetFriendlyName(item.FrameworkCode, item.Family);
+                //Debug.WriteLine($"Framework: {item.FrameworkCode}; Name: {item.FrameworkName}; Project: {item.FileName}");
             }
 
             return projects;
         }
 
         //Check to see if the framework 
-        private static string CheckFrameworkCodeForVariable(string variable, string? directoryBuildPropFileContent)
+        private static string CheckFrameworkCodeForVariable(string variable, string? propFileContent)
         {
             StringBuilder variableResult = new();
             if (variable.Contains("$(") && variable.Contains(')'))
@@ -287,7 +298,7 @@ namespace DotNetCensus.Core.Projects
                     {
                         string prefix = "";
                         string suffix = "";
-                        //Open the Directory.Build.props file and look for the variable
+                        //Open any .props files and look for the variables
                         int pFrom = variableItem.IndexOf("$(") + 2; // ("$(").Length;
                         int pTo = variableItem.LastIndexOf(")");
                         string searchVariable = variableItem[pFrom..pTo];
@@ -297,10 +308,10 @@ namespace DotNetCensus.Core.Projects
                             prefix = variableItem[..(pFrom - 2)];
                         }
                         suffix = variableItem[(pTo + 1)..];
-                        if (directoryBuildPropFileContent != null)
+                        if (propFileContent != null)
                         {
                             string processedVariable = "";
-                            string[] lines = directoryBuildPropFileContent.Split("\n");
+                            string[] lines = propFileContent.Split("\n");
                             foreach (string line in lines)
                             {
                                 if (line.Contains("<" + searchVariable + ">"))
@@ -333,7 +344,7 @@ namespace DotNetCensus.Core.Projects
                 {
                     string variableResultTmp = variableResult.ToString();
                     variableResult = new();
-                    variableResult.Append(CheckFrameworkCodeForVariable(variableResultTmp, directoryBuildPropFileContent));
+                    variableResult.Append(CheckFrameworkCodeForVariable(variableResultTmp, propFileContent));
                 }
             }
             else

@@ -5,18 +5,18 @@ namespace DotNetCensus.Core.Projects
     public static class DirectoryScanning
     {
         //Recursively search directories until a project file is found
-        public static List<Project> SearchDirectory(string directory, string? directoryBuildPropFileContent = null)
+        public static List<Project> SearchDirectory(string directory, string? propFileContent = null)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
-            string? newDirectoryBuildPropFileContent = directoryBuildPropFileContent;
+            string? currentPropFileContent = propFileContent;
 
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
                 if (ProjectClassification.IsProjectFile(fileInfo.Name))
                 {
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, newDirectoryBuildPropFileContent);
+                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, currentPropFileContent);
                     if (directoryProjects.Count > 0)
                     {
                         projects.AddRange(directoryProjects);
@@ -42,22 +42,25 @@ namespace DotNetCensus.Core.Projects
             //If we still didn't find a project, then look deeper in the sub-directories.
             if (!foundProjectFile)
             {
-                //Check for a Directory.Build.props file first
-                FileInfo? newDirectoryBuildPropFile = null;
-                List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
-                if (directoryBuildPropFiles.Count > 0)
+                //Check for .props files 
+                List<FileInfo> propFiles = new DirectoryInfo(directory).GetFiles("*.props", SearchOption.TopDirectoryOnly).ToList();
+                if (propFiles.Count > 0)
                 {
-                    newDirectoryBuildPropFile = directoryBuildPropFiles[0];
-                }
-                //If there is a directory file being passed in - convert it to content
-                if (newDirectoryBuildPropFile != null)
-                {
-                    if (directoryBuildPropFileContent == null)
+                    foreach (FileInfo fileInfo in propFiles)
                     {
-                        directoryBuildPropFileContent = "";
+                        //If there is a directory file being passed in - convert it to content
+                        if (fileInfo != null)
+                        {
+                            //Note: don't make this a stringbuilder - it breaks the recursive search
+                            if (propFileContent == null)
+                            {
+                                propFileContent = "";
+                            }
+                            propFileContent += File.ReadAllText(fileInfo.FullName);
+                        }
                     }
-                    directoryBuildPropFileContent += File.ReadAllText(newDirectoryBuildPropFile.FullName);
                 }
+
 
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
@@ -68,7 +71,7 @@ namespace DotNetCensus.Core.Projects
                         subDirectory.Name != ".vs" &&
                         subDirectory.Name != ".vscode")
                     {
-                        projects.AddRange(SearchDirectory(subDirectory.FullName, directoryBuildPropFileContent));
+                        projects.AddRange(SearchDirectory(subDirectory.FullName, propFileContent));
                     }
                 }
             }
