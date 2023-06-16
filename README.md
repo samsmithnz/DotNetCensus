@@ -28,6 +28,8 @@ Additionally, this tool supports:
 - [*.props files/variables](https://github.com/samsmithnz/DotNetCensus/issues/44) in project files
 - VB6 projects (as many are related to VB.NET projects)
 
+Specific details about how we read the version is found in [project documentation here](ProjectDocs.md).
+
 If we missed a version - please add an issue and we will fix it! 
 
 **Current limitations:**
