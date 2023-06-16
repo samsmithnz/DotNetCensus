@@ -31,7 +31,7 @@ With .NET Core 2 -> 3.1, .NET 5+, .NET Standard 1+, and .NET Framework: projects
 </Project>
 ```
 
-Current benchmarks: (total unknown / total)
+Current benchmarks as of 23-Apr-2023: (total unknown / total)
 - aspnetcore: 566/735
 - fsharp: 16/2482
 - Mono: 753/1072
