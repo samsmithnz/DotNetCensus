@@ -78,6 +78,7 @@ namespace DotNetCensus.Core.APIs
                 }
                 catch (Newtonsoft.Json.JsonSerializationException)
                 {
+                    //TODO This catch exception is here for a reason - but I don't remember what - need to find a test that covers it
                     FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
                     if (fileDetails != null &&
                         fileDetails.Length > 1)
