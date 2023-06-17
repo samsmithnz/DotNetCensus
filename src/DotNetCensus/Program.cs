@@ -61,7 +61,7 @@ public class Program
     static void HandleParseError(IEnumerable<Error> errs)
     {
         //handle errors
-        var excList = new List<Exception>();
+        List<Exception> excList = new List<Exception>();
         foreach (var err in errs)
         {
             excList.Add(new ArgumentException(err.ToString()));
