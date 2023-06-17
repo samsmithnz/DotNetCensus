@@ -84,7 +84,7 @@ namespace DotNetCensus.Core.APIs
                     {
                         foreach (FileDetails item in fileDetails)
                         {
-                            if (item.type == "file" && item != null && item.path != null)
+                            if (item != null && item.path != null && item.type == "file")
                             {
                                 result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
                                 break;
