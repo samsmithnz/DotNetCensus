@@ -128,7 +128,7 @@ namespace DotNetCensus.Core.APIs
             //Console.WriteLine($"Running GitHub url: {url}");
             if (!url.Contains("api.github.com"))
             {
-                throw new Exception("api.github.com missing from URL");
+                throw new ArgumentException("api.github.com missing from URL");
             }
             HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Clear();
