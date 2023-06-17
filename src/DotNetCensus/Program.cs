@@ -40,9 +40,10 @@ public class Program
         //setup the GitHub repo details
         if (opts.Owner != null && opts.Repo != null)
         {
+            opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
             _repo = new Repo(opts.Owner, opts.Repo)
             {
-                User = opts.Repo, //This is not a typo - we are using the repo name as the user
+                User = opts.User,
                 Password = opts.Password,
                 Branch = opts.Branch
             };
@@ -60,7 +61,7 @@ public class Program
     static void HandleParseError(IEnumerable<Error> errs)
     {
         //handle errors
-        var excList = new List<Exception>();
+        List<Exception> excList = new List<Exception>();
         foreach (var err in errs)
         {
             excList.Add(new ArgumentException(err.ToString()));

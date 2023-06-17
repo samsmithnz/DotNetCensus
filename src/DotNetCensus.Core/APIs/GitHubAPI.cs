@@ -78,13 +78,14 @@ namespace DotNetCensus.Core.APIs
                 }
                 catch (Newtonsoft.Json.JsonSerializationException)
                 {
+                    //TODO This catch exception is here for a reason - but I don't remember what - need to find a test that covers it
                     FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
                     if (fileDetails != null &&
                         fileDetails.Length > 1)
                     {
                         foreach (FileDetails item in fileDetails)
                         {
-                            if (item.type == "file" && item != null && item.path != null)
+                            if (item != null && item.path != null && item.type == "file")
                             {
                                 result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
                                 break;
@@ -128,7 +129,7 @@ namespace DotNetCensus.Core.APIs
             //Console.WriteLine($"Running GitHub url: {url}");
             if (!url.Contains("api.github.com"))
             {
-                throw new Exception("api.github.com missing from URL");
+                throw new ArgumentException("api.github.com missing from URL");
             }
             HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Clear();

@@ -95,6 +95,8 @@ public static class ProjectClassification
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
+            formattedNumber.Append(family);
+            formattedNumber.Append(' ');
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
@@ -104,7 +106,7 @@ public static class ProjectClassification
                     formattedNumber.Append('.');
                 }
             }
-            return family + " " + formattedNumber;
+            return formattedNumber.ToString();
         }
         else if (frameworkCode.StartsWith("netcoreapp"))
         {
@@ -246,10 +248,10 @@ public static class ProjectClassification
 
     public static string GetLanguage(string directory)
     {
+        string language;
         //Check to see if it's a VB.NET or C# project
         int csFiles = new DirectoryInfo(directory).GetFiles("*.cs", SearchOption.AllDirectories).Length;
         int vbFiles = new DirectoryInfo(directory).GetFiles("*.vb", SearchOption.AllDirectories).Length;
-        string language;
         if (csFiles >= vbFiles)
         {
             language = "csharp";
