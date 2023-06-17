@@ -248,10 +248,10 @@ public static class ProjectClassification
 
     public static string GetLanguage(string directory)
     {
+        string language;
         //Check to see if it's a VB.NET or C# project
         int csFiles = new DirectoryInfo(directory).GetFiles("*.cs", SearchOption.AllDirectories).Length;
         int vbFiles = new DirectoryInfo(directory).GetFiles("*.vb", SearchOption.AllDirectories).Length;
-        string language;
         if (csFiles >= vbFiles)
         {
             language = "csharp";
