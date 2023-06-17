@@ -95,6 +95,8 @@ public static class ProjectClassification
         {
             string number = frameworkCode.Replace("net", "");
             StringBuilder formattedNumber = new();
+            formattedNumber.Append(family);
+            formattedNumber.Append(' ');
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
@@ -104,7 +106,7 @@ public static class ProjectClassification
                     formattedNumber.Append('.');
                 }
             }
-            return family + " " + formattedNumber;
+            return formattedNumber.ToString();
         }
         else if (frameworkCode.StartsWith("netcoreapp"))
         {
