@@ -26,6 +26,10 @@ namespace DotNetCensus.Core.Projects
             //        owner, repository, branch);
             //}
 
+            await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
+
+
+
             return projects;
         }
 

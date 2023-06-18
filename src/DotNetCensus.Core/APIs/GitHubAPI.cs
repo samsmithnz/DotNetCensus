@@ -106,6 +106,19 @@ namespace DotNetCensus.Core.APIs
             return result;
         }
 
+        public async static Task<List<Repo>> GetOrganizationRepos(string? clientId, string? clientSecret, 
+            string owner)
+        {
+            //https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
+            string url = $"https://api.github.com/orgs/{owner}/repos?page=1";
+            //System.Diagnostics.Debug.WriteLine(url);
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+
+            List<Repo> results = new();
+
+            return results;
+        }
+
         private static bool IsBase64String(string base64)
         {
             Span<byte> buffer = new(new byte[base64.Length]);
