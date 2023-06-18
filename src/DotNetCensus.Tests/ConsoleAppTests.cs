@@ -27,6 +27,7 @@ Framework  FrameworkFamily  Count  Status
 
         //Asset
         Assert.IsNotNull(expected);
+        result = TextHelper.CleanTimingFromResult(result);
         Assert.AreEqual(expected, result);
     }
 

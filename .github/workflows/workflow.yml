@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
     - main
+  workflow_dispatch:
 jobs:
   build:
     name: Build job
@@ -18,12 +19,12 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.15
+      uses: gittools/actions/gitversion/setup@v0.10.2
       with:
         versionSpec: 5.x
     - name: Determine Version
       id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.15
+      uses: gittools/actions/gitversion/execute@v0.10.2
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ steps.gitversion.outputs.SemVer }}"
@@ -40,7 +41,12 @@ jobs:
         AppSettings.GitHubClientId: "${{ secrets.GitHubClientId }}"
         AppSettings.GitHubClientSecret: "${{ secrets.GitHubClientSecret }}" 
     - name: .NET test
-      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Release
+      run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=${{ github.workspace }}/TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
     - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
@@ -56,11 +62,28 @@ jobs:
         name: nugetCorePackage
         path: src/DotNetCensus.Core/nupkg
 
+
+  sonarCloud:
+    name: Run SonarCloud analysis
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' 
+    steps:
+      - name: Run Sonarcloud test
+        uses: samsmithnz/SamsDotNetSonarCloudAction@1.2.0
+        with:
+          projects: 'src/DotNetCensus/DotNetCensus.csproj,src/DotNetCensus.Core/DotNetCensus.Core.csproj,src/DotNetCensus.Tests/DotNetCensus.Tests.csproj'
+          dotnet-version: '7.0.x'
+          sonarcloud-organization: 'samsmithnz-github'
+          sonarcloud-project: 'samsmithnz_DotNetCensus'
+          SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
+
+
   release: 
     name: Release job
     runs-on: ubuntu-latest
     needs: 
     - build
+    - sonarCloud
     if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job

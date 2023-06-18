@@ -5,17 +5,18 @@ namespace DotNetCensus.Core.Projects
     public static class DirectoryScanning
     {
         //Recursively search directories until a project file is found
-        public static List<Project> SearchDirectory(string directory, FileInfo? directoryBuildPropFile = null)
+        public static List<Project> SearchDirectory(string directory, string? propFileContent = null)
         {
             List<Project> projects = new();
             bool foundProjectFile = false;
+            string? currentPropFileContent = propFileContent;
 
             //Get all files for the current directory, looking for projects.
             foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
             {
-                if (ProjectClassification.IsProjectFile(fileInfo.Name) == true)
+                if (ProjectClassification.IsProjectFile(fileInfo.Name))
                 {
-                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, directoryBuildPropFile);
+                    List<Project> directoryProjects = ProjectFileProcessing.SearchProjectFile(fileInfo, fileInfo.FullName, null, currentPropFileContent);
                     if (directoryProjects.Count > 0)
                     {
                         projects.AddRange(directoryProjects);
@@ -25,7 +26,7 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we didn't find projects in the initial pass, do a secondary pass looking for more obscurce and older projects
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
                 foreach (FileInfo fileInfo in new DirectoryInfo(directory).GetFiles("*.*", SearchOption.TopDirectoryOnly))
                 {
@@ -39,25 +40,38 @@ namespace DotNetCensus.Core.Projects
             }
 
             //If we still didn't find a project, then look deeper in the sub-directories.
-            if (foundProjectFile == false)
+            if (!foundProjectFile)
             {
-                //Check for a Directory.Build.props file first
-                FileInfo? newDirectoryBuildPropFile = null;
-                List<FileInfo> directoryBuildPropFiles = new DirectoryInfo(directory).GetFiles("Directory.Build.props", SearchOption.TopDirectoryOnly).ToList();
-                if (directoryBuildPropFile != null)
+                //Check for .props files 
+                List<FileInfo> propFiles = new DirectoryInfo(directory).GetFiles("*.props", SearchOption.TopDirectoryOnly).ToList();
+                if (propFiles.Count > 0)
                 {
-                    newDirectoryBuildPropFile = directoryBuildPropFile;
+                    foreach (FileInfo fileInfo in propFiles)
+                    {
+                        //If there is a directory file being passed in - convert it to content
+                        if (fileInfo != null)
+                        {
+                            //Note: don't make this a stringbuilder - it breaks the recursive search
+                            if (propFileContent == null)
+                            {
+                                propFileContent = "";
+                            }
+                            propFileContent += File.ReadAllText(fileInfo.FullName);
+                        }
+                    }
                 }
-                else if (directoryBuildPropFiles.Count > 0)
-                {
-                    newDirectoryBuildPropFile = directoryBuildPropFiles[0];
-                }
+
+
                 foreach (DirectoryInfo subDirectory in new DirectoryInfo(directory).GetDirectories())
                 {
-                    //Prevent blocking when debugging in Visual Studio.
-                    if (subDirectory.Name != ".vs")
+                    //Avoid the .git and .vs directories, they tend to be large, slow down the scan, and we don't need the data within them.
+                    if (subDirectory.Name != ".devcontainer" &&
+                        subDirectory.Name != ".git" &&
+                        subDirectory.Name != ".github" &&
+                        subDirectory.Name != ".vs" &&
+                        subDirectory.Name != ".vscode")
                     {
-                        projects.AddRange(SearchDirectory(subDirectory.FullName, newDirectoryBuildPropFile));
+                        projects.AddRange(SearchDirectory(subDirectory.FullName, propFileContent));
                     }
                 }
             }

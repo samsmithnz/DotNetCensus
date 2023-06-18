@@ -1,10 +1,12 @@
-﻿namespace DotNetCensus.Core.Projects;
+﻿using System.Text;
+
+namespace DotNetCensus.Core.Projects;
 
 public static class ProjectClassification
 {
     public static bool IsProjectFile(string fileName, bool primaryScan = true)
     {
-        if (primaryScan == true)
+        if (primaryScan)
         {
             switch (new FileInfo(fileName).Extension.ToLower())
             {
@@ -22,7 +24,6 @@ public static class ProjectClassification
             {
                 case "project.json":
                 case "web.config":
-                    //case "directory.build.props":
                     return true;
             }
         }
@@ -31,7 +32,7 @@ public static class ProjectClassification
 
     public static string GetFrameworkFamily(string frameworkCode)
     {
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
@@ -43,6 +44,7 @@ public static class ProjectClassification
                  frameworkCode.StartsWith("v2.") ||
                  frameworkCode.StartsWith("v3.") ||
                  frameworkCode.StartsWith("v4.") ||
+                 frameworkCode.StartsWith("net3") ||
                  frameworkCode.StartsWith("net4") ||
                  frameworkCode.StartsWith("Unity"))
         {
@@ -68,8 +70,7 @@ public static class ProjectClassification
 
     public static string GetFriendlyName(string frameworkCode, string family)
     {
-
-        if (string.IsNullOrEmpty(frameworkCode) == true)
+        if (string.IsNullOrEmpty(frameworkCode))
         {
             return "(Unknown)";
         }
@@ -85,20 +86,27 @@ public static class ProjectClassification
             //Drop the v from the version string. (e.g. v3.0 becomes 3.0)
             return family + " " + frameworkCode.Replace("v", "");
         }
-        else if (frameworkCode.StartsWith("net4"))
+        else if (frameworkCode == "net40-client")
+        {
+            return family + " 4.0";
+        }
+        else if (frameworkCode.StartsWith("net3") ||
+            frameworkCode.StartsWith("net4"))
         {
             string number = frameworkCode.Replace("net", "");
-            string formattedNumber = "";
+            StringBuilder formattedNumber = new();
+            formattedNumber.Append(family);
+            formattedNumber.Append(' ');
             //Add .'s between each number. Gross. (e.g. net462 becomes 4.6.2)
             for (int i = 0; i < number.Length; i++)
             {
-                formattedNumber += number[i];
+                formattedNumber.Append(number[i]);
                 if (i < number.Length - 1)
                 {
-                    formattedNumber += ".";
+                    formattedNumber.Append('.');
                 }
             }
-            return family + " " + formattedNumber;
+            return formattedNumber.ToString();
         }
         else if (frameworkCode.StartsWith("netcoreapp"))
         {
@@ -137,15 +145,15 @@ public static class ProjectClassification
 
         //Only process the earliest Visual Studio's, as the later versions should be picked up by the product version
         //Note that this may not be entirely accurate - for example, VS2008 could ignore a .NET 3 version, but these should be pretty rare - even if it misidentifies .NET framework 1/2/3 - the story is the same - these are wildly obsolete and need to be resolved.
-        if (productVersion.StartsWith("7.0") == true)
+        if (productVersion.StartsWith("7.0"))
         {
             return "v1.0";
         }
-        else if (productVersion.StartsWith("7.1") == true)
+        else if (productVersion.StartsWith("7.1"))
         {
             return "v1.1";
         }
-        else if (productVersion.StartsWith("8.0") == true)
+        else if (productVersion.StartsWith("8.0"))
         {
             return "v2.0";
         }
@@ -189,32 +197,36 @@ public static class ProjectClassification
             framework.Contains("v4.3") ||
             framework.Contains("v4.4") ||
             framework.Contains("v4.5") ||
-            framework == "net45" || //Unclear if this should be net 45 or v4.5 - I've seen both in wild
+            framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
+            framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
+            framework.Contains("net40") ||
+            framework.Contains("net45") || //Unclear if this should be net45 or v4.5 - I've seen both in wild
             framework == "net46" ||
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
             framework.Contains("netcoreapp2") ||
-            framework == "netcoreapp3.0" ||
+            framework.Contains("netcoreapp3") ||
+            framework.Contains("netcoreapp5") || //details about netcoreapp5 are unclear, but this scenario was mentioned as supported here: https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md
             framework.Contains("net5.0"))
         {
             //Unsupported/End of life/red
             return "deprecated";
         }
-        else if (framework == "netcoreapp3.1")
+        else if (framework == "net462" ||
+            framework == "v4.6.2")
         {
             //Supported, but old/orange
-            return "EOL: 13-Dec-2022";
+            return "EOL: 12-Jan-2027";
         }
-        else if (framework.Contains("v3.5"))
+        else if (framework.Contains("v3.5") ||
+            framework == "net35")
         {
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net6.0") || 
+        else if (framework.Contains("net6.0") ||
             framework.Contains("net7.0") ||
             framework.Contains("netstandard") ||
-            framework == "net462" ||
-            framework == "v4.6.2" ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
             framework.Contains("net48") ||
@@ -236,10 +248,10 @@ public static class ProjectClassification
 
     public static string GetLanguage(string directory)
     {
+        string language;
         //Check to see if it's a VB.NET or C# project
         int csFiles = new DirectoryInfo(directory).GetFiles("*.cs", SearchOption.AllDirectories).Length;
         int vbFiles = new DirectoryInfo(directory).GetFiles("*.vb", SearchOption.AllDirectories).Length;
-        string language;
         if (csFiles >= vbFiles)
         {
             language = "csharp";

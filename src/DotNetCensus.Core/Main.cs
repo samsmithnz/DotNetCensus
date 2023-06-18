@@ -9,66 +9,9 @@ namespace DotNetCensus.Core;
 
 public static class Main
 {
-    private static List<Project> GetProjects(string? directory, Target? repo)
+    public static string? GetInventoryResultsAsString(string? directory, Repo? repo, string? file)
     {
-        List<Project> projects = new();
-        List<Project> sortedProjects = new();
-        if (string.IsNullOrEmpty(directory) == false)
-        {
-            //Run the calculations to get and aggregate the results
-            projects = DirectoryScanning.SearchDirectory(directory);
-        }
-        else if (repo != null)
-        {
-            string? owner = repo.Owner;
-            string? repository = repo.Repository;
-            string? clientId = repo.User;
-            string? clientSecret = repo.Password;
-            if (repository != null)
-            {
-                projects = Task.Run(async () =>
-                    await RepoScanning.SearchRepo(clientId, clientSecret,
-                    owner, repository, "main")).Result;
-            }
-            else
-            {
-                List<RepoResponse>? repos = Task.Run(async () =>
-                    await GitHubAPI.GetGitHubOrganizationRepos(clientId, clientSecret, owner)).Result;
-                if (repos != null)
-                {
-                    foreach (RepoResponse item in repos)
-                    {
-                        if (item != null &&
-                            item.name != null &&
-                            item.default_branch != null)
-                        {
-                            List<Project> newProjects = Task.Run(async () =>
-                                   await RepoScanning.SearchRepo(clientId, clientSecret,
-                                   owner, item.name, item.default_branch)).Result;
-                            //Add the organization and repo name to these projects
-                            foreach (Project project in newProjects)
-                            {
-                                project.Organization = owner;
-                                project.Repo = item.name;
-                            }
-                            projects.AddRange(newProjects);
-                        }
-                    }
-                }
-            }
-        }
-        //Need to sort so that Linux + Windows results are the same
-        if (projects != null)
-        {
-            sortedProjects = projects.OrderBy(o => o.Organization).
-                ThenBy(o => o.Repo).
-                ThenBy(o => o.Path).ToList();
-        }
-        return sortedProjects;
-    }
-
-    public static string? GetInventoryResults(string? directory, Target? repo, string? file)
-    {
+        DateTime startTime = DateTime.Now;
         List<Project> projects = GetProjects(directory, repo);
         bool includeOrganizations = false;
         bool includeRepos = false;
@@ -78,31 +21,19 @@ public static class Main
         {
             foreach (Project item in projects)
             {
-                item.Path = item.Path.Replace(directory, "");
+                if (OperatingSystem.IsWindows())
+                {
+                    //Fix any Linux path separators to be Windows ones
+                    item.Path = item.Path.Replace(directory.Replace("/", "\\"), "");
+                }
+                else
+                {
+                    item.Path = item.Path.Replace(directory, "");
+                }
             }
         }
 
-        if (projects.Count > 0)
-        {
-            if (string.IsNullOrEmpty(projects[0].Organization) == false)
-            {
-                includeOrganizations = true;
-            }
-            if (string.IsNullOrEmpty(projects[0].Organization) == false)
-            {
-                includeRepos = true;
-            }
-        }
-        List<string> headers = new() { "Path", "FileName", "FrameworkCode", "FrameworkName", "Family", "Language", "Status" };
-        if (includeRepos == true)
-        {
-            headers.Insert(0, "Repo");
-        }
-        if (includeOrganizations == true)
-        {
-            headers.Insert(0, "Organization");
-        }
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             ConsoleTable table = new(headers.ToArray());
             foreach (Project item in projects)
@@ -118,6 +49,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
         else
@@ -162,18 +94,26 @@ public static class Main
             string? result = sw?.ToString();
             sw?.Close();
 
-            //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
     }
 
-    public static string? GetFrameworkSummary(string? directory, Target? repo, bool includeTotals, string? file)
+    /// <summary>
+    /// Return a string of the framework summary. Can also write to a file
+    /// </summary>
+    /// <param name="directory">directory to scan</param>
+    /// <param name="repo">GitHub repo to scan</param>
+    /// <param name="includeTotals">include a totals row</param>
+    /// <param name="file">output string to a file</param>
+    /// <returns></returns>
+    public static string? GetFrameworkSummaryAsString(string? directory, Repo? repo, bool includeTotals, string? file)
     {
-        List<Project> projects = GetProjects(directory, repo);
-        List<FrameworkSummary> frameworks = Census.AggregateFrameworks(projects, includeTotals);
+        DateTime startTime = DateTime.Now;
+        List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
 
-        if (string.IsNullOrEmpty(file) == true)
+        if (string.IsNullOrEmpty(file))
         {
             //Create and output the table
             ConsoleTable table = new("Framework", "FrameworkFamily", "Count", "Status");
@@ -183,6 +123,7 @@ public static class Main
             }
             string result = table.ToMinimalString();
             Console.WriteLine(result);
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
         else
@@ -200,9 +141,56 @@ public static class Main
             string? result = sw?.ToString();
             sw?.Close();
 
-            //FileInfo fileInfo = new(_file);
             Console.WriteLine($"Exported results to '{file}'");
+            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
+    }
+
+    /// <summary>
+    /// Return a list of Framework summary for each framework found 
+    /// </summary>
+    /// <param name="directory">directory to scan</param>
+    /// <param name="repo">GitHub repo to scan</param>
+    /// <param name="includeTotals">include a totals row</param>
+    /// <returns></returns>
+    public static List<FrameworkSummary> GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals)
+    {
+        List<Project> projects = GetProjects(directory, repo);
+        List<FrameworkSummary> frameworkSummary = Census.AggregateFrameworks(projects, includeTotals);
+        return frameworkSummary;
+    }
+
+
+    private static List<Project> GetProjects(string? directory, Repo? repo)
+    {
+        List<Project> projects = new();
+        List<Project> sortedProjects = new();
+        if (!string.IsNullOrEmpty(directory))
+        {
+            //Run the calculations to get and aggregate the results
+            projects = DirectoryScanning.SearchDirectory(directory);
+        }
+        else if (repo != null)
+        {
+            string? owner = repo.Owner;
+            string? repository = repo.Repository;
+            string? clientId = repo.User;
+            string? clientSecret = repo.Password;
+            string? branch = repo.Branch;
+            if (string.IsNullOrEmpty(branch))
+            {
+                branch = "main";
+            }
+            projects = Task.Run(async () =>
+                await RepoScanning.SearchRepo(clientId, clientSecret,
+                owner, repository, branch)).Result;
+        }
+        //Need to sort so that Linux + Windows results are the same
+        if (projects != null)
+        {
+            sortedProjects = projects.OrderBy(o => o.Path).ToList();
+        }
+        return sortedProjects;
     }
 }

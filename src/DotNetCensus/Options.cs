@@ -23,9 +23,12 @@ public class Options
     public string? Repo { get; set; }
 
     [Option('u', "user", Required = false, HelpText = "GitHub repo user")]
-    public string? User { get; set; }
+    public string? User { get;  set; }
 
     [Option('p', "password", Required = false, HelpText = "GitHub repo password")]
     public string? Password { get; set; }
+
+    [Option('b', "branch", Required = false, Default = "main", HelpText = "GitHub repo branch to search")]
+    public string? Branch { get; set; }
 
 }

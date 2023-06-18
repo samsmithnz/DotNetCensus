@@ -19,15 +19,15 @@ public class Program
                .WithNotParsed(HandleParseError);
 
         //If there is a folder to scan, run the process against it
-        if (string.IsNullOrEmpty(_directory) == false || _repo != null)
+        if (!string.IsNullOrEmpty(_directory) || _repo != null)
         {
-            if (_includeInventory == true)
+            if (_includeInventory)
             {
-                Core.Main.GetInventoryResults(_directory, _repo, _file);
+                Core.Main.GetInventoryResultsAsString(_directory, _repo, _file);
             }
             else
             {
-                Core.Main.GetFrameworkSummary(_directory, _repo, _includeTotals, _file);
+                Core.Main.GetFrameworkSummaryAsString(_directory, _repo, _includeTotals, _file);
             }
         }
     }
@@ -38,24 +38,15 @@ public class Program
         _directory = opts.Directory;
 
         //setup the GitHub repo details
-        if (opts.Owner != null)
+        if (opts.Owner != null && opts.Repo != null)
         {
-            if (opts.Repo != null)
+            opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
+            _repo = new Repo(opts.Owner, opts.Repo)
             {
-                _repo = new Target(opts.Owner, opts.Repo)
-                {
-                    User = opts.Owner,
-                    Password = opts.Password
-                };
-            }
-            else
-            {
-                _repo = new Target(opts.Owner)
-                {
-                    User = opts.Owner,
-                    Password = opts.Password
-                };
-            }
+                User = opts.User,
+                Password = opts.Password,
+                Branch = opts.Branch
+            };
         }
         if (_directory == null && _repo == null)
         {
@@ -70,7 +61,7 @@ public class Program
     static void HandleParseError(IEnumerable<Error> errs)
     {
         //handle errors
-        var excList = new List<Exception>();
+        List<Exception> excList = new List<Exception>();
         foreach (var err in errs)
         {
             excList.Add(new ArgumentException(err.ToString()));

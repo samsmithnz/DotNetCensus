@@ -12,7 +12,7 @@ namespace DotNetCensus.Core
             foreach (Project project in projects)
             {
                 project.Family = ProjectClassification.GetFrameworkFamily(project.FrameworkCode);
-                if (string.IsNullOrEmpty(project.FrameworkCode) == true)
+                if (string.IsNullOrEmpty(project.FrameworkCode))
                 {
                     project.FrameworkCode = "(Unknown framework)";
                 }
@@ -43,7 +43,7 @@ namespace DotNetCensus.Core
             List<FrameworkSummary> sortedFrameworks = frameworkSummary.OrderBy(o => o.Framework).ToList();
 
             //Add a total line if we need one
-            if (includeTotal == true)
+            if (includeTotal)
             {
                 sortedFrameworks.Add(new FrameworkSummary { Framework = "total frameworks", Count = total });
             }
@@ -56,7 +56,7 @@ namespace DotNetCensus.Core
             List<LanguageSummary> languageSummary = new();
             foreach (Project project in projects)
             {
-                if (string.IsNullOrEmpty(project.Language) == true)
+                if (string.IsNullOrEmpty(project.Language))
                 {
                     project.Language = "(Unknown language)";
                 }
@@ -85,7 +85,7 @@ namespace DotNetCensus.Core
             List<LanguageSummary> sortedLanguages = languageSummary.OrderBy(o => o.Language).ToList();
 
             //Add a total line if we need one
-            if (includeTotal == true)
+            if (includeTotal)
             {
                 sortedLanguages.Add(new LanguageSummary { Language = "total languages", Count = total });
             }

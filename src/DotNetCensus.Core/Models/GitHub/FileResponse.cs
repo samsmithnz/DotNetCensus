@@ -10,9 +10,9 @@ public class FileResponse
     //"url": "https://api.github.com/repos/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132"
 
     public string? path { get; set; }
-    public string? mode { get; set; }
+    //public string? mode { get; set; }
     public string? type { get; set; }
-    public int? size { get; set; }
-    public string? sha { get; set; }
-    public string? url { get; set; }
+    //public int? size { get; set; }
+    //public string? sha { get; set; }
+    //public string? url { get; set; }
 }

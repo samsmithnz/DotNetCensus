@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackAsTool>true</PackAsTool>
@@ -14,13 +14,13 @@
 		<PackageDescription>A tool to find and count .NET versions</PackageDescription>
 		<PackageTags>.NET;dotnet;count;census;.NET Framework;.NET Standard;.NET Core;.NET;c#;VB.NET;VB6;</PackageTags>
 		<Authors>SamSmithNZ</Authors>
-	<AssemblyName>dotnet-census</AssemblyName>
+		<AssemblyName>dotnet-census</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
 		<PackageReference Include="Spectre.Console" Version="0.45.0" />
-		<PackageReference Include="System.Text.Json" Version="6.0.6" />
+		<PackageReference Include="System.Text.Json" Version="7.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

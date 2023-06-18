@@ -11,7 +11,7 @@ public class TreeResponse
         tree = Array.Empty<FileResponse>();
     }
 
-    public string? sha { get; set; }
-    public string? url { get; set; }
+    //public string? sha { get; set; }
+    //public string? url { get; set; }
     public FileResponse[] tree { get; set; }
 }

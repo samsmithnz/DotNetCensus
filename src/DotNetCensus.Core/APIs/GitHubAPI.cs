@@ -20,7 +20,7 @@ namespace DotNetCensus.Core.APIs
             string url = $"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=true";
             System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false)
+            if (!string.IsNullOrEmpty(response))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
                 treeResponse = JsonConvert.DeserializeObject<TreeResponse>(jsonObj?.ToString());
@@ -29,18 +29,22 @@ namespace DotNetCensus.Core.APIs
             {
                 foreach (FileResponse item in treeResponse.tree)
                 {
-                    if (item != null && item.path != null)
+                    if (item != null && item.path != null && item.type == "blob")
                     {
                         FileInfo fileInfo = new(item.path);
                         string path = item.path;
-                        if (string.IsNullOrEmpty(path) == false)
+                        if (!string.IsNullOrEmpty(path))
                         {
                             //Danger: What if the file name is in the path? It will be replaced. 
                             path = path.Replace("/" + fileInfo.Name, "/");
                         }
-                        if (ProjectClassification.IsProjectFile(fileInfo.Name) == true ||
-                            ProjectClassification.IsProjectFile(fileInfo.Name, false) == true ||
-                            fileInfo.Name.ToLower() == "directory.build.props")
+                        if (path == fileInfo.Name)
+                        {
+                            path = "/";
+                        }
+                        if (ProjectClassification.IsProjectFile(fileInfo.Name) ||
+                            ProjectClassification.IsProjectFile(fileInfo.Name, false) ||
+                            fileInfo.Extension.ToLower() == ".props")
                         {
                             results.Add(new Project()
                             {
@@ -59,20 +63,42 @@ namespace DotNetCensus.Core.APIs
         }
 
         public async static Task<FileDetails?> GetRepoFileContents(string? clientId, string? clientSecret,
-            string owner, string repo, string path)
+            string owner, string repo, string path, string branch)
         {
             FileDetails? result = null;
             path = HttpUtility.UrlEncode(path);
-            string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}";
-            System.Diagnostics.Debug.WriteLine(url);
+            string url = $"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}";
+            //System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-            if (string.IsNullOrEmpty(response) == false && response.Contains(@"""message"":""Not Found""") == false)
+            if (!string.IsNullOrEmpty(response) && !response.Contains(@"""message"":""Not Found"""))
             {
                 dynamic? jsonObj = JsonConvert.DeserializeObject(response);
-                result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                try
+                {
+                    result = JsonConvert.DeserializeObject<FileDetails>(jsonObj?.ToString());
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    //TODO This catch exception is here for a reason - but I don't remember what - need to find a test that covers it
+                    FileDetails[] fileDetails = JsonConvert.DeserializeObject<FileDetails[]>(jsonObj?.ToString());
+                    if (fileDetails != null &&
+                        fileDetails.Length > 1)
+                    {
+                        foreach (FileDetails item in fileDetails)
+                        {
+                            if (item != null && item.path != null && item.type == "file")
+                            {
+                                result = await GetRepoFileContents(clientId, clientSecret, owner, repo, item.path, branch);
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 //Decode the Base64 file contents result
-                if (result != null && result.content != null)
+                if (result != null &&
+                    result.content != null &&
+                    IsBase64String(result.content))
                 {
                     byte[]? valueBytes = System.Convert.FromBase64String(result.content);
                     result.content = Encoding.UTF8.GetString(valueBytes);
@@ -153,12 +179,18 @@ namespace DotNetCensus.Core.APIs
             return result;
         }
 
+        private static bool IsBase64String(string base64)
+        {
+            Span<byte> buffer = new(new byte[base64.Length]);
+            return Convert.TryFromBase64String(base64, buffer, out _);
+        }
+
         private async static Task<string?> GetGitHubMessage(string? clientId, string? clientSecret, string url, bool processErrors = true)
         {
             HttpClient client = BuildHttpClient(clientId, clientSecret, url);
             HttpResponseMessage response = await client.GetAsync(url);
             //A debugging function
-            if (processErrors == true)
+            if (processErrors)
             {
                 response.EnsureSuccessStatusCode();
             }
@@ -170,14 +202,14 @@ namespace DotNetCensus.Core.APIs
             //Console.WriteLine($"Running GitHub url: {url}");
             if (!url.Contains("api.github.com"))
             {
-                throw new Exception("api.github.com missing from URL");
+                throw new ArgumentException("api.github.com missing from URL");
             }
             HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("SamsRepoAutomation", "0.1"));
             //If we use a id/secret, we significantly increase the rate from 60 requests an hour to 5000. https://developer.github.com/v3/#rate-limiting
-            if (string.IsNullOrEmpty(clientId) == false && string.IsNullOrEmpty(clientSecret) == false)
+            if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", clientId, clientSecret))));
             }
