@@ -38,15 +38,23 @@ public class Program
         _directory = opts.Directory;
 
         //setup the GitHub repo details
-        if (opts.Owner != null && opts.Repo != null)
+        if (opts.Owner != null)
         {
-            opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
-            _repo = new Repo(opts.Owner, opts.Repo)
+            if (opts.Repo != null)
             {
-                User = opts.User,
-                Password = opts.Password,
-                Branch = opts.Branch
-            };
+                opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
+                _repo = new Repo(opts.Owner, opts.Repo)
+                {
+                    User = opts.User,
+                    Password = opts.Password,
+                    Branch = opts.Branch
+                };
+            }
+            else
+            {
+                //We are downloading all repos for a owner or organization
+                int i = 0;
+            }
         }
         if (_directory == null && _repo == null)
         {
