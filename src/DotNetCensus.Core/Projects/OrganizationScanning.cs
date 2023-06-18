@@ -10,9 +10,12 @@ namespace DotNetCensus.Core.Projects
         public async static Task<List<Project>> SearchOrganization(string? clientId, string? clientSecret,
             string owner, string directory)
         {
-            ////Get all files for the current repo, looking for projects
-            //List<Project> repoProjects = await GitHubAPI.GetRepoFiles(clientId, clientSecret,
-            //       owner, repository, branch);
+            //Get all repos for the organization
+            await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
+
+            //for each repo, clone it to the temp location
+
+            //scan each repo for projects
 
             ////Recreate the folder structure with the primary directory, sub-directories, and any files. 
             //RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
@@ -26,7 +29,6 @@ namespace DotNetCensus.Core.Projects
             //        owner, repository, branch);
             //}
 
-            await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
 
 
 
