@@ -155,7 +155,7 @@ For example, to download results from this repository:
 Note: For large organizations, this will time out. Open to solutions on how to handle this better.
 For example, to download results from this organization:
 
-`dotnet census -o samsmithnz -u samsmithnz -p <PAT_TOKEN>`
+`dotnet census -o samsmithnz -u samsmithnz -p <PAT_TOKEN> -d <TEMP_DIRECTORY_TO_CLONE_AND_PROCESS>`
 
 ## What's next?
 - We are currently experimenting with scanning entire [organizations](https://github.com/samsmithnz/DotNetCensus/pull/48)
