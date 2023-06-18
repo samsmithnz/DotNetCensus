@@ -5,10 +5,10 @@ namespace DotNetCensus.Tests;
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
 [TestCategory("IntegrationTest")]
-public class ConsoleAppTests : DirectoryBasedTests
+public class ConsoleAppParameterTests : DirectoryBasedTests
 {
     [TestMethod]
-    public void RunSamplesWithNoParametersTest()
+    public void RunConsoleAppWithNoParametersTest()
     {
         //Arrange
         string[] parameters = Array.Empty<string>();
@@ -32,7 +32,7 @@ Framework  FrameworkFamily  Count  Status
     }
 
     [TestMethod]
-    public void RunSamplesWithInvalidParametersTest()
+    public void RunConsoleAppWithInvalidParametersTest()
     {
         if (SamplesPath != null)
         {

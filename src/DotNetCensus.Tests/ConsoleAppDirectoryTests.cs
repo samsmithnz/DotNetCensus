@@ -9,7 +9,7 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
 {
 
     [TestMethod]
-    public void RunSamplesWithInventoryResultsToFileTest()
+    public void RunConsoleAppWithInventoryResultsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
@@ -101,7 +101,7 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
 
 
     [TestMethod]
-    public void RunSamplesWithTotalsToFileTest()
+    public void RunConsoleAppWithTotalsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
