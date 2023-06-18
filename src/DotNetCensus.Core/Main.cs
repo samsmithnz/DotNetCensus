@@ -136,7 +136,7 @@ public static class Main
             string? owner = repo.Owner;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
-            var result = Task.Run(async () => 
+            projects = Task.Run(async () => 
                 await OrganizationScanning.SearchOrganization(clientId, clientSecret,
                    owner, directory)).Result;
         }

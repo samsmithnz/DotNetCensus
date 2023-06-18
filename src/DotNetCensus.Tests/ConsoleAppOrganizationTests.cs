@@ -20,9 +20,12 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
                 "-d", "c:\\temp",
                 "-t" };
             StringWriter sw = new();
-            string expected = @"Framework         FrameworkFamily  Count  Status
-------------------------------------------------
-total frameworks                   0            
+            string expected = @"Framework             FrameworkFamily  Count  Status   
+-------------------------------------------------------
+.NET 7.0              .NET             8      supported
+.NET 7.0-windows      .NET             2      supported
+.NET Framework 4.7.2  .NET Framework   1      supported
+total frameworks                       11              
 
 ";
 

@@ -106,16 +106,19 @@ namespace DotNetCensus.Core.APIs
             return result;
         }
 
-        public async static Task<List<Repo>> GetOrganizationRepos(string? clientId, string? clientSecret, 
+        public async static Task<List<RepoResponse>> GetOrganizationRepos(string? clientId, string? clientSecret,
             string owner)
         {
+            List<RepoResponse> results = new();
             //https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
             string url = $"https://api.github.com/orgs/{owner}/repos?page=1";
             //System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
-
-            List<Repo> results = new();
-
+            if (!string.IsNullOrEmpty(response))
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                results = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+            }
             return results;
         }
 

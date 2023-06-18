@@ -1,6 +1,7 @@
 ﻿using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
 using DotNetCensus.Core.Models.GitHub;
+using System.Diagnostics;
 using System.Text;
 
 namespace DotNetCensus.Core.Projects
@@ -10,27 +11,31 @@ namespace DotNetCensus.Core.Projects
         public async static Task<List<Project>> SearchOrganization(string? clientId, string? clientSecret,
             string owner, string directory)
         {
+            directory = directory + "/dotNetCensusTemp/";
             //Get all repos for the organization
-            await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
+            List<RepoResponse> repoResponses = await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
 
             //for each repo, clone it to the temp location
+            foreach (RepoResponse item in repoResponses)
+            {
+                string repoPath = directory + item.name; 
+                Process process = new()
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = "git",
+                        Arguments = $"clone {item.clone_url} {repoPath}",
+                    }
+                };
+                process.Start();
+            }
 
             //scan each repo for projects
-
-            ////Recreate the folder structure with the primary directory, sub-directories, and any files. 
-            //RepoDirectory baseDir = CreateRepoDirectoryStructure(repoProjects);
-
-            ////Recursively search directories until a project file is found
             List<Project> projects = new();
-            //if (baseDir != null && baseDir.Path != null)
-            //{
-            //    projects = await SearchRepoDirectory(baseDir, baseDir.Path,
-            //        clientId, clientSecret,
-            //        owner, repository, branch);
-            //}
-
-
-
+            foreach (string repoPath in Directory.GetDirectories(directory))
+            {
+                projects.AddRange(DirectoryScanning.SearchDirectory(repoPath));
+            }
 
             return projects;
         }
