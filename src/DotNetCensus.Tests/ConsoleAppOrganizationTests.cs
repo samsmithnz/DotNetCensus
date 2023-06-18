@@ -17,7 +17,7 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
                 "-o", "SamSmithNZ-dotcom",
                 "-u", GitHubId,
                 "-p", GitHubSecret,
-                "-d", "c:\\temp",
+                "-d", Path.GetTempPath(),
                 "-t" };
             StringWriter sw = new();
             string expected = @"Framework             FrameworkFamily  Count  Status   

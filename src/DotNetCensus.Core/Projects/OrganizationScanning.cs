@@ -11,7 +11,7 @@ namespace DotNetCensus.Core.Projects
         public async static Task<List<Project>> SearchOrganization(string? clientId, string? clientSecret,
             string owner, string directory)
         {
-            directory = directory + "/dotNetCensusTemp/";
+            directory = directory + "dotNetCensusTemp/";
             //Get all repos for the organization
             List<RepoResponse> repoResponses = await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
 
