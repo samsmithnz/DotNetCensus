@@ -136,7 +136,7 @@ VBProj.vbproj                               \samples\Sample.NetFrameworkInvalid.
 `dotnet census -f c:\temp\results.csv`
 
 ### To download results from a GitHub Repo, 
-- Add the `-o` argument with the GitHub owner or organiation
+- Add the `-o` argument with the GitHub owner or organization
 - Add the `-r` argument with the GitHub repo name
 - Add the `-u` argument with the GitHub user
 - Add the `-p` argument with the GitHub PAT Token password
@@ -147,10 +147,11 @@ For example, to download results from this repository:
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 
-### To download results from a GitHub Organization or Owner (personal account), omit the `-r` argument. Note that this is an experimental feature, and currently only downloads the first 30 repos...
+### To download results from a GitHub Organization or Owner (personal account), omit the `-r` argument and use the -d argument. Note that this is an experimental feature, and currently only downloads the first 30 repos...
 - Add the `-o` argument with the GitHub owner or organiation
 - Add the `-u` argument with the GitHub user
 - Add the `-p` argument with the GitHub PAT Token password
+- Add the `-d` argument with the directory to clone the repos to
 
 Note: For large organizations, this will time out. Open to solutions on how to handle this better.
 For example, to download results from this organization:
