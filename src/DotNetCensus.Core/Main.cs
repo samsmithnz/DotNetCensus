@@ -1,7 +1,5 @@
 ﻿using ConsoleTables;
-using DotNetCensus.Core.APIs;
 using DotNetCensus.Core.Models;
-using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
 using System.Text;
 
@@ -9,7 +7,7 @@ namespace DotNetCensus.Core;
 
 public static class Main
 {
-    public static string? GetInventoryResultsAsString(string? directory, Repo? repo, string? file)
+    public static string? GetInventoryResultsAsString(string? directory, Target? repo, string? file)
     {
         DateTime startTime = DateTime.Now;
         List<Project> projects = GetProjects(directory, repo);
@@ -108,7 +106,7 @@ public static class Main
     /// <param name="includeTotals">include a totals row</param>
     /// <param name="file">output string to a file</param>
     /// <returns></returns>
-    public static string? GetFrameworkSummaryAsString(string? directory, Repo? repo, bool includeTotals, string? file)
+    public static string? GetFrameworkSummaryAsString(string? directory, Target? repo, bool includeTotals, string? file)
     {
         DateTime startTime = DateTime.Now;
         List<FrameworkSummary> frameworks = GetFrameworkSummary(directory, repo, includeTotals);
@@ -154,7 +152,7 @@ public static class Main
     /// <param name="repo">GitHub repo to scan</param>
     /// <param name="includeTotals">include a totals row</param>
     /// <returns></returns>
-    public static List<FrameworkSummary> GetFrameworkSummary(string? directory, Repo? repo, bool includeTotals)
+    public static List<FrameworkSummary> GetFrameworkSummary(string? directory, Target? repo, bool includeTotals)
     {
         List<Project> projects = GetProjects(directory, repo);
         List<FrameworkSummary> frameworkSummary = Census.AggregateFrameworks(projects, includeTotals);
@@ -162,7 +160,7 @@ public static class Main
     }
 
 
-    private static List<Project> GetProjects(string? directory, Repo? repo)
+    private static List<Project> GetProjects(string? directory, Target? repo)
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
