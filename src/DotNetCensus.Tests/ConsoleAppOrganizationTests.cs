@@ -20,7 +20,11 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
                 "-d", "c:\\temp",
                 "-t" };
             StringWriter sw = new();
-            string expected = @"";
+            string expected = @"Framework         FrameworkFamily  Count  Status
+------------------------------------------------
+total frameworks                   0            
+
+";
 
             //Act
             Console.SetOut(sw);

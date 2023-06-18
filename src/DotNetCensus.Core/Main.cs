@@ -136,8 +136,8 @@ public static class Main
             string? owner = repo.Owner;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
-            await OrganizationScanning.SearchOrganization(clientId, clientSecret,
-                owner, directory);
+            OrganizationScanning.SearchOrganization(clientId, clientSecret,
+               owner, directory);
         }
         else if (!string.IsNullOrEmpty(directory))
         {
