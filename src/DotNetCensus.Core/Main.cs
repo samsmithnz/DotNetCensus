@@ -130,13 +130,23 @@ public static class Main
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
-        if (!string.IsNullOrEmpty(directory))
+        if (repo != null && !string.IsNullOrEmpty(directory))
         {
-            //Run the calculations to get and aggregate the results
+            //Run the caclulations on a target owner or organization
+            string? owner = repo.Owner;
+            string? clientId = repo.User;
+            string? clientSecret = repo.Password;
+            await OrganizationScanning.SearchOrganization(clientId, clientSecret,
+                owner, directory);
+        }
+        else if (!string.IsNullOrEmpty(directory))
+        {
+            //Run the calculations on a target directory to get and aggregate the results
             projects = DirectoryScanning.SearchDirectory(directory);
         }
         else if (repo != null)
         {
+            //Run the calculations on a target repo
             string? owner = repo.Owner;
             string? repository = repo.Repository;
             string? clientId = repo.User;
