@@ -50,14 +50,14 @@ Currently supported options:
 
 `dotnet census [-d|--directory <DIRECTORY>] [-o|--owner <Owner or Organization>] [-r|--repo <REPO>] [-u|--user <USERNAME>] [-p|--password <PASSWORD>] [-f|--file <FILE>] [-t|--total] [-i|--inventory]`
 
-- `-d|--directory`: target directory to scan for .NET versions
+- `-d|--directory`: target directory to scan for .NET versions. When used with `-o`, is used to specify the temp location where the owner/organization repos are cloned.
+- `-o|--owner`: target GitHub owner or organization to scan all repos for .NET versions. 
 - `-r|--repo`: target GitHub repo to scan for .NET versions
 - `-u|--user`: target GitHub username to scan for .NET versions. Required when using the repo or owner/organization options
 - `-p|--password`: target GitHub PAT Token to scan for .NET versions. Required when using the repo or owner/organization options
 - `-f|--file`: file path to output and save CSV data. 
 - `-t|--total`: Add totals to results. Ignored when used with `-i|--inventory`
 - `-i|--inventory`: output inventory of all data (instead of the default aggregated summary)
-- `-o|--owner`: target GitHub owner or organization to scan all repos for .NET versions. Note that the `-d|--directory` option must also be used to specify the temp location where the owner/organization repos are cloned.
 
 ### To target a specific directory from anywhere, use the `-d` argument to specify a target directory:
 `dotnet census -d c:\users\me\desktop\repos`
@@ -147,7 +147,7 @@ For example, to download results from this repository:
 `dotnet census -o samsmithnz -r dotnetcensus -u samsmithnz -p <PAT_TOKEN>`
 
 
-### To download results from a GitHub Organization or Owner (personal account), omit the `-r` argument and use the -d argument. Note that this is an experimental feature, and currently only downloads the first 30 repos...
+### To download results from all repos in a GitHub Organization or Owner (personal account), omit the `-r` argument and use the -d argument. Note that this is an experimental feature, and currently only downloads the first 30 repos...
 - Add the `-o` argument with the GitHub owner or organiation
 - Add the `-u` argument with the GitHub user
 - Add the `-p` argument with the GitHub PAT Token password
