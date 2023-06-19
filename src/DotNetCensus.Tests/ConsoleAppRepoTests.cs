@@ -4,7 +4,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-[TestCategory("IntegrationTest")]
+[TestCategory("ConsoleIntegrationTest")]
 public class ConsoleAppRepoTests : RepoBasedTests
 {
     [TestMethod]
