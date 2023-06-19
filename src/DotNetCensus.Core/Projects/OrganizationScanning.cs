@@ -11,7 +11,11 @@ namespace DotNetCensus.Core.Projects
         public async static Task<List<Project>> SearchOrganization(string? clientId, string? clientSecret,
             string owner, string directory)
         {
-            directory = directory + "dotNetCensusTemp/";
+            directory += "dotNetCensusTemp/";
+
+            //Clear files in repo if they exist
+            Directory.Delete(directory, true);
+
             //Get all repos for the organization
             List<RepoResponse> repoResponses = await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
 
