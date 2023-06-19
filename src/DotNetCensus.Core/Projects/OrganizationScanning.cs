@@ -39,6 +39,7 @@ namespace DotNetCensus.Core.Projects
                     }
                 };
                 process.Start();
+                process.WaitForExit();
             }
 
             //scan each repo for projects
