@@ -15,8 +15,8 @@ public class Program
     {
         //process arguments
         Parser.Default.ParseArguments<Options>(args)
-               .WithParsed(RunOptions)
-               .WithNotParsed(HandleParseError);
+            .WithParsed(RunOptions)
+            .WithNotParsed(HandleParseError);
 
         //If there is a folder to scan, run the process against it
         if (!string.IsNullOrEmpty(_directory) || _repo != null)
@@ -34,37 +34,23 @@ public class Program
 
     static void RunOptions(Options opts)
     {
-        //handle options
-        _directory = opts.Directory;
-
         //setup the GitHub repo details
         if (opts.Owner != null)
         {
-            if (opts.Repo != null)
+            _repo = new Repo(opts.Owner, opts.Repo)
             {
-                opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
-                _repo = new Repo(opts.Owner, opts.Repo)
-                {
-                    User = opts.User,
-                    Password = opts.Password,
-                    Branch = opts.Branch
-                };
-            }
-            else
-            {
-               opts.User = opts.Repo; //This is not a typo - we are using the repo name as the user
-                _repo = new Repo(opts.Owner, null)
-                {
-                    User = opts.User,
-                    Password = opts.Password
-                };
-            }
+                User = opts.User,
+                Password = opts.Password
+            };
         }
+        //Setup working directory details
+        _directory = opts.Directory;
         if (_directory == null && _repo == null)
         {
             //If both directory and repo are null, use the current directory
             _directory = Directory.GetCurrentDirectory();
         }
+        //misc options
         _includeTotals = opts.IncludeTotals;
         _includeInventory = opts.IncludeInventory;
         _file = opts.File;

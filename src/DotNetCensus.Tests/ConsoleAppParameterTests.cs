@@ -1,4 +1,5 @@
 using DotNetCensus.Tests.Helpers;
+using System.Diagnostics;
 
 namespace DotNetCensus.Tests;
 
@@ -7,6 +8,8 @@ namespace DotNetCensus.Tests;
 [TestCategory("ConsoleIntegrationTest")]
 public class ConsoleAppParameterTests : DirectoryBasedTests
 {
+    //NOTE: these tests that call the console app are integration tests, and due to the nature of the static class, method and properties there, if we run too many, they start to step on each other and fail. 
+
     [TestMethod]
     public void RunConsoleAppWithNoParametersTest()
     {
@@ -21,6 +24,7 @@ Framework  FrameworkFamily  Count  Status
 
         //Act
         Console.SetOut(sw);
+        Debug.WriteLine("RunConsoleAppWithNoParametersTest:" + parameters.Length.ToString());
         Program.Main(parameters);
         string result = Environment.NewLine + sw.ToString();
         sw.Close();
