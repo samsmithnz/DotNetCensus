@@ -111,7 +111,7 @@ namespace DotNetCensus.Core.APIs
         {
             List<RepoResponse> results = new();
             //https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
-            string url = $"https://api.github.com/orgs/{owner}/repos?page=1&per_page=1";
+            string url = $"https://api.github.com/orgs/{owner}/repos?page=1&per_page=30";
             //System.Diagnostics.Debug.WriteLine(url);
             string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
             if (!string.IsNullOrEmpty(response))

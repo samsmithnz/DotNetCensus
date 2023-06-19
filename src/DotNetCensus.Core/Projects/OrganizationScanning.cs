@@ -13,16 +13,23 @@ namespace DotNetCensus.Core.Projects
         {
             directory += "dotNetCensusTemp/";
 
-            //Clear files in repo if they exist
-            Directory.Delete(directory, true);
+            //Clear files in the target directory if they already exist
+            DirectoryInfo di = new(directory);
+            RecursiveDelete(di);
 
             //Get all repos for the organization
             List<RepoResponse> repoResponses = await GitHubAPI.GetOrganizationRepos(clientId, clientSecret, owner);
 
+            //Create the new temp directory if it doesn't exist
+            if (Directory.Exists(directory) == false)
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             //for each repo, clone it to the temp location
             foreach (RepoResponse item in repoResponses)
             {
-                string repoPath = directory + item.name; 
+                string repoPath = directory + item.name;
                 Process process = new()
                 {
                     StartInfo = new ProcessStartInfo()
@@ -42,6 +49,30 @@ namespace DotNetCensus.Core.Projects
             }
 
             return projects;
+        }
+
+        private static void RecursiveDelete(DirectoryInfo baseDir)
+        {
+            if (!baseDir.Exists)
+            {
+                return;
+            }
+            foreach (FileInfo file in baseDir.GetFiles())
+            {
+                if (file.Attributes.HasFlag(FileAttributes.ReadOnly))
+                {
+                    FileInfo fileInfo = new(file.FullName)
+                    {
+                        IsReadOnly = false
+                    };
+                }
+            }
+
+            foreach (DirectoryInfo dir in baseDir.EnumerateDirectories())
+            {
+                RecursiveDelete(dir);
+            }
+            baseDir.Delete(true);
         }
 
         private async static Task<List<Project>> SearchRepoDirectory(RepoDirectory baseDir, string fullPath,
