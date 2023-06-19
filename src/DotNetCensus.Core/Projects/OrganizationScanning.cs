@@ -39,7 +39,7 @@ namespace DotNetCensus.Core.Projects
                     }
                 };
                 process.Start();
-                process.WaitForExit();
+                process.WaitForExit(); //this is important - so that the clone finishes before the processing starts
             }
 
             //scan each repo for projects
