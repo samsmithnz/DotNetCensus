@@ -2,6 +2,7 @@
 using DotNetCensus.Core.Models.GitHub;
 using DotNetCensus.Core.Projects;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
@@ -104,6 +105,39 @@ namespace DotNetCensus.Core.APIs
                 }
             }
             return result;
+        }
+
+        public async static Task<List<RepoResponse>> GetOrganizationRepos(string? clientId, string? clientSecret,
+            string owner, int page = 1, int pageSize = 30)
+        {
+            List<RepoResponse> results = new();
+
+            //Loop through pages of results in the API until all results are returned
+            List<RepoResponse> thisPageOfResults;
+            do
+            {
+                thisPageOfResults = await GetOrganizationReposPage(clientId, clientSecret, owner, page, pageSize);
+                results.AddRange(thisPageOfResults);
+                page++;
+            } while (thisPageOfResults != null && thisPageOfResults.Count == pageSize);
+
+            return results;
+        }
+
+        private async static Task<List<RepoResponse>> GetOrganizationReposPage(string? clientId, string? clientSecret,
+            string owner, int page = 1, int pageSize = 1)
+        {
+            List<RepoResponse> results = new();
+            //https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
+            string url = $"https://api.github.com/orgs/{owner}/repos?page={page}&per_page={pageSize}";
+            //System.Diagnostics.Debug.WriteLine(url);
+            string? response = await GetGitHubMessage(clientId, clientSecret, url, true);
+            if (!string.IsNullOrEmpty(response))
+            {
+                dynamic? jsonObj = JsonConvert.DeserializeObject(response);
+                results = JsonConvert.DeserializeObject<List<RepoResponse>>(jsonObj?.ToString());
+            }
+            return results;
         }
 
         private static bool IsBase64String(string base64)

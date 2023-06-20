@@ -130,15 +130,26 @@ public static class Main
     {
         List<Project> projects = new();
         List<Project> sortedProjects = new();
-        if (!string.IsNullOrEmpty(directory))
+        if (repo != null && !string.IsNullOrEmpty(directory))
         {
-            //Run the calculations to get and aggregate the results
+            //Run the caclulations on a target owner or organization
+            string? owner = repo.Owner;
+            string? clientId = repo.User;
+            string? clientSecret = repo.Password;
+            projects = Task.Run(async () => 
+                await OrganizationScanning.SearchOrganization(clientId, clientSecret,
+                   owner, directory)).Result;
+        }
+        else if (!string.IsNullOrEmpty(directory))
+        {
+            //Run the calculations on a target directory to get and aggregate the results
             projects = DirectoryScanning.SearchDirectory(directory);
         }
-        else if (repo != null)
+        else if (repo != null && repo.Repository != null)
         {
+            //Run the calculations on a target repo
             string? owner = repo.Owner;
-            string? repository = repo.Repository;
+            string repository = repo.Repository;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             string? branch = repo.Branch;

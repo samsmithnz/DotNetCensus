@@ -4,11 +4,11 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-[TestCategory("IntegrationTest")]
-public class ConsoleRepoAppTests : RepoBasedTests
+[TestCategory("ConsoleAppFunctionalTest")]
+public class ConsoleAppRepoTests : RepoBasedTests
 {
     [TestMethod]
-    public void RunSamplesWithTotalsFromRepoTest()
+    public void RunConsoleAppWithTotalsFromRepoTest()
     {
         //Arrange
         if (GitHubId != null && GitHubSecret != null)
@@ -82,7 +82,7 @@ total frameworks                       69
     }
 
     [TestMethod]
-    public void RunSamplesWithTotalsFromBranchAndRepoTest()
+    public void RunConsoleAppWithTotalsFromBranchAndRepoTest()
     {
         //Arrange
         if (GitHubId != null && GitHubSecret != null)

@@ -4,7 +4,7 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-[TestCategory("UnitTest")]
+[TestCategory("IntegrationTest")]
 public class RepoDataAccessTests : RepoBasedTests
 {
 

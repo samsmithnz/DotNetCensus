@@ -4,12 +4,13 @@ namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-[TestCategory("IntegrationTest")]
-public class ConsoleDirectoryAppTests : DirectoryBasedTests
+[TestCategory("ConsoleAppFunctionalTest")]
+public class ConsoleAppDirectoryTests : DirectoryBasedTests
 {
+    //NOTE: these tests that call the console app are integration tests, and due to the nature of the static class, method and properties there, if we run too many, they start to step on each other and fail. 
 
     [TestMethod]
-    public void RunSamplesWithInventoryResultsToFileTest()
+    public void RunConsoleAppWithInventoryResultsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
@@ -101,7 +102,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
 
 
     [TestMethod]
-    public void RunSamplesWithTotalsToFileTest()
+    public void RunConsoleAppWithTotalsToFileTest()
     {
         //Arrange
         if (SamplesPath != null)
@@ -109,7 +110,7 @@ public class ConsoleDirectoryAppTests : DirectoryBasedTests
             string file = "test.txt";
             string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
-        string expected = @"Framework,FrameworkFamily,Count,Status
+            string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 5.0,.NET,2,deprecated
 .NET 6.0,.NET,4,supported
 .NET 6.0-android,.NET,1,supported

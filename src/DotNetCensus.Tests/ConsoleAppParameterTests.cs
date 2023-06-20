@@ -1,14 +1,17 @@
 using DotNetCensus.Tests.Helpers;
+using System.Diagnostics;
 
 namespace DotNetCensus.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
-[TestCategory("IntegrationTest")]
-public class ConsoleAppTests : DirectoryBasedTests
+[TestCategory("ConsoleAppFunctionalTest")]
+public class ConsoleAppParameterTests : DirectoryBasedTests
 {
+    //NOTE: these tests that call the console app are integration tests, and due to the nature of the static class, method and properties there, if we run too many, they start to step on each other and fail. 
+
     [TestMethod]
-    public void RunSamplesWithNoParametersTest()
+    public void RunConsoleAppWithNoParametersTest()
     {
         //Arrange
         string[] parameters = Array.Empty<string>();
@@ -21,6 +24,7 @@ Framework  FrameworkFamily  Count  Status
 
         //Act
         Console.SetOut(sw);
+        Debug.WriteLine("RunConsoleAppWithNoParametersTest:" + parameters.Length.ToString());
         Program.Main(parameters);
         string result = Environment.NewLine + sw.ToString();
         sw.Close();
@@ -32,7 +36,7 @@ Framework  FrameworkFamily  Count  Status
     }
 
     [TestMethod]
-    public void RunSamplesWithInvalidParametersTest()
+    public void RunConsoleAppWithInvalidParametersTest()
     {
         if (SamplesPath != null)
         {
