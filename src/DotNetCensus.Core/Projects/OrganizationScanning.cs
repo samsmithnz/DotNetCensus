@@ -62,7 +62,7 @@ namespace DotNetCensus.Core.Projects
             {
                 if (file.Attributes.HasFlag(FileAttributes.ReadOnly))
                 {
-                    FileInfo fileInfo = new(file.FullName)
+                    _ = new FileInfo(file.FullName)
                     {
                         IsReadOnly = false
                     };
