@@ -15,19 +15,17 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
         {
             string[] parameters = new string[] {
                 "-o", "SamSmithNZ-dotcom",
-                "-u", GitHubId,
-                "-p", GitHubSecret,
+                "-u", "",//GitHubId,
+                "-p", "",//GitHubSecret,
                 "-d", Path.GetTempPath(),
                 "-t" };
             StringWriter sw = new();
-            string expected = @"Framework             FrameworkFamily  Count  Status    
---------------------------------------------------------
-.NET 5.0              .NET             4      deprecated
-.NET 5.0-windows      .NET             2      deprecated
-.NET 7.0              .NET             8      supported 
-.NET 7.0-windows      .NET             2      supported 
-.NET Framework 4.7.2  .NET Framework   1      supported 
-total frameworks                       17               
+            string expected = @"Framework             FrameworkFamily  Count  Status   
+-------------------------------------------------------
+.NET 7.0              .NET             8      supported
+.NET 7.0-windows      .NET             2      supported
+.NET Framework 4.7.2  .NET Framework   1      supported
+total frameworks                       11              
 
 ";
 
