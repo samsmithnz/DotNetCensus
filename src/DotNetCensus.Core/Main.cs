@@ -145,11 +145,11 @@ public static class Main
             //Run the calculations on a target directory to get and aggregate the results
             projects = DirectoryScanning.SearchDirectory(directory);
         }
-        else if (repo != null)
+        else if (repo != null && repo.Repository != null)
         {
             //Run the calculations on a target repo
             string? owner = repo.Owner;
-            string? repository = repo.Repository;
+            string repository = repo.Repository;
             string? clientId = repo.User;
             string? clientSecret = repo.Password;
             string? branch = repo.Branch;
