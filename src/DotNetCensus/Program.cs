@@ -59,7 +59,7 @@ public class Program
     static void HandleParseError(IEnumerable<Error> errs)
     {
         //handle errors
-        List<Exception> excList = new List<Exception>();
+        List<Exception> excList = new();
         foreach (var err in errs)
         {
             excList.Add(new ArgumentException(err.ToString()));
