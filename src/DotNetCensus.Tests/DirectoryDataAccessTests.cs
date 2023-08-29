@@ -569,10 +569,10 @@ total frameworks                   1
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework           FrameworkFamily  Count  Status    
-------------------------------------------------------
-.NET Framework 4.0  .NET Framework   1      deprecated
-total frameworks                     1                
+            string expected = @"| Framework          | FrameworkFamily | Count | Status     |
+|--------------------|-----------------|-------|------------|
+| .NET Framework 4.0 | .NET Framework  | 1     | deprecated |
+| total frameworks   |                 | 1     |            |
 ";
 
             //Act
