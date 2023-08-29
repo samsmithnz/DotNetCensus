@@ -102,9 +102,9 @@ Visual Basic 6        Visual Basic 6   1      deprecated
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework  FrameworkFamily  Count  Status   
---------------------------------------------
-.NET 6.0   .NET             1      supported
+            string expected = @"| Framework | FrameworkFamily | Count | Status    |
+|-----------|-----------------|-------|-----------|
+| .NET 6.0  | .NET            | 1     | supported |
 ";
 
             //Act
