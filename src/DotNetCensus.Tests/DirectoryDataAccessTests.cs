@@ -344,16 +344,16 @@ total frameworks,,64,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Path                                                                      FileName                       FrameworkCode   FrameworkName         Family          Language  Status    
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/src/tools/illink/src/analyzer/analyzer.csproj                            analyzer.csproj                net8.0          .NET 8.0              .NET            csharp    in preview
-/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj        ILLink.CodeFixProvider.csproj  netstandard2.0  .NET Standard 2.0     .NET Standard   csharp    supported 
-/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj  ILLink.RoslynAnalyzer.csproj   netstandard2.0  .NET Standard 2.0     .NET Standard   csharp    supported 
-/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                    ILLink.Tasks.csproj            net472          .NET Framework 4.7.2  .NET Framework  csharp    supported 
-/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                    ILLink.Tasks.csproj                            (Unknown)             (Unknown)       csharp    unknown   
-/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                    ILLink.Tasks.csproj            net8.0          .NET 8.0              .NET            csharp    in preview
-/src/tools/illink/src/linker/Mono.Linker.csproj                           Mono.Linker.csproj             net8.0          .NET 8.0              .NET            csharp    in preview
-/src/tools/illink/src/tlens/tlens.csproj                                  tlens.csproj                   net8.0          .NET 8.0              .NET            csharp    in preview
+            string expected = @"| Path                                                                     | FileName                      | FrameworkCode  | FrameworkName        | Family         | Language | Status     |
+|--------------------------------------------------------------------------|-------------------------------|----------------|----------------------|----------------|----------|------------|
+| /src/tools/illink/src/analyzer/analyzer.csproj                           | analyzer.csproj               | net8.0         | .NET 8.0             | .NET           | csharp   | in preview |
+| /src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj       | ILLink.CodeFixProvider.csproj | netstandard2.0 | .NET Standard 2.0    | .NET Standard  | csharp   | supported  |
+| /src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj | ILLink.RoslynAnalyzer.csproj  | netstandard2.0 | .NET Standard 2.0    | .NET Standard  | csharp   | supported  |
+| /src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj           | net472         | .NET Framework 4.7.2 | .NET Framework | csharp   | supported  |
+| /src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj           |                | (Unknown)            | (Unknown)      | csharp   | unknown    |
+| /src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj           | net8.0         | .NET 8.0             | .NET           | csharp   | in preview |
+| /src/tools/illink/src/linker/Mono.Linker.csproj                          | Mono.Linker.csproj            | net8.0         | .NET 8.0             | .NET           | csharp   | in preview |
+| /src/tools/illink/src/tlens/tlens.csproj                                 | tlens.csproj                  | net8.0         | .NET 8.0             | .NET           | csharp   | in preview |
 ";
 
             //Act
