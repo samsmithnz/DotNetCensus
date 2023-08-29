@@ -594,9 +594,9 @@ total frameworks,,64,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework         FrameworkFamily  Count  Status
-------------------------------------------------
-total frameworks                   0            
+            string expected = @"| Framework        | FrameworkFamily | Count | Status |
+|------------------|-----------------|-------|--------|
+| total frameworks |                 | 0     |        |
 ";
 
             //Act
