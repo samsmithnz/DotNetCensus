@@ -17,8 +17,8 @@ public class ConsoleAppParameterTests : DirectoryBasedTests
         string[] parameters = Array.Empty<string>();
         StringWriter sw = new();
         string expected = @"
-Framework  FrameworkFamily  Count  Status
------------------------------------------
+| Framework | FrameworkFamily | Count | Status |
+|-----------|-----------------|-------|--------|
 
 ";
 
