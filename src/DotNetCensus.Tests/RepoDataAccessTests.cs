@@ -291,11 +291,11 @@ total frameworks                       69
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework         FrameworkFamily  Count  Status    
-----------------------------------------------------
-.NET 5.0          .NET             4      deprecated
-.NET 5.0-windows  .NET             2      deprecated
-total frameworks                   6                
+            string expected = @"| Framework        | FrameworkFamily | Count | Status     |
+|------------------|-----------------|-------|------------|
+| .NET 5.0         | .NET            | 4     | deprecated |
+| .NET 5.0-windows | .NET            | 2     | deprecated |
+| total frameworks |                 | 6     |            |
 ";
 
             //Act
@@ -303,7 +303,7 @@ total frameworks                   6
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\\", " /"), contents?.Replace("\\", "/"));
         }
     }
 
