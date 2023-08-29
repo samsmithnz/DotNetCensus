@@ -94,11 +94,11 @@ total frameworks                       69
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"Framework          FrameworkFamily  Count  Status   
-----------------------------------------------------
-.NET 7.0           .NET             1      supported
-.NET Standard 2.0  .NET Standard    1      supported
-total frameworks                    2               
+            string expected = @"| Framework         | FrameworkFamily | Count | Status    |
+|-------------------|-----------------|-------|-----------|
+| .NET 7.0          | .NET            | 1     | supported |
+| .NET Standard 2.0 | .NET Standard   | 1     | supported |
+| total frameworks  |                 | 2     |           |
 ";
 
             //Act
