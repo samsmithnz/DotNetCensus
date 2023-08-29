@@ -15,8 +15,8 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
         string? directory = null;
         Repo? repo = null;
         string? file = null;
-        string expected = @"Framework  FrameworkFamily  Count  Status
------------------------------------------
+        string expected = @"| Framework | FrameworkFamily | Count | Status |
+|-----------|-----------------|-------|--------|
 ";
 
         //Act
