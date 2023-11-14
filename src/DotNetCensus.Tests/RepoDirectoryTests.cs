@@ -115,19 +115,6 @@ public class RepoDirectoryTests : RepoBasedTests
         Assert.AreEqual("", dir.Name);
         Assert.AreEqual(1, dir.Directories.Count);
         Assert.AreEqual(0, dir.Files.Count);
-        //RepoDirectory abc = dir.Directories[0];
-        //Assert.AreEqual("abc", abc.Name);
-        //Assert.AreEqual(0, abc.Files.Count);
-        //Assert.AreEqual(1, abc.Directories.Count);
-        //RepoDirectory def = abc.Directories[0];
-        //Assert.AreEqual("def", def.Name);
-        //Assert.AreEqual(0, def.Files.Count);
-        //Assert.AreEqual(1, def.Directories.Count);
-        //RepoDirectory ghi = def.Directories[0];
-        //Assert.AreEqual("ghi", ghi.Name);
-        //Assert.AreEqual(0, ghi.Files.Count);
-        //Assert.AreEqual(1, ghi.Directories.Count);
-        //Assert.AreEqual("Sample.NetCore.ConsoleApp.csproj", ghi.Directories[0].Files[0]);
     }
 
 }
