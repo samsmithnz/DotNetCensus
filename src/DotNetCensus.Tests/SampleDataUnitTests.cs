@@ -70,7 +70,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         Assert.AreEqual(".NET 5.0", results[0].Framework);
         Assert.AreEqual(1, results[^2].Count);
         Assert.AreEqual("Visual Basic 6", results[^2].Framework);
-        Assert.AreEqual(64, results[^1].Count);
+        Assert.AreEqual(65, results[^1].Count);
         Assert.AreEqual("total frameworks", results[^1].Framework);
     }
 
