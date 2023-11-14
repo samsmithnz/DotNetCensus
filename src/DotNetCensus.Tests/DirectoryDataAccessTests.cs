@@ -411,16 +411,16 @@ total frameworks,,65,
         {
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
 /Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,net35,.NET Framework 3.5,.NET Framework,fsharp,EOL: 9-Jan-2029
-/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
-/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj,xUnit.tests.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
-/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
+/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,supported
+/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj,xUnit.tests.csproj,net8.0,.NET 8.0,.NET,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj,analyzer.csproj,net8.0,.NET 8.0,.NET,csharp,supported
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj,ILLink.CodeFixProvider.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj,ILLink.RoslynAnalyzer.csproj,netstandard2.0,.NET Standard 2.0,.NET Standard,csharp,supported
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,net472,.NET Framework 4.7.2,.NET Framework,csharp,supported
 /Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,,(Unknown),(Unknown),csharp,unknown
-/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
-/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/linker/Mono.Linker.csproj,Mono.Linker.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
-/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/tlens/tlens.csproj,tlens.csproj,net8.0,.NET 8.0,.NET,csharp,in preview
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj,ILLink.Tasks.csproj,net8.0,.NET 8.0,.NET,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/linker/Mono.Linker.csproj,Mono.Linker.csproj,net8.0,.NET 8.0,.NET,csharp,supported
+/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/tlens/tlens.csproj,tlens.csproj,net8.0,.NET 8.0,.NET,csharp,supported
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,EOL: 12-Jan-2027
