@@ -26,7 +26,7 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
 | .NET 7.0-windows     | .NET            | 2     | EOL: 14-May-2024 |
 | .NET Framework 4.7.2 | .NET Framework  | 1     | supported        |
 | total frameworks     |                 | 11    |                  |
-    
+
 ";
 
             //Act
