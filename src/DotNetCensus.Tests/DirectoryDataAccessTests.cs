@@ -239,7 +239,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET Standard 2.1,.NET Standard,1,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,64,
+total frameworks,,65,
 ";
 
             //Act
