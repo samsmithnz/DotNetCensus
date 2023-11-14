@@ -149,7 +149,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         Assert.AreEqual("vb.net", results[2].Language);
         Assert.AreEqual(1, results[3].Count);
         Assert.AreEqual("vb6", results[3].Language);
-        Assert.AreEqual(64, results[4].Count);
+        Assert.AreEqual(65, results[4].Count);
         Assert.AreEqual("total languages", results[4].Language);
     }
 
