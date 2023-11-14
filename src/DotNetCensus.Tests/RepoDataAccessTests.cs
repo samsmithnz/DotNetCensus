@@ -135,6 +135,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET 6.0-maccatalyst | .NET            | 1     | supported        |
 | .NET 7.0             | .NET            | 2     | EOL: 14-May-2024 |
 | .NET 8.0             | .NET            | 10    | supported        |
+| .NET 9.0             | .NET            | 1     | in preview       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -170,7 +171,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 69    |                  |
+| total frameworks     |                 | 70    |                  |
 ";
 
             //Act
