@@ -66,7 +66,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
 | total frameworks     |                 | 70    |                  |
-    
+
 ";
 
             //Act
