@@ -524,10 +524,10 @@ total frameworks,,65,
         string? file = null;
         if (directory != null || repo != null)
         {
-            string expected = @"| Framework        | FrameworkFamily | Count | Status     |
-|------------------|-----------------|-------|------------|
-| .NET 8.0         | .NET            | 1     | in preview |
-| total frameworks |                 | 1     |            |
+            string expected = @"| Framework        | FrameworkFamily | Count | Status    |
+|------------------|-----------------|-------|-----------|
+| .NET 8.0         | .NET            | 1     | supported |
+| total frameworks |                 | 1     |           |
 ";
 
             //Act
