@@ -18,7 +18,7 @@ Ever wanted to understand what your .NET portfolio looks like? Do you know what 
 5. Once a project file is found, it will stop scanning subdirectories (Note there is an [issue](https://github.com/samsmithnz/DotNetCensus/issues/88) to continue scanning)
 
 DotNet Census currently supports these .NET versions:
-- .NET 5, 6, 7, 8, etc
+- .NET 5, 6, 7, 8, 9, etc
 - .NET Core 1 to 3.1  (including older .NET Core 1 and 1.1 project.json formats)
 - .NET Framework (including .NET Framework 3.5 website formats with no project files)
 - .NET Standard 1 to 2.1
@@ -37,7 +37,7 @@ If we missed a version - please add an issue and we will fix it!
 
 ## To use
 
-1. This tool requires the .NET 6 or .NET 7 SDK to be installed.
+1. This tool requires the .NET 6 or .NET 8 SDK to be installed.
 2. Then install:
 `dotnet tool install -g dotnet-census`
 3. Then run the command in the directory you need to count versions:
@@ -73,8 +73,9 @@ Framework             FrameworkFamily  Count  Status
 .NET 6.0              .NET             3      supported       
 .NET 6.0-android      .NET             1      supported       
 .NET 6.0-ios          .NET             1      supported       
-.NET 7.0              .NET             1      supported       
-.NET 8.0              .NET             1      in preview      
+.NET 7.0              .NET             1      EOL: 14-May-2024       
+.NET 8.0              .NET             1      supported        
+.NET 9.0              .NET             1      in preview      
 .NET Core 1.0         .NET Core        1      deprecated      
 .NET Core 1.1         .NET Core        1      deprecated      
 .NET Core 2.0         .NET Core        1      deprecated      
@@ -116,8 +117,8 @@ Sample.MultipleTargets.ConsoleApp.csproj    \samples\Sample.MultipleTargets.Cons
 Sample.Net5.ConsoleApp.csproj               \samples\Sample.Net5.ConsoleApp\Sample.Net5.ConsoleApp.csproj                            net5.0          .NET 5.0              .NET            csharp    deprecated
 Sample.Net6.ConsoleApp.csproj               \samples\Sample.Net6.ConsoleApp\Sample.Net6.ConsoleApp.csproj                            net6.0          .NET 6.0              .NET            csharp    supported
 Sample.Net7.ConsoleApp.csproj               \samples\Sample.Net7.ConsoleApp\Sample.Net7.ConsoleApp.csproj                            net7.0          .NET 7.0              .NET            csharp    EOL: 14-May-2024
-Sample.Net7.ConsoleApp.csproj               \samples\Sample.Net7.ConsoleApp\Sample.Net7.ConsoleApp.csproj                            net7.0          .NET 8.0              .NET            csharp    supported
-Sample.Net8.ConsoleApp.csproj               \samples\Sample.Net8.ConsoleApp\Sample.Net8.ConsoleApp.csproj                            net8.0          .NET 9.0              .NET            csharp    in preview
+Sample.Net7.ConsoleApp.csproj               \samples\Sample.Net7.ConsoleApp\Sample.Net7.ConsoleApp.csproj                            net8.0          .NET 8.0              .NET            csharp    supported
+Sample.Net8.ConsoleApp.csproj               \samples\Sample.Net8.ConsoleApp\Sample.Net8.ConsoleApp.csproj                            net9.0          .NET 9.0              .NET            csharp    in preview
 Sample.NetCore.ConsoleApp.csproj            \samples\Sample.NetCore3.1.ConsoleApp\Sample.NetCore.ConsoleApp.csproj                   netcoreapp3.1   .NET Core 3.1         .NET Core       csharp    EOL: 13-Dec-2022
 Sample.NetCore2.0.ConsoleApp.csproj         \samples\Sample.NetCore2.0.ConsoleApp\Sample.NetCore2.0.ConsoleApp.csproj                netcoreapp2.0   .NET Core 2.0         .NET Core       csharp    deprecated
 Sample.NetCore2.1.ConsoleApp.csproj         \samples\Sample.NetCore2.1.ConsoleApp\Sample.NetCore2.1.ConsoleApp.csproj                netcoreapp2.1   .NET Core 2.1         .NET Core       csharp    deprecated
