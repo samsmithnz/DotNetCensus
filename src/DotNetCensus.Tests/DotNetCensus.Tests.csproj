@@ -23,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Spectre.Console.Testing" Version="0.47.0" />
+    <PackageReference Include="Spectre.Console.Testing" Version="0.48.0" />
   </ItemGroup>
 
   <ItemGroup>
