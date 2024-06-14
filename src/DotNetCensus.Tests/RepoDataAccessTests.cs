@@ -30,7 +30,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET 6.0-android     | .NET            | 1     | supported        |
 | .NET 6.0-ios         | .NET            | 1     | supported        |
 | .NET 6.0-maccatalyst | .NET            | 1     | supported        |
-| .NET 7.0             | .NET            | 2     | EOL: 14-May-2024 |
+| .NET 7.0             | .NET            | 2     | deprecated       |
 | .NET 8.0             | .NET            | 10    | supported        |
 | .NET 9.0             | .NET            | 1     | in preview       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
@@ -133,7 +133,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET 6.0-android     | .NET            | 1     | supported        |
 | .NET 6.0-ios         | .NET            | 1     | supported        |
 | .NET 6.0-maccatalyst | .NET            | 1     | supported        |
-| .NET 7.0             | .NET            | 2     | EOL: 14-May-2024 |
+| .NET 7.0             | .NET            | 2     | deprecated       |
 | .NET 8.0             | .NET            | 10    | supported        |
 | .NET 9.0             | .NET            | 1     | in preview       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
@@ -221,8 +221,8 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-maccatalyst | .NET 6.0-maccatalyst | .NET           | csharp   | supported        |
 | /samples/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-android     | .NET 6.0-android     | .NET           | csharp   | supported        |
 | /samples/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                 | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | supported        |
-| /samples/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                                                          | Sample.Net7.ConsoleApp.csproj                                | net7.0             | .NET 7.0             | .NET           | csharp   | EOL: 14-May-2024 |
-| /samples/Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj                                                        | Sample.Net7.ConsoleApp2.csproj                               | net7.0             | .NET 7.0             | .NET           | csharp   | EOL: 14-May-2024 |
+| /samples/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                                                          | Sample.Net7.ConsoleApp.csproj                                | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj                                                        | Sample.Net7.ConsoleApp2.csproj                               | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                                                          | Sample.Net8.ConsoleApp.csproj                                | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
 | /samples/Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj                                                          | Sample.Net9.ConsoleApp.csproj                                | net9.0             | .NET 9.0             | .NET           | csharp   | in preview       |
 | /samples/Sample.NetCore1.0.ConsoleApp/project.json                                                                     | project.json                                                 | netcoreapp1.0      | .NET Core 1.0        | .NET Core      | csharp   | deprecated       |
