@@ -207,7 +207,8 @@ public static class ProjectClassification
             framework.Contains("netcoreapp2") ||
             framework.Contains("netcoreapp3") ||
             framework.Contains("netcoreapp5") || //details about netcoreapp5 are unclear, but this scenario was mentioned as supported here: https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md
-            framework.Contains("net5.0"))
+            framework.Contains("net5.0") ||
+            framework.Contains("net7.0"))
         {
             //Unsupported/End of life/red
             return "deprecated";
@@ -223,11 +224,6 @@ public static class ProjectClassification
         {
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
-        }
-        else if (framework.Contains("net7.0"))
-        {
-            //Supported, but old/orange
-            return "EOL: 14-May-2024";
         }
         else if (framework.Contains("net6.0") ||
             framework.Contains("net8.0") ||

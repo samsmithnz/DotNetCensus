@@ -27,7 +27,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET 6.0-android     | .NET            | 1     | supported        |
 | .NET 6.0-ios         | .NET            | 1     | supported        |
 | .NET 6.0-maccatalyst | .NET            | 1     | supported        |
-| .NET 7.0             | .NET            | 2     | EOL: 14-May-2024 |
+| .NET 7.0             | .NET            | 2     | deprecated       |
 | .NET 8.0             | .NET            | 10    | supported        |
 | .NET 9.0             | .NET            | 1     | in preview       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
@@ -102,7 +102,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET 6.0-android     | .NET            | 1     | supported        |
 | .NET 6.0-ios         | .NET            | 1     | supported        |
 | .NET 6.0-maccatalyst | .NET            | 1     | supported        |
-| .NET 7.0             | .NET            | 2     | EOL: 14-May-2024 |
+| .NET 7.0             | .NET            | 2     | deprecated       |
 | .NET 8.0             | .NET            | 10    | supported        |
 | .NET 9.0             | .NET            | 1     | in preview       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
