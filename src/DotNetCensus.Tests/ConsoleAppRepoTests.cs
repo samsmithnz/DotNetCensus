@@ -98,13 +98,13 @@ public class ConsoleAppRepoTests : RepoBasedTests
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | supported        |
-| .NET 6.0-android     | .NET            | 1     | supported        |
-| .NET 6.0-ios         | .NET            | 1     | supported        |
-| .NET 6.0-maccatalyst | .NET            | 1     | supported        |
+| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0-android     | .NET            | 1     | deprecated       |
+| .NET 6.0-ios         | .NET            | 1     | deprecated       |
+| .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
 | .NET 8.0             | .NET            | 10    | supported        |
-| .NET 9.0             | .NET            | 1     | in preview       |
+| .NET 9.0             | .NET            | 1     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
