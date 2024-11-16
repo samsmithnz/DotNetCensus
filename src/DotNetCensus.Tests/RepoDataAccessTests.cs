@@ -128,14 +128,15 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
+| .NET 10.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | supported        |
-| .NET 6.0-android     | .NET            | 1     | supported        |
-| .NET 6.0-ios         | .NET            | 1     | supported        |
-| .NET 6.0-maccatalyst | .NET            | 1     | supported        |
+| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0-android     | .NET            | 1     | deprecated       |
+| .NET 6.0-ios         | .NET            | 1     | deprecated       |
+| .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 10    | supported        |
-| .NET 9.0             | .NET            | 1     | in preview       |
+| .NET 8.0             | .NET            | 9     | supported        |
+| .NET 9.0             | .NET            | 2     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -171,7 +172,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 70    |                  |
+| total frameworks     |                 | 71    |                  |
 ";
 
             //Act
