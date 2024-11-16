@@ -280,18 +280,19 @@ total frameworks,,66,
 | /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | netcoreapp3.1      | .NET Core 3.1        | .NET Core      | csharp   | deprecated       |
 | /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | net5.0             | .NET 5.0             | .NET           | csharp   | deprecated       |
 | /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | net462             | .NET Framework 4.6.2 | .NET Framework | csharp   | EOL: 12-Jan-2027 |
+| /Sample.Net10.ConsoleApp/Sample.Net10.ConsoleApp.csproj                                                        | Sample.Net10.ConsoleApp.csproj                               | net10.0            | .NET 10.0            | .NET           | csharp   | in preview       |
 | /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj                                                          | Sample.Net5.ConsoleApp.csproj                                | net5.0             | .NET 5.0             | .NET           | csharp   | deprecated       |
-| /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                          | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | supported        |
-| /Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj                                                     | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | supported        |
-| /Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj                                          | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | supported        |
-| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-ios         | .NET 6.0-ios         | .NET           | csharp   | supported        |
-| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-maccatalyst | .NET 6.0-maccatalyst | .NET           | csharp   | supported        |
-| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-android     | .NET 6.0-android     | .NET           | csharp   | supported        |
-| /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                 | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | supported        |
+| /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                          | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
+| /Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj                                                     | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
+| /Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj                                          | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
+| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-ios         | .NET 6.0-ios         | .NET           | csharp   | deprecated       |
+| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-maccatalyst | .NET 6.0-maccatalyst | .NET           | csharp   | deprecated       |
+| /Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj                                                  | Calculator.csproj                                            | net6.0-android     | .NET 6.0-android     | .NET           | csharp   | deprecated       |
+| /Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                 | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
 | /Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                                                          | Sample.Net7.ConsoleApp.csproj                                | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
 | /Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj                                                        | Sample.Net7.ConsoleApp2.csproj                               | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
 | /Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                                                          | Sample.Net8.ConsoleApp.csproj                                | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj                                                          | Sample.Net9.ConsoleApp.csproj                                | net9.0             | .NET 9.0             | .NET           | csharp   | in preview       |
+| /Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj                                                          | Sample.Net9.ConsoleApp.csproj                                | net9.0             | .NET 9.0             | .NET           | csharp   | supported        |
 | /Sample.NetCore1.0.ConsoleApp/project.json                                                                     | project.json                                                 | netcoreapp1.0      | .NET Core 1.0        | .NET Core      | csharp   | deprecated       |
 | /Sample.NetCore1.1.ConsoleApp/project.json                                                                     | project.json                                                 | netcoreapp1.1      | .NET Core 1.1        | .NET Core      | csharp   | deprecated       |
 | /Sample.NetCore2.0.ConsoleApp/Sample.NetCore2.0.ConsoleApp.csproj                                              | Sample.NetCore2.0.ConsoleApp.csproj                          | netcoreapp2.0      | .NET Core 2.0        | .NET Core      | csharp   | deprecated       |
@@ -427,18 +428,19 @@ total frameworks,,66,
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,EOL: 12-Jan-2027
+/Sample.Net10.ConsoleApp/Sample.Net10.ConsoleApp.csproj,Sample.Net10.ConsoleApp.csproj,net10.0,.NET 10.0,.NET,csharp,in preview
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
-/Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
-/Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
-/Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
-/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,supported
-/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-maccatalyst,.NET 6.0-maccatalyst,.NET,csharp,supported
-/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,supported
-/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,supported
+/Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
+/Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
+/Sample.NET6.Directory.Build.props/App1/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
+/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-ios,.NET 6.0-ios,.NET,csharp,deprecated
+/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-maccatalyst,.NET 6.0-maccatalyst,.NET,csharp,deprecated
+/Sample.Net6.MAUI.Calculator/src/Calculator/Calculator.csproj,Calculator.csproj,net6.0-android,.NET 6.0-android,.NET,csharp,deprecated
+/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
 /Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj,Sample.Net7.ConsoleApp.csproj,net7.0,.NET 7.0,.NET,csharp,deprecated
 /Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj,Sample.Net7.ConsoleApp2.csproj,net7.0,.NET 7.0,.NET,csharp,deprecated
 /Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj,Sample.Net8.ConsoleApp.csproj,net8.0,.NET 8.0,.NET,csharp,supported
-/Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj,Sample.Net9.ConsoleApp.csproj,net9.0,.NET 9.0,.NET,csharp,in preview
+/Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj,Sample.Net9.ConsoleApp.csproj,net9.0,.NET 9.0,.NET,csharp,supported
 /Sample.NetCore1.0.ConsoleApp/project.json,project.json,netcoreapp1.0,.NET Core 1.0,.NET Core,csharp,deprecated
 /Sample.NetCore1.1.ConsoleApp/project.json,project.json,netcoreapp1.1,.NET Core 1.1,.NET Core,csharp,deprecated
 /Sample.NetCore2.0.ConsoleApp/Sample.NetCore2.0.ConsoleApp.csproj,Sample.NetCore2.0.ConsoleApp.csproj,netcoreapp2.0,.NET Core 2.0,.NET Core,csharp,deprecated
