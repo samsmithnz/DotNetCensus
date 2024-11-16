@@ -113,14 +113,15 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
             string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
             string expected = @"Framework,FrameworkFamily,Count,Status
+.NET 10.0,.NET,1,in preview
 .NET 5.0,.NET,2,deprecated
-.NET 6.0,.NET,4,supported
-.NET 6.0-android,.NET,1,supported
-.NET 6.0-ios,.NET,1,supported
-.NET 6.0-maccatalyst,.NET,1,supported
+.NET 6.0,.NET,4,deprecated
+.NET 6.0-android,.NET,1,deprecated
+.NET 6.0-ios,.NET,1,deprecated
+.NET 6.0-maccatalyst,.NET,1,deprecated
 .NET 7.0,.NET,2,deprecated
 .NET 8.0,.NET,7,supported
-.NET 9.0,.NET,1,in preview
+.NET 9.0,.NET,1,supported
 .NET Core 1.0,.NET Core,1,deprecated
 .NET Core 1.1,.NET Core,1,deprecated
 .NET Core 2.0,.NET Core,1,deprecated
@@ -156,7 +157,7 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
 .NET Standard 2.1,.NET Standard,1,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,65,
+total frameworks,,66,
 ";
 
             //Act
