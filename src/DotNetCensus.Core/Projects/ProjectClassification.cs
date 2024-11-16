@@ -208,6 +208,7 @@ public static class ProjectClassification
             framework.Contains("netcoreapp3") ||
             framework.Contains("netcoreapp5") || //details about netcoreapp5 are unclear, but this scenario was mentioned as supported here: https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md
             framework.Contains("net5.0") ||
+            framework.Contains("net6.0") ||
             framework.Contains("net7.0"))
         {
             //Unsupported/End of life/red
@@ -225,8 +226,8 @@ public static class ProjectClassification
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net6.0") ||
-            framework.Contains("net8.0") ||
+        else if (framework.Contains("net9.0") || //EOL: May 12, 2026
+            framework.Contains("net8.0") || //EOL: November 10, 2026
             framework.Contains("netstandard") ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
@@ -236,7 +237,7 @@ public static class ProjectClassification
             //Supported/Ok/blue
             return "supported";
         }
-        else if (framework.Contains("net9.0"))
+        else if (framework.Contains("net10.0"))
         {
             return "in preview";
         }
