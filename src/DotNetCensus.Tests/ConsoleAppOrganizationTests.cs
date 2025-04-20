@@ -22,8 +22,8 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
             StringWriter sw = new();
             string expected = @"| Framework            | FrameworkFamily | Count | Status    |
 |----------------------|-----------------|-------|-----------|
-| .NET 8.0             | .NET            | 8     | supported |
-| .NET 8.0-windows     | .NET            | 2     | supported |
+| .NET 9.0             | .NET            | 8     | supported |
+| .NET 9.0-windows     | .NET            | 2     | supported |
 | .NET Framework 4.7.2 | .NET Framework  | 1     | supported |
 | total frameworks     |                 | 11    |           |
 
