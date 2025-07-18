@@ -24,7 +24,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
@@ -66,7 +66,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 71    |                  |
+| total frameworks     |                 | 69    |                  |
 
 ";
 
@@ -100,7 +100,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
@@ -142,7 +142,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 71    |                  |
+| total frameworks     |                 | 69    |                  |
 
 ";
 
