@@ -14,10 +14,6 @@
 		<PackageId>DotNetCensus.Core</PackageId>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<NuGetVersion>1.0.0</NuGetVersion>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="ConsoleTables" Version="2.6.2" />
