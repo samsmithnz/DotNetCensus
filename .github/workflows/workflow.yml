@@ -12,7 +12,7 @@ jobs:
     name: Build job
     runs-on: ubuntu-latest
     outputs:
-      Version: ${{ steps.gitversion.outputs.SemVer }}
+      Version: ${{ steps.gitversion.outputs.MinorMajorPatch }}
       CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}
     steps:
     - uses: actions/checkout@v4
@@ -21,13 +21,13 @@ jobs:
     - name: Setup GitVersion
       uses: gittools/actions/gitversion/setup@v4.0.1
       with:
-        versionSpec: 5.x
+        versionSpec: 6.x
     - name: Determine Version
       id: gitversion
       uses: gittools/actions/gitversion/execute@v4.0.1
     - name: Display GitVersion outputs
       run: |
-        echo "Version: ${{ steps.gitversion.outputs.SemVer }}"
+        echo "Version: ${{ steps.gitversion.outputs.MinorMajorPatch }}"
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -48,14 +48,14 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
     - name: .NET pack tool to NuGet package
-      run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+      run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MinorMajorPatch }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v4
       with:
         name: nugetToolPackage
         path: src/DotNetCensus/nupkg
     - name: .NET pack core projecty to NuGet package
-      run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+      run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MinorMajorPatch }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v4
       with:
