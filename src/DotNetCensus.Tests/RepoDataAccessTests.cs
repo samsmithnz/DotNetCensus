@@ -27,7 +27,7 @@ public class RepoDataAccessTests : RepoBasedTests
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
@@ -69,7 +69,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 71    |                  |
+| total frameworks     |                 | 69    |                  |
 ";
 
             //Act
@@ -131,7 +131,7 @@ public class RepoDataAccessTests : RepoBasedTests
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
-| .NET 6.0             | .NET            | 6     | deprecated       |
+| .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
@@ -173,7 +173,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 71    |                  |
+| total frameworks     |                 | 69    |                  |
 ";
 
             //Act
@@ -268,10 +268,8 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.Unity2020/Assembly-CSharp.csproj                                                                       | Assembly-CSharp.csproj                                       | v4.7.1             | .NET Framework 4.7.1 | .NET Framework | csharp   | supported        |
 | /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                                                   | Sample.VB6.WinApp.vbp                                        | vb6                | Visual Basic 6       | Visual Basic 6 | vb6      | deprecated       |
 | /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
 | /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net9.0             | .NET 9.0             | .NET           | csharp   | supported        |
 | /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
 ";
 
             //Act
