@@ -35,7 +35,7 @@ public static class Main
             {
                 table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
             }
-            string result = table.ToString();
+            string result = table.ToMinimalString();
             Console.WriteLine(result);
             Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
@@ -85,7 +85,7 @@ public static class Main
             {
                 table.AddRow(item.Framework, item.FrameworkFamily, item.Count, item.Status);
             }
-            string result = table.ToString();
+            string result = table.ToMinimalString();
             Console.WriteLine(result);
             Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
