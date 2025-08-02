@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="ConsoleTables" Version="2.7.0" />
+		<PackageReference Include="ConsoleTables" Version="2.6.2" />
 	</ItemGroup>
 
 </Project>

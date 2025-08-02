@@ -1,41 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-    <IsPackable>false</IsPackable>
+		<IsPackable>false</IsPackable>
 
-    <UserSecretsId>b57da4f0-05f1-4401-9b71-546bd5c69914</UserSecretsId>
-  </PropertyGroup>
+		<UserSecretsId>b57da4f0-05f1-4401-9b71-546bd5c69914</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ConsoleTables" Version="2.7.0" />
-    <PackageReference Include="coverlet.msbuild" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.7" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.10.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.10.0" />
-    <PackageReference Include="coverlet.collector" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Spectre.Console.Testing" Version="0.50.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ConsoleTables" Version="2.6.2" />
+		<PackageReference Include="coverlet.msbuild" Version="6.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.7" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.10.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.10.0" />
+		<PackageReference Include="coverlet.collector" Version="6.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Spectre.Console.Testing" Version="0.50.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DotNetCensus.Core\DotNetCensus.Core.csproj" />
-    <ProjectReference Include="..\DotNetCensus\DotNetCensus.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DotNetCensus.Core\DotNetCensus.Core.csproj" />
+		<ProjectReference Include="..\DotNetCensus\DotNetCensus.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
