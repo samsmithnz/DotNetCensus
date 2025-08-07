@@ -89,11 +89,13 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v5
       with:
+        merge-multiple: true
         name: nugetToolPackage
         path: nugetToolPackage
     - name: Download artifact from build job
       uses: actions/download-artifact@v5
       with:
+        merge-multiple: true
         name: nugetCorePackage
         path: nugetCorePackage
     - name: Display GitVersion outputs
@@ -109,9 +111,9 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
     - name: Publish nuget tool package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetToolPackage\*.nupkg --api-key "${{ secrets.NUGETTOOLTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push nugetToolPackage/*.nupkg --api-key "${{ secrets.NUGETTOOLTOKEN }}" --source "https://api.nuget.org/v3/index.json"
       shell: pwsh 
     - name: Publish nuget core package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetCorePackage\*.nupkg --api-key "${{ secrets.NUGETCORETOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push nugetCorePackage/*.nupkg --api-key "${{ secrets.NUGETCORETOKEN }}" --source "https://api.nuget.org/v3/index.json"
       shell: pwsh
