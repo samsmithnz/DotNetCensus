@@ -96,7 +96,7 @@ public class RepoDataAccessTests : RepoBasedTests
         string? file = null;
         if (directory != null || repo != null)
         {
-        string expected = @"| Framework         | FrameworkFamily | Count | Status    |
+            string expected = @"| Framework         | FrameworkFamily | Count | Status    |
 |-------------------|-----------------|-------|-----------|
 | .NET 8.0          | .NET            | 1     | supported |
 | .NET Standard 2.0 | .NET Standard   | 1     | supported |
