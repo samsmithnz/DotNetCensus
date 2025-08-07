@@ -22,10 +22,10 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
             StringWriter sw = new();
             string expected = @"| Framework            | FrameworkFamily | Count | Status    |
 |----------------------|-----------------|-------|-----------|
-| .NET 9.0             | .NET            | 9     | supported |
+| .NET 9.0             | .NET            | 11    | supported |
 | .NET 9.0-windows     | .NET            | 2     | supported |
 | .NET Framework 4.7.2 | .NET Framework  | 1     | supported |
-| total frameworks     |                 | 12    |           |
+| total frameworks     |                 | 14    |           |
 
 ";
 
