@@ -36,8 +36,10 @@ public static class Main
                 table.AddRow(item.Path, item.FileName, item.FrameworkCode, item.FrameworkName, item.Family, item.Language, item.Status);
             }
             string result = table.ToMinimalString();
-            Console.WriteLine(result);
-            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            
+            SafeConsoleWriteLine(result);
+            SafeConsoleWriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            
             return result;
         }
         else
@@ -58,8 +60,9 @@ public static class Main
                 }
             }
 
-            Console.WriteLine($"Exported results to '{file}'");
-            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            SafeConsoleWriteLine($"Exported results to '{file}'");
+            SafeConsoleWriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            
             return null;
         }
     }
@@ -86,8 +89,8 @@ public static class Main
                 table.AddRow(item.Framework, item.FrameworkFamily, item.Count, item.Status);
             }
             string result = table.ToMinimalString();
-            Console.WriteLine(result);
-            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            SafeConsoleWriteLine(result);
+            SafeConsoleWriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
             return result;
         }
         else
@@ -105,8 +108,9 @@ public static class Main
                 }
             }
 
-            Console.WriteLine($"Exported results to '{file}'");
-            Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            SafeConsoleWriteLine($"Exported results to '{file}'");
+            SafeConsoleWriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
+            
             return null;
         }
     }
@@ -125,6 +129,20 @@ public static class Main
         return frameworkSummary;
     }
 
+
+    private static void SafeConsoleWriteLine(string message)
+    {
+        try
+        {
+            Console.WriteLine(message);
+        }
+        catch (ObjectDisposedException)
+        {
+            // Console.Out might be pointing to a disposed writer from another test
+            // This can happen during concurrent test execution
+            // Just ignore the console output in this case
+        }
+    }
 
     private static List<Project> GetProjects(string? directory, Repo? repo)
     {
