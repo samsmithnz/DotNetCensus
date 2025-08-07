@@ -20,6 +20,7 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
                 "-d", Path.GetTempPath(),
                 "-t" };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status    |
 |----------------------|-----------------|-------|-----------|
 | .NET 9.0             | .NET            | 11    | supported |
@@ -30,15 +31,22 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
 
-            //Asset
-            Assert.IsNotNull(result);
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual(expected, result);
+                //Asset
+                Assert.IsNotNull(result);
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual(expected, result);
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
 

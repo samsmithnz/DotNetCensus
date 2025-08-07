@@ -43,24 +43,24 @@ public static class Main
         else
         {
             //Create a CSV file
-            StreamWriter sw = File.CreateText(file);
-            sw.WriteLine("Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status");
-            foreach (Project item in projects)
+            using (StreamWriter sw = File.CreateText(file))
             {
-                sw.WriteLine(item.Path + "," +
-                    item.FileName + "," +
-                    item.FrameworkCode + "," +
-                    item.FrameworkName + "," +
-                    item.Family + "," +
-                    item.Language + "," +
-                    item.Status);
+                sw.WriteLine("Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status");
+                foreach (Project item in projects)
+                {
+                    sw.WriteLine(item.Path + "," +
+                        item.FileName + "," +
+                        item.FrameworkCode + "," +
+                        item.FrameworkName + "," +
+                        item.Family + "," +
+                        item.Language + "," +
+                        item.Status);
+                }
             }
-            string? result = sw?.ToString();
-            sw?.Close();
 
             Console.WriteLine($"Exported results to '{file}'");
             Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
-            return result;
+            return null;
         }
     }
 
@@ -93,21 +93,21 @@ public static class Main
         else
         {
             //Create a CSV file
-            StreamWriter sw = File.CreateText(file);
-            sw.WriteLine("Framework,FrameworkFamily,Count,Status");
-            foreach (FrameworkSummary item in frameworks)
+            using (StreamWriter sw = File.CreateText(file))
             {
-                sw.WriteLine(item.Framework + "," +
-                    item.FrameworkFamily + "," +
-                    item.Count + "," +
-                    item.Status);
+                sw.WriteLine("Framework,FrameworkFamily,Count,Status");
+                foreach (FrameworkSummary item in frameworks)
+                {
+                    sw.WriteLine(item.Framework + "," +
+                        item.FrameworkFamily + "," +
+                        item.Count + "," +
+                        item.Status);
+                }
             }
-            string? result = sw?.ToString();
-            sw?.Close();
 
             Console.WriteLine($"Exported results to '{file}'");
             Console.WriteLine("Time to process: " + TimingHelper.GetTime(DateTime.Now - startTime));
-            return result;
+            return null;
         }
     }
 
