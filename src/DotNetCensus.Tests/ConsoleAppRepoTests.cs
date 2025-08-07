@@ -20,6 +20,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
                 "-b", GetCurrentBranch(),
                 "-t" };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
@@ -71,15 +72,22 @@ public class ConsoleAppRepoTests : RepoBasedTests
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
 
-            //Asset
-            Assert.IsNotNull(result);
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual(expected, result);
+                //Asset
+                Assert.IsNotNull(result);
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual(expected, result);
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
 
@@ -96,6 +104,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
                 "-b", GetCurrentBranch(),
                 "-t" };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
 | .NET 10.0            | .NET            | 1     | in preview       |
@@ -147,16 +156,22 @@ public class ConsoleAppRepoTests : RepoBasedTests
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
 
-            //Asset
-            Assert.IsNotNull(result);
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual(expected, result);
+                //Asset
+                Assert.IsNotNull(result);
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual(expected, result);
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
-
 }

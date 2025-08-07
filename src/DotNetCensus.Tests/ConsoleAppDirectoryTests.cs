@@ -18,6 +18,7 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
             string file = "test2.txt";
             string[] parameters = new string[] { "-d", SamplesPath, "-i", "-f", file };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"Path,FileName,FrameworkCode,FrameworkName,Family,Language,Status
 /Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj,net35,.NET Framework 3.5,.NET Framework,fsharp,EOL: 9-Jan-2029
 /Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj,powershell-win-core.csproj,net8.0,.NET 8.0,.NET,csharp,supported
@@ -88,17 +89,23 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
+                string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
-            //Asset
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
-
+                //Asset
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual($"Exported results to 'test2.txt'" + Environment.NewLine, result);
+                Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
 
@@ -112,6 +119,7 @@ public class ConsoleAppDirectoryTests : DirectoryBasedTests
             string file = "test.txt";
             string[] parameters = new string[] { "-d", SamplesPath, "-t", "-f", file };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"Framework,FrameworkFamily,Count,Status
 .NET 10.0,.NET,1,in preview
 .NET 5.0,.NET,2,deprecated
@@ -161,17 +169,23 @@ total frameworks,,66,
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
-            string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
+                string contents = File.ReadAllText(Directory.GetCurrentDirectory() + "/" + file);
 
-            //Asset
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+                //Asset
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual($"Exported results to 'test.txt'" + Environment.NewLine, result);
+                Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
-
 }
