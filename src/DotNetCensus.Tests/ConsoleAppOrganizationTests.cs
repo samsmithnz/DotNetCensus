@@ -20,25 +20,33 @@ public class ConsoleAppOrganizationTests : RepoBasedTests
                 "-d", Path.GetTempPath(),
                 "-t" };
             StringWriter sw = new();
+            TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status    |
 |----------------------|-----------------|-------|-----------|
-| .NET 9.0             | .NET            | 9     | supported |
+| .NET 9.0             | .NET            | 11    | supported |
 | .NET 9.0-windows     | .NET            | 2     | supported |
 | .NET Framework 4.7.2 | .NET Framework  | 1     | supported |
-| total frameworks     |                 | 12    |           |
+| total frameworks     |                 | 14    |           |
 
 ";
 
             //Act
-            Console.SetOut(sw);
-            Program.Main(parameters);
-            string result = sw.ToString();
-            sw.Close();
+            try
+            {
+                Console.SetOut(sw);
+                Program.Main(parameters);
+                string result = sw.ToString();
 
-            //Asset
-            Assert.IsNotNull(result);
-            result = TextHelper.CleanTimingFromResult(result);
-            Assert.AreEqual(expected, result);
+                //Asset
+                Assert.IsNotNull(result);
+                result = TextHelper.CleanTimingFromResult(result);
+                Assert.AreEqual(expected, result);
+            }
+            finally
+            {
+                Console.SetOut(originalOut);  // Always restore the original output
+                sw.Close();
+            }
         }
     }
 
