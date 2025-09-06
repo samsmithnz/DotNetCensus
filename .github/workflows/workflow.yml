@@ -30,7 +30,7 @@ jobs:
         echo "Version: ${{ steps.gitversion.outputs.MajorMinorPatch }}"
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 9.0.x
     - name: Variable Substitution appsettings file for tests
