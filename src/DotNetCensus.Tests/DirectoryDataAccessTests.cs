@@ -432,7 +432,8 @@ total frameworks,,67,
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,netcoreapp3.1,.NET Core 3.1,.NET Core,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj,Sample.MultipleTargets.ConsoleApp.csproj,net462,.NET Framework 4.6.2,.NET Framework,csharp,EOL: 12-Jan-2027
-/Sample.Net10.ConsoleApp/Sample.Net10.ConsoleApp.csproj,Sample.Net10.ConsoleApp.csproj,net10.0,.NET 10.0,.NET,csharp,in preview
+/Sample.Net10.ConsoleApp/Sample.Net10.ConsoleApp.csproj,Sample.Net10.ConsoleApp.csproj,net10.0,.NET 10.0,.NET,csharp,supported
+/Sample.Net11.ConsoleApp/Sample.Net11.ConsoleApp.csproj,Sample.Net11.ConsoleApp.csproj,net11.0,.NET 11.0,.NET,csharp,in preview
 /Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj,Sample.Net5.ConsoleApp.csproj,net5.0,.NET 5.0,.NET,csharp,deprecated
 /Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
 /Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj,Sample.Net6.ConsoleApp.csproj,net6.0,.NET 6.0,.NET,csharp,deprecated
