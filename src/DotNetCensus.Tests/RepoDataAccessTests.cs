@@ -129,7 +129,8 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | in preview       |
+| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 11.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
