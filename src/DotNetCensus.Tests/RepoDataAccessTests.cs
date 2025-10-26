@@ -70,7 +70,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 69    |                  |
+| total frameworks     |                 | 70    |                  |
 ";
 
             //Act
@@ -175,7 +175,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 69    |                  |
+| total frameworks     |                 | 70    |                  |
 ";
 
             //Act
