@@ -200,7 +200,8 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
         if (directory != null || repo != null)
         {
             string expected = @"Framework,FrameworkFamily,Count,Status
-.NET 10.0,.NET,1,in preview
+.NET 10.0,.NET,1,supported
+.NET 11.0,.NET,1,in preview
 .NET 5.0,.NET,2,deprecated
 .NET 6.0,.NET,4,deprecated
 .NET 6.0-android,.NET,1,deprecated
@@ -244,7 +245,7 @@ public class DirectoryDataAccessTests : DirectoryBasedTests
 .NET Standard 2.1,.NET Standard,1,supported
 (Unknown),(Unknown),2,unknown
 Visual Basic 6,Visual Basic 6,1,deprecated
-total frameworks,,66,
+total frameworks,,67,
 ";
 
             //Act
