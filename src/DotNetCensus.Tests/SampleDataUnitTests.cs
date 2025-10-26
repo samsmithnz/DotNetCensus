@@ -141,7 +141,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         //Asset
         Assert.IsNotNull(results);
         Assert.AreEqual(5, results.Count);
-        Assert.AreEqual(57, results[0].Count);
+        Assert.AreEqual(58, results[0].Count);
         Assert.AreEqual("csharp", results[0].Language);
         Assert.AreEqual(3, results[1].Count);
         Assert.AreEqual("fsharp", results[1].Language);
@@ -149,7 +149,7 @@ public class SampleDataUnitTests : DirectoryBasedTests
         Assert.AreEqual("vb.net", results[2].Language);
         Assert.AreEqual(1, results[3].Count);
         Assert.AreEqual("vb6", results[3].Language);
-        Assert.AreEqual(66, results[4].Count);
+        Assert.AreEqual(67, results[4].Count);
         Assert.AreEqual("total languages", results[4].Language);
     }
 
