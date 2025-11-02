@@ -179,7 +179,7 @@ public static class ProjectClassification
     //    return unityVersion;
     //}
 
-    // get a color to represent the support. Kinda rough for now, but highlights really old versions.
+    // get a color to represent the support. Highlights old deprecated, soon to be out of support, and current versions.
     public static string? GetStatus(string? framework)
     {
         if (framework == null)
@@ -197,10 +197,10 @@ public static class ProjectClassification
             framework.Contains("v4.3") ||
             framework.Contains("v4.4") ||
             framework.Contains("v4.5") ||
-            framework == "v4.6" || //Unclear if this should be net46 or v4.6 - I've seen both in wild
-            framework == "v4.6.1" || //Unclear if this should be net461 or v4.6.1 - I've seen both in wild
             framework.Contains("net40") ||
             framework.Contains("net45") || //Unclear if this should be net45 or v4.5 - I've seen both in wild
+            framework == "v4.6" || //Unclear if these should be net46 or v4.6 - I've seen both samples in the wild
+            framework == "v4.6.1" || 
             framework == "net46" ||
             framework == "net461" ||
             framework.Contains("netcoreapp1") ||
@@ -226,8 +226,10 @@ public static class ProjectClassification
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net9.0") || //EOL: May 12, 2026
-            framework.Contains("net8.0") || //EOL: November 10, 2026
+        else if (
+            framework.Contains("net10.0") || //EOL: Nov ??, 2028
+            framework.Contains("net9.0") || //EOL: Nov 10, 2026
+            framework.Contains("net8.0") || //EOL: Nov 10, 2026
             framework.Contains("netstandard") ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
@@ -237,7 +239,7 @@ public static class ProjectClassification
             //Supported/Ok/blue
             return "supported";
         }
-        else if (framework.Contains("net10.0"))
+        else if (framework.Contains("net11.0"))
         {
             return "in preview";
         }
