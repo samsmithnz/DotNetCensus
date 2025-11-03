@@ -87,13 +87,13 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         merge-multiple: true
         name: nugetToolPackage
         path: nugetToolPackage
     - name: Download artifact from build job
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         merge-multiple: true
         name: nugetCorePackage
