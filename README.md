@@ -8,7 +8,7 @@
 
 **A dotnet [tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) to conduct a .NET census - count all of the different .NET versions - on a target directory or GitHub repo. It can also output a CSV file with the results, or conduct a full inventory of all detected project files.** 
 
-Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help.
+Ever wanted to understand what your .NET portfolio looks like? Do you know what projects are using .NET versions that expired and the amount of technical debt you are managing? Or maybe just looking to have more visibility into your .NET portfolio? DotNet Census is here to help. hello.
 
 ## How it works
 1. It scans for project files (csproj, vbproj, fsproj, vb6proj, etc)
