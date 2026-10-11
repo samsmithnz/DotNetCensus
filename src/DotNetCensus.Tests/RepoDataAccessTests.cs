@@ -202,7 +202,6 @@ public class RepoDataAccessTests : RepoBasedTests
         if (directory != null || repo != null)
         {
             string expected = @"| Path                                                                                                                   | FileName                                                     | FrameworkCode      | FrameworkName        | Family         | Language | Status           |
-| Path                                                                                                                   | FileName                                                     | FrameworkCode      | FrameworkName        | Family         | Language | Status           |
 |------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|--------------------|----------------------|----------------|----------|------------------|
 | /samples/Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj                              | Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj | net35              | .NET Framework 3.5   | .NET Framework | fsharp   | EOL: 9-Jan-2029  |
 | /samples/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                 | powershell-win-core.csproj                                   | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
