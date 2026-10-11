@@ -25,7 +25,7 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
 | .NET 11.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -33,8 +33,8 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 9     | supported        |
-| .NET 9.0             | .NET            | 2     | supported        |
+| .NET 8.0             | .NET            | 7     | supported        |
+| .NET 9.0             | .NET            | 1     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -130,7 +130,7 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
 | .NET 11.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -138,8 +138,8 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 9     | supported        |
-| .NET 9.0             | .NET            | 2     | supported        |
+| .NET 8.0             | .NET            | 7     | supported        |
+| .NET 9.0             | .NET            | 1     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -202,6 +202,7 @@ public class RepoDataAccessTests : RepoBasedTests
         if (directory != null || repo != null)
         {
             string expected = @"| Path                                                                                                                   | FileName                                                     | FrameworkCode      | FrameworkName        | Family         | Language | Status           |
+| Path                                                                                                                   | FileName                                                     | FrameworkCode      | FrameworkName        | Family         | Language | Status           |
 |------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|--------------------|----------------------|----------------|----------|------------------|
 | /samples/Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj                              | Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj | net35              | .NET Framework 3.5   | .NET Framework | fsharp   | EOL: 9-Jan-2029  |
 | /samples/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                 | powershell-win-core.csproj                                   | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
@@ -270,9 +271,9 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                                                             | Sample.SSDT.Database.sqlproj                                 | v4.7.2             | .NET Framework 4.7.2 | .NET Framework | csharp   | supported        |
 | /samples/Sample.Unity2020/Assembly-CSharp.csproj                                                                       | Assembly-CSharp.csproj                                       | v4.7.1             | .NET Framework 4.7.1 | .NET Framework | csharp   | supported        |
 | /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                                                   | Sample.VB6.WinApp.vbp                                        | vb6                | Visual Basic 6       | Visual Basic 6 | vb6      | deprecated       |
-| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net9.0             | .NET 9.0             | .NET           | csharp   | supported        |
-| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
 ";
 
             //Act
