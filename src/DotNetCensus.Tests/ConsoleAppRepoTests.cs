@@ -23,7 +23,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
 | .NET 11.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -31,8 +31,8 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 9     | supported        |
-| .NET 9.0             | .NET            | 2     | supported        |
+| .NET 8.0             | .NET            | 7     | supported        |
+| .NET 9.0             | .NET            | 1     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -108,7 +108,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
 | .NET 11.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -116,8 +116,8 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 9     | supported        |
-| .NET 9.0             | .NET            | 2     | supported        |
+| .NET 8.0             | .NET            | 7     | supported        |
+| .NET 9.0             | .NET            | 1     | supported        |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
