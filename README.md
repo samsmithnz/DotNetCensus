@@ -1,7 +1,6 @@
 # DotNetCensus
 [![CI/CD](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DotNetCensus/actions/workflows/workflow.yml)
 [![Coverage Status](https://coveralls.io/repos/github/samsmithnz/AzurePipelinesToGitHubActionsConverter/badge.svg?branch=main)](https://coveralls.io/github/samsmithnz/AzurePipelinesToGitHubActionsConverter?branch=main)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samsmithnz_DotNetCensus&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samsmithnz_DotNetCensus)
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnet-census?label=nuget%20dotnet%20tool)](https://www.nuget.org/packages/dotnet-census/)
 [![Latest NuGet package](https://img.shields.io/nuget/v/dotnetcensus.core?label=nuget%20library)](https://www.nuget.org/packages/dotnetcensus.core/)
 ![Current Release](https://img.shields.io/github/release/samsmithnz/DotNetCensus/all.svg)
@@ -18,7 +17,7 @@ Ever wanted to understand what your .NET portfolio looks like? Do you know what 
 5. Once a project file is found, it will stop scanning subdirectories (Note there is an [issue](https://github.com/samsmithnz/DotNetCensus/issues/88) to continue scanning)
 
 DotNet Census currently supports these .NET versions:
-- .NET 5, 6, 7, 8, 9, etc
+- .NET 5, 6, 7, 8, 9, 10, 11, etc
 - .NET Core 1 to 3.1  (including older .NET Core 1 and 1.1 project.json formats)
 - .NET Framework (including .NET Framework 3.5 website formats with no project files)
 - .NET Standard 1 to 2.1
@@ -37,7 +36,7 @@ If we missed a version - please add an issue and we will fix it!
 
 ## To use
 
-1. This tool requires the .NET 6 or .NET 8 SDK to be installed.
+1. This tool requires the .NET 10 SDK to be installed.
 2. Then install:
 `dotnet tool install -g dotnet-census`
 3. Then run the command in the directory you need to count versions:
