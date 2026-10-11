@@ -226,14 +226,10 @@ public static class ProjectClassification
             //Supported, but old/orange
             return "EOL: 9-Jan-2029";
         }
-        else if (framework.Contains("net9.0") || //EOL: Nov 10, 2026
-            framework.Contains("net8.0") || //EOL: Nov 10, 2026     
-        {
-            //Supported, but old/orange
-            return "EOL: 10-Nov-2026";
-        }
         else if (
             framework.Contains("net10.0") || //EOL: Nov ??, 2028
+            framework.Contains("net9.0") || //EOL: Nov 10, 2026
+            framework.Contains("net8.0") || //EOL: Nov 10, 2026
             framework.Contains("netstandard") ||
             framework.Contains("net47") ||
             framework.Contains("v4.7") ||
