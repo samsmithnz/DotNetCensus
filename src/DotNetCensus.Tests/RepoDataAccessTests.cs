@@ -25,16 +25,17 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 4     | supported        |
-| .NET 11.0            | .NET            | 1     | in preview       |
+| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 7     | supported        |
-| .NET 9.0             | .NET            | 1     | supported        |
+| .NET 8.0             | .NET            | 7     | deprecated       |
+| .NET 9.0             | .NET            | 1     | deprecated       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -70,7 +71,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 70    |                  |
+| total frameworks     |                 | 71    |                  |
 ";
 
             //Act
@@ -130,16 +131,17 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 4     | supported        |
-| .NET 11.0            | .NET            | 1     | in preview       |
+| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
 | .NET 6.0-ios         | .NET            | 1     | deprecated       |
 | .NET 6.0-maccatalyst | .NET            | 1     | deprecated       |
 | .NET 7.0             | .NET            | 2     | deprecated       |
-| .NET 8.0             | .NET            | 7     | supported        |
-| .NET 9.0             | .NET            | 1     | supported        |
+| .NET 8.0             | .NET            | 7     | deprecated       |
+| .NET 9.0             | .NET            | 1     | deprecated       |
 | .NET Core 1.0        | .NET Core       | 1     | deprecated       |
 | .NET Core 1.1        | .NET Core       | 1     | deprecated       |
 | .NET Core 2.0        | .NET Core       | 1     | deprecated       |
@@ -175,7 +177,7 @@ public class RepoDataAccessTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 70    |                  |
+| total frameworks     |                 | 71    |                  |
 ";
 
             //Act
@@ -204,21 +206,22 @@ public class RepoDataAccessTests : RepoBasedTests
             string expected = @"| Path                                                                                                                   | FileName                                                     | FrameworkCode      | FrameworkName        | Family         | Language | Status           |
 |------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|--------------------|----------------------|----------------|----------|------------------|
 | /samples/Sample.fsharp.net35/Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj                              | Sample_VS2017_FSharp_ConsoleApp_net35_old_fsharp_core.fsproj | net35              | .NET Framework 3.5   | .NET Framework | fsharp   | EOL: 9-Jan-2029  |
-| /samples/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                 | powershell-win-core.csproj                                   | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /samples/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj                                                        | xUnit.tests.csproj                                           | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj                           | analyzer.csproj                                              | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
+| /samples/Sample.GenericProps.File.NoProjectVariable/src/powershell-win-core/powershell-win-core.csproj                 | powershell-win-core.csproj                                   | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.GenericProps.File/test/xUnit/xUnit.tests.csproj                                                        | xUnit.tests.csproj                                           | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/analyzer/analyzer.csproj                           | analyzer.csproj                                              | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.CodeFix/ILLink.CodeFixProvider.csproj       | ILLink.CodeFixProvider.csproj                                | netstandard2.0     | .NET Standard 2.0    | .NET Standard  | csharp   | supported        |
 | /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.RoslynAnalyzer/ILLink.RoslynAnalyzer.csproj | ILLink.RoslynAnalyzer.csproj                                 | netstandard2.0     | .NET Standard 2.0    | .NET Standard  | csharp   | supported        |
 | /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj                                          | net472             | .NET Framework 4.7.2 | .NET Framework | csharp   | supported        |
 | /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj                                          |                    | (Unknown)            | (Unknown)      | csharp   | unknown          |
-| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj                                          | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/linker/Mono.Linker.csproj                          | Mono.Linker.csproj                                           | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/tlens/tlens.csproj                                 | tlens.csproj                                                 | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
+| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/ILLink.Tasks/ILLink.Tasks.csproj                   | ILLink.Tasks.csproj                                          | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/linker/Mono.Linker.csproj                          | Mono.Linker.csproj                                           | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.Multiple.Directory.Build.Props/src/tools/illink/src/tlens/tlens.csproj                                 | tlens.csproj                                                 | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | netcoreapp3.1      | .NET Core 3.1        | .NET Core      | csharp   | deprecated       |
 | /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | net5.0             | .NET 5.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.MultipleTargets.ConsoleApp/Sample.MultipleTargets.ConsoleApp.csproj                                    | Sample.MultipleTargets.ConsoleApp.csproj                     | net462             | .NET Framework 4.6.2 | .NET Framework | csharp   | EOL: 12-Jan-2027 |
 | /samples/Sample.Net10.ConsoleApp/Sample.Net10.ConsoleApp.csproj                                                        | Sample.Net10.ConsoleApp.csproj                               | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
-| /samples/Sample.Net11.ConsoleApp/Sample.Net11.ConsoleApp.csproj                                                        | Sample.Net11.ConsoleApp.csproj                               | net11.0            | .NET 11.0            | .NET           | csharp   | in preview       |
+| /samples/Sample.Net11.ConsoleApp/Sample.Net11.ConsoleApp.csproj                                                        | Sample.Net11.ConsoleApp.csproj                               | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
+| /samples/Sample.Net12.ConsoleApp/Sample.Net12.ConsoleApp.csproj                                                        | Sample.Net12.ConsoleApp.csproj                               | net12.0            | .NET 12.0            | .NET           | csharp   | in preview       |
 | /samples/Sample.Net5.ConsoleApp/Sample.Net5.ConsoleApp.csproj                                                          | Sample.Net5.ConsoleApp.csproj                                | net5.0             | .NET 5.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Net6.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                          | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Net6.ConsoleApp2/src/Sample.Net6.ConsoleApp.csproj                                                     | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
@@ -229,8 +232,8 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.Net6Inception.ConsoleApp/Sample.Net6.ConsoleApp.csproj                                                 | Sample.Net6.ConsoleApp.csproj                                | net6.0             | .NET 6.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Net7.ConsoleApp/Sample.Net7.ConsoleApp.csproj                                                          | Sample.Net7.ConsoleApp.csproj                                | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.Net7.ConsoleApp2/Sample.Net7.ConsoleApp2.csproj                                                        | Sample.Net7.ConsoleApp2.csproj                               | net7.0             | .NET 7.0             | .NET           | csharp   | deprecated       |
-| /samples/Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                                                          | Sample.Net8.ConsoleApp.csproj                                | net8.0             | .NET 8.0             | .NET           | csharp   | supported        |
-| /samples/Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj                                                          | Sample.Net9.ConsoleApp.csproj                                | net9.0             | .NET 9.0             | .NET           | csharp   | supported        |
+| /samples/Sample.Net8.ConsoleApp/Sample.Net8.ConsoleApp.csproj                                                          | Sample.Net8.ConsoleApp.csproj                                | net8.0             | .NET 8.0             | .NET           | csharp   | deprecated       |
+| /samples/Sample.Net9.ConsoleApp/Sample.Net9.ConsoleApp.csproj                                                          | Sample.Net9.ConsoleApp.csproj                                | net9.0             | .NET 9.0             | .NET           | csharp   | deprecated       |
 | /samples/Sample.NetCore1.0.ConsoleApp/project.json                                                                     | project.json                                                 | netcoreapp1.0      | .NET Core 1.0        | .NET Core      | csharp   | deprecated       |
 | /samples/Sample.NetCore1.1.ConsoleApp/project.json                                                                     | project.json                                                 | netcoreapp1.1      | .NET Core 1.1        | .NET Core      | csharp   | deprecated       |
 | /samples/Sample.NetCore2.0.ConsoleApp/Sample.NetCore2.0.ConsoleApp.csproj                                              | Sample.NetCore2.0.ConsoleApp.csproj                          | netcoreapp2.0      | .NET Core 2.0        | .NET Core      | csharp   | deprecated       |
@@ -270,9 +273,9 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                                                             | Sample.SSDT.Database.sqlproj                                 | v4.7.2             | .NET Framework 4.7.2 | .NET Framework | csharp   | supported        |
 | /samples/Sample.Unity2020/Assembly-CSharp.csproj                                                                       | Assembly-CSharp.csproj                                       | v4.7.1             | .NET Framework 4.7.1 | .NET Framework | csharp   | supported        |
 | /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                                                   | Sample.VB6.WinApp.vbp                                        | vb6                | Visual Basic 6       | Visual Basic 6 | vb6      | deprecated       |
-| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
-| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
-| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
 ";
 
             //Act
@@ -280,7 +283,7 @@ public class RepoDataAccessTests : RepoBasedTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\r\n", "\n").Replace("\\", "/"), contents?.Replace("\r\n", "\n").Replace("\\", "/"));
         }
     }
 
