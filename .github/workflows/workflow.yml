@@ -15,22 +15,22 @@ jobs:
       Version: ${{ steps.gitversion.outputs.MajorMinorPatch }}
       CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
     - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v4.1.0
+      uses: gittools/actions/gitversion/setup@v4.7.0
       with:
         versionSpec: 6.x
     - name: Determine Version
       id: gitversion
-      uses: gittools/actions/gitversion/execute@v4.1.0
+      uses: gittools/actions/gitversion/execute@v4.7.0
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ steps.gitversion.outputs.MajorMinorPatch }}"
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: 11.0.x
     - name: Variable Substitution appsettings file for tests
@@ -43,21 +43,21 @@ jobs:
     - name: .NET test
       run: dotnet test src/DotNetCensus.Tests/DotNetCensus.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=${{ github.workspace }}/TestResults/ -e:CoverletOutputFormat=lcov # using -e parameter to set an environment variable until the /p parameter is fixed: https://github.com/coverlet-coverage/coverlet/issues/1391
     - name: Coveralls
-      uses: coverallsapp/github-action@v2.3.6
+      uses: coverallsapp/github-action@v2.3.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ${{ github.workspace }}/TestResults/coverage.info
     - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: Upload package back to GitHub
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v7
       with:
         name: nugetToolPackage
         path: src/DotNetCensus/nupkg
     - name: .NET pack core projecty to NuGet package
       run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: Upload package back to GitHub
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v7
       with:
         name: nugetCorePackage
         path: src/DotNetCensus.Core/nupkg
@@ -87,13 +87,13 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         merge-multiple: true
         name: nugetToolPackage
         path: nugetToolPackage
     - name: Download artifact from build job
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         merge-multiple: true
         name: nugetCorePackage
