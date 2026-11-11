@@ -23,8 +23,8 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
-| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
+| .NET 11.0            | .NET            | 1     | supported        |
 | .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -109,8 +109,8 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
-| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
+| .NET 11.0            | .NET            | 1     | supported        |
 | .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |

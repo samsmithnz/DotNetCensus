@@ -25,8 +25,8 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
-| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
+| .NET 11.0            | .NET            | 1     | supported        |
 | .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -131,8 +131,8 @@ public class RepoDataAccessTests : RepoBasedTests
         {
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 1     | supported        |
-| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 10.0            | .NET            | 4     | supported        |
+| .NET 11.0            | .NET            | 1     | supported        |
 | .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
@@ -273,9 +273,9 @@ public class RepoDataAccessTests : RepoBasedTests
 | /samples/Sample.SSDT.Database/Sample.SSDT.Database.sqlproj                                                             | Sample.SSDT.Database.sqlproj                                 | v4.7.2             | .NET Framework 4.7.2 | .NET Framework | csharp   | supported        |
 | /samples/Sample.Unity2020/Assembly-CSharp.csproj                                                                       | Assembly-CSharp.csproj                                       | v4.7.1             | .NET Framework 4.7.1 | .NET Framework | csharp   | supported        |
 | /samples/Sample.VB6.Calculator/Sample.VB6.WinApp.vbp                                                                   | Sample.VB6.WinApp.vbp                                        | vb6                | Visual Basic 6       | Visual Basic 6 | vb6      | deprecated       |
-| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
-| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
-| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net11.0            | .NET 11.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Core/DotNetCensus.Core.csproj                                                                        | DotNetCensus.Core.csproj                                     | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus.Tests/DotNetCensus.Tests.csproj                                                                      | DotNetCensus.Tests.csproj                                    | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
+| /src/DotNetCensus/DotNetCensus.csproj                                                                                  | DotNetCensus.csproj                                          | net10.0            | .NET 10.0            | .NET           | csharp   | supported        |
 ";
 
             //Act
