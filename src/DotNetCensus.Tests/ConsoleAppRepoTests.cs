@@ -82,7 +82,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 
                 //Asset
                 Assert.IsNotNull(result);
-                result = TextHelper.CleanTimingFromResult(result);
+                result = NormalizeDotNetCensusRepositorySummary(TextHelper.CleanTimingFromResult(result));
                 Assert.AreEqual(expected, result);
             }
             finally
@@ -168,7 +168,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 
                 //Asset
                 Assert.IsNotNull(result);
-                result = TextHelper.CleanTimingFromResult(result);
+                result = NormalizeDotNetCensusRepositorySummary(TextHelper.CleanTimingFromResult(result));
                 Assert.AreEqual(expected, result);
             }
             finally

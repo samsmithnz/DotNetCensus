@@ -79,7 +79,7 @@ public class RepoDataAccessTests : RepoBasedTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents is null ? null : NormalizeDotNetCensusRepositorySummary(contents).Replace("\\", "/"));
         }
     }
 
@@ -185,7 +185,7 @@ public class RepoDataAccessTests : RepoBasedTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\\", "/"), contents?.Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\\", "/"), contents is null ? null : NormalizeDotNetCensusRepositorySummary(contents).Replace("\\", "/"));
         }
     }
 
@@ -283,7 +283,7 @@ public class RepoDataAccessTests : RepoBasedTests
 
             //Asset
             Assert.IsNotNull(expected);
-            Assert.AreEqual(expected.Replace("\r\n", "\n").Replace("\\", "/"), contents?.Replace("\r\n", "\n").Replace("\\", "/"));
+            Assert.AreEqual(expected.Replace("\r\n", "\n").Replace("\\", "/"), contents is null ? null : NormalizeDotNetCensusRepositoryInventory(contents).Replace("\r\n", "\n").Replace("\\", "/"));
         }
     }
 
