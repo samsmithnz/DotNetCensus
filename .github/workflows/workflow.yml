@@ -70,6 +70,7 @@ jobs:
     - build
     if: github.ref == 'refs/heads/main'
     permissions:
+      contents: write # for the release task
       id-token: write  # enable GitHub OIDC token issuance for this job
     steps:
     - name: Download artifact from build job
