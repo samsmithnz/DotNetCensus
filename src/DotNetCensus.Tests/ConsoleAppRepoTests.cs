@@ -23,8 +23,9 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 4     | supported        |
-| .NET 11.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
@@ -68,7 +69,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 70    |                  |
+| total frameworks     |                 | 71    |                  |
 
 ";
 
@@ -108,8 +109,9 @@ public class ConsoleAppRepoTests : RepoBasedTests
             TextWriter originalOut = Console.Out;  // Save the original output
             string expected = @"| Framework            | FrameworkFamily | Count | Status           |
 |----------------------|-----------------|-------|------------------|
-| .NET 10.0            | .NET            | 4     | supported        |
-| .NET 11.0            | .NET            | 1     | supported        |
+| .NET 10.0            | .NET            | 1     | supported        |
+| .NET 11.0            | .NET            | 4     | supported        |
+| .NET 12.0            | .NET            | 1     | in preview       |
 | .NET 5.0             | .NET            | 2     | deprecated       |
 | .NET 6.0             | .NET            | 4     | deprecated       |
 | .NET 6.0-android     | .NET            | 1     | deprecated       |
@@ -153,7 +155,7 @@ public class ConsoleAppRepoTests : RepoBasedTests
 | .NET Standard 2.1    | .NET Standard   | 1     | supported        |
 | (Unknown)            | (Unknown)       | 2     | unknown          |
 | Visual Basic 6       | Visual Basic 6  | 1     | deprecated       |
-| total frameworks     |                 | 70    |                  |
+| total frameworks     |                 | 71    |                  |
 
 ";
 
