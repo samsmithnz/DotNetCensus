@@ -85,6 +85,8 @@ jobs:
     - build
     # - sonarCloud
     if: github.ref == 'refs/heads/main'
+    permissions:
+      id-token: write  # enable GitHub OIDC token issuance for this job
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v8
@@ -109,11 +111,19 @@ jobs:
         tag: "v${{ needs.build.outputs.Version }}"
         name: "v${{ needs.build.outputs.Version }}"
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: samsmithnz # Recommended: use a secret like ${{ secrets.NUGET_USER }} for your nuget.org username (profile name), NOT your email address
     - name: Publish nuget tool package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetToolPackage/*.nupkg --api-key "${{ secrets.NUGETTOOLTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      # run: dotnet nuget push nugetToolPackage/*.nupkg --api-key "${{ secrets.NUGETTOOLTOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push nugetToolPackage/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
       shell: pwsh 
     - name: Publish nuget core package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetCorePackage/*.nupkg --api-key "${{ secrets.NUGETCORETOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      # run: dotnet nuget push nugetCorePackage/*.nupkg --api-key "${{ secrets.NUGETCORETOKEN }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push nugetCorePackage/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
       shell: pwsh
