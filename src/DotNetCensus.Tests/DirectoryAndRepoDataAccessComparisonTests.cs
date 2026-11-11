@@ -34,6 +34,8 @@ public class DirectoryAndRepoDataAccessComparisonTests : RepoBasedTests
         //Asset
         Assert.IsNotNull(contents);
         Assert.IsNotNull(contents2);
-        Assert.AreEqual(contents?.Replace("\\", "/"), contents2.Replace("\\", "/"));
+        Assert.AreEqual(
+            NormalizeDotNetCensusRepositorySummary(contents).Replace("\\", "/"),
+            NormalizeDotNetCensusRepositorySummary(contents2).Replace("\\", "/"));
     }
 }

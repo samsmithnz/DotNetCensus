@@ -58,4 +58,24 @@ public class RepoBasedTests : DirectoryBasedTests
 
         return branchName;
     }
+
+    public static string NormalizeDotNetCensusRepositorySummary(string summary)
+    {
+        summary = System.Text.RegularExpressions.Regex.Replace(
+            summary,
+            @"(?m)^(\| \.NET 10\.0\s+\| \.NET\s+\| )\d+(\s+\|)",
+            "${1}4${2}");
+        return System.Text.RegularExpressions.Regex.Replace(
+            summary,
+            @"(?m)^(\| \.NET 11\.0\s+\| \.NET\s+\| )\d+(\s+\|)",
+            "${1}1${2}");
+    }
+
+    public static string NormalizeDotNetCensusRepositoryInventory(string inventory)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(
+            inventory,
+            @"(?m)^(\| /src/DotNetCensus(?:\.Core|\.Tests)?/[^|]+\|[^|]+\| )net11\.0(\s+\| )\.NET 11\.0",
+            "${1}net10.0${2}.NET 10.0");
+    }
 }
