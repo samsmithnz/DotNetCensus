@@ -50,14 +50,14 @@ jobs:
     - name: .NET pack tool to NuGet package
       run: dotnet pack src/DotNetCensus/DotNetCensus.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: Upload package back to GitHub
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v7
       with:
         name: nugetToolPackage
         path: src/DotNetCensus/nupkg
     - name: .NET pack core projecty to NuGet package
       run: dotnet pack src/DotNetCensus.Core/DotNetCensus.Core.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: Upload package back to GitHub
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v7
       with:
         name: nugetCorePackage
         path: src/DotNetCensus.Core/nupkg
@@ -87,13 +87,13 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         merge-multiple: true
         name: nugetToolPackage
         path: nugetToolPackage
     - name: Download artifact from build job
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         merge-multiple: true
         name: nugetCorePackage
